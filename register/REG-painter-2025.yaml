@@ -13,7 +13,7 @@ outcome: upper_limit
 limits: "< 1% of surveyed stars with EIRP > 0.3 Arecibo radar equivalents over the band"
 confounders_found: [radio-frequency interference]
 lesson: Method choice changes what an archive yields; the largest archive is not exhausted.
-bibcodes: { status: to_resolve, values: [] }
+bibcodes: { status: resolved, values: ["2025AJ....169..222P"] }
 urls: [https://arxiv.org/abs/2412.05786]
 related: [REG-breakthrough-listen-ma-2023]
 added: 2026-11-07

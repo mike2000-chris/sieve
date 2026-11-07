@@ -13,7 +13,7 @@ outcome: candidates_unconfirmed
 limits: ""
 confounders_found: [warm debris discs, extreme debris discs, young stellar objects, background contamination]
 lesson: Candidate lists from one wavelength family need all-wavelength cross-matching before publication; see REG-ren-2024-contamination.
-bibcodes: { status: to_resolve, values: [] }
+bibcodes: { status: resolved, values: ["2024MNRAS.531..695S"] }
 urls: [https://arxiv.org/abs/2405.02927]
 related: [REG-hephaistos-i-2022, REG-ren-2024-contamination, REG-cody-tess-dyson-transits-2024]
 added: 2026-11-07

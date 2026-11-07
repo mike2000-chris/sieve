@@ -13,7 +13,7 @@ outcome: contested
 limits: ""
 confounders_found: [observational degeneracy with hydrocarbons, abiotic organosulfur chemistry, retrieval model dependence, sulfur hazes]
 lesson: Signal, molecule identification and biological interpretation are three separate claims; expect degeneracy and plan independent re-analysis.
-bibcodes: { status: to_resolve, values: [] }
+bibcodes: { status: resolved, values: ["2023ApJ...956L..13M", "2025ApJ...983L..40M", "2026ApJ..1003L..22J"] }
 urls: [https://www.cam.ac.uk/stories/strongest-hints-of-biological-activity, https://arxiv.org/abs/2603.18923]
 related: []
 added: 2026-11-07

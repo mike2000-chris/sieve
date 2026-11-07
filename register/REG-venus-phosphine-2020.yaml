@@ -13,7 +13,7 @@ outcome: contested
 limits: ""
 confounders_found: [spectral ripple systematics, SO2 line contamination, calibration of a very bright source]
 lesson: Archival in-situ data can corroborate or refute remote claims; a disequilibrium gas is a chemistry claim first.
-bibcodes: { status: to_resolve, values: [] }
+bibcodes: { status: resolved, values: ["2021NatAs...5..655G", "2021GeoRL..4891327M", "2024arXiv240913438C"] }
 urls: [https://arxiv.org/abs/2409.13438]
 related: []
 added: 2026-11-07
