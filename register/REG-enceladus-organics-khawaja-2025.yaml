@@ -13,7 +13,7 @@ outcome: confirmed_signal_no_life_claim
 limits: ""
 confounders_found: [radiation-driven surface chemistry as alternative source for some species]
 lesson: Old in-situ data reward new analysis methods seventeen years later; PDS is a live target.
-bibcodes: { status: to_resolve, values: [] }
+bibcodes: { status: resolved, values: ["2025NatAs...9.1662K"] }
 urls: [https://doi.org/10.1038/s41550-025-02655-y]
 related: []
 added: 2026-11-07

@@ -13,7 +13,7 @@ outcome: candidates_refuted
 limits: ""
 confounders_found: [hot dust-obscured galaxies, radio-loud AGN behind foreground M dwarfs]
 lesson: Confounders can be found in archives too; gate G4 must search radio and other wavelengths for every catalogue anomaly.
-bibcodes: { status: to_resolve, values: [] }
+bibcodes: { status: resolved, values: ["2024RNAAS...8..145R"] }
 urls: [https://arxiv.org/abs/2405.14921]
 related: [REG-hephaistos-ii-2024]
 added: 2026-11-07

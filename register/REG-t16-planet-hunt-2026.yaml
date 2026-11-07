@@ -13,7 +13,7 @@ outcome: method_demonstration
 limits: ""
 confounders_found: [eclipsing binaries, background blends, systematics]
 lesson: Asking an unasked question (faint stars) of a mined archive still pays; a census, not a life search.
-bibcodes: { status: to_resolve, values: [] }
+bibcodes: { status: resolved, values: ["2026ApJS..284...19R"] }
 urls: [https://arxiv.org/abs/2604.18579]
 related: []
 added: 2026-11-07

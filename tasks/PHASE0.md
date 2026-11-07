@@ -3,14 +3,15 @@
 Milestone **M0**: repository public, 50 register entries, baseline cards scored. Paper reference: Section 9.1.
 
 ## Repository and tooling
-- [ ] `git init`, first commit of this scaffold, create the public GitHub repository (`gh repo create sieve --public --source=. --push`)
-- [ ] `uv sync`; `uv run python -m pipeline.cards validate` passes
-- [ ] Obtain an ADS API key, put it in `.env`, run `uv run python -m pipeline.literature.ads 2024MNRAS.531..695S` to confirm bibcode resolution works
-- [ ] Enable the GitHub Actions workflow (`.github/workflows/validate.yml`) and confirm it passes on `main`
-- [ ] Add `tasks/STATUS.md` and write the first status note
+- [x] `git init`, first commit of this scaffold, create the public GitHub repository (`gh repo create sieve --public --source=. --push`)
+- [x] `uv sync`; `uv run python -m pipeline.cards validate` passes
+- [x] Obtain an ADS API key, put it in `.env`, run `uv run python -m pipeline.literature.ads 2024MNRAS.531..695S` to confirm bibcode resolution works
+- [x] Enable the GitHub Actions workflow (`.github/workflows/validate.yml`) and confirm it passes on `main`
+- [x] Add `tasks/STATUS.md` and write the first status note
 
 ## Register (novelty oracle)
 - [ ] Resolve bibcodes for the 11 seed entries (`bibcodes.status: to_resolve` → `resolved`)
+  - 10/11 resolved via `pipeline/literature/resolve_register.py`; `REG-cody-tess-dyson-transits-2024` open (no ADS record found, see STATUS 2026-11-07)
 - [ ] Add the "entries to add in week 1–2" from paper Section 6 (laser searches, Boyajian's star, Clarke exobelt, lunar/Martian artefact searches, Galileo Earth-as-exoplanet, Gaia astrometric anomaly searches, Kepler artificial-transit searches, pollutant biosignatures) — target 50 entries
 - [ ] For each entry fill `lesson` and `confounders_found`; these feed the negative-space operator
 

@@ -13,7 +13,7 @@ outcome: upper_limit
 limits: "< ~1e-5 of stars for near-complete 100-1000 K spheres within ~5 kpc"
 confounders_found: [natural mid-IR excess sources, WISE flux overestimation near saturation, source confusion]
 lesson: A catalogue cross-match sets population limits cheaply; the limit itself is a publishable product.
-bibcodes: { status: to_resolve, values: [] }
+bibcodes: { status: resolved, values: ["2022MNRAS.512.2988S"] }
 urls: [https://arxiv.org/abs/2201.11123]
 related: [REG-hephaistos-ii-2024]
 added: 2026-11-07

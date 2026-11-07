@@ -13,7 +13,7 @@ outcome: candidates_unconfirmed
 limits: ""
 confounders_found: [radio-frequency interference]
 lesson: Re-detection is the bar; a deep-learning model cannot extrapolate to signal types absent from training.
-bibcodes: { status: to_resolve, values: [] }
+bibcodes: { status: resolved, values: ["2023NatAs...7..492M"] }
 urls: [https://seti.berkeley.edu/ml_gbt/]
 related: [REG-painter-2025]
 added: 2026-11-07
