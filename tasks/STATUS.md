@@ -9,6 +9,7 @@ Operator: Claude Code (claude-opus-5-5). Branch `archives/smoke-tests`.
 - IRSA: `JOIN ... ON CONTAINS` with TAP_UPLOAD is rejected; `DISTANCE()` returns arcsec, not degrees. Upload cross-match of 60k positions took 18 min, Gaia's precomputed `allwise_best_neighbour` 3 s.
 - MAST: portal search failed/hung (34 min) today; S3 mirror `stpubdata` works in 1.5 s and is now the primary path.
 - Public status page (claude.ai artifact, private until shared): https://claude.ai/artifact/HYHzpNwzBB73bM1ZDKyVaR
+- `main` protected by ruleset `protect-main` (no force push/deletion, PR + `validate` check required, admin bypass). Owner: dismiss the GitHub banner.
 
 ### Open questions
 - Should SIEVE register a Gaia archive account (higher row limits, persistent user tables for DR4 day one)? Needs the owner's credentials.

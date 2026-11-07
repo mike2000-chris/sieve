@@ -8,6 +8,7 @@ Milestone **M0**: repository public, 50 register entries, baseline cards scored.
 - [x] Obtain an ADS API key, put it in `.env`, run `uv run python -m pipeline.literature.ads 2024MNRAS.531..695S` to confirm bibcode resolution works
 - [x] Enable the GitHub Actions workflow (`.github/workflows/validate.yml`) and confirm it passes on `main`
 - [x] Add `tasks/STATUS.md` and write the first status note
+- [x] Protect `main` (ruleset `protect-main`): no force push or deletion, changes only via pull request, `validate` check required; repository admins may bypass (2026-11-07)
 
 ## Register (novelty oracle)
 - [ ] Resolve bibcodes for the 11 seed entries (`bibcodes.status: to_resolve` → `resolved`)
@@ -24,6 +25,7 @@ Milestone **M0**: repository public, 50 register entries, baseline cards scored.
 - [x] SPHEREx QR S3 range read (`aws s3 ls --no-sign-request s3://nasa-irsa-spherex/`)
 - [x] Record each archive's actual access path, latency and licence in `config/archives.yaml`
 - [ ] Prepare 3 Gaia DR4 queries (astrometric anomalies, periodic photometry, anomalous accelerations) as text files in `analyses/dr4-day-one/` for 2 Dec 2026
+  - mind the Gaia anonymous 50,000-row cap found in the smoke tests: chunk each query and check it against `COUNT(*)` (see `config/archives.yaml`)
 
 ## Baseline
 - [ ] Owner: two-hour human-only brainstorm, write results as raw cards with `provenance.generator_model: human`
