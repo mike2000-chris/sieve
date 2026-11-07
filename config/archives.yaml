@@ -8,6 +8,11 @@ archives:
     licence: public
     suitability: high
     url: https://exoplanetarchive.ipac.caltech.edu/
+    smoke_test:   # 2026-11-07
+      status: ok
+      access_path: pyvo TAP sync -> https://exoplanetarchive.ipac.caltech.edu/TAP, table pscomppars
+      latency: "1.7 s for 495 planets with 200 K <= pl_eqt <= 350 K"
+      licence: public (NASA Exoplanet Archive; acknowledgement requested)
   - key: mast
     name: MAST (Kepler/K2, TESS, HST, JWST)
     content: light curves, full-frame images, spectra
@@ -16,6 +21,12 @@ archives:
     licence: public after proprietary period
     suitability: high
     url: https://archive.stsci.edu/
+    smoke_test:   # 2026-11-07
+      status: ok (via S3 mirror)
+      access_path: boto3 unsigned S3, bucket stpubdata, tess/public/tid/sNNNN/<TIC in 4-digit groups>/; read with lightkurve.read
+      latency: "list + 2 MB SPOC light curve (pi Men, sector 1, 18,279 cadences) 1.5 s"
+      licence: public (MAST, NASA)
+      caveat: "MAST portal search (lightkurve.search_lightcurve / astroquery Observations.query_criteria) failed on 2026-11-07: RemoteServiceError, then a 34-min hang ending in connection reset, despite astroquery timeout=120. Name lookup API answered. Use S3 first, portal as fallback."
   - key: gaia
     name: ESA Gaia (DR3 now, DR4 on 2026-12-02)
     content: astrometry, photometry, low-res spectra, variability; DR4 adds full epoch time series (5.5 yr)
@@ -25,6 +36,12 @@ archives:
     suitability: very_high
     notes: run archive-side ADQL; DR4 day-one queries prepared in analyses/dr4-day-one/
     url: https://gea.esac.esa.int/archive/
+    smoke_test:   # 2026-11-07, pipeline/archives/smoke.py, results in analyses/smoke-tests-phase0/results/smoke.json
+      status: ok
+      access_path: astroquery.gaia launch_job_async -> https://gea.esac.esa.int/tap-server (anonymous)
+      latency: "COUNT(*) 2.5 s; 60,235-row sample in 4 RA chunks 21 s"
+      licence: "ESA Gaia data, CC BY-SA 3.0 IGO (acknowledge ESA/Gaia/DPAC)"
+      caveat: "anonymous async results are cut at 50,000 rows WITHOUT error (Gaia.ROW_LIMIT=-1 does not help); chunk queries and check against COUNT(*). Archive release 3.15 announced breaking changes."
   - key: irsa_ir
     name: IRSA (AllWISE, NEOWISE, 2MASS, Spitzer)
     content: infrared photometry, multi-epoch WISE
@@ -33,6 +50,13 @@ archives:
     licence: public
     suitability: very_high
     url: https://irsa.ipac.caltech.edu/
+    smoke_test:   # 2026-11-07
+      status: ok
+      access_path: pyvo TAP async with TAP_UPLOAD -> https://irsa.ipac.caltech.edu/TAP, table allwise_p3as_psd
+      latency: "positional cross-match of 60,235 uploaded Gaia positions (3 arcsec) 18 min; Gaia-side gaiadr3.allwise_best_neighbour 3 s"
+      result: "59,603 matched (17 with >1 match), median separation 0.06 arcsec, p95 0.65 arcsec after propagating Gaia positions J2016.0 -> J2010.5; allwise_best_neighbour gives 53,525"
+      licence: public (IPAC/IRSA, NASA)
+      caveat: "IRSA rejects JOIN ... ON CONTAINS(...) with uploads (use comma join + WHERE). IRSA DISTANCE() returns arcsec, not degrees as in the ADQL standard (verified with a 1-arcsec offset). For large samples prefer Gaia's precomputed cross-match tables."
   - key: spherex
     name: IRSA SPHEREx Quick Release (QR2/QR3)
     content: all-sky 0.75-5 um spectral images, 102 bands, weekly releases
@@ -42,6 +66,12 @@ archives:
     suitability: high
     notes: new spectral archive; under-explored for signatures
     url: https://irsa.ipac.caltech.edu/data/SPHEREx/
+    smoke_test:   # 2026-11-07
+      status: ok
+      access_path: boto3 unsigned S3, bucket nasa-irsa-spherex (us-east-1); prefixes qr2/, qr3/
+      latency: "list 0.4 s; 2,880-byte range read of a 16.7 MB FITS header 0.2 s"
+      licence: public (IPAC/IRSA, NASA)
+      caveat: aws CLI not needed; boto3 with signature_version=UNSIGNED works
   - key: breakthrough_listen
     name: Breakthrough Listen Open Data Archive
     content: radio spectrograms (GBT, Parkes), target lists, published candidate lists
