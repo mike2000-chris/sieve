@@ -1,0 +1,101 @@
+{
+ "runs": {
+  "gaia": {
+   "test": "gaia",
+   "runtime_s": 20.84,
+   "access": "astroquery.gaia ADQL async (gea.esac.esa.int/tap-server)",
+   "query": "SELECT source_id, ra, dec, pmra, pmdec, parallax, phot_g_mean_mag\nFROM gaiadr3.gaia_source\nWHERE phot_g_mean_mag < 12 AND parallax > 10 AND parallax_over_error > 10 (in 4 RA chunks)",
+   "n_rows": 60235,
+   "n_count_check": 60235,
+   "note": "anonymous async results capped at 50,000 rows without error; chunk and check COUNT(*)",
+   "licence": "public (ESA Gaia, CC BY-SA 3.0 IGO)",
+   "status": "ok",
+   "date": "2026-11-07",
+   "operator": "claude-code (claude-opus-5-5)",
+   "host": "Darwin arm64, python 3.14.3"
+  },
+  "wise": {
+   "test": "wise",
+   "runtime_s": 1091.81,
+   "access": "pyvo TAP async with TAP_UPLOAD (irsa.ipac.caltech.edu/TAP), table allwise_p3as_psd",
+   "query": "SELECT u.source_id, a.designation, a.w1mpro, a.w2mpro, a.w3mpro, a.w4mpro, a.cc_flags, a.ext_flg,\n       DISTANCE(POINT('ICRS', u.ra_w, u.dec_w), POINT('ICRS', a.ra, a.dec)) AS sep_deg\nFROM allwise_p3as_psd a, TAP_UPLOAD.gaia u\nWHERE CONTAINS(POINT('ICRS', a.ra, a.dec), CIRCLE('ICRS', u.ra_w, u.dec_w, 0.0008333333333333334))=1",
+   "n_uploaded": 60235,
+   "n_matched": 59603,
+   "n_with_multiple_matches": 17,
+   "match_radius_arcsec": 3.0,
+   "epoch_propagation": "J2016.0 -> J2010.5",
+   "sep_arcsec_median": 0.063,
+   "sep_arcsec_p95": 0.648,
+   "check_gaiadr3_allwise_best_neighbour": 53525,
+   "licence": "public (IPAC/IRSA, NASA)",
+   "check_runtime_s": 3.07,
+   "status": "ok",
+   "date": "2026-11-07",
+   "operator": "claude-code (claude-opus-5-5)",
+   "host": "Darwin arm64, python 3.14.3",
+   "note": "IRSA DISTANCE() returns arcsec, not degrees (verified with a 1-arcsec offset); upload cross-match of 60k positions took 18 min, Gaia's precomputed allwise_best_neighbour 3 s. Positional 3-arcsec match finds 59,603 vs 53,525 in allwise_best_neighbour (stricter one-to-one quality cut)."
+  },
+  "tess": {
+   "test": "tess",
+   "runtime_s": 1.46,
+   "access": "MAST S3 mirror s3://stpubdata/tess/public/tid/ (unsigned), read with lightkurve",
+   "target": "pi Mensae (TIC 261136679)",
+   "downloaded": "tess/public/tid/s0001/0000/0002/6113/6679/tess2018206045859-s0001-0000000261136679-0120-s_lc.fits",
+   "sector": 1,
+   "n_cadences": 18279,
+   "licence": "public (MAST, NASA)",
+   "status": "ok",
+   "date": "2026-11-07",
+   "operator": "claude-code (claude-opus-5-5)",
+   "host": "Darwin arm64, python 3.14.3"
+  },
+  "exoplanets": {
+   "test": "exoplanets",
+   "runtime_s": 1.73,
+   "access": "pyvo TAP sync (exoplanetarchive.ipac.caltech.edu/TAP), table pscomppars",
+   "query": "SELECT pl_name, hostname, pl_eqt, pl_rade, pl_bmasse, sy_dist, discoverymethod\nFROM pscomppars\nWHERE pl_eqt >= 200 AND pl_eqt <= 350\nORDER BY pl_eqt",
+   "n_rows": 495,
+   "by_discovery_method": {
+    "Transit": 222,
+    "Radial Velocity": 263,
+    "Transit Timing Variations": 6,
+    "Imaging": 2,
+    "Eclipse Timing Variations": 1,
+    "Microlensing": 1
+   },
+   "result_table": "analyses/smoke-tests-phase0/results/exoplanets_teq_200_350.csv",
+   "licence": "public (NASA Exoplanet Archive)",
+   "status": "ok",
+   "date": "2026-11-07",
+   "operator": "claude-code (claude-opus-5-5)",
+   "host": "Darwin arm64, python 3.14.3"
+  },
+  "spherex": {
+   "test": "spherex",
+   "runtime_s": 1.19,
+   "access": "boto3 S3 unsigned (s3://nasa-irsa-spherex/, us-east-1)",
+   "list_s": 0.38,
+   "licence": "public (IPAC/IRSA, NASA)",
+   "top_level_prefixes": [
+    "qr2/",
+    "qr3/"
+   ],
+   "range_read_key": "qr2/abs_gain_matrix/cal-agm-v7-2025-218/1/abs_gain_matrix_D1_spx_cal-agm-v7-2025-218.fits",
+   "object_size_bytes": 16652160,
+   "bytes_read": 2880,
+   "range_read_s": 0.21,
+   "header_first_cards": [
+    "SIMPLE  =                    T / conforms to FITS standard",
+    "BITPIX  =                    8 / array data type",
+    "NAXIS   =                    0 / number of array dimensions",
+    "EXTEND  =                    T",
+    "VERSION = '6.1.3.post97+g4430725' / SSDC Pipelines software version",
+    "END"
+   ],
+   "status": "ok",
+   "date": "2026-11-07",
+   "operator": "claude-code (claude-opus-5-5)",
+   "host": "Darwin arm64, python 3.14.3"
+  }
+ }
+}

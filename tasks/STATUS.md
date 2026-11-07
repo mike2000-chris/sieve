@@ -2,6 +2,17 @@
 
 Newest first. One entry per agent session or weekly review. Questions for the owner go under **Open questions**, not into chat.
 
+## 2026-11-07 (later) — archive smoke tests
+Operator: Claude Code (claude-opus-5-5). Branch `archives/smoke-tests`.
+- All five Phase 0 smoke tests pass: `pipeline/archives/smoke.py`, records in `analyses/smoke-tests-phase0/results/smoke.json`, access paths/latency/licence in `config/archives.yaml` (`smoke_test` blocks).
+- Gaia: anonymous async results are silently capped at 50,000 rows (first run returned 50,000 of 60,235). Now chunked by RA and checked against COUNT(*). **Relevant for the DR4 day-one queries**: every large query needs a count check, or an authenticated Gaia archive account (limits not tested).
+- IRSA: `JOIN ... ON CONTAINS` with TAP_UPLOAD is rejected; `DISTANCE()` returns arcsec, not degrees. Upload cross-match of 60k positions took 18 min, Gaia's precomputed `allwise_best_neighbour` 3 s.
+- MAST: portal search failed/hung (34 min) today; S3 mirror `stpubdata` works in 1.5 s and is now the primary path.
+- Public status page (claude.ai artifact, private until shared): https://claude.ai/artifact/HYHzpNwzBB73bM1ZDKyVaR
+
+### Open questions
+- Should SIEVE register a Gaia archive account (higher row limits, persistent user tables for DR4 day one)? Needs the owner's credentials.
+
 ## 2026-11-07 — repo live, seed bibcodes resolved
 Operator: Claude Code (claude-opus-5-5), session with owner. Branch `register/resolve-seed-bibcodes`.
 - Repository public at https://github.com/mike2000-chris/sieve; gh token needed the `workflow` scope for the first push. CI `validate` green on `main`.

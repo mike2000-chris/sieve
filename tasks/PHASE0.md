@@ -16,12 +16,13 @@ Milestone **M0**: repository public, 50 register entries, baseline cards scored.
 - [ ] For each entry fill `lesson` and `confounders_found`; these feed the negative-space operator
 
 ## Archive access smoke tests (gate G3 map)
-- [ ] Gaia DR3 ADQL query via `astroquery.gaia` (count sources with G < 12 within 100 pc) — record runtime
-- [ ] IRSA AllWISE TAP query for the same sample; cross-match by position
-- [ ] `lightkurve` download of one TESS light curve
-- [ ] NASA Exoplanet Archive TAP query (planets with equilibrium temperature 200–350 K)
-- [ ] SPHEREx QR S3 range read (`aws s3 ls --no-sign-request s3://nasa-irsa-spherex/`)
-- [ ] Record each archive's actual access path, latency and licence in `config/archives.yaml`
+- [x] Gaia DR3 ADQL query via `astroquery.gaia` (count sources with G < 12 within 100 pc) — record runtime
+  - all five smoke tests: `pipeline/archives/smoke.py`, results in `analyses/smoke-tests-phase0/` (2026-11-07)
+- [x] IRSA AllWISE TAP query for the same sample; cross-match by position
+- [x] `lightkurve` download of one TESS light curve
+- [x] NASA Exoplanet Archive TAP query (planets with equilibrium temperature 200–350 K)
+- [x] SPHEREx QR S3 range read (`aws s3 ls --no-sign-request s3://nasa-irsa-spherex/`)
+- [x] Record each archive's actual access path, latency and licence in `config/archives.yaml`
 - [ ] Prepare 3 Gaia DR4 queries (astrometric anomalies, periodic photometry, anomalous accelerations) as text files in `analyses/dr4-day-one/` for 2 Dec 2026
 
 ## Baseline
