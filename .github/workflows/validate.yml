@@ -1,0 +1,32 @@
+name: validate
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: uv sync --no-dev
+      - run: uv run python -m pipeline.cards validate
+      - name: Guard immutable pre-registrations
+        run: |
+          base="${{ github.event.pull_request.base.sha || github.event.before }}"
+          if [ -n "$base" ] && git cat-file -e "$base" 2>/dev/null; then
+            changed=$(git diff --name-only "$base" HEAD -- prereg/ | grep -v TEMPLATE.md || true)
+            for f in $changed; do
+              if git cat-file -e "$base:$f" 2>/dev/null; then
+                # existing prereg changed: only additions under '## Addendum' are allowed
+                if git diff "$base" HEAD -- "$f" | grep -E '^-[^-]' | grep -v '^---' ; then
+                  echo "::error file=$f::pre-registration content removed or edited; only additions under '## Addendum' are allowed"; exit 1
+                fi
+              fi
+            done
+          fi
+      - name: Budget file present and well-formed
+        run: uv run python -c "import yaml;yaml.safe_load(open('config/budget.yaml'));print('budget ok')"

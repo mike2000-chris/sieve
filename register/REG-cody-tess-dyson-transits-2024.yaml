@@ -1,0 +1,20 @@
+id: REG-cody-tess-dyson-transits-2024
+name: TESS search for anomalous transits as Dyson-swarm signatures
+year: 2024
+authors: Cody (SETI Institute)
+domain: technosignature
+signature_class: artificial_structure_geometry
+observable: time_series
+hypothesis: Megastructures in orbit produce anomalous, non-planetary transit shapes or variability.
+data_used: [TESS photometry]
+method: Optical photometry pipeline for anomalous variability; applied to the seven Hephaistos II objects.
+result: None of the seven Hephaistos II candidates shows significant anomalous variability.
+outcome: null_result
+limits: ""
+confounders_found: []
+lesson: Time-domain photometry is an independent channel for any IR-selected candidate; coincidence across channels is the bar.
+bibcodes: { status: to_resolve, values: [] }
+urls: [https://physicsworld.com/a/are-dusty-quasars-masquerading-as-dyson-sphere-candidates/]
+related: [REG-hephaistos-ii-2024]
+added: 2026-11-07
+withheld_for_rediscovery_test: true

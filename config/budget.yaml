@@ -1,0 +1,21 @@
+# Hard caps. pipeline/ stops and reports when a run would exceed them.
+period: monthly
+llm:
+  max_eur: 150
+  max_cards_per_expand_run: 120
+  max_gate_calls_per_run: 600
+  measured_cost_per_card_eur: null    # fill in week 3 (paper Section 9.3)
+compute:
+  max_eur: 50
+  max_single_job_minutes: 90
+  archive_side_queries_preferred: true
+  max_download_gb_per_analysis: 5
+human:
+  hours_per_week: 4
+  weekly_review_slot_hours: 3
+portfolio:
+  max_selected_cards_per_cycle: 5
+  min_selected_cards_per_cycle: 3
+  min_domains_represented: 2
+  max_ambitious_cards: 1
+  min_quick_cards: 1

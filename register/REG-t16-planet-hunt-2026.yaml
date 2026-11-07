@@ -1,0 +1,20 @@
+id: REG-t16-planet-hunt-2026
+name: T16 Planet Hunt - 10,000 new planet candidates from TESS Cycle 1
+year: 2026
+authors: Roth et al. (Princeton, UCLA, Carnegie, MIT, Concepcion)
+domain: data_mining_exemplar
+signature_class: population_statistics
+observable: time_series
+hypothesis: Faint TESS stars (down to T = 16) hide an uncatalogued transiting-planet population.
+data_used: [TESS Cycle 1 full-frame images, 83.7 million light curves]
+method: Uniform detrending and systematics correction; semi-automated transit search with random-forest vetting; human review of every published candidate.
+result: 11,554 candidates, 10,091 new, periods 0.5-27 days; one hot Jupiter confirmed with Magellan RVs (ApJS 284, May 2026).
+outcome: method_demonstration
+limits: ""
+confounders_found: [eclipsing binaries, background blends, systematics]
+lesson: Asking an unasked question (faint stars) of a mined archive still pays; a census, not a life search.
+bibcodes: { status: to_resolve, values: [] }
+urls: [https://arxiv.org/abs/2604.18579]
+related: []
+added: 2026-11-07
+withheld_for_rediscovery_test: true

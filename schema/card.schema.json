@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sieve.project/schema/card.schema.json",
+  "title": "SIEVE hypothesis card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "version", "title", "claim", "domain", "signature_class", "observable", "timescale", "mechanism", "status", "provenance"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^SIEVE-[0-9]{4}$" },
+    "version": { "type": "integer", "minimum": 1 },
+    "title": { "type": "string", "minLength": 10, "maxLength": 160 },
+    "claim": { "type": "string", "minLength": 20, "description": "One falsifiable sentence" },
+    "domain": { "enum": ["biosignature", "technosignature", "solar_system_insitu"] },
+    "signature_class": { "enum": ["atmospheric_chemistry", "surface_albedo", "thermal_waste_heat", "artificial_structure_geometry", "em_transmission", "temporal_behaviour", "population_statistics", "insitu_composition"] },
+    "observable": { "enum": ["photometry", "spectroscopy", "astrometry", "time_series", "polarimetry", "radio", "imaging", "mass_spectrometry", "population_statistic", "spectral_excess"] },
+    "timescale": { "enum": ["snapshot", "days", "years", "decades"] },
+    "mechanism": { "type": "string", "minLength": 20, "description": "Why life or technology produces the signature, with an order-of-magnitude estimate" },
+    "data_requirements": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "wavelength_um": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+        "spectral_resolution": { "type": ["string", "number"] },
+        "cadence": { "type": "string" },
+        "depth": { "type": "string" },
+        "sample": { "type": "string" }
+      }
+    },
+    "candidate_archives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "access"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "access": { "type": "string" },
+          "licence": { "type": "string" },
+          "volume_estimate": { "type": "string" }
+        }
+      }
+    },
+    "method": { "type": "string" },
+    "confounders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "exclusion"],
+        "additionalProperties": false,
+        "properties": { "name": { "type": "string" }, "exclusion": { "type": "string" } }
+      }
+    },
+    "novelty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["unchecked", "open", "partly_done", "done"] },
+        "closest_prior": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["bibcode", "relation"],
+            "additionalProperties": false,
+            "properties": {
+              "bibcode": { "type": "string", "pattern": "^[0-9]{4}[A-Za-z&.]{5}[0-9.]{4}[A-Za-z.][0-9.]{4}[A-Z]$" },
+              "register_id": { "type": "string" },
+              "relation": { "type": "string" }
+            }
+          }
+        },
+        "queries_run": { "type": "array", "items": { "type": "string" } },
+        "audited_by_human": { "type": "boolean" }
+      }
+    },
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "novelty": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "feasibility": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "information_value": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "confounder_robustness": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "cost_inverted": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "total": { "type": "integer", "minimum": 0, "maximum": 15 },
+        "scored_by": { "enum": ["llm", "human", "both"] }
+      }
+    },
+    "null_result_value": { "type": "string" },
+    "status": { "enum": ["raw", "gated", "parked", "selected", "preregistered", "executed", "reported"] },
+    "anomaly_level": { "type": ["integer", "null"], "minimum": 0, "maximum": 5, "description": "Credibility ladder level; only the owner sets values above 1" },
+    "parked_reason": { "type": ["string", "null"] },
+    "preregistration": { "type": ["string", "null"] },
+    "report": { "type": ["string", "null"] },
+    "provenance": {
+      "type": "object",
+      "required": ["generator_model", "prompt_version", "operator", "created"],
+      "additionalProperties": false,
+      "properties": {
+        "generator_model": { "type": "string" },
+        "prompt_version": { "type": "string" },
+        "operator": { "enum": ["cross_archive_transfer", "inversion", "population_statistics", "coincidence", "earth_as_template", "negative_space", "cross_disciplinary_analogy", "pipeline_shadow", "human", "manual"] },
+        "taxonomy_cell": { "type": "string" },
+        "parent_card": { "type": ["string", "null"] },
+        "created": { "type": "string", "format": "date" },
+        "edited_by_human": { "type": "boolean" }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+id: REG-enceladus-organics-khawaja-2025
+name: Complex organics in freshly ejected Enceladus ice grains (Cassini CDA re-analysis)
+year: 2025
+authors: Khawaja, Postberg et al.
+domain: solar_system_insitu
+signature_class: insitu_composition
+observable: mass_spectrometry
+hypothesis: Ocean-derived complex organic molecules are present in plume grains sampled directly, not only in aged E-ring grains.
+data_used: [Cassini Cosmic Dust Analyzer, 2008 E5 plume flyby]
+method: Re-analysis of high-speed impact mass spectra with techniques refined on other flybys.
+result: Complex organics including oxygen- and nitrogen-bearing compounds confirmed in fresh grains; ocean origin (Nature Astronomy, Oct 2025). Unexplained spectral types remain.
+outcome: confirmed_signal_no_life_claim
+limits: ""
+confounders_found: [radiation-driven surface chemistry as alternative source for some species]
+lesson: Old in-situ data reward new analysis methods seventeen years later; PDS is a live target.
+bibcodes: { status: to_resolve, values: [] }
+urls: [https://doi.org/10.1038/s41550-025-02655-y]
+related: []
+added: 2026-11-07
+withheld_for_rediscovery_test: true

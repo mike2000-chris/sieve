@@ -1,0 +1,26 @@
+# secrets and local config
+.env
+*.key
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+
+# data: raw archive pulls never enter the repository; result tables under analyses/ may
+analyses/**/data/
+analyses/**/*.fits
+analyses/**/*.parquet
+analyses/**/*.hdf5
+*.onnx
+*.bin
+
+# notebooks checkpoints
+.ipynb_checkpoints/
+
+# os
+.DS_Store

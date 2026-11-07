@@ -1,0 +1,20 @@
+id: REG-ren-2024-contamination
+name: Background contamination of the Project Hephaistos Dyson sphere candidates
+year: 2024
+authors: Ren, Garrett, Siemion
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: radio
+hypothesis: The Hephaistos II infrared excesses are contaminated by hot dust-obscured galaxies (Hot DOGs) close to the line of sight.
+data_used: [VLASS, other radio survey catalogues, e-MERLIN, e-VLBI follow-up]
+method: Cross-match within 10 arcsec of Gaia positions; follow-up interferometry of candidate G.
+result: Radio counterparts offset 4.9, 0.4 and 5.0 arcsec for candidates A, B, G; candidate G resolved with a compact component above 10^6 K brightness temperature, consistent with an obscured AGN.
+outcome: candidates_refuted
+limits: ""
+confounders_found: [hot dust-obscured galaxies, radio-loud AGN behind foreground M dwarfs]
+lesson: Confounders can be found in archives too; gate G4 must search radio and other wavelengths for every catalogue anomaly.
+bibcodes: { status: to_resolve, values: [] }
+urls: [https://arxiv.org/abs/2405.14921]
+related: [REG-hephaistos-ii-2024]
+added: 2026-11-07
+withheld_for_rediscovery_test: true

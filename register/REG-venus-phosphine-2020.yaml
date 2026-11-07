@@ -1,0 +1,20 @@
+id: REG-venus-phosphine-2020
+name: Phosphine in the clouds of Venus and the JCMT-Venus monitoring programme
+year: 2020
+authors: Greaves et al. (2020/2021); Mogul et al. (2021); Clements et al. (JCMT-Venus)
+domain: solar_system_insitu
+signature_class: atmospheric_chemistry
+observable: spectroscopy
+hypothesis: Phosphine in an oxidising atmosphere is a disequilibrium biosignature.
+data_used: [JCMT, ALMA millimetre spectra, archival Pioneer Venus 1978 mass spectrometer data]
+method: Line detection at 1.1 mm; re-analysis of in-situ mass spectra; long-term monitoring of PH3, HDO, SO2.
+result: Detection contested since 2020; archival in-situ data reported as consistent with phosphine at ppm levels in the clouds; monitoring ongoing; neither retracted nor accepted as biosignature.
+outcome: contested
+limits: ""
+confounders_found: [spectral ripple systematics, SO2 line contamination, calibration of a very bright source]
+lesson: Archival in-situ data can corroborate or refute remote claims; a disequilibrium gas is a chemistry claim first.
+bibcodes: { status: to_resolve, values: [] }
+urls: [https://arxiv.org/abs/2409.13438]
+related: []
+added: 2026-11-07
+withheld_for_rediscovery_test: true

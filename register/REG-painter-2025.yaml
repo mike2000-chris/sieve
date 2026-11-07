@@ -1,0 +1,20 @@
+id: REG-painter-2025
+name: A novel technosignature search in the Breakthrough Listen Green Bank Telescope archive
+year: 2025
+authors: Painter, Croft, Lebofsky, Andersson, Choza, Gajjar, Price, Siemion
+domain: technosignature
+signature_class: em_transmission
+observable: radio
+hypothesis: A morphology-agnostic statistical search finds narrowband signals missed by both traditional and ML pipelines.
+data_used: [Breakthrough Listen GBT archive, 9684 cadences of 3077 stars, L/S/C/X bands]
+method: Low-complexity statistical vetting of RFI; visual inspection of the most promising signals.
+result: Recovers previously found candidates plus new ones for vetting; <1% of stars host transmitters brighter than 0.3 Arecibo-equivalents in band (AJ 169, 222).
+outcome: upper_limit
+limits: "< 1% of surveyed stars with EIRP > 0.3 Arecibo radar equivalents over the band"
+confounders_found: [radio-frequency interference]
+lesson: Method choice changes what an archive yields; the largest archive is not exhausted.
+bibcodes: { status: to_resolve, values: [] }
+urls: [https://arxiv.org/abs/2412.05786]
+related: [REG-breakthrough-listen-ma-2023]
+added: 2026-11-07
+withheld_for_rediscovery_test: true

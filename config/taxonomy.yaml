@@ -1,0 +1,28 @@
+# Taxonomy grid for the Expand stage (paper Section 4.2). Coverage is measured per cell.
+domains: [biosignature, technosignature, solar_system_insitu]
+signature_classes:
+  - atmospheric_chemistry
+  - surface_albedo
+  - thermal_waste_heat
+  - artificial_structure_geometry
+  - em_transmission
+  - temporal_behaviour
+  - population_statistics
+  - insitu_composition
+observables: [photometry, spectroscopy, astrometry, time_series, polarimetry, radio, imaging, mass_spectrometry, population_statistic, spectral_excess]
+timescales: [snapshot, days, years, decades]
+archive_families: [exoplanet_archive, mast, gaia, irsa_ir, spherex, breakthrough_listen, pds, ztf, rubin, optical_spectra, euclid]
+operators:
+  - cross_archive_transfer
+  - inversion
+  - population_statistics
+  - coincidence
+  - earth_as_template
+  - negative_space
+  - cross_disciplinary_analogy
+  - pipeline_shadow
+# Cells that are physically meaningless are listed here so coverage metrics skip them.
+excluded_cells:
+  - { domain: solar_system_insitu, observable: astrometry }
+  - { domain: biosignature, signature_class: artificial_structure_geometry }
+  - { domain: biosignature, signature_class: em_transmission }

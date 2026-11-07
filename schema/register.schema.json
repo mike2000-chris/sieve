@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sieve.project/schema/register.schema.json",
+  "title": "SIEVE prior-search register entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "year", "domain", "signature_class", "hypothesis", "data_used", "result", "outcome", "lesson", "bibcodes"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^REG-[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "year": { "type": "integer", "minimum": 1950, "maximum": 2100 },
+    "authors": { "type": "string" },
+    "domain": { "enum": ["biosignature", "technosignature", "solar_system_insitu", "data_mining_exemplar"] },
+    "signature_class": { "type": "string" },
+    "observable": { "type": "string" },
+    "hypothesis": { "type": "string" },
+    "data_used": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "method": { "type": "string" },
+    "result": { "type": "string" },
+    "outcome": { "enum": ["null_result", "upper_limit", "candidates_unconfirmed", "candidates_refuted", "contested", "confirmed_natural", "confirmed_signal_no_life_claim", "method_demonstration"] },
+    "limits": { "type": "string" },
+    "confounders_found": { "type": "array", "items": { "type": "string" } },
+    "lesson": { "type": "string" },
+    "bibcodes": {
+      "type": "object",
+      "required": ["status"],
+      "additionalProperties": false,
+      "properties": {
+        "status": { "enum": ["to_resolve", "resolved"] },
+        "values": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "urls": { "type": "array", "items": { "type": "string", "format": "uri" } },
+    "related": { "type": "array", "items": { "type": "string" } },
+    "added": { "type": "string", "format": "date" },
+    "withheld_for_rediscovery_test": { "type": "boolean", "description": "true for entries published 2020 or later (paper Section 7)" }
+  }
+}

@@ -1,0 +1,20 @@
+id: REG-k2-18b-dms-2025
+name: K2-18b dimethyl sulfide / dimethyl disulfide claim and rebuttals
+year: 2025
+authors: Madhusudhan et al. (2023, 2025); Jordan et al. (2026) and others
+domain: biosignature
+signature_class: atmospheric_chemistry
+observable: spectroscopy
+hypothesis: Organosulfur gases (DMS/DMDS) in a hycean atmosphere indicate biological production.
+data_used: [JWST NIRISS, JWST NIRSpec, JWST MIRI transmission spectra]
+method: Atmospheric retrieval on transmission spectra; Bayesian model comparison.
+result: 3-sigma hint from MIRI; independent analyses find the signal weak and the molecular identification degenerate with hydrocarbons (e.g. C2H6); abiotic formation pathways proposed.
+outcome: contested
+limits: ""
+confounders_found: [observational degeneracy with hydrocarbons, abiotic organosulfur chemistry, retrieval model dependence, sulfur hazes]
+lesson: Signal, molecule identification and biological interpretation are three separate claims; expect degeneracy and plan independent re-analysis.
+bibcodes: { status: to_resolve, values: [] }
+urls: [https://www.cam.ac.uk/stories/strongest-hints-of-biological-activity, https://arxiv.org/abs/2603.18923]
+related: []
+added: 2026-11-07
+withheld_for_rediscovery_test: true

@@ -1,0 +1,105 @@
+# Machine-readable archive map for gate G3 (paper Section 5). Update access/latency after the Phase 0 smoke tests.
+archives:
+  - key: exoplanet_archive
+    name: NASA Exoplanet Archive
+    content: confirmed planets, candidates, stellar hosts, transmission spectra
+    access: [tap, api, astroquery.ipac.nexsci.nasa_exoplanet_archive]
+    scale: "6,000+ confirmed planets, 10,000+ candidates"
+    licence: public
+    suitability: high
+    url: https://exoplanetarchive.ipac.caltech.edu/
+  - key: mast
+    name: MAST (Kepler/K2, TESS, HST, JWST)
+    content: light curves, full-frame images, spectra
+    access: [astroquery.mast, lightkurve, s3]
+    scale: "TESS 80M+ FFI light curves via T16-type products"
+    licence: public after proprietary period
+    suitability: high
+    url: https://archive.stsci.edu/
+  - key: gaia
+    name: ESA Gaia (DR3 now, DR4 on 2026-12-02)
+    content: astrometry, photometry, low-res spectra, variability; DR4 adds full epoch time series (5.5 yr)
+    access: [adql, astroquery.gaia]
+    scale: "~1.8 billion sources"
+    licence: public
+    suitability: very_high
+    notes: run archive-side ADQL; DR4 day-one queries prepared in analyses/dr4-day-one/
+    url: https://gea.esac.esa.int/archive/
+  - key: irsa_ir
+    name: IRSA (AllWISE, NEOWISE, 2MASS, Spitzer)
+    content: infrared photometry, multi-epoch WISE
+    access: [tap, astroquery.ipac.irsa]
+    scale: "~750M AllWISE sources"
+    licence: public
+    suitability: very_high
+    url: https://irsa.ipac.caltech.edu/
+  - key: spherex
+    name: IRSA SPHEREx Quick Release (QR2/QR3)
+    content: all-sky 0.75-5 um spectral images, 102 bands, weekly releases
+    access: [s3://nasa-irsa-spherex/ (no account), irsa_sia2]
+    scale: full sky twice a year
+    licence: public
+    suitability: high
+    notes: new spectral archive; under-explored for signatures
+    url: https://irsa.ipac.caltech.edu/data/SPHEREx/
+  - key: breakthrough_listen
+    name: Breakthrough Listen Open Data Archive
+    content: radio spectrograms (GBT, Parkes), target lists, published candidate lists
+    access: [http, cloud]
+    scale: petabyte-scale; subsets manageable
+    licence: public
+    suitability: medium
+    notes: use published candidate lists and targeted subsets
+    url: https://seti.berkeley.edu/opendata
+  - key: pds
+    name: Planetary Data System
+    content: Cassini, Galileo, Juno, MRO, Mars rovers, Voyager, Pioneer Venus
+    access: [pds_nodes, http]
+    scale: mission-specific
+    licence: public
+    suitability: medium
+    url: https://pds.nasa.gov/
+  - key: ztf
+    name: ZTF public data releases and alert brokers
+    content: optical time series, alerts since 2018
+    access: [irsa, brokers: [fink, alerce, antares, lasair]]
+    scale: billions of detections
+    licence: public
+    suitability: high
+    url: https://www.ztf.caltech.edu/
+  - key: rubin
+    name: Rubin Observatory (alerts public; DP2; DR1 ~2028 with data rights)
+    content: alert stream, Data Preview 2, DR1
+    access: [brokers, rubin_science_platform]
+    scale: up to 7M alerts/night
+    licence: alerts public; images and DR catalogues need data rights
+    suitability: high_for_alerts
+    url: https://rubinobservatory.org/
+  - key: optical_spectra
+    name: SDSS, LAMOST, Gaia RVS
+    content: optical stellar and galaxy spectra
+    access: [casjobs, tap]
+    scale: millions of spectra
+    licence: public
+    suitability: medium
+  - key: euclid
+    name: ESA Euclid (Q1, Q2, DR1-Foundation Nov 2026)
+    content: deep optical/NIR imaging and spectra over ~1,900 deg2 in DR1-Foundation
+    access: [esa_euclid_archive, irsa_mirror]
+    scale: DR1-Foundation Nov 2026
+    licence: public
+    suitability: low_to_medium
+    url: https://www.cosmos.esa.int/web/euclid
+literature:
+  - key: ads
+    name: NASA ADS
+    access: https://api.adsabs.harvard.edu/v1/
+    auth: ADS_API_KEY
+  - key: openalex
+    name: OpenAlex
+    access: https://api.openalex.org/
+    auth: none (mailto recommended)
+  - key: arxiv
+    name: arXiv API
+    access: https://export.arxiv.org/api/query
+    auth: none

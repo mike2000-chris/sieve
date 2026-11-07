@@ -1,0 +1,20 @@
+id: REG-hephaistos-i-2022
+name: Project Hephaistos I - upper limits on partial Dyson spheres
+year: 2022
+authors: Suazo, Zackrisson, Wright, Korn, Huston
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: photometry
+hypothesis: Partial Dyson spheres (100-1000 K) re-emit absorbed starlight as mid-infrared waste heat detectable as IR excess.
+data_used: [Gaia DR2, AllWISE]
+method: Colour cuts on >10^8 Gaia-WISE sources; counts of objects in Dyson-sphere model regions by distance.
+result: Upper limits on the fraction of stars hosting partial Dyson spheres, as low as ~1 in 100,000 in the most constraining case.
+outcome: upper_limit
+limits: "< ~1e-5 of stars for near-complete 100-1000 K spheres within ~5 kpc"
+confounders_found: [natural mid-IR excess sources, WISE flux overestimation near saturation, source confusion]
+lesson: A catalogue cross-match sets population limits cheaply; the limit itself is a publishable product.
+bibcodes: { status: to_resolve, values: [] }
+urls: [https://arxiv.org/abs/2201.11123]
+related: [REG-hephaistos-ii-2024]
+added: 2026-11-07
+withheld_for_rediscovery_test: true

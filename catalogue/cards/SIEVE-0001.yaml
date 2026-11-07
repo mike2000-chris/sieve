@@ -1,0 +1,60 @@
+id: SIEVE-0001
+version: 1
+title: Waste-heat excess of partial Dyson swarms in SPHEREx 0.75-5 um spectra
+claim: >
+  Stars hosting partial Dyson swarms show a smooth 2-5 um excess over the photospheric model that is
+  spectrally distinct from debris-disc dust.
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+timescale: snapshot
+mechanism: >
+  Absorbed starlight re-emitted at 100-600 K; covering fraction f gives excess ~ f * L_star; f >= 0.01
+  detectable at S/N > 10 for G < 12 within 100 pc given SPHEREx per-channel depth (to be verified in G1).
+data_requirements:
+  wavelength_um: [0.75, 5.0]
+  spectral_resolution: "R >= 35"
+  cadence: none
+  depth: SPHEREx all-sky
+  sample: Gaia DR3 stars, G < 12, d < 100 pc
+candidate_archives:
+  - name: IRSA SPHEREx QR2/QR3
+    access: "S3 s3://nasa-irsa-spherex/ (no account), IRSA SIA2"
+    licence: public
+  - name: Gaia DR3
+    access: ADQL via Gaia Archive
+    licence: public
+method: >
+  Forward-model photosphere + blackbody excess; outlier detection on residual shape; cross-match AllWISE and
+  radio surveys for background contamination.
+confounders:
+  - name: debris discs
+    exclusion: spectral shape and age indicators; prior disc catalogues
+  - name: background dust-obscured galaxies
+    exclusion: radio cross-match within 10 arcsec (REG-ren-2024-contamination method)
+  - name: unresolved binaries / young stellar objects
+    exclusion: Gaia RUWE, H-alpha, variability
+novelty:
+  status: partly_done
+  closest_prior:
+    - bibcode: 2024MNRAS.531..695S
+      register_id: REG-hephaistos-ii-2024
+      relation: same signature, WISE photometry instead of SPHEREx spectra
+  queries_run: ["Dyson sphere infrared excess spectra", "SPHEREx technosignature"]
+  audited_by_human: false
+null_result_value: >
+  Sets the first spectroscopic upper limit on partial Dyson swarms with f >= 0.01 within 100 pc,
+  independent of WISE systematics.
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: claude-fable-5-1
+  prompt_version: expand-v0.1
+  operator: cross_archive_transfer
+  taxonomy_cell: technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex
+  parent_card: null
+  created: 2026-11-07
+  edited_by_human: true

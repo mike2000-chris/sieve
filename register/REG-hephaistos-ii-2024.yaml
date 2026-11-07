@@ -1,0 +1,20 @@
+id: REG-hephaistos-ii-2024
+name: Project Hephaistos II - Dyson sphere candidates from Gaia DR3, 2MASS and WISE
+year: 2024
+authors: Suazo, Zackrisson, Mahto, Lundell, Nettelblad, Korn, Wright, Majumdar
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+hypothesis: Partial Dyson spheres produce an infrared excess whose SED fits a blackbody-plus-photosphere model better than natural dust.
+data_used: [Gaia DR3, 2MASS, AllWISE]
+method: Multi-filter pipeline over ~5 million sources with SED model fits; CNN to flag WISE confusion; H-alpha, variability and astrometry checks.
+result: Seven M-dwarf candidates with unexplained IR excess (MNRAS 531, 695).
+outcome: candidates_unconfirmed
+limits: ""
+confounders_found: [warm debris discs, extreme debris discs, young stellar objects, background contamination]
+lesson: Candidate lists from one wavelength family need all-wavelength cross-matching before publication; see REG-ren-2024-contamination.
+bibcodes: { status: to_resolve, values: [] }
+urls: [https://arxiv.org/abs/2405.02927]
+related: [REG-hephaistos-i-2022, REG-ren-2024-contamination, REG-cody-tess-dyson-transits-2024]
+added: 2026-11-07
+withheld_for_rediscovery_test: true

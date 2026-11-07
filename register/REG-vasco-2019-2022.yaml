@@ -1,0 +1,20 @@
+id: REG-vasco-2019-2022
+name: VASCO - Vanishing and Appearing Sources during a Century of Observations
+year: 2019
+authors: Villarroel et al.; Solano, Villarroel, Rodrigo (2022)
+domain: technosignature
+signature_class: temporal_behaviour
+observable: imaging
+hypothesis: Stars that vanish over ~70 years without a remnant would indicate new astrophysics or technology (e.g. enclosure by megastructures).
+data_used: [USNO-B1.0, POSS I/II plates, Pan-STARRS DR2, Gaia EDR3, ZTF]
+method: Cross-match 1950s plate catalogues with modern surveys; vet candidates visually and by Virtual Observatory services.
+result: No genuine vanishing star found; no point source detected by both POSS-I and POSS-II before vanishing; large transient and artefact samples catalogued.
+outcome: upper_limit
+limits: "vanishing stars < 1 in 90 million per 70 yr (2019); failed-supernova rate < 1 per 10^9 stars per 70 yr (2022)"
+confounders_found: [plate emulsion defects, asteroids, high-proper-motion stars, variable stars, dust-obscured stars]
+lesson: Decade-scale archives are an under-used axis; the product is a quantified limit plus a vetted transient catalogue.
+bibcodes: { status: to_resolve, values: [] }
+urls: [https://arxiv.org/abs/1911.05068, https://arxiv.org/abs/2206.00907]
+related: []
+added: 2026-11-07
+withheld_for_rediscovery_test: false

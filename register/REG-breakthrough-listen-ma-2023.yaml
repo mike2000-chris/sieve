@@ -1,0 +1,20 @@
+id: REG-breakthrough-listen-ma-2023
+name: Breakthrough Listen deep-learning search for technosignatures (820 nearby stars)
+year: 2023
+authors: Ma, Ng, Rizk, Croft, Siemion et al.
+domain: technosignature
+signature_class: em_transmission
+observable: radio
+hypothesis: Narrowband, Doppler-drifting radio signals that appear only in on-target cadences indicate transmitters.
+data_used: [Breakthrough Listen Green Bank Telescope archive]
+method: Deep-learning classifier (beta-VAE + random forest) over cadence spectrograms; follow-up re-observation of signals of interest.
+result: Signals of interest identified; follow-up observations did not re-detect them, so none qualifies as a bona fide candidate. Code and data public.
+outcome: candidates_unconfirmed
+limits: ""
+confounders_found: [radio-frequency interference]
+lesson: Re-detection is the bar; a deep-learning model cannot extrapolate to signal types absent from training.
+bibcodes: { status: to_resolve, values: [] }
+urls: [https://seti.berkeley.edu/ml_gbt/]
+related: [REG-painter-2025]
+added: 2026-11-07
+withheld_for_rediscovery_test: true
