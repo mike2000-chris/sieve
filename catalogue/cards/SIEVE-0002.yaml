@@ -1,5 +1,5 @@
 id: SIEVE-0002
-version: 4
+version: 5
 title: Smooth 300-600 K blackbody excess at 3-5 um around Gaia 100-pc FGKM dwarfs in SPHEREx QR spectral images
 claim: Fewer than 1 in 10^4 Gaia DR3 main-sequence stars within 100 pc show a 3.5-5.0 um flux excess above 5 per
   cent whose spectral slope fits a single 300-600 K blackbody to chi2_nu<1.5 with no feature deeper than 2 per cent.
@@ -177,3 +177,26 @@ provenance:
 scores:
   confounder_robustness: 2
   scored_by: llm
+physics:
+  verdict: revise
+  rationale: 'The core arithmetic is correct: for a 5800 K star and a 400 K radiator I get about 11f at 4.5 um and
+    1.6f at 3.5 um, and with f = 1 per cent the pattern sits roughly 2-5x above a plausible 2-3 per cent systematic
+    floor. The stated null-result bound (covering fraction 0.5 per cent across 300-600 K for all FGKM) is wrong
+    by up to an order of magnitude at the cool-radiator and M-dwarf end. At 300 K, or around a 3200 K host, f =
+    0.5 per cent gives only about 1.2 per cent excess, below the 5 per cent threshold.'
+  checks:
+    energy_budget: ok
+    observability: concern
+    internal_consistency: concern
+    forbidden_physics: ok
+  revision_hints:
+  - 'Restate the threshold as a 4.5 um (or band-integrated 4-5 um) excess. Replace the single null-result bound
+    with a covering-fraction limit that depends on host Teff and T_d: f_min = 0.05 / [(T*/T_d)^4 B(4.5um,T_d)/B(4.5um,T*)],
+    about 0.5 per cent for G/400 K but about 2 per cent for G/300 K or M/400 K. Also state the SPHEREx bright-star
+    saturation cut alongside Ks < 12.'
+  judged:
+    model: claude-opus-5-5
+    prompt_version: critique-g1-physics-v0.2
+    date: '2026-11-11'
+    by: Claude Code (claude-opus-5-5)
+  audited_by_human: false
