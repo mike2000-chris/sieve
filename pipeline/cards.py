@@ -122,6 +122,36 @@ def set_status(card_id: str, new_status: str, reason: str, by: str) -> int:
     return 0
 
 
+def set_novelty(card_id: str, novelty: dict, by: str, gate_log: dict) -> int:
+    """Write a G2 verdict into the card's `novelty` block and append the `G2` gate-log event.
+
+    Called by pipeline/critique.py. Leaves `status` alone: a novelty verdict is evidence for the raw -> gated/parked
+    decision, which still goes through `set_status`. The card is validated before it is written; an invalid novelty
+    block (e.g. a malformed bibcode) is refused and nothing changes.
+    """
+    path = CARDS / f"{card_id}.yaml"
+    if not path.exists():
+        print(f"no such card: {card_id}")
+        return 1
+    card = _load_yaml(path)
+    previous = card.get("novelty") or {"status": "unchecked"}
+    card["novelty"] = novelty
+    card["version"] = int(card.get("version", 1)) + 1
+    errors = [f"{'/'.join(map(str, e.path))}: {e.message}" for e in _validator("card.schema.json").iter_errors(card)]
+    if errors:
+        print(f"{card_id}: novelty block refused: {errors[:3]}")
+        return 1
+    path.write_text(yaml.safe_dump(card, sort_keys=False, allow_unicode=True, width=110), encoding="utf-8")
+    GATE_LOGS.mkdir(parents=True, exist_ok=True)
+    entry = {"ts": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "event": "gate", "gate": "G2",
+             "verdict": novelty["status"], "by": by, "card_version": card["version"], "previous_novelty": previous,
+             **gate_log}
+    with (GATE_LOGS / f"{card_id}.jsonl").open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    print(f"{card_id}: novelty {previous.get('status')} -> {novelty['status']} (logged)")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="sieve")
     sub = ap.add_subparsers(dest="cmd", required=True)
