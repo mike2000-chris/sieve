@@ -10,12 +10,17 @@ G2-fast, G1, G3, G4 (full G2 is run separately with `g2`).
     uv run python -m pipeline.critique g2 SIEVE-0002 [--dry-run] [--max-run-eur 3]
     uv run python -m pipeline.critique g2 --all-unchecked --by "name (model)"
 
-Full G2 (prompt critique-g2-novelty-v0.2): the model writes 3-5 queries; pipeline/literature/retrieve.py runs them
+Full G2 (prompt critique-g2-novelty-v0.3): the model writes 3-5 queries; pipeline/literature/retrieve.py runs them
 against NASA ADS and OpenAlex and keeps the 10 best papers, all with ADS-resolved bibcodes; the model judges
 done | partly_done | open over those papers and the closest register entries. Rule 2 is enforced in code: a bibcode in
 the judge's output that is neither in the retrieved list nor a resolved register bibcode is dropped and logged, and a
 done/partly_done verdict left without any resolved bibcode is logged as `unsupported` and does not reach the card.
 The verdict is written through pipeline/cards.py `set_novelty` (card + `G2` gate-log event); `status` is untouched.
+No G2 verdict parks a card: `done` is written to the `novelty` block and the gate log and nothing else happens
+(owner decision 2026-11-11; G2 has no `--park`). For the survival metric `open` and `partly_done` pass G2 and only
+`done` fails (evaluation/metrics.md). v0.3 verdict rules: `open` when the card's archive or method measures a
+quantity earlier searches could not measure; `partly_done` when the same measurement is repeated on newer or larger
+data or a closely related claim was tested; a paper that only proposes the idea is not a test.
 Every model call is preceded by the budget checks (monthly cap, calls per run, --max-run-eur against the call's
 worst case) and followed by a record in evaluation/costs/llm_runs.jsonl.
 
@@ -141,7 +146,8 @@ def g2_fast(card_ids: list[str], by: str, dry_run: bool) -> int:
 
 # --- G2: ADS/OpenAlex retrieval + LLM judge ---------------------------------------------------------------------
 
-G2_PROMPT_VERSION = "critique-g2-novelty-v0.2"
+G2_PROMPT_VERSION = "critique-g2-novelty-v0.3"
+G2_PASS = ("open", "partly_done")   # survival metric: only `done` fails G2; no verdict changes a card's status
 G2_EFFORT = {"queries": "low", "judge": "high"}       # query writing is routine; the verdict is the judgement
 G2_MAX_TOKENS = {"queries": 4000, "judge": 12000}     # hard per-call output ceilings; they bound the cost check
 G2_MAX_PAPERS = 10
