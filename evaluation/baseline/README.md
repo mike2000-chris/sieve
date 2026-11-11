@@ -15,7 +15,7 @@ Status: 23 sources, 40 raw cards, no gate has been run. Proposed text for the pa
 | `cards/BASE-NNNN.yaml` | The baseline cards, `status: raw`. |
 | `paper-change-v0.2.md` | Proposed changes to paper Sections 7 and 9.1. |
 
-Gate logs for baseline cards go to `evaluation/baseline/gate_logs/` (written by `pipeline.cards set-status BASE-NNNN ...`).
+Gate logs for baseline cards go to `evaluation/baseline/gate_logs/` (written by `pipeline.cards set-status BASE-NNNN ...` and by the gate runner, see "Gating the baseline").
 
 ## Selection rule
 
@@ -103,6 +103,17 @@ The bibcode pattern in the schema rejected arXiv bibcodes such as `2018arXiv1812
 - Suggested reading: report G2 under the "tested" definition for both sets, and add for pipeline cards a second label, proposed before or not, judged against ADS and against the baseline cards. The share of baseline cards that Expand regenerates is then a second rediscovery measure beside the register-based one.
 
 **Blinding.** The gate prompts take the card as YAML. `provenance` (and the id prefix) should be removed before the card reaches a judge, for both sets, so that the judge does not know whether a card is from the literature or from the pipeline and does not see the source bibcodes.
+
+## Gating the baseline
+
+Owner decisions of 2026-11-11 on decision points 2 and 4 below, as implemented:
+
+- **Blind prompts.** `pipeline.cards.blind_card` removes `id`, `version` and the whole `provenance` block (with `source_bibcodes` and `transcribed_by`) before a card enters any gate prompt: G1, G3 and G4 through `pipeline/gates/common.py`, the G2 query writer and judge through `pipeline/critique.py`. This holds for both card sets. `tests/test_blinding.py` checks it on one card of each set.
+- **Runner.** `python -m pipeline.critique g1|g2|g2-fast|g3|g4|all` accepts `BASE-NNNN` ids, reads and writes `evaluation/baseline/cards/` and logs to `evaluation/baseline/gate_logs/`. `--all-raw` and `--all-unchecked` stay catalogue-only. A real run on a baseline card is refused unless `--baseline-ok` is given; `--dry-run` works without it.
+- **G2.** From `critique-g2-novelty-v0.3` on, a paper that only proposes the idea, the card's own source included, is not a test and cannot support `done`. The judge is not told which listed paper is the source.
+- **Not done yet.** No gate has been run on a baseline card. The owner audits a sample of the screening and the cards first.
+
+What blinding does not remove is wording. 33 of the 40 cards contain transcription phrases such as "the source gives no estimate" or "not stated in source", and most have no `candidate_archives`, `method` or `confounders`. A judge can infer from that text that a card was transcribed. G3 also short-circuits without a model call on a card that lists no archive (`no_archives_listed`), which applies to 34 baseline cards.
 
 ## Limitations
 

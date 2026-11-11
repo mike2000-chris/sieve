@@ -13,10 +13,14 @@ Two card sets share one schema and are kept apart by id prefix and directory:
   SIEVE-NNNN  catalogue/cards/            pipeline cards (Expand, human edits); gate logs in catalogue/gate_logs/
   BASE-NNNN   evaluation/baseline/cards/  literature baseline (evaluation/baseline/README.md); gate logs in
                                           evaluation/baseline/gate_logs/. Expand and the catalogue never read them.
+
+Gate prompts see both sets blind: `blind_card` removes the id, the provenance block and the version before a card is
+put into any gate prompt. It is the one place where that stripping is defined.
 """
 from __future__ import annotations
 
 import argparse
+import copy
 import datetime as dt
 import json
 import sys
@@ -83,6 +87,29 @@ def card_paths(card_id: str) -> tuple[Path, Path]:
     return CARDS / f"{card_id}.yaml", GATE_LOGS
 
 
+def load_card(card_id: str) -> dict | None:
+    """The card for an id from its set's directory (catalogue or baseline); None if there is no such card."""
+    path, _ = card_paths(card_id)
+    return _load_yaml(path) if path.exists() else None
+
+
+# Fields that tell a judge where a card comes from. `id` carries the SIEVE/BASE prefix; `provenance` holds generator
+# model, operator, taxonomy cell, parent card and, for baseline cards, `source_bibcodes` and `transcribed_by`;
+# `version` counts earlier writes and so differs between a freshly transcribed and a gated card. The last two names
+# are provenance sub-fields, listed in case one is ever written at the top level.
+ORIGIN_FIELDS = ("id", "version", "provenance", "source_bibcodes", "transcribed_by")
+
+
+def blind_card(card: dict) -> dict:
+    """A copy of the card without the fields that reveal its origin (ORIGIN_FIELDS); everything else is kept.
+
+    Every gate prompt (G1, G2 queries and judge, G3, G4) is built from this view, so pipeline cards and
+    literature-baseline cards are judged blind (owner decision 2026-11-11). The gates may drop further fields for
+    their own reasons (their own earlier output); they never add one of these back.
+    """
+    return {k: copy.deepcopy(v) for k, v in card.items() if k not in ORIGIN_FIELDS}
+
+
 def baseline_source_bibcodes() -> set[str] | None:
     """Bibcodes of included baseline sources (and their full-text twins); None if sources.yaml is absent."""
     if not BASELINE_SOURCES.exists():
@@ -112,8 +139,9 @@ def _validate_baseline(card_v) -> tuple[int, int]:
             problems.append("provenance/source_bibcodes missing")
         if known is not None:
             problems += [f"source bibcode {b} is not an included source in sources.yaml" for b in bibs if b not in known]
-        if (doc.get("novelty") or {}).get("closest_prior") and doc.get("status") == "raw":
-            problems.append("novelty/closest_prior must stay empty on raw baseline cards (gate G2 fills it)")
+        nov = doc.get("novelty") or {}
+        if nov.get("closest_prior") and not nov.get("judged"):
+            problems.append("novelty/closest_prior may only be filled by gate G2 (no novelty/judged block found)")
         for msg in problems:
             errors += 1
             print(f"BASELINE {p.name}: {msg}")
@@ -247,27 +275,21 @@ def set_novelty(card_id: str, novelty: dict, by: str, gate_log: dict) -> int:
 
     Called by pipeline/critique.py. Leaves `status` alone: a novelty verdict is evidence for the raw -> gated/parked
     decision, which still goes through `set_status`. The card is validated before it is written; an invalid novelty
-    block (e.g. a malformed bibcode) is refused and nothing changes.
+    block (e.g. a malformed bibcode) is refused and nothing changes. Works for both card sets (id prefix).
     """
-    path = CARDS / f"{card_id}.yaml"
-    if not path.exists():
+    card = load_card(card_id)
+    if card is None:
         print(f"no such card: {card_id}")
         return 1
-    card = _load_yaml(path)
     previous = card.get("novelty") or {"status": "unchecked"}
     card["novelty"] = novelty
-    card["version"] = int(card.get("version", 1)) + 1
-    errors = [f"{'/'.join(map(str, e.path))}: {e.message}" for e in _validator("card.schema.json").iter_errors(card)]
+    errors = write_card(card)
     if errors:
         print(f"{card_id}: novelty block refused: {errors[:3]}")
         return 1
-    path.write_text(yaml.safe_dump(card, sort_keys=False, allow_unicode=True, width=110), encoding="utf-8")
-    GATE_LOGS.mkdir(parents=True, exist_ok=True)
-    entry = {"ts": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "event": "gate", "gate": "G2",
-             "verdict": novelty["status"], "by": by, "card_version": card["version"], "previous_novelty": previous,
-             **gate_log}
-    with (GATE_LOGS / f"{card_id}.jsonl").open("a", encoding="utf-8") as fh:
-        fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    append_gate_log(card_id, {"ts": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "event": "gate",
+                              "gate": "G2", "verdict": novelty["status"], "by": by, "card_version": card["version"],
+                              "previous_novelty": previous, **gate_log})
     print(f"{card_id}: novelty {previous.get('status')} -> {novelty['status']} (logged)")
     return 0
 

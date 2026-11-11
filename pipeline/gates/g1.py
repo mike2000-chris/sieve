@@ -64,7 +64,7 @@ def _apply(card: dict, result: dict, judged: dict) -> list[str]:
 
 
 G1 = Gate(name="G1", prompt_version=PROMPT_VERSION, schema=SCHEMA, build_vars=lambda card: {}, apply=_apply,
-          verdict_of=lambda r: r["verdict"], fail_verdicts=("fail",))
+          verdict_of=lambda r: r["verdict"], fail_verdicts=("fail",), own_fields=("physics",))
 
 
 def latest_g1_event(card_id: str) -> dict | None:

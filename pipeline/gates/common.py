@@ -27,10 +27,11 @@ _DETECTION_WORDS = re.compile(r"\b(detect(?:ion|ions|ed|s)?|discover(?:y|ies|ed)
 
 
 def load_card(card_id: str) -> dict:
-    path = cards_mod.CARDS / f"{card_id}.yaml"
-    if not path.exists():
+    """Catalogue (SIEVE-NNNN) or baseline (BASE-NNNN) card; the id prefix decides the directory."""
+    card = cards_mod.load_card(card_id)
+    if card is None:
         raise SystemExit(f"no such card: {card_id}")
-    return cards_mod._load_yaml(path)
+    return card
 
 
 def judged_block(model: str, prompt_version: str, by: str) -> dict:
@@ -38,9 +39,10 @@ def judged_block(model: str, prompt_version: str, by: str) -> dict:
     return {"model": model, "prompt_version": prompt_version, "date": dt.date.today().isoformat(), "by": by}
 
 
-def card_yaml(card: dict) -> str:
-    """The card as the critic sees it: no provenance block, no earlier gate output in `scores`."""
-    view = {k: v for k, v in card.items() if k not in {"provenance", "scores", "version"}}
+def card_yaml(card: dict, drop: tuple = ()) -> str:
+    """The card as the critic sees it: blind to its origin (pipeline.cards.blind_card removes id, provenance and
+    version), without earlier gate output in `scores` and without the fields in `drop` (a gate's own earlier output)."""
+    view = {k: v for k, v in cards_mod.blind_card(card).items() if k != "scores" and k not in drop}
     return yaml.safe_dump(view, sort_keys=False, allow_unicode=True, width=110).rstrip()
 
 
@@ -128,10 +130,12 @@ class Gate:
     verdict_of: object        # (result) -> str
     fail_verdicts: tuple = ()
     precheck: object = None   # optional (card) -> dict | None; a non-None return short-circuits the LLM call
+    own_fields: tuple = ()    # card fields holding this gate's earlier output; hidden from its own prompt
 
 
 def build_prompt(gate: Gate, card: dict) -> str:
-    return load_prompt(f"{gate.prompt_version}.md").format(card_yaml=card_yaml(card), **gate.build_vars(card))
+    return load_prompt(f"{gate.prompt_version}.md").format(card_yaml=card_yaml(card, gate.own_fields),
+                                                           **gate.build_vars(card))
 
 
 def run_gate(gate: Gate, card_id: str, *, by: str, model: str = MODEL, dry_run: bool = False,
