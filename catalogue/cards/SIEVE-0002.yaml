@@ -1,5 +1,5 @@
 id: SIEVE-0002
-version: 1
+version: 3
 title: Smooth 300-600 K blackbody excess at 3-5 um around Gaia 100-pc FGKM dwarfs in SPHEREx QR spectral images
 claim: Fewer than 1 in 10^4 Gaia DR3 main-sequence stars within 100 pc show a 3.5-5.0 um flux excess above 5 per
   cent whose spectral slope fits a single 300-600 K blackbody to chi2_nu<1.5 with no feature deeper than 2 per cent.
@@ -26,12 +26,23 @@ candidate_archives:
 - name: IRSA SPHEREx Quick Release
   access: boto3 unsigned S3, bucket nasa-irsa-spherex (us-east-1), prefixes qr2/ and qr3/, spectral image cubes
     with WCS
+  licence: public (IPAC/IRSA, NASA)
+  volume_estimate: 'FITS images ~16.7 MB each. Header index: 2,880 bytes per image. Pixel stamps via row-range reads:
+    order 1-10 TB for ~3x10^5 stars x ~100-200 exposures x image/variance/flag rows; order-of-magnitude, exposure
+    counts to verify. Whole-image download would be far larger.'
 - name: Gaia DR3
   access: 'ESA Gaia TAP: gaiadr3.gaia_source, gaiadr3.astrophysical_parameters, gaiadr3.xp_continuous_mean_spectrum'
+  licence: CC BY-SA 3.0 IGO (acknowledge ESA/Gaia/DPAC)
+  volume_estimate: ~3x10^5 rows of astrometry/parameters (~100 MB). XP coefficients with covariances order 1-3 GB,
+    retrieved in <=50,000-row chunks.
 - name: 2MASS Point Source Catalog
   access: IRSA TAP table fp_psc
+  licence: public (IPAC/IRSA, NASA)
+  volume_estimate: ~3x10^5 rows, ~50 MB
 - name: AllWISE / CatWISE2020
   access: IRSA TAP tables allwise_p3as_psd and catwise_2020
+  licence: public (IPAC/IRSA, NASA)
+  volume_estimate: ~3x10^5 rows, ~50 MB
 method: Select Gaia DR3 sources with parallax>10 mas, RUWE<1.4 and a main-sequence position in the CMD. Fit a photospheric
   model to Gaia XP spectra plus 2MASS JHKs (PHOENIX/BT-Settl grid, Teff/logg/[Fe/H] from Gaia GSP-Phot). Pull SPHEREx
   QR2/QR3 spectral image cutouts and do forced PSF photometry at Gaia positions propagated to the SPHEREx epoch.
@@ -48,6 +59,62 @@ confounders:
 - name: SPHEREx calibration or LVF edge systematics
   exclusion: Compare against constant-star control samples matched in magnitude and focal-plane position. Require
     the excess in both semiannual passes.
+- name: Warm debris disc or hot exozodiacal dust of large grains
+  exclusion: 'The card''s test (age from kinematics, Li 6708, moving groups, plus W3/W4 shape) is necessary but
+    not enough. Fit the 3-5 um residual jointly with W3 (12 um) and W4 (22 um). A single 400 K blackbody fixes the
+    W3/W4 ratio; any colder component adds W4 flux and points to dust. Where archival Spitzer IRS spectra exist,
+    look for a 10 um silicate feature. A fully large-grain, single-temperature belt with no colder material is spectrally
+    identical to a radiator, so age cuts only lower its prior. Data: AllWISE/CatWISE2020 W1-W4 with cc_flags=''0000''
+    and ext_flg=0; Spitzer IRAC/MIPS/IRS and Herschel PACS archives; AKARI IRC/FIS; NEOWISE multi-epoch W1/W2 for
+    variable collisional dust; LAMOST/GALAH Li; BANYAN-type moving-group membership; eROSITA/ROSAT X-ray activity
+    as an age proxy [G4 excludable: partly]'
+- name: Unresolved cool companion (late M, L, T or Y dwarf)
+  exclusion: 'The card''s CH4 3.3 um / CO 4.6 um test works for T/Y dwarfs but is weak for L dwarfs. Add the following:
+    Gaia DR3 RUWE (the card''s <1.4 cut lets through face-on and long-period systems), ipd_frac_multi_peak, ipd_gof_harmonic_amplitude,
+    non_single_star and duplicated_source flags; Gaia DR3 proper-motion anomaly against Hipparcos where available;
+    and a fit of the residual with BT-Settl/Sonora L-T templates compared with a blackbody by Delta-chi2. Set the
+    template-preference threshold on a control sample of known L/T companions. Systems at small separation with
+    no astrometric signal remain. Data: Gaia DR3 gaia_source flags and NSS tables; Hipparcos-Gaia proper-motion
+    anomaly catalogue; 2MASS/UKIDSS/VHS JHK; CatWISE2020 colours and motions; archival AO imaging lists for nearby
+    stars [G4 excludable: partly]'
+- name: M-dwarf photospheric model mismatch at 3-5 um
+  exclusion: 'Not covered by the card. Replace the pure model photosphere with empirical loci. Calibrate the excess
+    on SPHEREx spectra of a control sample matched in Teff, [Fe/H] and absolute magnitude, and require the source
+    to be an outlier against that locus. Cross-check Teff with independent spectroscopic values. Also test the W1-W2
+    versus G-Ks or BP-RP relation for the same Teff bin. The outlier threshold must be calibrated on the control
+    sample. Data: SPHEREx QR spectra of matched controls; LAMOST, APOGEE and GALAH stellar parameters; Gaia DR3
+    astrophysical_parameters; AllWISE W1/W2 [G4 excludable: yes]'
+- name: Blended background galaxy, AGN or neighbouring star
+  exclusion: 'The card''s 12 arcsec neighbour check in Legacy Survey DR10 and Gaia is adequate for resolved sources
+    but should be extended in two ways. First, test co-motion: 100-pc stars move by more than about 0.1 arcsec/yr,
+    so compare the CatWISE2020/unWISE W2 centroid and its motion with the Gaia position propagated to each epoch.
+    A fixed W2 centroid offset means a background source. Second, check PAH 3.3 um emission in the SPHEREx residual,
+    which indicates a star-forming galaxy. Use a local-background annulus to reject cirrus. Data: Legacy Survey
+    DR10; Gaia DR3; CatWISE2020 and unWISE motions; Pan-STARRS1; VHS/UKIDSS; Planck/IRAS dust maps for cirrus [G4
+    excludable: yes]'
+- name: SPHEREx calibration, LVF edge and bright-star systematics
+  exclusion: 'The card''s matched-control and two-pass requirement is adequate if extended. Match controls in focal-plane
+    position, LVF position, magnitude and colour. Require consistency across independent exposures and across both
+    semiannual passes. Reject pixels using the SPHEREx flag rows. Add an injection-recovery test of synthetic blackbody
+    excesses. Set the bright-star non-linearity threshold on a control sample rather than assuming one. Data: SPHEREx
+    QR2/QR3 image, variance and flag planes; multi-exposure coverage; control stars of constant flux [G4 excludable:
+    yes]'
+- name: Look-elsewhere and Eddington selection in a 3x10^5-star ranking
+  exclusion: 'Not covered by the card. Measure the distribution of negative ''excesses'', which should be a mirror
+    of the positive tail if the excesses are noise. Estimate the false-positive rate from blackbody fits to the
+    negated residuals of controls. Include per-channel covariance in the chi2. Require the excess to be reproduced
+    in W1/W2 and in the second pass. Data: Full SPHEREx residue table; AllWISE/CatWISE W1/W2 photometry [G4 excludable:
+    yes]'
+- name: Misclassified young stellar object or evolved dusty star
+  exclusion: 'Check the CMD position with Gaia parallax_over_error above a threshold to calibrate on a control sample.
+    Look for Brackett-alpha 4.05 um emission in the SPHEREx spectrum and for H-alpha emission or Li. Check X-ray/UV
+    activity. Check SIMBAD types. Within 100 pc these sources are few and well catalogued. Data: Gaia DR3; SIMBAD;
+    eROSITA DR1/ROSAT; GALEX; LAMOST/GALAH; IPHAS/VPHAS H-alpha where available [G4 excludable: yes]'
+- name: Epoch mismatch and stellar variability
+  exclusion: 'Normalise the photosphere on the contemporaneous SPHEREx 0.75-2.5 um channels rather than on 2MASS
+    alone. Propagate positions with full Gaia astrometry. Use the second pass and NEOWISE light curves to flag variables.
+    Data: SPHEREx short-wavelength channels; NEOWISE W1/W2 time series; TESS light curves; Gaia DR3 variability
+    tables [G4 excludable: yes]'
 novelty:
   status: unchecked
 null_result_value: A null result bounds the fraction of nearby FGKM stars hosting re-radiating structures with covering
@@ -65,3 +132,6 @@ provenance:
   parent_card: null
   created: '2026-11-11'
   edited_by_human: false
+scores:
+  confounder_robustness: 2
+  scored_by: llm
