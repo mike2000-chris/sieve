@@ -1,0 +1,67 @@
+id: SIEVE-0002
+version: 1
+title: Smooth 300-600 K blackbody excess at 3-5 um around Gaia 100-pc FGKM dwarfs in SPHEREx QR spectral images
+claim: Fewer than 1 in 10^4 Gaia DR3 main-sequence stars within 100 pc show a 3.5-5.0 um flux excess above 5 per
+  cent whose spectral slope fits a single 300-600 K blackbody to chi2_nu<1.5 with no feature deeper than 2 per cent.
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+timescale: snapshot
+mechanism: A partial Dyson swarm absorbs a fraction f of starlight and re-radiates it at its operating temperature.
+  For a G2V star and a 400 K radiator, the excess at 4.5 um is about 11f of the photosphere and at 3.5 um about
+  1.5f. So f=1 per cent gives an 11 per cent excess at 4.5 um and a sevenfold rise in excess from 3.5 to 4.5 um.
+  This assumes the radiators are near-blackbody and optically thick, and that the luminosity escapes only as thermal
+  emission. WISE W1/W2 gives two points; the 102 SPHEREx channels give the Wien-side curvature.
+data_requirements:
+  measured_quantity: flux excess per SPHEREx channel at 3.0-5.0 um over a photospheric model fitted to Gaia XP +
+    2MASS, in per cent, plus best-fit blackbody temperature of the residual
+  wavelength_um:
+  - 0.75
+  - 5
+  spectral_resolution: R~35-130 (SPHEREx LVF channels)
+  cadence: single all-sky pass (snapshot); second pass used only for artifact rejection
+  depth: stars with Ks<12 to keep per-channel S/N>20 at 4.5 um
+  sample: ~3x10^5 Gaia DR3 main-sequence stars within 100 pc
+candidate_archives:
+- name: IRSA SPHEREx Quick Release
+  access: boto3 unsigned S3, bucket nasa-irsa-spherex (us-east-1), prefixes qr2/ and qr3/, spectral image cubes
+    with WCS
+- name: Gaia DR3
+  access: 'ESA Gaia TAP: gaiadr3.gaia_source, gaiadr3.astrophysical_parameters, gaiadr3.xp_continuous_mean_spectrum'
+- name: 2MASS Point Source Catalog
+  access: IRSA TAP table fp_psc
+- name: AllWISE / CatWISE2020
+  access: IRSA TAP tables allwise_p3as_psd and catwise_2020
+method: Select Gaia DR3 sources with parallax>10 mas, RUWE<1.4 and a main-sequence position in the CMD. Fit a photospheric
+  model to Gaia XP spectra plus 2MASS JHKs (PHOENIX/BT-Settl grid, Teff/logg/[Fe/H] from Gaia GSP-Phot). Pull SPHEREx
+  QR2/QR3 spectral image cutouts and do forced PSF photometry at Gaia positions propagated to the SPHEREx epoch.
+  Compute the per-channel ratio of observed to model flux. Fit a single-temperature blackbody to the 3.0-5.0 um
+  residual. Rank sources by excess significance and by the chi2 of a featureless fit. Release the ranked residue
+  table.
+confounders:
+- name: Warm debris disk around a young star
+  exclusion: Estimate age from Gaia kinematics, LAMOST/GALAH Li 6708 and moving-group membership. Debris also shows
+    a rising 12/22 um WISE W3/W4 excess that a 400 K single-component radiator underpredicts.
+- name: Blended background galaxy or red companion in the 6.2 arcsec SPHEREx pixel
+  exclusion: Check Legacy Survey DR10 and Gaia for neighbours within 12 arcsec. Brown-dwarf companions show CH4
+    absorption at 3.3 um and CO at 4.6 um in the SPHEREx spectrum.
+- name: SPHEREx calibration or LVF edge systematics
+  exclusion: Compare against constant-star control samples matched in magnitude and focal-plane position. Require
+    the excess in both semiannual passes.
+novelty:
+  status: unchecked
+null_result_value: A null result bounds the fraction of nearby FGKM stars hosting re-radiating structures with covering
+  fraction above about 0.5 per cent at 300-600 K to below about 1e-4.
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: claude-opus-5-5
+  prompt_version: expand-v0.2
+  operator: cross_archive_transfer
+  taxonomy_cell: technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false

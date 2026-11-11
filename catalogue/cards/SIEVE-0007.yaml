@@ -1,0 +1,66 @@
+id: SIEVE-0007
+version: 1
+title: Rest-frame 3-5 um waste-heat bump in SPHEREx spectra of z<0.1 galaxies, tracked through redshift to reject
+  instrumental features
+claim: Among 2MASS XSC galaxies with spectroscopic z<0.1 and no AGN or star-formation signatures, none shows a rest-frame
+  3.5-5 um excess above 20 per cent over a stellar-population model that moves with redshift and lacks a 3.29 um
+  PAH feature.
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+timescale: snapshot
+mechanism: A galaxy-spanning civilization that reprocesses fraction f of starlight at 500 K adds an excess at rest
+  4.5 um of about 8f relative to a ~4000 K old stellar population. At 300 K the excess is about 0.9f. So f=5 per
+  cent at 500 K gives a 40 per cent bump. This assumes uniform reprocessing across the galaxy and grey thermal emission.
+  WISE broadband colours mix this bump with AGN hot dust, while SPHEREx spectra place the bump at a rest-frame wavelength
+  that shifts with z.
+data_requirements:
+  measured_quantity: rest-frame 3.5-5.0 um flux excess over best-fit stellar population model, in per cent, and
+    3.29 um PAH equivalent width
+  wavelength_um:
+  - 0.75
+  - 5
+  spectral_resolution: R~35-130
+  cadence: single pass
+  depth: galaxies with Ks_ext<13.5
+  sample: ~5x10^4 2MASS XSC galaxies with spectroscopic z<0.1, quiescent and non-AGN
+candidate_archives:
+- name: IRSA SPHEREx Quick Release
+  access: boto3 unsigned S3, bucket nasa-irsa-spherex, prefixes qr2/ qr3/
+- name: 2MASS Extended Source Catalog
+  access: IRSA TAP table fp_xsc
+- name: SDSS DR17 / DESI DR1
+  access: SkyServer SpecObj and galSpecLine tables; DESI zcatalog via data.desi.lbl.gov
+- name: AllWISE
+  access: IRSA TAP allwise_p3as_psd
+method: Select 2MASS XSC galaxies with SDSS/6dF/DESI redshifts. Remove AGN by BPT classification, WISE W1-W2>0.5
+  and X-ray matches, and remove strong star formation by H-alpha EW>5 A. Extract matched-aperture SPHEREx spectra
+  and fit stellar population synthesis (age, metallicity, TP-AGB). Fit residuals in the rest frame and stack by
+  redshift bin. A real bump stays fixed in rest wavelength; an instrument feature stays fixed in observed wavelength.
+confounders:
+- name: Obscured AGN hot dust torus
+  exclusion: Use BPT line ratios, WISE W1-W2 colour, and a Chandra Source Catalog / eROSITA DR1 X-ray match. A torus
+    also rises steeply into W3/W4.
+- name: TP-AGB stars in intermediate-age populations raising the 2-5 um continuum
+  exclusion: TP-AGB light shows CO 2.3 um and H2O 1.9 um absorption visible in SPHEREx spectra and correlates with
+    spectroscopic age indices (Dn4000, H-delta).
+- name: Aperture mismatch for extended galaxies across wavelength-dependent PSF
+  exclusion: Use fixed physical apertures convolved to a common PSF. Test on galaxy pairs at the same z with different
+    sizes and check for size-dependent residuals.
+novelty:
+  status: unchecked
+null_result_value: A null result limits the fraction of quiescent galaxies reprocessing more than 5 per cent of
+  starlight at 400-700 K to below about 1/N_gal, N~10^4-10^5, improving the WISE broadband limit for warm reprocessors.
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: claude-opus-5-5
+  prompt_version: expand-v0.2
+  operator: cross_archive_transfer
+  taxonomy_cell: technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false

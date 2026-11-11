@@ -1,0 +1,74 @@
+id: SIEVE-0008
+version: 1
+title: 3-5 um excess in SPHEREx spectra of Kepler, K2, TESS and ZTF aperiodic dippers versus matched non-dipping
+  control stars
+claim: Stars with aperiodic dips deeper than 1 per cent in Kepler, K2, TESS or ZTF light curves show a median SPHEREx
+  3.5-5 um flux excess over photospheric models that is at least 5 per cent higher than that of control stars matched
+  in Gaia colour, magnitude and distance.
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+timescale: snapshot
+mechanism: An occulter large enough to block 1-20 per cent of a stellar disk absorbs starlight and must re-emit
+  it. A swarm with a time-averaged covering factor of 1 per cent at 1 AU around an F3V star (L about 4.7 Lsun) equilibrates
+  near 400 K. Its 4.6 um flux is about 0.01 x (6750/400)^4 x [B_nu(400 K)/B_nu(6750 K)], or roughly 20 per cent
+  of the photosphere. This assumes the structures are opaque, absorb optical light, and radiate thermally rather
+  than storing or beaming the energy. The operator moves the photometric dipper anomaly class into the SPHEREx spectral
+  channel.
+data_requirements:
+  measured_quantity: flux excess at 3.5-5 um over a fitted photospheric model, in per cent, per star and as a population
+    median difference (dippers minus matched controls)
+  wavelength_um:
+  - 0.75
+  - 5
+  spectral_resolution: R 35-130 (SPHEREx native, 102 bands)
+  cadence: single epoch per star (snapshot); multiple QR visits co-added
+  depth: S/N >= 20 per band at 4-5 um for stars with W2 < 12 mag
+  sample: about 500 aperiodic dippers from Kepler, K2, TESS and ZTF, plus 10,000 Gaia-matched control stars
+candidate_archives:
+- name: IRSA SPHEREx Quick Release
+  access: boto3 with signature_version=UNSIGNED, bucket nasa-irsa-spherex (us-east-1), prefixes qr2/ and qr3/ spectral
+    image cubes
+- name: Gaia DR3
+  access: ESA Gaia TAP, tables gaiadr3.gaia_source and gaiadr3.xp_continuous_mean_spectrum
+- name: MAST Kepler/K2/TESS light curves
+  access: astroquery.mast Observations.query_criteria with obs_collection Kepler, K2, TESS
+- name: AllWISE / CatWISE2020
+  access: IRSA TAP tables allwise_p3as_psd and catwise_2020
+method: Compile about 500 aperiodic dippers from published Kepler, K2, TESS and ZTF dipper lists, including Boyajian-type
+  and shallow random-transiter cases. Exclude young-cluster members and YSOs flagged in SIMBAD. Draw 20 control
+  stars per dipper, matched in Gaia BP-RP, G and parallax. Extract SPHEREx QR spectral-image photometry at the Gaia
+  DR3 positions propagated to the SPHEREx epoch. Fit PHOENIX photospheres to Gaia XP plus 0.75-2 um SPHEREx bands,
+  then compute the 3.5-5 um excess. Compare the dipper and control excess distributions with a two-sample Anderson-Darling
+  test, and list individual dippers above 5 sigma.
+confounders:
+- name: Circumstellar dust from collisions or exocomets (natural dippers)
+  exclusion: Dust shows chromatic dip depths in multiband photometry (ZTF g/r, TESS versus ground). Its 3-5 um excess
+    is usually accompanied by a 10 um silicate or W3/W4 rise in AllWISE. Flag excesses with W3-W4 > 0.5 mag as dust-like.
+- name: Young stellar object disks misclassified as field dippers
+  exclusion: Remove stars with Gaia DR3 age or lithium indicators of youth, those inside star-forming-region boundaries,
+    and those with H-alpha emission in LAMOST or Gaia RVS spectra.
+- name: Blended background galaxy or red companion within SPHEREx 6.2 arcsec pixels
+  exclusion: Check Gaia DR3 and Legacy Survey DR10 for neighbours within 12 arcsec. Require a centroid shift below
+    1 arcsec between the 1 um and 4.5 um SPHEREx images.
+- name: Photospheric model error for evolved or chemically peculiar stars
+  exclusion: Apply the identical model pipeline to the matched controls, so systematic model offsets cancel in the
+    difference statistic.
+novelty:
+  status: unchecked
+null_result_value: A non-detection limits the time-averaged covering factor of warm (300-600 K) opaque occulters
+  around aperiodic dippers to below about 0.5 per cent per star and below about 0.1 per cent for the population
+  mean.
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: claude-opus-5-5
+  prompt_version: expand-v0.2
+  operator: cross_archive_transfer
+  taxonomy_cell: technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false

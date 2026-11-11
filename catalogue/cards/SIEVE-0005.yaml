@@ -1,0 +1,65 @@
+id: SIEVE-0005
+version: 1
+title: 'Host-luminosity-independent excess temperature: a population test of 3-5 um excesses across the SPHEREx
+  stellar sky'
+claim: For stars with 3-5 um excess in SPHEREx, the fitted excess temperature correlates with host luminosity as
+  T proportional to L^(0.1-0.25), with no subpopulation clustered within 50 K of a single temperature across a factor
+  of 100 in L.
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+timescale: snapshot
+mechanism: 'Natural dust temperature follows the grain''s equilibrium distance and composition. Across a population
+  this gives a broad T distribution that tracks L^0.25 at fixed radius, except at the ~1500 K sublimation rim. An
+  engineered radiator temperature is set by the design: maximum work per unit radiator area, a material limit, or
+  a ~300-400 K biological/electronic operating point. That design holds regardless of host star. If 10 per cent
+  of excess sources were engineered at 350+-30 K, a sample of 1000 excesses would show a 100-source spike in a 60
+  K bin above a smooth natural distribution of ~20 per bin.'
+data_requirements:
+  measured_quantity: best-fit excess blackbody temperature T_ex (K) and luminosity fraction f, versus host bolometric
+    luminosity L*
+  wavelength_um:
+  - 0.75
+  - 5
+  spectral_resolution: R~35-130
+  cadence: single all-sky pass
+  depth: stars with Ks<13
+  sample: all Gaia DR3 stars with SPHEREx 4-5 um excess >5 sigma, expected 10^3-10^4
+candidate_archives:
+- name: IRSA SPHEREx Quick Release
+  access: boto3 unsigned S3, bucket nasa-irsa-spherex, prefixes qr2/ qr3/
+- name: Gaia DR3
+  access: ESA Gaia TAP gaiadr3.astrophysical_parameters (lum_flame, teff_gspphot)
+- name: AllWISE
+  access: IRSA TAP allwise_p3as_psd for W3/W4 long-wavelength anchors
+method: 'Build an all-sky SPHEREx excess catalog: forced photometry on Gaia DR3 stars with photospheric models from
+  XP spectra, keeping excess >5 sigma at 4-5 um. Fit T_ex and the luminosity fraction f with an MCMC that marginalises
+  over photospheric uncertainty. Plot T_ex against L* from Gaia parallax plus bolometric correction. Search for
+  overdensities in T_ex at fixed T using kernel density with injection-recovery to model selection effects.'
+confounders:
+- name: Selection effect from the SPHEREx wavelength window favouring T~400-1000 K
+  exclusion: Run injection-recovery of blackbodies with uniform T across 200-2000 K into real spectra. Divide the
+    observed T histogram by the recovery function.
+- name: Dust sublimation rim fixing T near 1300-1500 K
+  exclusion: The rim temperature is known and sits above the 300-600 K band of interest. Treat it as a separate
+    component in the mixture model.
+- name: Brown dwarf or M-dwarf companions with fixed Teff mimicking a fixed-T excess
+  exclusion: Companions show H2O/CH4/CO bands in SPHEREx spectra. Exclude sources whose residual is better fit by
+    BT-Settl atmospheres than by blackbodies.
+novelty:
+  status: unchecked
+null_result_value: A null result limits engineered fixed-temperature radiators to below about 5 per cent of the
+  3-5 um excess population over the 300-900 K range accessible to SPHEREx.
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: claude-opus-5-5
+  prompt_version: expand-v0.2
+  operator: cross_archive_transfer
+  taxonomy_cell: technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false

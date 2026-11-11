@@ -1,0 +1,69 @@
+id: SIEVE-0006
+version: 1
+title: 'Optical luminosity deficit balanced by 3-5 um excess: an energy-conservation test with Gaia XP, spectroscopic
+  surveys and SPHEREx'
+claim: No main-sequence star with spectroscopic Teff/logg/[Fe/H] and Gaia parallax shows an optical bolometric deficit
+  of more than 5 per cent that equals, within 30 per cent, its integrated 1-5 um infrared excess luminosity.
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+timescale: snapshot
+mechanism: 'A quasi-spherical swarm that intercepts fraction f of starlight removes f from the optical output seen
+  at every viewing angle. It returns f as waste heat, so the deficit equals the infrared excess. Natural disks are
+  flattened, so most sightlines give an excess without a deficit: the ratio of deficit to excess is near 0 face-on,
+  while edge-on systems show strong reddening. For f=10 per cent the optical deficit is 0.11 mag against a radius-luminosity
+  prediction precision of 0.03-0.05 mag for APOGEE/GALAH dwarfs with parallax error below 1 per cent. This assumes
+  isotropic coverage and grey absorption by the structure.'
+data_requirements:
+  measured_quantity: ratio of optical bolometric deficit D (relative to isochrone-predicted luminosity) to infrared
+    excess luminosity fraction E, both in per cent
+  wavelength_um:
+  - 0.33
+  - 5
+  spectral_resolution: Gaia XP R~30-100 plus SPHEREx R~35-130
+  cadence: single epoch per instrument
+  depth: G<13, Ks<11
+  sample: ~2x10^5 dwarfs with APOGEE DR17, GALAH DR4 or LAMOST parameters and parallax error <1 per cent
+candidate_archives:
+- name: IRSA SPHEREx Quick Release
+  access: boto3 unsigned S3, bucket nasa-irsa-spherex, prefixes qr2/ qr3/
+- name: Gaia DR3
+  access: ESA Gaia TAP gaiadr3.gaia_source and gaiadr3.xp_sampled_mean_spectrum
+- name: APOGEE DR17
+  access: SDSS SAS file allStar-dr17-synspec_rev1.fits
+- name: GALAH DR4 / LAMOST DR10
+  access: GALAH DR4 allstar FITS via datacentral.org.au; LAMOST DR10 catalog via dr10.lamost.org
+- name: Bayestar19 3D dust
+  access: python dustmaps package, bayestar query
+method: For dwarfs with APOGEE/GALAH/LAMOST parameters and parallax_over_error>100, predict L from isochrones (MIST)
+  given Teff, logg and [Fe/H]. Measure observed bolometric flux by integrating Gaia XP + 2MASS + SPHEREx. Correct
+  for extinction with 3D dust maps. Compute the deficit fraction D=1-L_obs/L_pred and the excess fraction E from
+  the SPHEREx 1-5 um residual extrapolated with a blackbody. Search for D~E>0.05 and test grey-versus-chromatic
+  dimming across XP wavelengths.
+confounders:
+- name: Interstellar extinction underestimated by the 3D dust map
+  exclusion: Interstellar dust gives chromatic dimming (R_V~3.1) visible across Gaia XP 0.33-1.05 um, while the
+    hypothesis predicts grey dimming. Restrict to d<200 pc where E(B-V)<0.02.
+- name: Wrong spectroscopic parameters or unresolved binary shifting the predicted luminosity
+  exclusion: Binaries make stars overluminous, not underluminous. Require agreement of Teff/logg between two surveys
+    and Gaia RUWE<1.2 with no RV variability in APOGEE visits.
+- name: Edge-on circumstellar disk producing both dimming and excess
+  exclusion: Edge-on disks give chromatic reddening and scattered-light polarisation. Gaia XP slope and the absence
+    of a W3/W4 cold component discriminate.
+novelty:
+  status: unchecked
+null_result_value: A null result bounds the incidence of near-spherical grey re-radiating envelopes with covering
+  fraction above 5-10 per cent among well-characterised dwarfs to below about 1/N, N~10^5.
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: claude-opus-5-5
+  prompt_version: expand-v0.2
+  operator: cross_archive_transfer
+  taxonomy_cell: technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false

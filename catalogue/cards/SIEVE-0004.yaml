@@ -1,0 +1,64 @@
+id: SIEVE-0004
+version: 1
+title: Absence of ice, PAH and aliphatic bands in the residue of WISE waste-heat candidate lists, tested with SPHEREx
+  spectra
+claim: 'Every star flagged as an unexplained WISE 3-22 um excess in published waste-heat searches shows, in SPHEREx
+  spectra, at least one feature with equivalent width >1 per cent of the excess: H2O ice 3.05 um, PAH 3.29 um, aliphatic
+  3.4 um, CO2 ice 4.27 um, or CO 4.67 um.'
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+timescale: snapshot
+mechanism: Natural reprocessors are dust grains with characteristic solid-state and molecular bands. In young stellar
+  objects and dusty galaxies these bands reach 5-30 per cent of the continuum. Engineered radiators made of bulk
+  metals or ceramics would emit a smooth grey continuum, with features below 1 per cent. This assumes the radiator
+  surfaces are not coated with molecular ices or carbonaceous films. WISE broadbands cannot separate the two cases;
+  SPHEREx channels at R~35-130 can.
+data_requirements:
+  measured_quantity: equivalent width (or 3-sigma upper limit) of 3.05, 3.29, 3.40, 4.27, 4.67 um features relative
+    to the fitted excess continuum, in per cent
+  wavelength_um:
+  - 2.2
+  - 5
+  spectral_resolution: R~35 (2.4-3.8 um) and R~110-130 (3.8-5.0 um)
+  cadence: single pass, both passes co-added for S/N
+  depth: per-channel S/N>30 on the excess continuum
+  sample: ~10^2-10^4 residue sources from prior WISE waste-heat candidate lists
+candidate_archives:
+- name: IRSA SPHEREx Quick Release
+  access: boto3 unsigned S3, bucket nasa-irsa-spherex, prefixes qr2/ qr3/
+- name: AllWISE
+  access: IRSA TAP allwise_p3as_psd for W1-W4 continuum anchor
+- name: Prior search candidate tables
+  access: VizieR TAP, author-supplied candidate tables from Gaia+WISE waste-heat searches
+method: Assemble the union of published candidate lists from WISE/Gaia/2MASS waste-heat searches (galaxy and star
+  residues). Do forced SPHEREx photometry at each position. Fit a smooth continuum (blackbody plus photosphere)
+  and measure equivalent widths or upper limits at 3.05, 3.29, 3.40, 4.27 and 4.67 um, plus the 2.29 um CO bandhead.
+  Sort candidates into feature-bearing (natural) and featureless (retained). Release the per-band limits.
+confounders:
+- name: Featureless hot carbon dust (amorphous carbon above ~800 K)
+  exclusion: Carbon dust has a steeper emissivity (beta~1-2), giving curvature distinct from a beta=0 blackbody
+    across 1-5 um. Combine with W3/W4 to test emissivity index.
+- name: Low S/N hiding weak bands
+  exclusion: Use injection-recovery of 1 per cent EW features into each spectrum. Report a source as featureless
+    only if injected features are recovered at >3 sigma.
+- name: Background contamination dominating the WISE excess but not SPHEREx
+  exclusion: Compare SPHEREx 4.5 um flux to WISE W2. A mismatch above 20 per cent flags confusion from the 6 arcsec
+    WISE beam.
+novelty:
+  status: unchecked
+null_result_value: If all candidates show bands, a null result removes the full existing WISE residue as an artificial-radiator
+  population and sets an empty featureless subset as the new baseline limit.
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: claude-opus-5-5
+  prompt_version: expand-v0.2
+  operator: cross_archive_transfer
+  taxonomy_cell: technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
