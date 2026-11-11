@@ -2,6 +2,25 @@
 
 Newest first. One entry per agent session or weekly review. Questions for the owner go under **Open questions**, not into chat.
 
+## 2026-11-11 (evening) — gates G1-G4 merged, literature baseline, Gaia login
+Operator: Claude Code (claude-opus-5-5) with four sub-agents (Fable 5.2 / Sonnet 5.5). PRs #7-#12 merged by the agent at the owner's request.
+- **#8** `prompts/score-v0.2` (no detection language, no citations, novelty from G2 only, numeric effort/cost estimates).
+- **#9** optional Gaia login in `pipeline/archives/adql_run.py` (`GAIA_USER`/`GAIA_PASSWORD` in `.env`). Live test with the owner's ESA Cosmos account: login, 249 tables, logout OK. `gaia.authenticated_row_limit` still `null`, measure on 2 Dec. Live anonymous query untested (Gaia async queue saturated today).
+- **#10** G1/G3/G4 in `pipeline/gates/`, prompts v0.2; smoke run on SIEVE-0002/0006: G1 `revise` for both (0006: method adds re-radiated heat back to the luminosity and cancels the deficit it measures), G3 `partial`, G4 robustness 2. Owner decisions: G4 includes withheld register entries; exact-name confounder dedupe for now; `all` stays log-only on a G1 fail.
+- **#11** full G2 (ADS/OpenAlex retrieval + LLM judge, rule 2 enforced in code, 0 bibcodes dropped). All 11 cards `partly_done` under v0.2 → no separation in this cell.
+- **#12** literature baseline: 40 cards BASE-0001..0040 from 23 sources; schema accepts `BASE-` ids, `source_bibcodes`, `transcribed_by`; bibcode pattern fixed for arXiv bibcodes.
+- Spend today: Expand 0.50 + gates ≈ 1.60 EUR. Cost per card all gates ≈ 0.42 EUR.
+
+**Owner decisions (as recommended)**
+- G2 calibration (→ v0.3): `open` if the new archive measures a quantity earlier searches could not; `partly_done` for the same measurement on newer data; proposal-only papers and the card's own source never count as a test. `done` is logged, never auto-parks. For the survival metric `partly_done` passes, only `done` fails. Rationale fields stay in the card. Judge stays at effort high.
+- Baseline: schema changes approved; gates run blinded (id/provenance stripped) on both sets; G1 judges cards as transcribed, failures for a missing order-of-magnitude estimate reported separately; 20/11/9 imbalance accepted and disclosed; baseline is evaluation-only (not Converge); "lift in volume" to be dropped from paper Section 7 in v0.2; morphological signatures (no taxonomy class, BASE-0034) deferred to the Phase 1 taxonomy review.
+- In progress: branch `pipeline/owner-decisions-g2-v0.3` (G1 card field + score fields in schema, blinding + BASE support in the gate runner, G2 v0.3 and re-run, cap 1.5 EUR).
+
+### Open questions
+- Owner audit of the baseline sample (~10 exclusions, 5 cards, ~1 h) before the baseline goes through the gates (~17 EUR).
+- `cost_inverted` bands in score-v0.2 (5-20 % → 2, 20-100 % → 1) are an agent proposal.
+- Apply `paper-change-v0.2.md` to the paper when the owner revises it.
+
 ## 2026-11-11 (later) — owner review: decisions, merges, four agent work packages
 Operator: Claude Code (claude-opus-5-5), dialogue with the owner. PRs #4, #5, #6 merged by the agent at the owner's request.
 **Owner decisions**
