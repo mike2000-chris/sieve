@@ -31,17 +31,20 @@ Milestone **M0**: repository public, 50 register entries, baseline cards scored.
   - done against the draft DR4 data model, DR3 dry runs pass, runner `pipeline/archives/adql_run.py`; release-day checklist in `analyses/dr4-day-one/README.md` (PR #5, 2026-11-11)
 
 ## Baseline
-- [ ] ~~Owner: two-hour human-only brainstorm~~ replaced by a **literature baseline** (owner decision 2026-11-11): published human-proposed hypotheses, resolved bibcodes only, as raw cards in `evaluation/baseline/`; paper change proposed for v0.2
-- [ ] Run the four gates on the baseline cards; keep the gate logs as `evaluation/baseline/`
+- [x] ~~Owner: two-hour human-only brainstorm~~ replaced by a **literature baseline** (owner decision 2026-11-11): published human-proposed hypotheses, resolved bibcodes only, as raw cards in `evaluation/baseline/`; paper change proposed for v0.2
+  - 23 sources, 40 cards BASE-0001..0040 (20 techno / 11 bio / 9 in-situ), selection rule in `evaluation/baseline/README.md`, paper change in `evaluation/baseline/paper-change-v0.2.md` (PR #12)
+- [ ] Owner: audit sample, ~10 exclusions and 5 cards against their sources (~1 h); gates on the baseline only after that
+- [ ] Run the four gates on the baseline cards, blinded (id and provenance stripped); keep the gate logs in `evaluation/baseline/` (~17 EUR at 0.42 EUR/card)
 
 ## Prompts and pipeline
-- [ ] Review `prompts/*-v0.1.md`; adjust tone and constraints; bump versions on change
+- [x] Review `prompts/*-v0.1.md`; adjust tone and constraints; bump versions on change
+  - v0.2 for score (PR #8), G1/G3/G4 (PR #10), G2 (PR #11); G2 v0.3 with owner calibration rules in progress
 - [x] Implement `pipeline/expand.py` end to end for one taxonomy cell (10 cards) and inspect output by hand
   - prompt `expand-v0.2` (JSON schema output); SIEVE-0002..0011 in cell technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex; agent spot-checked; owner accepted `expand-v0.2` as is (2026-11-11)
-- [ ] Implement gate G2 against the register first (fast path), then ADS/OpenAlex queries
-  - fast path done (`uv run python -m pipeline.critique g2-fast`), gate logs for SIEVE-0001..0011; ADS/OpenAlex query + LLM judge open
-- [ ] Measure cost per card (tokens, €) and write it into `config/budget.yaml` as `measured_cost_per_card`
-  - Expand only: 0.050 EUR/card (`measured_cost_per_card_eur_expand`); gates still to measure
+- [x] Implement gate G2 against the register first (fast path), then ADS/OpenAlex queries
+  - fast path + full G2 (`pipeline.critique g2`, ADS/OpenAlex retrieval, LLM judge, rule 2 enforced in code), PR #11; G1/G3/G4 in `pipeline/gates/`, PR #10
+- [x] Measure cost per card (tokens, €) and write it into `config/budget.yaml` as `measured_cost_per_card`
+  - Expand 0.050, G1 0.096, G2 0.066, G3 0.125, G4 0.130 EUR/card (G1/G3/G4 n=2, G2 n=11); all gates ≈ 0.42 EUR/card
 
 ## Exit criteria
 - [ ] M0 reached; owner signs off in `tasks/STATUS.md`; Phase 1 checklist (`tasks/PHASE1.md`) created from paper Section 9.1
