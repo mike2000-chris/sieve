@@ -1,0 +1,20 @@
+id: REG-bl-nearby-galaxies-choza-2024
+name: Breakthrough Listen technosignature search of 97 nearby galaxies
+year: 2024
+authors: Choza, Bautista, Croft, Siemion, Brzycki, Bhattaram, Czech, de Pater et al.
+domain: technosignature
+signature_class: em_transmission
+observable: radio
+hypothesis: Kardashev Type II-scale narrowband transmitters in the centres of nearby galaxies would be visible in GBT cadences.
+data_used: [Green Bank Telescope 1-11 GHz (four bands), Breakthrough Listen]
+method: turboSETI narrowband drift search (+-4 Hz/s, S/N 10, 3 Hz, ~18.25 s); six-scan on/off cadence; zero-drift signals discarded; injection-recovery and new RFI-environment diagnostics.
+result: Constraints placed on transmitters in all four bands; no signal of interest reported in the abstract.
+outcome: upper_limit
+limits: "EIRP of order 1e26 W (Kardashev Type II power) toward 97 galaxy centres"
+confounders_found: [radio-frequency interference]
+lesson: Extragalactic pointings trade per-system sensitivity for population size; the zero-drift cut is a known blind spot worth noting in any card.
+bibcodes: { status: resolved, values: ["2024AJ....167...10C"] }
+urls: [https://arxiv.org/abs/2312.03943]
+related: [REG-bl-galactic-center-gajjar-2021, REG-painter-2025]
+added: 2026-11-11
+withheld_for_rediscovery_test: true

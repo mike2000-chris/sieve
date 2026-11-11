@@ -1,0 +1,19 @@
+id: REG-alh84001-1996
+name: Proposed relic biogenic features in Martian meteorite ALH84001 and abiotic explanations
+year: 1996
+authors: McKay et al. (1996); Scott et al. (1997); Treiman (2003); Steele et al. (2022)
+domain: solar_system_insitu
+signature_class: insitu_composition
+observable: imaging
+hypothesis: PAHs, carbonate globules and single-domain magnetite in ALH84001 are fossil remains of Martian microbes.
+data_used: [Antarctic meteorite ALH84001, scanning and transmission electron microscopy, nanoscale colocated analyses]
+method: Electron microscopy of fracture surfaces and carbonate globules; contamination studies; later petrology and nanoscale mineral-organic analyses.
+result: PAHs and magnetite-bearing carbonate globules resembling bacterially induced precipitates were reported, with inorganic formation acknowledged as possible; later work describes shock and thermal metamorphism producing the magnetite and abiotic organic synthesis during serpentinisation and carbonation.
+outcome: confirmed_natural
+limits: Morphology alone is ambiguous at sub-micron scale.
+confounders_found: [shock melting of carbonates, thermal decomposition producing magnetite, abiotic organic synthesis by water-rock reaction, terrestrial contamination]
+lesson: Morphology and co-location are not biogenicity; generate the abiotic formation pathway alongside every biological hypothesis.
+bibcodes: { status: resolved, values: ["1996Sci...273..924M", "1997Natur.387..377S", "2003AsBio...3..369T", "2022Sci...375..172S"] }
+related: [REG-viking-labeled-release-1977]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

@@ -1,0 +1,20 @@
+id: REG-boyajian-star-secular-dimming-2016
+name: Boyajian's star (KIC 8462852) - century-long and Kepler-era secular dimming and its plate-archive rebuttal
+year: 2016
+authors: Schaefer (2016); Hippke, Angerhausen, Lund, Pepper, Stassun (2016); Montet & Simon (2016)
+domain: technosignature
+signature_class: temporal_behaviour
+observable: time_series
+hypothesis: If the Kepler dips share one mechanism with a long-term fading, archival photometry should show secular dimming of KIC 8462852 unmatched by comparison stars.
+data_used: [Harvard DASCH photographic plates 1890-1989, Kepler full-frame images]
+method: B-band light curve from 1338 archival plates with check stars (Schaefer); statistical audit of DASCH plate photometry accuracy (Hippke et al.); relative photometry from Kepler full-frame images against 193 nearby and 355 similar stars (Montet & Simon).
+result: Schaefer reported fading of 0.164 +/- 0.013 mag per century; Hippke et al. found DASCH systematics up to ~0.2 mag per century for constant stars and judged the trend not significant; Montet & Simon found a ~3 per cent fade over four Kepler years that no comparison star matched.
+outcome: contested
+limits: "DASCH median rms ~0.15 mag; systematics <~0.2 mag per century for most constant stars (Hippke et al. 2016)"
+confounders_found: [photographic plate calibration systematics, plate-to-plate discontinuities]
+lesson: Decade-scale claims from plate archives must be tested against the archive's own systematics floor on constant stars; a contemporaneous independent dataset (Kepler FFIs) is a stronger check.
+bibcodes: { status: resolved, values: ["2016ApJ...822L..34S", "2016ApJ...825...73H", "2016ApJ...830L..39M"] }
+urls: [https://arxiv.org/abs/1601.03256, https://arxiv.org/abs/1601.07314, https://arxiv.org/abs/1608.01316]
+related: [REG-boyajian-star-kepler-dips-2016-2018, REG-vasco-2019-2022]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

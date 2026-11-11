@@ -1,0 +1,20 @@
+id: REG-bl-galactic-center-gajjar-2021
+name: Breakthrough Listen search toward the Galactic Center, paper I
+year: 2021
+authors: Gajjar, Perez, Siemion, Foster, Brzycki, Chatterjee, Chen, Cordes et al.
+domain: technosignature
+signature_class: em_transmission
+observable: radio
+hypothesis: The Galactic Center line of sight contains the most potentially habitable systems; beacons there may be narrowband drifting or artificially dispersed transient signals.
+data_used: [Parkes 1-4 GHz (7.0 h), Green Bank Telescope 3.9-8 GHz (11.2 h), Breakthrough Listen]
+method: Narrowband drifting-signal search plus a search for artificially dispersed transients and FRB-like bursts (DM up to 5000 pc cm^-3).
+result: Several hundred bursts from the magnetar SGR J1745-2900 recovered; no new transient bursts and no ETI beacons.
+outcome: upper_limit
+limits: "EIRP >= 4e18 W among 60 million stars (1-4 GHz) and >= 5e17 W among half a million stars (3.9-8 GHz); dispersed transients EIRP >= 1e14 W/Hz with period <= 4.3 h"
+confounders_found: [radio-frequency interference, natural magnetar bursts (SGR J1745-2900)]
+lesson: Searching for artificially dispersed pulses reuses FRB/pulsar machinery; the same data constrain natural transients, so a null card still yields astrophysics.
+bibcodes: { status: resolved, values: ["2021AJ....162...33G"] }
+urls: [https://arxiv.org/abs/2104.14148]
+related: [REG-bl-price-2020-1327-stars-gaia-extension]
+added: 2026-11-11
+withheld_for_rediscovery_test: true

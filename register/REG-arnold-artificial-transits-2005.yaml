@@ -1,0 +1,20 @@
+id: REG-arnold-artificial-transits-2005
+name: Transit light-curve signatures of artificial objects
+year: 2005
+authors: Arnold
+domain: technosignature
+signature_class: artificial_structure_geometry
+observable: time_series
+hypothesis: Planet-sized artificial objects (triangle, two-screen, louver-like six-screen) produce transit light curves distinguishable from spherical or oblate planets, and multiple objects could serve as attention-getting signals.
+data_used: [model light curves]
+method: Compute transit light curves of non-spherical artificial shapes and compare with natural planet transits.
+result: The artificial shapes give distinguishable light curves, with some ambiguity against ringed planets; multiple artificial objects are easier to distinguish than a single one.
+outcome: method_demonstration
+limits: ""
+confounders_found: [ringed planets, oblate planets]
+lesson: Shape-based transit tests predate Kepler; their main degeneracy (ringed planets) should be built into any template or anomaly-score search.
+bibcodes: { status: resolved, values: ["2005ApJ...627..534A"] }
+urls: [https://arxiv.org/abs/astro-ph/0503580]
+related: [REG-g-hat-iv-transiting-megastructures-2016, REG-clarke-exobelt-2018]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

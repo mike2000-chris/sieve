@@ -1,0 +1,20 @@
+id: REG-hipparcos-gaia-proper-motion-anomaly-2018-2021
+name: Hipparcos-Gaia proper motion anomaly and Catalog of Accelerations (HGCA)
+year: 2018
+authors: Brandt (2018, 2021); Kervella, Arenou, Mignard, Thévenin (2019)
+domain: data_mining_exemplar
+signature_class: population_statistics
+observable: astrometry
+hypothesis: Unseen companions perturb a star's proper motion, so the difference between the long-term Hipparcos-to-Gaia proper motion and the short-term Gaia or Hipparcos proper motion flags accelerating stars.
+data_used: [Hipparcos, Gaia DR2, Gaia EDR3]
+method: Cross-calibrate Hipparcos and Gaia astrometry to give three proper motions per star with calibrated errors (HGCA DR2 and EDR3 editions); search for proper motion anomalies in ~117000 Hipparcos stars with focus on 6741 stars within 50 pc.
+result: 30 per cent of the stars studied show a proper motion anomaly above 3 sigma; known companions recovered and upper limits of 0.1-0.3 M_J set for planets around Proxima at 1-10 au; EDR3 edition improves precision by ~3x with Gaia EDR3 error inflation factor 1.37.
+outcome: method_demonstration
+limits: "median tangential velocity anomaly accuracy 1.0 m/s per parsec with Gaia DR2 (Kervella et al. 2019)"
+confounders_found: [Hipparcos reduction differences, local and colour/magnitude-dependent frame rotations, spurious catalogue entries, underestimated Gaia formal errors]
+lesson: Cross-epoch catalogue differences turn two snapshots into an acceleration measurement; any astrometric anomaly hypothesis must first be checked against the HGCA binarity baseline.
+bibcodes: { status: resolved, values: ["2018ApJS..239...31B", "2019A&A...623A..72K", "2021ApJS..254...42B"] }
+urls: [https://arxiv.org/abs/1811.07283, https://arxiv.org/abs/1811.08902, https://arxiv.org/abs/2105.11662]
+related: [REG-zackrisson-seti-gaia-2018]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

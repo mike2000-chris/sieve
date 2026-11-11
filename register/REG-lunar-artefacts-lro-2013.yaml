@@ -1,0 +1,20 @@
+id: REG-lunar-artefacts-lro-2013
+name: Searching for non-terrestrial artefacts in Lunar Reconnaissance Orbiter imagery
+year: 2013
+authors: Davies & Wagner (2013); Haqq-Misra & Kopparapu (2012)
+domain: technosignature
+signature_class: artificial_structure_geometry
+observable: imaging
+hypothesis: Alien technology may have left artefacts or surface modifications on the Moon, where traces are preserved for immense durations.
+data_used: [Lunar Reconnaissance Orbiter photographic mapping at 0.5 m resolution, Moon- and Mars-orbiting satellite data]
+method: Proposal to scrutinise LRO images for SETI purposes, piggy-backing on routine planetary-science inspection and crowdsourcing; probabilistic framework for the absence of artefacts in the Solar System.
+result: No search results reported; the papers argue that existing planetary image archives are a low-cost SETI target and that current searches leave the presence of probes poorly constrained.
+outcome: method_demonstration
+limits: No systematic search executed; very low prior probability acknowledged.
+confounders_found: []
+lesson: PDS imagery is a large, under-searched archive for artefact hypotheses; a quantified completeness measure is the missing piece.
+bibcodes: { status: resolved, values: ["2013AcAau..89..261D", "2012AcAau..72...15H"] }
+urls: [https://arxiv.org/abs/1111.1212]
+related: []
+added: 2026-11-11
+withheld_for_rediscovery_test: false

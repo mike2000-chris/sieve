@@ -1,0 +1,19 @@
+id: REG-mars-methane-curiosity-tgo-2015
+name: Mars methane at Gale crater (Curiosity TLS) versus ExoMars TGO upper limits
+year: 2015
+authors: Webster et al. (2015, 2018); Korablev et al. (2019); Montmessin et al. (2021)
+domain: solar_system_insitu
+signature_class: atmospheric_chemistry
+observable: spectroscopy
+hypothesis: Methane in the Martian atmosphere, and its variability, point to an active biological or geological source.
+data_used: [Curiosity SAM Tunable Laser Spectrometer in-situ measurements, ExoMars Trace Gas Orbiter ACS solar occultations]
+method: In-situ laser spectroscopy over 20 months and 5 years at Gale crater; orbital solar-occultation spectroscopy over 1.44 Mars years.
+result: Curiosity reports a background of 0.41 +/- 0.16 ppbv with seasonal variation and spikes near 7 ppbv; TGO ACS finds no methane, with an annual-mean upper limit of 20 pptv, also near Gale crater.
+outcome: contested
+limits: Orbital limits are dust-dependent; surface and orbital instruments sample different altitudes and times.
+confounders_found: [localised surface release versus global mixing, dust-limited orbital sensitivity, unexplained destruction mechanism needed to reconcile both]
+lesson: In-situ and orbital data of the same quantity can disagree by an order of magnitude; a hypothesis must specify where and when the gas should be.
+bibcodes: { status: resolved, values: ["2015Sci...347..415W", "2018Sci...360.1093W", "2019Natur.568..517K", "2021A&A...650A.140M"] }
+related: [REG-viking-labeled-release-1977]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

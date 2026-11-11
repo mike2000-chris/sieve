@@ -1,0 +1,20 @@
+id: REG-seti-ellipsoid-gaia-2022-2024
+name: SETI Ellipsoid target selection with Gaia (nearby stars, DR3 variables) and TESS light curves
+year: 2022
+authors: Davenport, Cabrales, Sheikh, Croft, Siemion, Giles, Cody (2022); Nilipour, Davenport, Croft, Siemion (2023); Cabrales, Davenport et al. (2024)
+domain: technosignature
+signature_class: temporal_behaviour
+observable: time_series
+hypothesis: Civilisations may synchronise transmissions to a conspicuous event (e.g. SN 1987A); Gaia distances fix when a star's signal would cross Earth (SETI Ellipsoid, Seto scheme).
+data_used: [Gaia Catalog of Nearby Stars, Gaia DR3 variable star catalogue, Gaia EDR3, TESS continuous viewing zone light curves]
+method: Compute Ellipsoid crossing times for SN 1987A, 278 classical novae and four historical supernovae; split light curves at the crossing time and inspect for modulation.
+result: < 8% of stars within 100 pc lie inside the SN 1987A Ellipsoid, ~734 per year cross it; < 0.01% of Gaia DR3 variables have crossings inside the Gaia baseline; 32 TESS CVZ targets showed no anomalous signatures at crossing.
+outcome: method_demonstration
+limits: ""
+confounders_found: [Gaia distance uncertainties versus crossing-time precision]
+lesson: Gaia parallaxes convert a game-theoretic signalling idea into a dated target list for any time-domain archive (ZTF, Rubin, TESS); distance precision sets the usable sample.
+bibcodes: { status: resolved, values: ["2022AJ....164..117D", "2023AJ....166...79N", "2024AJ....167..101C"] }
+urls: [https://arxiv.org/abs/2206.04092, https://arxiv.org/abs/2308.00066, https://arxiv.org/abs/2402.11037]
+related: [REG-vasco-2019-2022]
+added: 2026-11-11
+withheld_for_rediscovery_test: true

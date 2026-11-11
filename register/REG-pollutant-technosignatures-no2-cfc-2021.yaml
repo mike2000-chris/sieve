@@ -1,0 +1,20 @@
+id: REG-pollutant-technosignatures-no2-cfc-2021
+name: Detectability of NO2 and CFC atmospheric technosignatures with LUVOIR-like telescopes and JWST
+year: 2021
+authors: Kopparapu, Arney, Haqq-Misra, Lustig-Yaeger et al. (2021); Haqq-Misra, Kopparapu, Fauchez, Frank et al. (2022)
+domain: technosignature
+signature_class: atmospheric_chemistry
+observable: spectroscopy
+hypothesis: Industrial NO2 and long-lived CFC-11/CFC-12 at Earth-like levels are remotely detectable spectral signatures of technology.
+data_used: [1D photochemical and 3D climate models, synthetic spectra for Earth-like planets around G, K and M dwarfs and TRAPPIST-1e]
+method: Model atmospheric abundances and simulate reflected-light (LUVOIR-like, 0.2-0.7 micron) and transmission (JWST MIRI LRS) spectra.
+result: Present-Earth NO2 at 10 pc reaches S/N ~5 in ~400 h with a 15 m LUVOIR-like telescope; Earth-level CFCs on TRAPPIST-1e reach S/N >= 3-5 in ~100 h in transit with a 10 ppm noise floor but are undetectable with a 50 ppm floor.
+outcome: method_demonstration
+limits: Results depend strongly on the assumed noise floor; IR NO2 features are masked by H2O and CO2 bands.
+confounders_found: [clouds and aerosols mimic the NO2 feature, biogenic NO2 sources, H2O and CO2 band masking]
+lesson: Atmospheric technosignature searches can piggy-back on biosignature programmes at no extra cost; non-detections convert directly into upper limits.
+bibcodes: { status: resolved, values: ["2021ApJ...908..164K", "2022PSJ.....3...60H"] }
+urls: [https://arxiv.org/abs/2102.05027, https://arxiv.org/abs/2202.05858]
+related: [REG-industrial-pollution-cfc-2014]
+added: 2026-11-11
+withheld_for_rediscovery_test: true

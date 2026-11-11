@@ -1,0 +1,20 @@
+id: REG-g-hat-iv-transiting-megastructures-2016
+name: Ĝ search IV - signatures and information content of transiting megastructures
+year: 2016
+authors: Wright, Cartier, Zhao, Jontof-Hutter, Ford
+domain: technosignature
+signature_class: artificial_structure_geometry
+observable: time_series
+hypothesis: Planet-sized artificial structures transiting their star would show anomalous silhouettes, orbits or transmission that distinguish them from exoplanets.
+data_used: [Kepler light curves, CoRoT light curves]
+method: Enumerate ten distinguishing transit signatures and their natural mimics; define a normalized information-content statistic M for variable transit depths; apply it to KIC 12557548.
+result: Anomalous objects such as KIC 12557548 and CoRoT-29 match some predicted signatures but have natural explanations, so the ETI hypothesis is not warranted for them; KIC 8462852 was flagged as an outstanding SETI target.
+outcome: method_demonstration
+limits: ""
+confounders_found: [disintegrating planets, asymmetric transits from natural causes, gravity darkening, ringed planets]
+lesson: Each artificial-transit signature should be paired with its known natural mimic before a search; the information-content statistic offers a signal-agnostic way to rank variable-depth transits.
+bibcodes: { status: resolved, values: ["2016ApJ...816...17W"] }
+urls: [https://arxiv.org/abs/1510.04606]
+related: [REG-arnold-artificial-transits-2005, REG-boyajian-star-kepler-dips-2016-2018, REG-cody-tess-dyson-transits-2024]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

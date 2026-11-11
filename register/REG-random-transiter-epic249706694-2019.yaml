@@ -1,0 +1,20 @@
+id: REG-random-transiter-epic249706694-2019
+name: The Random Transiter EPIC 249706694 / HD 139139 and its radio follow-up
+year: 2019
+authors: Rappaport, Vanderburg, Kristiansen et al. (2019); Brzycki, Siemion, Croft et al. (2019)
+domain: technosignature
+signature_class: temporal_behaviour
+observable: time_series
+hypothesis: 28 transit-like dips of ~200 ppm with no periodicity in a K2 target are an anomaly that standard transit scenarios should explain; failing that, the star merits a technosignature follow-up.
+data_used: [K2 Campaign 15 photometry, Green Bank Telescope C-band]
+method: Data-quality tests and periodicity analysis of the dips, evaluation of transit and stellar scenarios; Breakthrough Listen narrow-band search (SNR > 10, drift within +/- 5 Hz/s).
+result: No more than four dips can belong to one periodic sequence; all transit scenarios considered fail and intrinsic stellar variability would be novel; the radio follow-up found no narrow-band signal.
+outcome: candidates_unconfirmed
+limits: "EIRP upper limit 10 TW at C-band (Brzycki et al. 2019)"
+confounders_found: [two candidate host stars in the aperture, dust-emitting planets or asteroids, transit timing variations, dipper-star activity, short-lived starspots]
+lesson: Aperiodic shallow dips are a distinct anomaly class from deep dippers; pairing a photometric anomaly with a cheap radio upper limit is a standard follow-up pattern.
+bibcodes: { status: resolved, values: ["2019MNRAS.488.2455R", "2019RNAAS...3..147B"] }
+urls: [https://arxiv.org/abs/1906.11268, https://arxiv.org/abs/1910.03711]
+related: [REG-boyajian-star-kepler-dips-2016-2018, REG-weird-detector-kepler-2019]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

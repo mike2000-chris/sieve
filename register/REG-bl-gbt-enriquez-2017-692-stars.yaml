@@ -1,0 +1,20 @@
+id: REG-bl-gbt-enriquez-2017-692-stars
+name: Breakthrough Listen 1.1-1.9 GHz observations of 692 nearby stars
+year: 2017
+authors: Enriquez, Siemion, Foster, Gajjar, Hellbourg, Hickish, Isaacson, Price et al.
+domain: technosignature
+signature_class: em_transmission
+observable: radio
+hypothesis: High-duty-cycle narrowband transmitters around nearby stars appear only in ON-source scans of an ON/OFF cadence.
+data_used: [Green Bank Telescope L band, Breakthrough Listen]
+method: Three five-minute ON scans per primary target interleaved with OFF scans on secondary targets; thresholding and ON/OFF comparison to reject terrestrial interference.
+result: Eleven events passed the threshold; all consistent with known anthropogenic RFI.
+outcome: upper_limit
+limits: "no high-duty-cycle transmitters with EIRP ~10^13 W at 1.1-1.9 GHz; < ~0.1% of stellar systems within 50 pc host such transmitters"
+confounders_found: [radio-frequency interference]
+lesson: The ON/OFF cadence is the baseline RFI filter of the BL archive; every later BL result inherits its blind spots (low duty cycle, outside L band).
+bibcodes: { status: resolved, values: ["2017ApJ...849..104E"] }
+urls: [https://arxiv.org/abs/1709.03491]
+related: [REG-bl-price-2020-1327-stars-gaia-extension, REG-breakthrough-listen-ma-2023]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

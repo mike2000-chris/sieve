@@ -1,0 +1,20 @@
+id: REG-boyajian-star-kepler-dips-2016-2018
+name: Boyajian's star (KIC 8462852) - aperiodic deep dips in Kepler and post-Kepler monitoring
+year: 2016
+authors: Boyajian, LaCourse, Rappaport, Fabrycky, Fischer et al. (2016); Boyajian, Alonso, Ammerman et al. (2018)
+domain: technosignature
+signature_class: artificial_structure_geometry
+observable: photometry
+hypothesis: Irregular, aperiodic dips of up to ~20 per cent in an otherwise ordinary F3 V star demand an occulter; artificial structures were one scenario raised for such light curves.
+data_used: [Kepler light curves, high-resolution spectroscopy, SED fitting, radial velocities, high-resolution imaging, ground-based multiband photometry 2015-2017, polarimetry]
+method: Characterise star and dips (2016, Planet Hunters discovery); ground-based photometric surveillance that caught four 1-2.5 per cent dips in 2017 with multiband photometry, spectra and polarization (2018).
+result: Dips are astrophysical, not instrumental; no IR excess and no close companion; the 2017 dips show non-grey, chromatic extinction with no change in spectrum or polarization, inconsistent with optically thick occulters and in line with optically thin sub-micron dust.
+outcome: confirmed_natural
+limits: ""
+confounders_found: [exocomet or planetesimal fragment families, optically thin circumstellar dust, intrinsic photospheric variation]
+lesson: A grey-versus-chromatic extinction test is a cheap discriminator between opaque structures and dust; any occultation hypothesis should state its predicted colour dependence up front.
+bibcodes: { status: resolved, values: ["2016MNRAS.457.3988B", "2018ApJ...853L...8B"] }
+urls: [https://arxiv.org/abs/1509.03622, https://arxiv.org/abs/1801.00732]
+related: [REG-boyajian-star-secular-dimming-2016, REG-g-hat-iv-transiting-megastructures-2016]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

@@ -1,0 +1,20 @@
+id: REG-clarke-exobelt-2018
+name: Clarke exobelt - transit signatures of geosynchronous satellite belts
+year: 2018
+authors: Socas-Navarro
+domain: technosignature
+signature_class: artificial_structure_geometry
+observable: photometry
+hypothesis: A dense belt of devices or debris at a planet's geosynchronous orbit would leave a light-curve imprint dominated by the belt edge, where projected opacity peaks.
+data_used: [numerical light-curve simulations]
+method: Simulate Clarke exobelt and natural-ring transits for a range of scenarios and compare their light curves.
+result: In some cases a Clarke exobelt with fractional face-on opacity ~1e-4 would be observable with existing instrumentation; exobelts and natural rings can be distinguished by their light curves.
+outcome: method_demonstration
+limits: ""
+confounders_found: [natural planetary rings]
+lesson: Ring-versus-belt discrimination is a concrete transit-shape test; geosynchronous radius depends on planet mass and rotation, so belt geometry is predictable from planet parameters.
+bibcodes: { status: resolved, values: ["2018ApJ...855..110S"] }
+urls: [https://arxiv.org/abs/1802.07723]
+related: [REG-arnold-artificial-transits-2005, REG-g-hat-iv-transiting-megastructures-2016]
+added: 2026-11-11
+withheld_for_rediscovery_test: false
