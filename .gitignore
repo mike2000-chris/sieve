@@ -24,3 +24,6 @@ analyses/**/*.hdf5
 
 # os
 .DS_Store
+
+# regenerable dry-run tables (run records are committed)
+analyses/dr4-day-one/dr3-dryrun/results/*.ecsv

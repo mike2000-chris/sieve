@@ -1,0 +1,30 @@
+-- DR3 dry run of ../anomalous_acceleration.adql. DR3 epoch 2016.0 -> Hipparcos baseline 24.75 yr.
+
+SELECT COUNT(*) AS n
+FROM gaiadr3.nss_acceleration_astro AS a
+JOIN gaiadr3.gaia_source AS g USING (source_id)
+WHERE g.parallax > 10;
+
+SELECT a.source_id, a.nss_solution_type, a.significance, g.parallax, g.pmra, g.pmdec,
+       a.accel_ra, a.accel_ra_error, a.accel_dec, a.accel_dec_error, g.ruwe, g.phot_g_mean_mag, g.bp_rp
+FROM gaiadr3.nss_acceleration_astro AS a
+JOIN gaiadr3.gaia_source AS g USING (source_id)
+WHERE g.parallax > 10;
+
+SELECT COUNT(*) AS n
+FROM gaiadr3.hipparcos2_best_neighbour AS x
+JOIN gaiadr3.gaia_source AS g USING (source_id)
+JOIN public.hipparcos_newreduction AS h ON h.hip = x.original_ext_source_id
+WHERE g.parallax > 10;
+
+SELECT g.source_id, h.hip, g.parallax, g.ruwe, g.phot_g_mean_mag,
+       g.pmra, g.pmdec,
+       (g.ra - DEGREES(h.ra_rad)) * COS(RADIANS(g.dec)) * 3.6e6 / 24.75 AS pmra_hg,
+       (g.dec - DEGREES(h.de_rad)) * 3.6e6 / 24.75 AS pmdec_hg,
+       g.pmra - (g.ra - DEGREES(h.ra_rad)) * COS(RADIANS(g.dec)) * 3.6e6 / 24.75 AS dpmra,
+       g.pmdec - (g.dec - DEGREES(h.de_rad)) * 3.6e6 / 24.75 AS dpmdec,
+       h.pm_ra AS pmra_hip, h.pm_de AS pmdec_hip, h.e_pm_ra, h.e_pm_de, x.angular_distance AS hip_sep_arcsec
+FROM gaiadr3.hipparcos2_best_neighbour AS x
+JOIN gaiadr3.gaia_source AS g USING (source_id)
+JOIN public.hipparcos_newreduction AS h ON h.hip = x.original_ext_source_id
+WHERE g.parallax > 10;

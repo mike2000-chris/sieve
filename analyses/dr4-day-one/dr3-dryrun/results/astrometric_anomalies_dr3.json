@@ -1,0 +1,13 @@
+{
+  "file": "analyses/dr4-day-one/dr3-dryrun/astrometric_anomalies_dr3.adql",
+  "started": "2026-11-11T11:37:20+0100",
+  "chunks": [
+    {
+      "lo": 0,
+      "hi": 1811709770,
+      "rows": 35142,
+      "seconds": 22.4
+    }
+  ],
+  "count": 35142
+}
