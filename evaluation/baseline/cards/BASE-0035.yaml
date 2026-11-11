@@ -1,0 +1,36 @@
+id: BASE-0035
+version: 1
+title: Enantiomeric excess and isomer selectivity of organic molecules in Martian samples
+claim: Some organic molecules preserved in Martian samples show an enantiomeric excess, a diastereoisomeric preference
+  or a restricted subset of structural isomers.
+domain: solar_system_insitu
+signature_class: insitu_composition
+observable: mass_spectrometry
+timescale: snapshot
+mechanism: Life synthesises exclusively one enantiomer of chiral molecules (l-amino acids, d-ribose), biosynthesises
+  compounds with several chiral centres as a unique stereoisomer, and uses a limited subset of the chemically feasible
+  structural isomers. After death, racemisation erodes the enantiomeric enrichment at a rate that depends on dose,
+  temperature, pH and duration.
+confounders:
+- name: Abiotic enantioenrichment
+  exclusion: l-excesses of some amino acids in the Tagish Lake meteorite show non-biological processes can produce
+    them; the source calls for a holistic interpretation over several compounds and their relationships.
+- name: Racemisation over time
+  exclusion: Not specified.
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2017AsBio..17..471V
+  transcribed_by: claude-fable-5-2

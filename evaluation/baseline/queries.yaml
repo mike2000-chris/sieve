@@ -1,0 +1,32 @@
+# ADS queries that define the literature baseline (see README.md, "Selection rule").
+# Every query is sent as  (<q>) AND <common_filter>  with the sort and row cut below. Do not edit after the
+# baseline is gated; add a new version file instead.
+version: baseline-literature-v0.1
+common_filter: "collection:astronomy year:2015-2025"
+sort: "citation_count desc, bibcode asc"
+rows: 20
+queries:
+  - id: T-WP
+    domain: technosignature
+    source_type: decadal_white_paper
+    q: 'bibstem:BAAS year:2019-2021 abs:(technosignature OR technosignatures OR SETI)'
+  - id: T-REV
+    domain: technosignature
+    source_type: review_or_report
+    q: 'title:(technosignature OR technosignatures OR SETI) title:(review OR roadmap OR prospects OR opportunities OR strategies OR report OR workshop OR concepts)'
+  - id: B-WP
+    domain: biosignature
+    source_type: decadal_white_paper
+    q: 'bibstem:BAAS year:2019-2021 abs:(biosignature OR biosignatures) abs:(exoplanet OR exoplanets)'
+  - id: B-REV
+    domain: biosignature
+    source_type: review_or_report
+    q: 'title:(biosignature OR biosignatures) title:(exoplanet OR exoplanets) title:(review OR roadmap OR prospects OR opportunities OR framework OR strategies OR future)'
+  - id: S-WP
+    domain: solar_system_insitu
+    source_type: decadal_white_paper
+    q: 'bibstem:BAAS year:2020-2021 abs:(biosignature OR biosignatures OR "life detection") -abs:(exoplanet OR exoplanets)'
+  - id: S-REV
+    domain: solar_system_insitu
+    source_type: review_or_report
+    q: 'title:("life detection" OR biosignature OR biosignatures) title:(Enceladus OR Europa OR Mars OR Titan OR Venus OR "ocean worlds" OR "solar system") title:(review OR roadmap OR prospects OR strategy OR strategies OR search OR framework)'

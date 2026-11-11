@@ -1,0 +1,31 @@
+id: BASE-0036
+version: 1
+title: Molecular-weight clustering and carbon-number patterns of organics in Martian samples
+claim: Some organic matter preserved in Martian samples shows a clustered molecular-weight distribution or a carbon-number
+  pattern such as a predominance of even-numbered fatty acids.
+domain: solar_system_insitu
+signature_class: insitu_composition
+observable: mass_spectrometry
+timescale: snapshot
+mechanism: 'Many biochemicals exist in discrete molecular-weight ranges (e.g. C14-C20 lipid fatty acids), so biologically
+  derived matter is concentrated in discrete clumps, whereas abiotic volatiles have a uniform relative abundance
+  that drops off with carbon number. Biosynthesis from repeating subunits leaves patterns: even-carbon fatty acids
+  (C14, C16, C18, C20) because two carbon atoms are attached at a time, and C15, C20, C25 acyclic isoprenoids from
+  C5 blocks. Functional groups can also show systematic 13C/12C ordering.'
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2017AsBio..17..471V
+  transcribed_by: claude-fable-5-2

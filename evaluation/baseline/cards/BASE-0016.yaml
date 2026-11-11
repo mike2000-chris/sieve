@@ -1,0 +1,36 @@
+id: BASE-0016
+version: 1
+title: Lurker probes on Earth co-orbital and other stable solar-system orbits in radar, optical and infrared data
+claim: At least one object on an Earth co-orbital orbit or at a stable Lagrange point is an artificial probe, recognisable
+  by radar imaging, anomalous morphology or reflectivity, infrared excess or radio emission.
+domain: technosignature
+signature_class: artificial_structure_geometry
+observable: imaging
+timescale: snapshot
+mechanism: Active or remnant probes ('lurkers') could reside at gravitationally stable Lagrange points or on horseshoe,
+  tadpole or quasi-satellite orbits; Earth co-orbital objects approach Earth closely and are assumed to be natural.
+  The source states that co-orbital objects have not yet been pinged or imaged by planetary radar. Optical observations
+  could show anomalous morphological or reflective features, infrared observations an excess from waste energy of
+  a functional artefact, and radio observations communicative signals or reflected terrestrial interference. No
+  size or flux estimate is given.
+method: Planetary radar ranging and imaging of co-orbital objects; passive optical, infrared and radio observations
+  of known near-Earth objects and stable orbits; comparison of all-sky radio transient images (e.g. Long Wavelength
+  Array, 10-90 MHz) with positions of known satellites to identify anomalies.
+novelty:
+  status: unchecked
+null_result_value: Constrains the prevalence of lurkers at stable orbits in the solar system.
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2022arXiv220911685H
+  transcribed_by: claude-fable-5-2

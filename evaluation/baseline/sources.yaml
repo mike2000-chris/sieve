@@ -1,0 +1,1123 @@
+# Screening record of the literature baseline (rule and reason codes: README.md in this directory).
+# One entry per record returned by the ADS queries in queries.yaml (raw results: search_log.json, retrieved 2026-11-11).
+# Bibcode, first author, year and title are copied from the ADS API response; nothing here is written from memory.
+# decision: included | X1 not a review, white paper or report | X2 executed search | X3 programme, policy or facility
+#           status | X4 framework or method without a signature | X5 laboratory, field or analogue study |
+#           X6 duplicate record | X7 accessible text names no specific signature plus observable |
+#           X8 no accessible text | Q beyond the per-query quota (not screened)
+version: baseline-literature-v0.1
+screened: '2026-11-11'
+screened_by: claude-fable-5-2
+sources:
+- bibcode: 2019BAAS...51g.223G
+  first_author: Gajjar, Vishal
+  year: 2019
+  title: The Breakthrough Listen Search for Extraterrestrial Intelligence
+  doctype: abstract
+  found_by:
+  - T-WP#1
+  decision: X3
+  note: programme status report
+- bibcode: 2019BAAS...51g..39W
+  first_author: Wright, Jason
+  year: 2019
+  title: 'Searches for Technosignatures: The State of the Profession'
+  doctype: abstract
+  found_by:
+  - T-WP#2
+  decision: X3
+  note: workforce and funding
+- bibcode: 2019BAAS...51c..79H
+  first_author: Haqq-Misra, Jacob
+  year: 2019
+  title: 'Searching for Technosignatures: Implications of Detection and Non-Detection'
+  doctype: article
+  found_by:
+  - T-WP#3
+  decision: included
+  text_basis: full_text
+  text_source: ADS e-source EPRINT_PDF (arXiv:1903.06550)
+  cards:
+  - id: BASE-0001
+    locator: section 'Non-Radio Technosignatures', paragraph 2
+  - id: BASE-0002
+    locator: section 'Non-Radio Technosignatures', last paragraph
+- bibcode: 2019BAAS...51c.106B
+  first_author: Berea, Anamaria
+  year: 2019
+  title: The Promise of Data Science for the Technosignatures Field
+  doctype: article
+  found_by:
+  - T-WP#4
+  decision: X4
+  note: 'full text read: machine-learning methods for existing searches, no signature of its own'
+- bibcode: 2019BAAS...51c.298M
+  first_author: Margot, Jean-Luc
+  year: 2019
+  title: The radio search for technosignatures in the decade 2020—2030
+  doctype: article
+  found_by:
+  - T-WP#5
+  decision: included
+  text_basis: full_text
+  text_source: ADS e-source EPRINT_PDF (arXiv:1903.05544)
+  cards:
+  - id: BASE-0003
+    locator: sections 1 (item 3), 2.2-2.4 and Figure 1
+- bibcode: 2021BAAS...53d.369M
+  first_author: Michaud, Eric
+  year: 2021
+  title: Lunar Opportunities for SETI
+  doctype: abstract
+  found_by:
+  - T-WP#6
+  - T-REV#18
+  decision: X7
+  note: lunar radio telescope concept; text (arXiv twin 2020arXiv200912689M) names only generic narrowband radio
+    SETI
+- bibcode: 2019BAAS...51g.151L
+  first_author: Lynch, Ryan
+  year: 2019
+  title: Advanced Capabilities for the Green Bank Telescope
+  doctype: abstract
+  found_by:
+  - T-WP#7
+  decision: X3
+  note: facility capabilities
+- bibcode: 2021BAAS...53d.427S
+  first_author: Sheikh, Sofia
+  year: 2021
+  title: Technosignatures as a Priority in Planetary Science
+  doctype: abstract
+  found_by:
+  - T-WP#8
+  - S-WP#19
+  decision: X7
+  note: abstract only; no specific signature
+- bibcode: 2019BAAS...51c.164L
+  first_author: Lesyna, Larry
+  year: 2019
+  title: A Technosignature Carrying a Message Will Likely Inform us of Crucial Biological Details of Life Outside
+    our Solar System
+  doctype: article
+  found_by:
+  - T-WP#9
+  decision: X7
+  note: abstract only; no observable
+- bibcode: 2019BAAS...51c.343W
+  first_author: Wright, Jason
+  year: 2019
+  title: Technosignatures in Transit
+  doctype: article
+  found_by:
+  - T-WP#10
+  decision: included
+  text_basis: full_text
+  text_source: eprint twin 2019arXiv190707830W (same title and author; publisher PDF not retrievable)
+  cards:
+  - id: BASE-0002
+    locator: whole paper, esp. 'Towards Robust Upper Limits of Orbiting Technosignatures' and 'A Weird Filter and
+      Inverting Light Curves'
+- bibcode: 2019BAAS...51c.366W
+  first_author: Wright, Jason
+  year: 2019
+  title: Technosignatures in the Thermal Infrared
+  doctype: article
+  found_by:
+  - T-WP#11
+  decision: included
+  text_basis: full_text
+  text_source: eprint twin 2019arXiv190707829W (same title and author; publisher PDF not retrievable)
+  cards:
+  - id: BASE-0004
+    locator: abstract; 'Towards Robust Upper Limits of Energy Use'; 'Necessary Advances ...'
+  - id: BASE-0005
+    locator: abstract; Figure 1 and the text following it
+- bibcode: 2019BAAS...51c.389W
+  first_author: Wright, Jason
+  year: 2019
+  title: Searches for Technosignatures in Astronomy and Astrophysics
+  doctype: article
+  found_by:
+  - T-WP#12
+  decision: X7
+  note: 'full text read (arXiv twin 2019arXiv190707831W): summary that endorses the workshop report and the other
+    white papers, no idea of its own'
+- bibcode: 2019BAAS...51c.558D
+  first_author: DeMarines, Julia
+  year: 2019
+  title: Observing the Earth as a Communicating Exoplanet
+  doctype: article
+  found_by:
+  - T-WP#13
+  decision: X7
+  note: abstract only; observing project on Earth's own radio emission, no hypothesis about an extraterrestrial
+    signature
+- bibcode: 2019BAAS...51g...9S
+  first_author: Shapshak, Paul
+  year: 2019
+  title: Problems in Neutrinos and Intergalactic Communication
+  doctype: abstract
+  found_by:
+  - T-WP#14
+  decision: X7
+  note: abstract only; neutrino communication, no observable stated
+- bibcode: 2019BAAS...51g.264W
+  first_author: Wright, Shelley
+  year: 2019
+  title: 'Panoramic SETI: An all-sky fast time-domain observatory'
+  doctype: abstract
+  found_by:
+  - T-WP#15
+  decision: X7
+  note: abstract only; instrument concept, signature not named in the abstract
+- bibcode: 2021BAAS...53c1129D
+  first_author: Daylan, T.
+  year: 2021
+  title: SETI prioritization and follow-up of potentially habitable TESS planet candidates
+  doctype: abstract
+  found_by:
+  - T-WP#16
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2018arXiv181208681N
+  first_author: NASA Technosignatures Workshop Participants
+  year: 2018
+  title: 'NASA and the Search for Technosignatures: A Report from the NASA Technosignatures Workshop'
+  doctype: eprint
+  found_by:
+  - T-REV#1
+  decision: included
+  text_basis: full_text_sections
+  text_source: ADS e-source EPRINT_PDF (arXiv:1812.08681); sections 5.1.1-5.1.3 read
+  cards:
+  - id: BASE-0003
+    locator: section 5.1.1.1
+  - id: BASE-0006
+    locator: section 5.1.1.2
+  - id: BASE-0007
+    locator: section 5.1.2
+  - id: BASE-0008
+    locator: section 5.1.3.1
+  - id: BASE-0013
+    locator: section 5.1.3.3
+- bibcode: 2016ApJ...827L..22T
+  first_author: Tingay, S. J.
+  year: 2016
+  title: An Opportunistic Search for Extraterrestrial Intelligence (SETI) with the Murchison Widefield Array
+  doctype: article
+  found_by:
+  - T-REV#2
+  decision: X2
+- bibcode: 2020RAA....20...78L
+  first_author: Li, Di
+  year: 2020
+  title: Opportunities to search for extraterrestrial intelligence with the FAST
+  doctype: article
+  found_by:
+  - T-REV#3
+  decision: included
+  text_basis: full_text_sections
+  text_source: ADS e-source PUB_PDF; abstract, sections 3 and 4 read
+  cards:
+  - id: BASE-0003
+    locator: sections 3.2 and 4.1, Table 1
+  - id: BASE-0009
+    locator: section 3.1 and Figure 3
+  - id: BASE-0010
+    locator: section 4.2.1 and Figure 4
+  - id: BASE-0011
+    locator: section 4.2.2
+- bibcode: 2021AcAau.182..446S
+  first_author: Socas-Navarro, Hector
+  year: 2021
+  title: Concepts for future missions to search for technosignatures
+  doctype: article
+  found_by:
+  - T-REV#4
+  decision: included
+  text_basis: full_text_sections
+  text_source: ADS e-source EPRINT_PDF (arXiv:2103.01536); sections 3 and 4 read
+  cards:
+  - id: BASE-0007
+    locator: section 3 (second bullet) and section 4
+  - id: BASE-0012
+    locator: section 3, first bullet; Table 1 ('Starshades in transit', 'Clarke exobelt in transit')
+  - id: BASE-0013
+    locator: section 3, third bullet
+  - id: BASE-0014
+    locator: section 3, fourth bullet
+  - id: BASE-0018
+    locator: section 4
+- bibcode: 2021AcAau.188..203W
+  first_author: Wright, Jason T.
+  year: 2021
+  title: Strategies and advice for the Search for Extraterrestrial Intelligence
+  doctype: article
+  found_by:
+  - T-REV#5
+  decision: X4
+  note: abstract states the review covers search philosophies, not the variety of technosignatures
+- bibcode: 2023AJ....166..245H
+  first_author: Huang, Bo-Lun
+  year: 2023
+  title: 'A Solution to Continuous RFI in Narrowband Radio SETI with FAST: The MultiBeam Point-source Scanning Strategy'
+  doctype: article
+  found_by:
+  - T-REV#6
+  decision: X2
+  note: observing-strategy paper with an executed TRAPPIST-1 observation
+- bibcode: 2021AJ....162..151H
+  first_author: Houston, Kenneth
+  year: 2021
+  title: Strategies for Maximizing Detection Rate in Radio SETI
+  doctype: article
+  found_by:
+  - T-REV#7
+  decision: X4
+  note: system modelling of detection rate; no signature beyond narrowband radio
+- bibcode: 2023AJ....166...79N
+  first_author: Nilipour, Andy
+  year: 2023
+  title: Signal Synchronization Strategies and Time Domain SETI with Gaia DR3
+  doctype: article
+  found_by:
+  - T-REV#8
+  decision: X2
+  note: already in the register (REG-seti-ellipsoid-gaia-2022-2024)
+- bibcode: 2018SPIE10700E..4IB
+  first_author: Berdyugina, S. V.
+  year: 2018
+  title: 'The Exo-Life Finder (ELF) telescope: New strategies for direct detection of exoplanet biosignatures and
+    technosignatures'
+  doctype: inproceedings
+  found_by:
+  - T-REV#9
+  - B-REV#7
+  decision: X1
+  note: instrument conference paper
+- bibcode: 2021AJ....161...39K
+  first_author: Kerins, Eamonn
+  year: 2021
+  title: 'Mutual Detectability: A Targeted SETI Strategy That Avoids the SETI Paradox'
+  doctype: article
+  found_by:
+  - T-REV#10
+  decision: X1
+  note: research article with a single targeting proposal
+- bibcode: 2022arXiv220911685H
+  first_author: Haqq-Misra, Jacob
+  year: 2022
+  title: Opportunities for Technosignature Science in the Planetary Science and Astrobiology Decadal Survey
+  doctype: eprint
+  found_by:
+  - T-REV#11
+  decision: included
+  text_basis: full_text_sections
+  text_source: ADS e-source EPRINT_PDF (arXiv:2209.11685); section 2 read
+  cards:
+  - id: BASE-0015
+    locator: section 2.1
+  - id: BASE-0016
+    locator: section 2.2
+  - id: BASE-0017
+    locator: section 2.3
+- bibcode: 2021IJAsB..20..359L
+  first_author: Lacki, Brian C.
+  year: 2021
+  title: 'Galactic traversability: a new concept for extragalactic SETI'
+  doctype: article
+  found_by:
+  - T-REV#12
+  decision: X1
+  note: research article introducing a single concept
+- bibcode: 2021RAA....21..178C
+  first_author: Chen, Yi-Xuan
+  year: 2021
+  title: SETI strategy with FAST fractality
+  doctype: article
+  found_by:
+  - T-REV#13
+  decision: X1
+  note: research article
+- bibcode: 2020arXiv200912689M
+  first_author: Michaud, Eric J.
+  year: 2020
+  title: Lunar Opportunities for SETI
+  doctype: eprint
+  found_by:
+  - T-REV#14
+  decision: X6
+  note: eprint of 2021BAAS...53d.369M (screened under T-WP)
+- bibcode: 2018SPIE10702E..5LM
+  first_author: Maire, Jérôme
+  year: 2018
+  title: 'Panoramic optical and near-infrared SETI instrument: optical and structural design concepts'
+  doctype: inproceedings
+  found_by:
+  - T-REV#15
+  decision: X1
+  note: instrument design paper
+- bibcode: 2022SerAJ.205...53O
+  first_author: Osmanov, Z. N.
+  year: 2022
+  title: Prospects of SETI by Small Size Optical Telescopes
+  doctype: article
+  found_by:
+  - T-REV#16
+  decision: X1
+  note: research article
+- bibcode: 2023RNAAS...7..120D
+  first_author: Davenport, James R. A.
+  year: 2023
+  title: Real-time Technosignature Strategies with SN 2023ixf
+  doctype: article
+  found_by:
+  - T-REV#17
+  decision: X1
+  note: research note on a single event
+- bibcode: 2022arXiv220308968H
+  first_author: Haqq-Misra, Jacob
+  year: 2022
+  title: Opportunities for Technosignature Science in the Astro2020 Report
+  doctype: eprint
+  found_by:
+  - T-REV#19
+  decision: included
+  text_basis: full_text_sections
+  text_source: ADS e-source EPRINT_PDF (arXiv:2203.08968); facility sections read by keyword
+  cards:
+  - id: BASE-0018
+    locator: section on the IR/O/UV telescope
+  - id: BASE-0019
+    locator: section on the IR/O/UV telescope, optical beacons paragraph
+  - id: BASE-0020
+    locator: section 'X-ray Probe to Complement ESA's Athena Observatory'
+- bibcode: 2025ApJ...995L..22H
+  first_author: Haqq-Misra, Jacob
+  year: 2025
+  title: 'Projections of Earth''s Technosphere: Strategies for Observing Technosignatures on Terrestrial Exoplanets'
+  doctype: article
+  found_by:
+  - T-REV#20
+  decision: Q
+- bibcode: 2019BAAS...51c.162L
+  first_author: Lopez-Morales, Mercedes
+  year: 2019
+  title: Detecting Earth-like Biosignatures on Rocky Exoplanets around Nearby Stars with Ground-based Extremely
+    Large Telescopes
+  doctype: article
+  found_by:
+  - B-WP#1
+  decision: included
+  text_basis: full_text_sections
+  text_source: ADS e-source EPRINT_PDF (arXiv:1903.09523); sections 1-2.2 read
+  cards:
+  - id: BASE-0021
+    locator: sections 1 and 2.1
+  - id: BASE-0022
+    locator: section 2.2
+- bibcode: 2019BAAS...51c.158K
+  first_author: Krissansen-Totton, Joshua
+  year: 2019
+  title: 'Atmospheric disequilibrium as an exoplanet biosignature: Opportunities for next generation telescopes'
+  doctype: article
+  found_by:
+  - B-WP#2
+  - B-REV#9
+  decision: included
+  text_basis: abstract
+  text_source: publisher PDF not retrievable, no eprint in ADS
+  cards:
+  - id: BASE-0023
+    locator: abstract (full text not accessible)
+- bibcode: 2019BAAS...51g.141A
+  first_author: Apai, Daniel
+  year: 2019
+  title: 'Nautilus: A Very Large-Aperture, Ultralight Space Telescope for Exoplanet Exploration, Time-domain Astrophysics,
+    and Faint Objects'
+  doctype: abstract
+  found_by:
+  - B-WP#3
+  decision: X7
+  note: abstract only; mission concept, no specific signature
+- bibcode: 2019BAAS...51c.225L
+  first_author: Lisman, Doug
+  year: 2019
+  title: Surveying the solar neighborhood for ozone in the UV at temperate rocky exoplanets
+  doctype: article
+  found_by:
+  - B-WP#4
+  decision: included
+  text_basis: abstract
+  text_source: publisher PDF not retrievable, no eprint in ADS
+  cards:
+  - id: BASE-0024
+    locator: abstract (full text not accessible)
+- bibcode: 2019BAAS...51g.238S
+  first_author: Staguhn, Johannes
+  year: 2019
+  title: 'The Mid-InfraRed Exo-planet CLimate Explorer MIRECLE: Exploring the Nearest M-Earths Through Ultra-Stable
+    Mid-IR Transit and Phase-Curve Spectroscopy'
+  doctype: abstract
+  found_by:
+  - B-WP#5
+  decision: included
+  note: contributes to a shared card only (BASE-0022)
+  text_basis: full_text_sections
+  text_source: eprint twin 2019arXiv190802356S; passages on biosignatures read by keyword
+  cards:
+  - id: BASE-0022
+    locator: section 1 (science case, pages 2-3)
+- bibcode: 2021BAAS...53c0201K
+  first_author: Krissansen-Totton, J.
+  year: 2021
+  title: Investigating the atmospheric evolution of habitable worlds with a coupled climate-interior-redox model
+  doctype: abstract
+  found_by:
+  - B-WP#6
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c0202C
+  first_author: Crouse, J.
+  year: 2021
+  title: 'Biosignature Gas Pairs: Detectability and Implications for Future Observing Strategies'
+  doctype: abstract
+  found_by:
+  - B-WP#7
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c0203S
+  first_author: Seager, S.
+  year: 2021
+  title: Prospects for Life on Sub Neptune-Sized Exoplanets
+  doctype: abstract
+  found_by:
+  - B-WP#8
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c0301G
+  first_author: Gaudi, B.
+  year: 2021
+  title: 'Tools to Find Living Worlds: The HabEx and LUVOIR Mission Concepts'
+  doctype: abstract
+  found_by:
+  - B-WP#9
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c0303B
+  first_author: Bixel, A.
+  year: 2021
+  title: 'Bioverse: a simulation framework to assess the statistical power of future biosignature surveys'
+  doctype: abstract
+  found_by:
+  - B-WP#10
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c0402D
+  first_author: Davis, C.
+  year: 2021
+  title: On the Effects of M-Dwarf UV Variability on Detecting and Interpreting Biosignatures
+  doctype: abstract
+  found_by:
+  - B-WP#11
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c0606Y
+  first_author: Young, A.
+  year: 2021
+  title: Constraining Chemical Disequilibrium Biosignatures for an Earth-like Exoplanet using Retrieval Analysis
+    Techniques
+  doctype: abstract
+  found_by:
+  - B-WP#12
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c1010F
+  first_author: Fisher, T.
+  year: 2021
+  title: 'Statistical Assessment of Thermochemical Disequilibria in Exoplanets: Implications for Biosignature Detection'
+  doctype: abstract
+  found_by:
+  - B-WP#13
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c1012R
+  first_author: Ranjan, S.
+  year: 2021
+  title: New Near-UV H<SUB>2</SUB>O Cross-Sections &amp; Photochemistry of Early Earth-like Atmospheres
+  doctype: abstract
+  found_by:
+  - B-WP#14
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c1016T
+  first_author: Tuchow, N.
+  year: 2021
+  title: A Framework for Relative Biosignature Yields from Future Direct Imaging Missions
+  doctype: abstract
+  found_by:
+  - B-WP#15
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c1019D
+  first_author: de Beurs, Z.
+  year: 2021
+  title: Removing Stellar Activity Signals from Radial Velocity Measurements Using Neural Networks
+  doctype: abstract
+  found_by:
+  - B-WP#16
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c1024T
+  first_author: Thompson, M.
+  year: 2021
+  title: 'Methane: the Ideal Biosignature for the JWST Era?'
+  doctype: abstract
+  found_by:
+  - B-WP#17
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c1028S
+  first_author: Sousa-Silva, C.
+  year: 2021
+  title: Phosphine and the importance of unusual biosignatures
+  doctype: abstract
+  found_by:
+  - B-WP#18
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c1034M
+  first_author: Mendez, A.
+  year: 2021
+  title: Habitability Models for Exoplanet Sciences
+  doctype: abstract
+  found_by:
+  - B-WP#19
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2021BAAS...53c1037A
+  first_author: Angerhausen, D.
+  year: 2021
+  title: 'The Large Interferometer for Exoplanets (LIFE) mission: characterizing habitable planets in the mid-infrared'
+  doctype: abstract
+  found_by:
+  - B-WP#20
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2018AsBio..18..663S
+  first_author: Schwieterman, Edward W.
+  year: 2018
+  title: 'Exoplanet Biosignatures: A Review of Remotely Detectable Signs of Life'
+  doctype: article
+  found_by:
+  - B-REV#1
+  decision: included
+  text_basis: full_text_sections
+  text_source: ADS e-source EPRINT_PDF (arXiv:1705.05791); sections 4.2.4, 5.1.3, 6.1 read
+  cards:
+  - id: BASE-0025
+    locator: section 4.2.4
+  - id: BASE-0026
+    locator: section 5.1.3
+  - id: BASE-0027
+    locator: section 6.1
+- bibcode: 2018AsBio..18..709C
+  first_author: Catling, David C.
+  year: 2018
+  title: 'Exoplanet Biosignatures: A Framework for Their Assessment'
+  doctype: article
+  found_by:
+  - B-REV#2
+  decision: X4
+  note: 'full text probed: Bayesian assessment framework, no search idea of its own'
+- bibcode: 2018AsBio..18..739F
+  first_author: Fujii, Yuka
+  year: 2018
+  title: 'Exoplanet Biosignatures: Observational Prospects'
+  doctype: article
+  found_by:
+  - B-REV#3
+  decision: included
+  text_basis: full_text_sections
+  text_source: ADS e-source EPRINT_PDF (arXiv:1705.07098); passages read by keyword
+  cards:
+  - id: BASE-0026
+    locator: section 4.3 (high-contrast imaging; surface reflectance paragraph)
+  - id: BASE-0028
+    locator: section 4.3 (high-contrast imaging; surface reflectance paragraph)
+- bibcode: 2018AsBio..18..779W
+  first_author: Walker, Sara I.
+  year: 2018
+  title: 'Exoplanet Biosignatures: Future Directions'
+  doctype: article
+  found_by:
+  - B-REV#4
+  decision: included
+  text_basis: full_text_sections
+  text_source: ADS e-source EPRINT_PDF (arXiv:1705.08071); sections 4.3.1, 5.4.1, 5.4.2 read
+  cards:
+  - id: BASE-0029
+    locator: section 5.4.1
+- bibcode: 2017PhR...713....1G
+  first_author: Grenfell, John Lee
+  year: 2017
+  title: A review of exoplanetary biosignatures
+  doctype: article
+  found_by:
+  - B-REV#5
+  decision: included
+  text_basis: full_text_sections
+  text_source: ADS e-source EPRINT_PDF (arXiv:1710.03976); sections 3.5.1, 3.5.6, 4, 5 read
+  cards:
+  - id: BASE-0029
+    locator: section 5
+  - id: BASE-0030
+    locator: section 3.5.1
+  - id: BASE-0031
+    locator: section 4
+- bibcode: 2020PNAS..11721031B
+  first_author: Balbi, Amedeo
+  year: 2020
+  title: Quantifying the information impact of future searches for exoplanetary biosignatures
+  doctype: article
+  found_by:
+  - B-REV#6
+  decision: X1
+  note: research article (Bayesian inference from survey outcomes)
+- bibcode: 2025AJ....169..238A
+  first_author: Angerhausen, Daniel
+  year: 2025
+  title: What if we Find Nothing? Bayesian Analysis of the Statistical Information of Null Results in Future Exoplanet
+    Habitability and Biosignature Surveys
+  doctype: article
+  found_by:
+  - B-REV#8
+  decision: X1
+  note: research article (statistics of null results)
+- bibcode: 2017LPICo2042.4156D
+  first_author: Domagal-Goldman, S. D.
+  year: 2017
+  title: The History and Future of Exoplanet Biosignatures
+  doctype: inproceedings
+  found_by:
+  - B-REV#10
+  decision: X1
+  note: conference abstract
+- bibcode: 2018jpl..data..161C
+  first_author: Crisp, David
+  year: 2018
+  title: 'Exoplanet Biosignatures: A Framework for Their Assessment'
+  doctype: dataset
+  found_by:
+  - B-REV#11
+  decision: X6
+  note: dataset record of 2018AsBio..18..709C
+- bibcode: 2019absc.conf20212R
+  first_author: Rackham, Benjamin
+  year: 2019
+  title: Opportunities to Characterize Stellar Photospheres and Enable Exoplanet Biosignature Observations in the
+    2020s
+  doctype: inproceedings
+  found_by:
+  - B-REV#12
+  decision: X1
+  note: conference abstract
+- bibcode: 2024AAS...24343702Y
+  first_author: Young, Amber
+  year: 2024
+  title: Examining Chemical Disequilibrium Biosignatures and Observational Strategies for Earth-like Exoplanets
+  doctype: abstract
+  found_by:
+  - B-REV#13
+  decision: X1
+  note: conference abstract
+- bibcode: 2021BAAS...53d.181C
+  first_author: Chou, Luoth
+  year: 2021
+  title: Towards a more universal life detection strategy
+  doctype: abstract
+  found_by:
+  - S-WP#1
+  decision: X7
+  note: abstract only; agnostic signatures not specified
+- bibcode: 2021BAAS...53d.240P
+  first_author: Perl, Scott
+  year: 2021
+  title: 'Salty Environments: The importance of evaporites and brine environments as habitats and preservers of
+    biosignatures'
+  doctype: abstract
+  found_by:
+  - S-WP#2
+  decision: X7
+  note: abstract only; names a preservation setting, no observable
+- bibcode: 2021BAAS...53d.272V
+  first_author: Van Kranendonk, Martin
+  year: 2021
+  title: Terrestrial Hydrothermal Fields and the Search for Life in the Solar System
+  doctype: abstract
+  found_by:
+  - S-WP#3
+  decision: X7
+  note: abstract only; names a target environment, no observable
+- bibcode: 2021BAAS...53d.293W
+  first_author: Willis, Peter
+  year: 2021
+  title: How to Search for Chemical Biosignatures on Ocean Worlds
+  doctype: abstract
+  found_by:
+  - S-WP#4
+  - S-REV#14
+  decision: X7
+  note: abstract only; 'organic chemical biosignatures' not specified further
+- bibcode: 2021BAAS...53d.054C
+  first_author: Cable, Morgan
+  year: 2021
+  title: 'Plume Grain Sampling at Hypervelocity: Implications for Astrobiology Investigations'
+  doctype: abstract
+  found_by:
+  - S-WP#5
+  decision: X7
+  note: abstract only; 'biomolecules' not specified further
+- bibcode: 2021BAAS...53d.087L
+  first_author: Ligterink, Niels
+  year: 2021
+  title: 'Detecting the elemental and molecular signatures of life: Laser-based mass spectrometry technologies'
+  doctype: abstract
+  found_by:
+  - S-WP#6
+  decision: included
+  text_basis: full_text_sections
+  text_source: eprint twin 2020arXiv200902521L; passages read by keyword
+  cards:
+  - id: BASE-0032
+    locator: sections 1-2 (laser ablation/ionisation mass spectrometry)
+  - id: BASE-0038
+    locator: section 1
+- bibcode: 2021BAAS...53d.202H
+  first_author: Hoehler, Tori
+  year: 2021
+  title: Groundwork for Life Detection
+  doctype: abstract
+  found_by:
+  - S-WP#7
+  decision: X4
+  note: framework for readiness
+- bibcode: 2021BAAS...53d.096M
+  first_author: Mathies, Richard
+  year: 2021
+  title: The Case for an Orbital Mission to Characterize the Organic Content of the Enceladus Plumes
+  doctype: abstract
+  found_by:
+  - S-WP#8
+  decision: X7
+  note: abstract only; 'organic biomarkers' not specified further
+- bibcode: 2021BAAS...53d.059M
+  first_author: Mahaffy, Paul
+  year: 2021
+  title: Agnostic Biosignature Exploration at Europa through Plume Sampling
+  doctype: abstract
+  found_by:
+  - S-WP#9
+  decision: X7
+  note: abstract only; agnostic methods not specified
+- bibcode: 2021BAAS...53d.140C
+  first_author: Choukroun, Mathieu
+  year: 2021
+  title: Sampling Ocean Materials, Traces of Life or Biosignatures in Plume Deposits on Enceladus' Surface
+  doctype: abstract
+  found_by:
+  - S-WP#10
+  decision: X7
+  note: abstract only; the journal version 2021PSJ.....2..100C is included under S-REV
+- bibcode: 2021BAAS...53d.211C
+  first_author: Czaja, Andrew
+  year: 2021
+  title: Mars as a compelling target in the continuing search for signs of ancient extraterrestrial life
+  doctype: abstract
+  found_by:
+  - S-WP#11
+  decision: X7
+  note: abstract only; programmatic
+- bibcode: 2021BAAS...53d.243M
+  first_author: Miller, Kelly E.
+  year: 2021
+  title: The value of CHONS isotopic measurements of major compounds as probes of planetary origin, evolution, and
+    habitability
+  doctype: abstract
+  found_by:
+  - S-WP#12
+  decision: included
+  note: contributes to a shared card only (BASE-0038)
+  text_basis: abstract
+  text_source: publisher PDF not retrievable, no eprint in ADS
+  cards:
+  - id: BASE-0038
+    locator: abstract
+- bibcode: 2021BAAS...53d.260S
+  first_author: Schmidt, Britney
+  year: 2021
+  title: Enabling Progress Towards Life Detection on NASA Missions
+  doctype: abstract
+  found_by:
+  - S-WP#13
+  decision: X3
+  note: programmatic
+- bibcode: 2021BAAS...53d.277B
+  first_author: Blake, David
+  year: 2021
+  title: 'MapX: An In-situ X-ray µ-Mapper for Habitability and Biosignature Studies'
+  doctype: abstract
+  found_by:
+  - S-WP#14
+  decision: included
+  text_basis: abstract
+  text_source: publisher PDF not retrievable, no eprint in ADS
+  cards:
+  - id: BASE-0033
+    locator: abstract (full text not accessible)
+- bibcode: 2021BAAS...53d.306B
+  first_author: Blank, Jennifer G.
+  year: 2021
+  title: Volcanic Caves as Priority Sites for Astrobiology Science
+  doctype: abstract
+  found_by:
+  - S-WP#15
+  decision: X7
+  note: abstract only; names a target environment, no signature
+- bibcode: 2021BAAS...53d.333L
+  first_author: Lin, Ying
+  year: 2021
+  title: MASEX — A Dedicated Life Detection Mission on Mars
+  doctype: abstract
+  found_by:
+  - S-WP#16
+  decision: X7
+  note: abstract only; 'signs of extant life, biomolecules, and organics' not specified further
+- bibcode: 2021BAAS...53d.357K
+  first_author: Karunatillake, Suniti
+  year: 2021
+  title: GANGOTRI mission concept on the glacial key to the Amazonian climate of Mars
+  doctype: abstract
+  found_by:
+  - S-WP#17
+  decision: X7
+  note: abstract only; habitability and preservation potential
+- bibcode: 2021BAAS...53d.368W
+  first_author: Wilhelm, Mary Beth
+  year: 2021
+  title: 'Abzu: Uncovering the Origin of Ancient Organics on Mars'
+  doctype: abstract
+  found_by:
+  - S-WP#18
+  decision: X7
+  note: abstract only; origin of organic matter, signature not specified
+- bibcode: 2021BAAS...53c0302M
+  first_author: Meadows, V.
+  year: 2021
+  title: The Feasibility of Detecting Biosignatures in the TRAPPIST-1 Planetary System with JWST
+  doctype: abstract
+  found_by:
+  - S-WP#20
+  decision: X1
+  note: conference abstract of a single study (Habitable Worlds 2021)
+- bibcode: 2017AsBio..17..471V
+  first_author: Vago, Jorge L.
+  year: 2017
+  title: Habitability on Early Mars and the Search for Biosignatures with the ExoMars Rover
+  doctype: article
+  found_by:
+  - S-REV#1
+  decision: included
+  text_basis: full_text_sections
+  text_source: ADS e-source PMC (PMC5685153, open-access XML via Europe PMC); section 4 read
+  cards:
+  - id: BASE-0034
+    locator: section 4.1
+  - id: BASE-0035
+    locator: section 4.2.1
+  - id: BASE-0036
+    locator: section 4.2.2
+  - id: BASE-0038
+    locator: section 4.2.3
+- bibcode: 2015AsBio..15..998W
+  first_author: Westall, Frances
+  year: 2015
+  title: 'Biosignatures on Mars: What, Where, and How? Implications for the Search for Martian Life'
+  doctype: article
+  found_by:
+  - S-REV#2
+  decision: included
+  text_basis: full_text_sections
+  text_source: ADS e-source PMC (PMC4653824, open-access XML via Europe PMC); sections 3.1.2-3.1.3 read
+  cards:
+  - id: BASE-0037
+    locator: section 3.1.2
+  - id: BASE-0038
+    locator: section 3.1.3
+- bibcode: 2020ChRv..120.4660G
+  first_author: Glavin, Daniel P.
+  year: 2020
+  title: The Search for Chiral Asymmetry as a Potential Biosignature in our Solar System
+  doctype: article
+  found_by:
+  - S-REV#3
+  decision: X8
+  note: no abstract in ADS, no open full text
+- bibcode: 2021NRvEE...2..490B
+  first_author: Bosak, Tanja
+  year: 2021
+  title: Searching for biosignatures in sedimentary rocks from early Earth and Mars
+  doctype: article
+  found_by:
+  - S-REV#4
+  decision: X8
+  note: no abstract in ADS, no open full text
+- bibcode: 2016IJAsB..15..239G
+  first_author: Goetz, W.
+  year: 2016
+  title: 'MOMA: the challenge to search for organics and biosignatures on Mars'
+  doctype: article
+  found_by:
+  - S-REV#5
+  decision: X7
+  note: abstract only (publisher PDF not retrievable); organic material not specified further
+- bibcode: 2020AsBio..20.1029S
+  first_author: Sánchez-García, Laura
+  year: 2020
+  title: 'Simulating Mars Drilling Mission for Searching for Life: Ground-Truthing Lipids and Other Complex Microbial
+    Biomarkers in the Iron-Sulfur Rich Río Tinto Analog'
+  doctype: article
+  found_by:
+  - S-REV#6
+  decision: X5
+- bibcode: 2020AsBio..20..830N
+  first_author: Newman, Sharon A.
+  year: 2020
+  title: Lipid Biomarker Record of the Serpentinite-Hosted Ecosystem of the Samail Ophiolite, Oman and Implications
+    for the Search for Biosignatures on Mars
+  doctype: article
+  found_by:
+  - S-REV#7
+  decision: X5
+- bibcode: 2017AsBio..17..984B
+  first_author: Blanco, Yolanda
+  year: 2017
+  title: 'Critical Assessment of Analytical Techniques in the Search for Biomarkers on Mars: A Mummified Microbial
+    Mat from Antarctica as a Best-Case Scenario'
+  doctype: article
+  found_by:
+  - S-REV#8
+  decision: X5
+- bibcode: 2021IJAsB..20..345P
+  first_author: Pacelli, Claudia
+  year: 2021
+  title: 'Fungal biomarkers are detectable in Martian rock-analogues after space exposure: implications for the
+    search of life on Mars'
+  doctype: article
+  found_by:
+  - S-REV#9
+  decision: X5
+  note: judged on title; no abstract in ADS
+- bibcode: 2021PSJ.....2..100C
+  first_author: Choukroun, Mathieu
+  year: 2021
+  title: Sampling Plume Deposits on Enceladus' Surface to Explore Ocean Materials and Search for Traces of Life
+    or Biosignatures
+  doctype: article
+  found_by:
+  - S-REV#10
+  decision: included
+  note: journal version of the white paper 2021BAAS...53d.140C
+  text_basis: full_text_sections
+  text_source: ADS e-source PUB_PDF (open access); passages read by keyword
+  cards:
+  - id: BASE-0039
+    locator: section on preservation of organics in plume deposits
+  - id: BASE-0040
+    locator: section on mission concepts and sample volume; conclusions
+- bibcode: 2017AsBio..17..852J
+  first_author: Judge, Philip
+  year: 2017
+  title: A Novel Strategy to Seek Biosignatures at Enceladus and Europa
+  doctype: article
+  found_by:
+  - S-REV#11
+  decision: X1
+  note: research article with a single proposal
+- bibcode: 2023AsBio..23..308C
+  first_author: Corenblit, Dov
+  year: 2023
+  title: Signatures of Life Detected in Images of Rocks Using Neural Network Analysis Demonstrate New Potential
+    for Searching for Biosignatures on the Surface of Mars
+  doctype: article
+  found_by:
+  - S-REV#12
+  decision: X1
+  note: research article; judged on title, no abstract in ADS
+- bibcode: 2019bias.book..167M
+  first_author: McSween, Harry Y., Jr.
+  year: 2019
+  title: The Search for Biosignatures in Martian Meteorite Allan Hills 84001
+  doctype: inbook
+  found_by:
+  - S-REV#13
+  decision: X2
+  note: 'book chapter reviewing the ALH 84001 claims (register: REG-alh84001-1996)'
+- bibcode: 2022ESC.....6.2595S
+  first_author: Shen, Jianxun
+  year: 2022
+  title: 'Geochemical and Biological Profiles of a Quartz Stone in the Qaidam Mars Analog Using LIBS: Implications
+    for the Search for Biosignatures on Mars'
+  doctype: article
+  found_by:
+  - S-REV#15
+  decision: X5
+  note: judged on title; no abstract in ADS
+- bibcode: 2023P&SS..23205694C
+  first_author: Cable, Morgan L.
+  year: 2023
+  title: Geochemical and physical variability of Icelandic tephra fields and glaciovolcanic sandur to inform spatial
+    sampling in Mars biosignature searches
+  doctype: article
+  found_by:
+  - S-REV#16
+  decision: X5
+- bibcode: 2019P&SS..17904714H
+  first_author: Haezeleer, Bettina
+  year: 2019
+  title: Artifact formation during Raman measurements and its relevance to the search for chemical biosignatures
+    on Mars
+  doctype: article
+  found_by:
+  - S-REV#17
+  decision: X5
+- bibcode: 2023AsBio..23.1303B
+  first_author: Bonaccorsi, Rosalba
+  year: 2023
+  title: 'In Situ Real-Time Monitoring for Aseptic Drilling: Lessons Learned from the Atacama Rover Astrobiology
+    Drilling Studies Contamination Control Strategy and Implementation and Application to the Icebreaker Mars Life
+    Detection Mission'
+  doctype: article
+  found_by:
+  - S-REV#18
+  decision: X5
+- bibcode: 2023AsBio..23.1284S
+  first_author: Stoker, Carol R.
+  year: 2023
+  title: A Mission Simulating the Search for Life on Mars with Automated Drilling, Sample Handling, and Life Detection
+    Instruments Performed in the Hyperarid Core of the Atacama Desert, Chile
+  doctype: article
+  found_by:
+  - S-REV#19
+  decision: X5
+  note: judged on title; no abstract in ADS
+- bibcode: 2016LPICo1912.2032H
+  first_author: Horgan, B.
+  year: 2016
+  title: Strategies for Searching for Biosignatures in Ancient Martian Sub-Aerial Surface Environments
+  doctype: inproceedings
+  found_by:
+  - S-REV#20
+  decision: X1
+  note: conference abstract

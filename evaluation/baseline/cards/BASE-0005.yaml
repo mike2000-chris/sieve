@@ -1,0 +1,45 @@
+id: BASE-0005
+version: 1
+title: 'Galaxy-wide waste heat: smooth mid-infrared emission not associated with dust or star formation in galaxies'
+claim: Some galaxies show mid-infrared emission from a smoothly distributed component with large mid- to far-infrared
+  colours and without the PAH features or the association with star formation expected from dust.
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+timescale: snapshot
+mechanism: 'A spacefaring civilisation that has settled a galaxy reprocesses part of its starlight into waste heat
+  (Kardashev Type III). The source''s example is an old elliptical with 10 per cent of the starlight reprocessed
+  as 300 K waste heat: its optical and near-infrared colours resemble a dusty stellar population, so WISE alone
+  cannot separate the two in integrated light, but waste heat at hundreds of kelvin gives large MIR-FIR colours
+  not expected from dust, which usually has a cool component. Dust is clumpy and traces star formation, while stars,
+  and hence waste heat, are well mixed: waste heat should be conspicuous between spiral arms and throughout ellipticals.'
+candidate_archives:
+- name: WISE
+  access: not stated in source
+- name: JWST (mid-infrared spectroscopy)
+  access: not stated in source
+method: Catalogue the mid-infrared luminosities of galaxies; break the degeneracy with dust using infrared spectra
+  (PAH features) or far-infrared measurements; for resolved galaxies fit stellar population synthesis models with
+  an added smoothly varying waste-heat component to the SEDs of individual pixels.
+confounders:
+- name: Dust heated by star formation
+  exclusion: PAH features in infrared spectra, a cool far-infrared component, and clumpy spatial distribution tracing
+    star formation.
+novelty:
+  status: unchecked
+null_result_value: First robust upper limits on galaxy-wide energy use in other galaxies.
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2019BAAS...51c.366W
+  transcribed_by: claude-fable-5-2

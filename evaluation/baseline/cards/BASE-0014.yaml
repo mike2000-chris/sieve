@@ -1,0 +1,32 @@
+id: BASE-0014
+version: 1
+title: Signs of technology concentrated in regions that form optimal navigation-communication hubs among exoplanets
+claim: Technosignatures are more abundant in regions of interstellar space whose distribution of suitable worlds
+  makes them a hub of an optimal navigation-communication network than elsewhere.
+domain: technosignature
+signature_class: population_statistics
+observable: population_statistic
+timescale: snapshot
+mechanism: The source argues by analogy with Earth, where technosignatures are more abundant wherever human population
+  density is high, and population clusters in network structures. A network-fitting algorithm determines an optimal
+  navigation-communication pathway among a sample of exoplanets in a region; a region with the right distribution
+  of suitable worlds to become a communication hub may be a promising place to search. No quantitative estimate
+  is given.
+method: Network analysis of exoplanet samples to narrow the search for technosignatures.
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2021AcAau.182..446S
+  transcribed_by: claude-fable-5-2

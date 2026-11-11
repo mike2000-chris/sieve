@@ -1,0 +1,1044 @@
+{
+ "version": "baseline-literature-v0.1",
+ "retrieved": "2026-11-11",
+ "common_filter": "collection:astronomy year:2015-2025",
+ "sort": "citation_count desc, bibcode asc",
+ "rows": 20,
+ "queries": [
+  {
+   "id": "T-WP",
+   "domain": "technosignature",
+   "source_type": "decadal_white_paper",
+   "q": "(bibstem:BAAS year:2019-2021 abs:(technosignature OR technosignatures OR SETI)) AND collection:astronomy year:2015-2025",
+   "num_found": 16,
+   "results": [
+    {
+     "rank": 1,
+     "bibcode": "2019BAAS...51g.223G",
+     "year": 2019,
+     "first_author": "Gajjar, Vishal",
+     "title": "The Breakthrough Listen Search for Extraterrestrial Intelligence",
+     "doctype": "abstract",
+     "citation_count": 10
+    },
+    {
+     "rank": 2,
+     "bibcode": "2019BAAS...51g..39W",
+     "year": 2019,
+     "first_author": "Wright, Jason",
+     "title": "Searches for Technosignatures: The State of the Profession",
+     "doctype": "abstract",
+     "citation_count": 6
+    },
+    {
+     "rank": 3,
+     "bibcode": "2019BAAS...51c..79H",
+     "year": 2019,
+     "first_author": "Haqq-Misra, Jacob",
+     "title": "Searching for Technosignatures: Implications of Detection and Non-Detection",
+     "doctype": "article",
+     "citation_count": 2
+    },
+    {
+     "rank": 4,
+     "bibcode": "2019BAAS...51c.106B",
+     "year": 2019,
+     "first_author": "Berea, Anamaria",
+     "title": "The Promise of Data Science for the Technosignatures Field",
+     "doctype": "article",
+     "citation_count": 2
+    },
+    {
+     "rank": 5,
+     "bibcode": "2019BAAS...51c.298M",
+     "year": 2019,
+     "first_author": "Margot, Jean-Luc",
+     "title": "The radio search for technosignatures in the decade 2020—2030",
+     "doctype": "article",
+     "citation_count": 2
+    },
+    {
+     "rank": 6,
+     "bibcode": "2021BAAS...53d.369M",
+     "year": 2021,
+     "first_author": "Michaud, Eric",
+     "title": "Lunar Opportunities for SETI",
+     "doctype": "abstract",
+     "citation_count": 2
+    },
+    {
+     "rank": 7,
+     "bibcode": "2019BAAS...51g.151L",
+     "year": 2019,
+     "first_author": "Lynch, Ryan",
+     "title": "Advanced Capabilities for the Green Bank Telescope",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 8,
+     "bibcode": "2021BAAS...53d.427S",
+     "year": 2021,
+     "first_author": "Sheikh, Sofia",
+     "title": "Technosignatures as a Priority in Planetary Science",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 9,
+     "bibcode": "2019BAAS...51c.164L",
+     "year": 2019,
+     "first_author": "Lesyna, Larry",
+     "title": "A Technosignature Carrying a Message Will Likely Inform us of Crucial Biological Details of Life Outside our Solar System",
+     "doctype": "article",
+     "citation_count": 0
+    },
+    {
+     "rank": 10,
+     "bibcode": "2019BAAS...51c.343W",
+     "year": 2019,
+     "first_author": "Wright, Jason",
+     "title": "Technosignatures in Transit",
+     "doctype": "article",
+     "citation_count": 0
+    },
+    {
+     "rank": 11,
+     "bibcode": "2019BAAS...51c.366W",
+     "year": 2019,
+     "first_author": "Wright, Jason",
+     "title": "Technosignatures in the Thermal Infrared",
+     "doctype": "article",
+     "citation_count": 0
+    },
+    {
+     "rank": 12,
+     "bibcode": "2019BAAS...51c.389W",
+     "year": 2019,
+     "first_author": "Wright, Jason",
+     "title": "Searches for Technosignatures in Astronomy and Astrophysics",
+     "doctype": "article",
+     "citation_count": 0
+    },
+    {
+     "rank": 13,
+     "bibcode": "2019BAAS...51c.558D",
+     "year": 2019,
+     "first_author": "DeMarines, Julia",
+     "title": "Observing the Earth as a Communicating Exoplanet",
+     "doctype": "article",
+     "citation_count": 0
+    },
+    {
+     "rank": 14,
+     "bibcode": "2019BAAS...51g...9S",
+     "year": 2019,
+     "first_author": "Shapshak, Paul",
+     "title": "Problems in Neutrinos and Intergalactic Communication",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 15,
+     "bibcode": "2019BAAS...51g.264W",
+     "year": 2019,
+     "first_author": "Wright, Shelley",
+     "title": "Panoramic SETI: An all-sky fast time-domain observatory",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 16,
+     "bibcode": "2021BAAS...53c1129D",
+     "year": 2021,
+     "first_author": "Daylan, T.",
+     "title": "SETI prioritization and follow-up of potentially habitable TESS planet candidates",
+     "doctype": "abstract",
+     "citation_count": 0
+    }
+   ]
+  },
+  {
+   "id": "T-REV",
+   "domain": "technosignature",
+   "source_type": "review_or_report",
+   "q": "(title:(technosignature OR technosignatures OR SETI) title:(review OR roadmap OR prospects OR opportunities OR strategies OR report OR workshop OR concepts)) AND collection:astronomy year:2015-2025",
+   "num_found": 38,
+   "results": [
+    {
+     "rank": 1,
+     "bibcode": "2018arXiv181208681N",
+     "year": 2018,
+     "first_author": "NASA Technosignatures Workshop Participants",
+     "title": "NASA and the Search for Technosignatures: A Report from the NASA Technosignatures Workshop",
+     "doctype": "eprint",
+     "citation_count": 40
+    },
+    {
+     "rank": 2,
+     "bibcode": "2016ApJ...827L..22T",
+     "year": 2016,
+     "first_author": "Tingay, S. J.",
+     "title": "An Opportunistic Search for Extraterrestrial Intelligence (SETI) with the Murchison Widefield Array",
+     "doctype": "article",
+     "citation_count": 30
+    },
+    {
+     "rank": 3,
+     "bibcode": "2020RAA....20...78L",
+     "year": 2020,
+     "first_author": "Li, Di",
+     "title": "Opportunities to search for extraterrestrial intelligence with the FAST",
+     "doctype": "article",
+     "citation_count": 29
+    },
+    {
+     "rank": 4,
+     "bibcode": "2021AcAau.182..446S",
+     "year": 2021,
+     "first_author": "Socas-Navarro, Hector",
+     "title": "Concepts for future missions to search for technosignatures",
+     "doctype": "article",
+     "citation_count": 25
+    },
+    {
+     "rank": 5,
+     "bibcode": "2021AcAau.188..203W",
+     "year": 2021,
+     "first_author": "Wright, Jason T.",
+     "title": "Strategies and advice for the Search for Extraterrestrial Intelligence",
+     "doctype": "article",
+     "citation_count": 20
+    },
+    {
+     "rank": 6,
+     "bibcode": "2023AJ....166..245H",
+     "year": 2023,
+     "first_author": "Huang, Bo-Lun",
+     "title": "A Solution to Continuous RFI in Narrowband Radio SETI with FAST: The MultiBeam Point-source Scanning Strategy",
+     "doctype": "article",
+     "citation_count": 13
+    },
+    {
+     "rank": 7,
+     "bibcode": "2021AJ....162..151H",
+     "year": 2021,
+     "first_author": "Houston, Kenneth",
+     "title": "Strategies for Maximizing Detection Rate in Radio SETI",
+     "doctype": "article",
+     "citation_count": 12
+    },
+    {
+     "rank": 8,
+     "bibcode": "2023AJ....166...79N",
+     "year": 2023,
+     "first_author": "Nilipour, Andy",
+     "title": "Signal Synchronization Strategies and Time Domain SETI with Gaia DR3",
+     "doctype": "article",
+     "citation_count": 11
+    },
+    {
+     "rank": 9,
+     "bibcode": "2018SPIE10700E..4IB",
+     "year": 2018,
+     "first_author": "Berdyugina, S. V.",
+     "title": "The Exo-Life Finder (ELF) telescope: New strategies for direct detection of exoplanet biosignatures and technosignatures",
+     "doctype": "inproceedings",
+     "citation_count": 9
+    },
+    {
+     "rank": 10,
+     "bibcode": "2021AJ....161...39K",
+     "year": 2021,
+     "first_author": "Kerins, Eamonn",
+     "title": "Mutual Detectability: A Targeted SETI Strategy That Avoids the SETI Paradox",
+     "doctype": "article",
+     "citation_count": 7
+    },
+    {
+     "rank": 11,
+     "bibcode": "2022arXiv220911685H",
+     "year": 2022,
+     "first_author": "Haqq-Misra, Jacob",
+     "title": "Opportunities for Technosignature Science in the Planetary Science and Astrobiology Decadal Survey",
+     "doctype": "eprint",
+     "citation_count": 7
+    },
+    {
+     "rank": 12,
+     "bibcode": "2021IJAsB..20..359L",
+     "year": 2021,
+     "first_author": "Lacki, Brian C.",
+     "title": "Galactic traversability: a new concept for extragalactic SETI",
+     "doctype": "article",
+     "citation_count": 5
+    },
+    {
+     "rank": 13,
+     "bibcode": "2021RAA....21..178C",
+     "year": 2021,
+     "first_author": "Chen, Yi-Xuan",
+     "title": "SETI strategy with FAST fractality",
+     "doctype": "article",
+     "citation_count": 5
+    },
+    {
+     "rank": 14,
+     "bibcode": "2020arXiv200912689M",
+     "year": 2020,
+     "first_author": "Michaud, Eric J.",
+     "title": "Lunar Opportunities for SETI",
+     "doctype": "eprint",
+     "citation_count": 4
+    },
+    {
+     "rank": 15,
+     "bibcode": "2018SPIE10702E..5LM",
+     "year": 2018,
+     "first_author": "Maire, Jérôme",
+     "title": "Panoramic optical and near-infrared SETI instrument: optical and structural design concepts",
+     "doctype": "inproceedings",
+     "citation_count": 3
+    },
+    {
+     "rank": 16,
+     "bibcode": "2022SerAJ.205...53O",
+     "year": 2022,
+     "first_author": "Osmanov, Z. N.",
+     "title": "Prospects of SETI by Small Size Optical Telescopes",
+     "doctype": "article",
+     "citation_count": 3
+    },
+    {
+     "rank": 17,
+     "bibcode": "2023RNAAS...7..120D",
+     "year": 2023,
+     "first_author": "Davenport, James R. A.",
+     "title": "Real-time Technosignature Strategies with SN 2023ixf",
+     "doctype": "article",
+     "citation_count": 3
+    },
+    {
+     "rank": 18,
+     "bibcode": "2021BAAS...53d.369M",
+     "year": 2021,
+     "first_author": "Michaud, Eric",
+     "title": "Lunar Opportunities for SETI",
+     "doctype": "abstract",
+     "citation_count": 2
+    },
+    {
+     "rank": 19,
+     "bibcode": "2022arXiv220308968H",
+     "year": 2022,
+     "first_author": "Haqq-Misra, Jacob",
+     "title": "Opportunities for Technosignature Science in the Astro2020 Report",
+     "doctype": "eprint",
+     "citation_count": 2
+    },
+    {
+     "rank": 20,
+     "bibcode": "2025ApJ...995L..22H",
+     "year": 2025,
+     "first_author": "Haqq-Misra, Jacob",
+     "title": "Projections of Earth's Technosphere: Strategies for Observing Technosignatures on Terrestrial Exoplanets",
+     "doctype": "article",
+     "citation_count": 2
+    }
+   ]
+  },
+  {
+   "id": "B-WP",
+   "domain": "biosignature",
+   "source_type": "decadal_white_paper",
+   "q": "(bibstem:BAAS year:2019-2021 abs:(biosignature OR biosignatures) abs:(exoplanet OR exoplanets)) AND collection:astronomy year:2015-2025",
+   "num_found": 32,
+   "results": [
+    {
+     "rank": 1,
+     "bibcode": "2019BAAS...51c.162L",
+     "year": 2019,
+     "first_author": "Lopez-Morales, Mercedes",
+     "title": "Detecting Earth-like Biosignatures on Rocky Exoplanets around Nearby Stars with Ground-based Extremely Large Telescopes",
+     "doctype": "article",
+     "citation_count": 15
+    },
+    {
+     "rank": 2,
+     "bibcode": "2019BAAS...51c.158K",
+     "year": 2019,
+     "first_author": "Krissansen-Totton, Joshua",
+     "title": "Atmospheric disequilibrium as an exoplanet biosignature: Opportunities for next generation telescopes",
+     "doctype": "article",
+     "citation_count": 1
+    },
+    {
+     "rank": 3,
+     "bibcode": "2019BAAS...51g.141A",
+     "year": 2019,
+     "first_author": "Apai, Daniel",
+     "title": "Nautilus: A Very Large-Aperture, Ultralight Space Telescope for Exoplanet Exploration, Time-domain Astrophysics, and Faint Objects",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 4,
+     "bibcode": "2019BAAS...51c.225L",
+     "year": 2019,
+     "first_author": "Lisman, Doug",
+     "title": "Surveying the solar neighborhood for ozone in the UV at temperate rocky exoplanets",
+     "doctype": "article",
+     "citation_count": 0
+    },
+    {
+     "rank": 5,
+     "bibcode": "2019BAAS...51g.238S",
+     "year": 2019,
+     "first_author": "Staguhn, Johannes",
+     "title": "The Mid-InfraRed Exo-planet CLimate Explorer MIRECLE: Exploring the Nearest M-Earths Through Ultra-Stable Mid-IR Transit and Phase-Curve Spectroscopy",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 6,
+     "bibcode": "2021BAAS...53c0201K",
+     "year": 2021,
+     "first_author": "Krissansen-Totton, J.",
+     "title": "Investigating the atmospheric evolution of habitable worlds with a coupled climate-interior-redox model",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 7,
+     "bibcode": "2021BAAS...53c0202C",
+     "year": 2021,
+     "first_author": "Crouse, J.",
+     "title": "Biosignature Gas Pairs: Detectability and Implications for Future Observing Strategies",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 8,
+     "bibcode": "2021BAAS...53c0203S",
+     "year": 2021,
+     "first_author": "Seager, S.",
+     "title": "Prospects for Life on Sub Neptune-Sized Exoplanets",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 9,
+     "bibcode": "2021BAAS...53c0301G",
+     "year": 2021,
+     "first_author": "Gaudi, B.",
+     "title": "Tools to Find Living Worlds: The HabEx and LUVOIR Mission Concepts",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 10,
+     "bibcode": "2021BAAS...53c0303B",
+     "year": 2021,
+     "first_author": "Bixel, A.",
+     "title": "Bioverse: a simulation framework to assess the statistical power of future biosignature surveys",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 11,
+     "bibcode": "2021BAAS...53c0402D",
+     "year": 2021,
+     "first_author": "Davis, C.",
+     "title": "On the Effects of M-Dwarf UV Variability on Detecting and Interpreting Biosignatures",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 12,
+     "bibcode": "2021BAAS...53c0606Y",
+     "year": 2021,
+     "first_author": "Young, A.",
+     "title": "Constraining Chemical Disequilibrium Biosignatures for an Earth-like Exoplanet using Retrieval Analysis Techniques",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 13,
+     "bibcode": "2021BAAS...53c1010F",
+     "year": 2021,
+     "first_author": "Fisher, T.",
+     "title": "Statistical Assessment of Thermochemical Disequilibria in Exoplanets: Implications for Biosignature Detection",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 14,
+     "bibcode": "2021BAAS...53c1012R",
+     "year": 2021,
+     "first_author": "Ranjan, S.",
+     "title": "New Near-UV H<SUB>2</SUB>O Cross-Sections &amp; Photochemistry of Early Earth-like Atmospheres",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 15,
+     "bibcode": "2021BAAS...53c1016T",
+     "year": 2021,
+     "first_author": "Tuchow, N.",
+     "title": "A Framework for Relative Biosignature Yields from Future Direct Imaging Missions",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 16,
+     "bibcode": "2021BAAS...53c1019D",
+     "year": 2021,
+     "first_author": "de Beurs, Z.",
+     "title": "Removing Stellar Activity Signals from Radial Velocity Measurements Using Neural Networks",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 17,
+     "bibcode": "2021BAAS...53c1024T",
+     "year": 2021,
+     "first_author": "Thompson, M.",
+     "title": "Methane: the Ideal Biosignature for the JWST Era?",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 18,
+     "bibcode": "2021BAAS...53c1028S",
+     "year": 2021,
+     "first_author": "Sousa-Silva, C.",
+     "title": "Phosphine and the importance of unusual biosignatures",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 19,
+     "bibcode": "2021BAAS...53c1034M",
+     "year": 2021,
+     "first_author": "Mendez, A.",
+     "title": "Habitability Models for Exoplanet Sciences",
+     "doctype": "abstract",
+     "citation_count": 0
+    },
+    {
+     "rank": 20,
+     "bibcode": "2021BAAS...53c1037A",
+     "year": 2021,
+     "first_author": "Angerhausen, D.",
+     "title": "The Large Interferometer for Exoplanets (LIFE) mission: characterizing habitable planets in the mid-infrared",
+     "doctype": "abstract",
+     "citation_count": 0
+    }
+   ]
+  },
+  {
+   "id": "B-REV",
+   "domain": "biosignature",
+   "source_type": "review_or_report",
+   "q": "(title:(biosignature OR biosignatures) title:(exoplanet OR exoplanets) title:(review OR roadmap OR prospects OR opportunities OR framework OR strategies OR future)) AND collection:astronomy year:2015-2025",
+   "num_found": 13,
+   "results": [
+    {
+     "rank": 1,
+     "bibcode": "2018AsBio..18..663S",
+     "year": 2018,
+     "first_author": "Schwieterman, Edward W.",
+     "title": "Exoplanet Biosignatures: A Review of Remotely Detectable Signs of Life",
+     "doctype": "article",
+     "citation_count": 517
+    },
+    {
+     "rank": 2,
+     "bibcode": "2018AsBio..18..709C",
+     "year": 2018,
+     "first_author": "Catling, David C.",
+     "title": "Exoplanet Biosignatures: A Framework for Their Assessment",
+     "doctype": "article",
+     "citation_count": 200
+    },
+    {
+     "rank": 3,
+     "bibcode": "2018AsBio..18..739F",
+     "year": 2018,
+     "first_author": "Fujii, Yuka",
+     "title": "Exoplanet Biosignatures: Observational Prospects",
+     "doctype": "article",
+     "citation_count": 178
+    },
+    {
+     "rank": 4,
+     "bibcode": "2018AsBio..18..779W",
+     "year": 2018,
+     "first_author": "Walker, Sara I.",
+     "title": "Exoplanet Biosignatures: Future Directions",
+     "doctype": "article",
+     "citation_count": 97
+    },
+    {
+     "rank": 5,
+     "bibcode": "2017PhR...713....1G",
+     "year": 2017,
+     "first_author": "Grenfell, John Lee",
+     "title": "A review of exoplanetary biosignatures",
+     "doctype": "article",
+     "citation_count": 57
+    },
+    {
+     "rank": 6,
+     "bibcode": "2020PNAS..11721031B",
+     "year": 2020,
+     "first_author": "Balbi, Amedeo",
+     "title": "Quantifying the information impact of future searches for exoplanetary biosignatures",
+     "doctype": "article",
+     "citation_count": 10
+    },
+    {
+     "rank": 7,
+     "bibcode": "2018SPIE10700E..4IB",
+     "year": 2018,
+     "first_author": "Berdyugina, S. V.",
+     "title": "The Exo-Life Finder (ELF) telescope: New strategies for direct detection of exoplanet biosignatures and technosignatures",
+     "doctype": "inproceedings",
+     "citation_count": 9
+    },
+    {
+     "rank": 8,
+     "bibcode": "2025AJ....169..238A",
+     "year": 2025,
+     "first_author": "Angerhausen, Daniel",
+     "title": "What if we Find Nothing? Bayesian Analysis of the Statistical Information of Null Results in Future Exoplanet Habitability and Biosignature Surveys",
+     "doctype": "article",
+     "citation_count": 7
+    },
+    {
+     "rank": 9,
+     "bibcode": "2019BAAS...51c.158K",
+     "year": 2019,
+     "first_author": "Krissansen-Totton, Joshua",
+     "title": "Atmospheric disequilibrium as an exoplanet biosignature: Opportunities for next generation telescopes",
+     "doctype": "article",
+     "citation_count": 1
+    },
+    {
+     "rank": 10,
+     "bibcode": "2017LPICo2042.4156D",
+     "year": 2017,
+     "first_author": "Domagal-Goldman, S. D.",
+     "title": "The History and Future of Exoplanet Biosignatures",
+     "doctype": "inproceedings",
+     "citation_count": 0
+    },
+    {
+     "rank": 11,
+     "bibcode": "2018jpl..data..161C",
+     "year": 2018,
+     "first_author": "Crisp, David",
+     "title": "Exoplanet Biosignatures: A Framework for Their Assessment",
+     "doctype": "dataset",
+     "citation_count": 0
+    },
+    {
+     "rank": 12,
+     "bibcode": "2019absc.conf20212R",
+     "year": 2019,
+     "first_author": "Rackham, Benjamin",
+     "title": "Opportunities to Characterize Stellar Photospheres and Enable Exoplanet Biosignature Observations in the 2020s",
+     "doctype": "inproceedings",
+     "citation_count": 0
+    },
+    {
+     "rank": 13,
+     "bibcode": "2024AAS...24343702Y",
+     "year": 2024,
+     "first_author": "Young, Amber",
+     "title": "Examining Chemical Disequilibrium Biosignatures and Observational Strategies for Earth-like Exoplanets",
+     "doctype": "abstract",
+     "citation_count": 0
+    }
+   ]
+  },
+  {
+   "id": "S-WP",
+   "domain": "solar_system_insitu",
+   "source_type": "decadal_white_paper",
+   "q": "(bibstem:BAAS year:2020-2021 abs:(biosignature OR biosignatures OR \"life detection\") -abs:(exoplanet OR exoplanets)) AND collection:astronomy year:2015-2025",
+   "num_found": 38,
+   "results": [
+    {
+     "rank": 1,
+     "bibcode": "2021BAAS...53d.181C",
+     "year": 2021,
+     "first_author": "Chou, Luoth",
+     "title": "Towards a more universal life detection strategy",
+     "doctype": "abstract",
+     "citation_count": 6
+    },
+    {
+     "rank": 2,
+     "bibcode": "2021BAAS...53d.240P",
+     "year": 2021,
+     "first_author": "Perl, Scott",
+     "title": "Salty Environments: The importance of evaporites and brine environments as habitats and preservers of biosignatures",
+     "doctype": "abstract",
+     "citation_count": 6
+    },
+    {
+     "rank": 3,
+     "bibcode": "2021BAAS...53d.272V",
+     "year": 2021,
+     "first_author": "Van Kranendonk, Martin",
+     "title": "Terrestrial Hydrothermal Fields and the Search for Life in the Solar System",
+     "doctype": "abstract",
+     "citation_count": 4
+    },
+    {
+     "rank": 4,
+     "bibcode": "2021BAAS...53d.293W",
+     "year": 2021,
+     "first_author": "Willis, Peter",
+     "title": "How to Search for Chemical Biosignatures on Ocean Worlds",
+     "doctype": "abstract",
+     "citation_count": 4
+    },
+    {
+     "rank": 5,
+     "bibcode": "2021BAAS...53d.054C",
+     "year": 2021,
+     "first_author": "Cable, Morgan",
+     "title": "Plume Grain Sampling at Hypervelocity: Implications for Astrobiology Investigations",
+     "doctype": "abstract",
+     "citation_count": 3
+    },
+    {
+     "rank": 6,
+     "bibcode": "2021BAAS...53d.087L",
+     "year": 2021,
+     "first_author": "Ligterink, Niels",
+     "title": "Detecting the elemental and molecular signatures of life: Laser-based mass spectrometry technologies",
+     "doctype": "abstract",
+     "citation_count": 3
+    },
+    {
+     "rank": 7,
+     "bibcode": "2021BAAS...53d.202H",
+     "year": 2021,
+     "first_author": "Hoehler, Tori",
+     "title": "Groundwork for Life Detection",
+     "doctype": "abstract",
+     "citation_count": 3
+    },
+    {
+     "rank": 8,
+     "bibcode": "2021BAAS...53d.096M",
+     "year": 2021,
+     "first_author": "Mathies, Richard",
+     "title": "The Case for an Orbital Mission to Characterize the Organic Content of the Enceladus Plumes",
+     "doctype": "abstract",
+     "citation_count": 2
+    },
+    {
+     "rank": 9,
+     "bibcode": "2021BAAS...53d.059M",
+     "year": 2021,
+     "first_author": "Mahaffy, Paul",
+     "title": "Agnostic Biosignature Exploration at Europa through Plume Sampling",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 10,
+     "bibcode": "2021BAAS...53d.140C",
+     "year": 2021,
+     "first_author": "Choukroun, Mathieu",
+     "title": "Sampling Ocean Materials, Traces of Life or Biosignatures in Plume Deposits on Enceladus' Surface",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 11,
+     "bibcode": "2021BAAS...53d.211C",
+     "year": 2021,
+     "first_author": "Czaja, Andrew",
+     "title": "Mars as a compelling target in the continuing search for signs of ancient extraterrestrial life",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 12,
+     "bibcode": "2021BAAS...53d.243M",
+     "year": 2021,
+     "first_author": "Miller, Kelly E.",
+     "title": "The value of CHONS isotopic measurements of major compounds as probes of planetary origin, evolution, and habitability",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 13,
+     "bibcode": "2021BAAS...53d.260S",
+     "year": 2021,
+     "first_author": "Schmidt, Britney",
+     "title": "Enabling Progress Towards Life Detection on NASA Missions",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 14,
+     "bibcode": "2021BAAS...53d.277B",
+     "year": 2021,
+     "first_author": "Blake, David",
+     "title": "MapX: An In-situ X-ray µ-Mapper for Habitability and Biosignature Studies",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 15,
+     "bibcode": "2021BAAS...53d.306B",
+     "year": 2021,
+     "first_author": "Blank, Jennifer G.",
+     "title": "Volcanic Caves as Priority Sites for Astrobiology Science",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 16,
+     "bibcode": "2021BAAS...53d.333L",
+     "year": 2021,
+     "first_author": "Lin, Ying",
+     "title": "MASEX — A Dedicated Life Detection Mission on Mars",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 17,
+     "bibcode": "2021BAAS...53d.357K",
+     "year": 2021,
+     "first_author": "Karunatillake, Suniti",
+     "title": "GANGOTRI mission concept on the glacial key to the Amazonian climate of Mars",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 18,
+     "bibcode": "2021BAAS...53d.368W",
+     "year": 2021,
+     "first_author": "Wilhelm, Mary Beth",
+     "title": "Abzu: Uncovering the Origin of Ancient Organics on Mars",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 19,
+     "bibcode": "2021BAAS...53d.427S",
+     "year": 2021,
+     "first_author": "Sheikh, Sofia",
+     "title": "Technosignatures as a Priority in Planetary Science",
+     "doctype": "abstract",
+     "citation_count": 1
+    },
+    {
+     "rank": 20,
+     "bibcode": "2021BAAS...53c0302M",
+     "year": 2021,
+     "first_author": "Meadows, V.",
+     "title": "The Feasibility of Detecting Biosignatures in the TRAPPIST-1 Planetary System with JWST",
+     "doctype": "abstract",
+     "citation_count": 0
+    }
+   ]
+  },
+  {
+   "id": "S-REV",
+   "domain": "solar_system_insitu",
+   "source_type": "review_or_report",
+   "q": "(title:(\"life detection\" OR biosignature OR biosignatures) title:(Enceladus OR Europa OR Mars OR Titan OR Venus OR \"ocean worlds\" OR \"solar system\") title:(review OR roadmap OR prospects OR strategy OR strategies OR search OR framework)) AND collection:astronomy year:2015-2025",
+   "num_found": 86,
+   "results": [
+    {
+     "rank": 1,
+     "bibcode": "2017AsBio..17..471V",
+     "year": 2017,
+     "first_author": "Vago, Jorge L.",
+     "title": "Habitability on Early Mars and the Search for Biosignatures with the ExoMars Rover",
+     "doctype": "article",
+     "citation_count": 373
+    },
+    {
+     "rank": 2,
+     "bibcode": "2015AsBio..15..998W",
+     "year": 2015,
+     "first_author": "Westall, Frances",
+     "title": "Biosignatures on Mars: What, Where, and How? Implications for the Search for Martian Life",
+     "doctype": "article",
+     "citation_count": 216
+    },
+    {
+     "rank": 3,
+     "bibcode": "2020ChRv..120.4660G",
+     "year": 2020,
+     "first_author": "Glavin, Daniel P.",
+     "title": "The Search for Chiral Asymmetry as a Potential Biosignature in our Solar System",
+     "doctype": "article",
+     "citation_count": 170
+    },
+    {
+     "rank": 4,
+     "bibcode": "2021NRvEE...2..490B",
+     "year": 2021,
+     "first_author": "Bosak, Tanja",
+     "title": "Searching for biosignatures in sedimentary rocks from early Earth and Mars",
+     "doctype": "article",
+     "citation_count": 67
+    },
+    {
+     "rank": 5,
+     "bibcode": "2016IJAsB..15..239G",
+     "year": 2016,
+     "first_author": "Goetz, W.",
+     "title": "MOMA: the challenge to search for organics and biosignatures on Mars",
+     "doctype": "article",
+     "citation_count": 45
+    },
+    {
+     "rank": 6,
+     "bibcode": "2020AsBio..20.1029S",
+     "year": 2020,
+     "first_author": "Sánchez-García, Laura",
+     "title": "Simulating Mars Drilling Mission for Searching for Life: Ground-Truthing Lipids and Other Complex Microbial Biomarkers in the Iron-Sulfur Rich Río Tinto Analog",
+     "doctype": "article",
+     "citation_count": 34
+    },
+    {
+     "rank": 7,
+     "bibcode": "2020AsBio..20..830N",
+     "year": 2020,
+     "first_author": "Newman, Sharon A.",
+     "title": "Lipid Biomarker Record of the Serpentinite-Hosted Ecosystem of the Samail Ophiolite, Oman and Implications for the Search for Biosignatures on Mars",
+     "doctype": "article",
+     "citation_count": 26
+    },
+    {
+     "rank": 8,
+     "bibcode": "2017AsBio..17..984B",
+     "year": 2017,
+     "first_author": "Blanco, Yolanda",
+     "title": "Critical Assessment of Analytical Techniques in the Search for Biomarkers on Mars: A Mummified Microbial Mat from Antarctica as a Best-Case Scenario",
+     "doctype": "article",
+     "citation_count": 14
+    },
+    {
+     "rank": 9,
+     "bibcode": "2021IJAsB..20..345P",
+     "year": 2021,
+     "first_author": "Pacelli, Claudia",
+     "title": "Fungal biomarkers are detectable in Martian rock-analogues after space exposure: implications for the search of life on Mars",
+     "doctype": "article",
+     "citation_count": 14
+    },
+    {
+     "rank": 10,
+     "bibcode": "2021PSJ.....2..100C",
+     "year": 2021,
+     "first_author": "Choukroun, Mathieu",
+     "title": "Sampling Plume Deposits on Enceladus' Surface to Explore Ocean Materials and Search for Traces of Life or Biosignatures",
+     "doctype": "article",
+     "citation_count": 12
+    },
+    {
+     "rank": 11,
+     "bibcode": "2017AsBio..17..852J",
+     "year": 2017,
+     "first_author": "Judge, Philip",
+     "title": "A Novel Strategy to Seek Biosignatures at Enceladus and Europa",
+     "doctype": "article",
+     "citation_count": 8
+    },
+    {
+     "rank": 12,
+     "bibcode": "2023AsBio..23..308C",
+     "year": 2023,
+     "first_author": "Corenblit, Dov",
+     "title": "Signatures of Life Detected in Images of Rocks Using Neural Network Analysis Demonstrate New Potential for Searching for Biosignatures on the Surface of Mars",
+     "doctype": "article",
+     "citation_count": 8
+    },
+    {
+     "rank": 13,
+     "bibcode": "2019bias.book..167M",
+     "year": 2019,
+     "first_author": "McSween, Harry Y., Jr.",
+     "title": "The Search for Biosignatures in Martian Meteorite Allan Hills 84001",
+     "doctype": "inbook",
+     "citation_count": 4
+    },
+    {
+     "rank": 14,
+     "bibcode": "2021BAAS...53d.293W",
+     "year": 2021,
+     "first_author": "Willis, Peter",
+     "title": "How to Search for Chemical Biosignatures on Ocean Worlds",
+     "doctype": "abstract",
+     "citation_count": 4
+    },
+    {
+     "rank": 15,
+     "bibcode": "2022ESC.....6.2595S",
+     "year": 2022,
+     "first_author": "Shen, Jianxun",
+     "title": "Geochemical and Biological Profiles of a Quartz Stone in the Qaidam Mars Analog Using LIBS: Implications for the Search for Biosignatures on Mars",
+     "doctype": "article",
+     "citation_count": 4
+    },
+    {
+     "rank": 16,
+     "bibcode": "2023P&SS..23205694C",
+     "year": 2023,
+     "first_author": "Cable, Morgan L.",
+     "title": "Geochemical and physical variability of Icelandic tephra fields and glaciovolcanic sandur to inform spatial sampling in Mars biosignature searches",
+     "doctype": "article",
+     "citation_count": 4
+    },
+    {
+     "rank": 17,
+     "bibcode": "2019P&SS..17904714H",
+     "year": 2019,
+     "first_author": "Haezeleer, Bettina",
+     "title": "Artifact formation during Raman measurements and its relevance to the search for chemical biosignatures on Mars",
+     "doctype": "article",
+     "citation_count": 3
+    },
+    {
+     "rank": 18,
+     "bibcode": "2023AsBio..23.1303B",
+     "year": 2023,
+     "first_author": "Bonaccorsi, Rosalba",
+     "title": "In Situ Real-Time Monitoring for Aseptic Drilling: Lessons Learned from the Atacama Rover Astrobiology Drilling Studies Contamination Control Strategy and Implementation and Application to the Icebreaker Mars Life Detection Mission",
+     "doctype": "article",
+     "citation_count": 3
+    },
+    {
+     "rank": 19,
+     "bibcode": "2023AsBio..23.1284S",
+     "year": 2023,
+     "first_author": "Stoker, Carol R.",
+     "title": "A Mission Simulating the Search for Life on Mars with Automated Drilling, Sample Handling, and Life Detection Instruments Performed in the Hyperarid Core of the Atacama Desert, Chile",
+     "doctype": "article",
+     "citation_count": 2
+    },
+    {
+     "rank": 20,
+     "bibcode": "2016LPICo1912.2032H",
+     "year": 2016,
+     "first_author": "Horgan, B.",
+     "title": "Strategies for Searching for Biosignatures in Ancient Martian Sub-Aerial Surface Environments",
+     "doctype": "inproceedings",
+     "citation_count": 1
+    }
+   ]
+  }
+ ]
+}

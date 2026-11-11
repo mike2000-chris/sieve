@@ -1,0 +1,31 @@
+id: BASE-0006
+version: 1
+title: Artificial objects in the solar system recognised by reflected-light polarimetry
+claim: At least one object in the solar system, in space or on the surface of a solar-system body, shows a reflected-light
+  polarisation signature of artificial rather than natural material.
+domain: technosignature
+signature_class: artificial_structure_geometry
+observable: polarimetry
+timescale: snapshot
+mechanism: Space-based artefacts, possibly bearing messages like those on Pioneer and Voyager, could be present
+  within the solar system. The source states that artificial materials appear very different from natural ones in
+  polarised light (citing Kissell 1974), so they could be detected with reflected-light polarimetry using current
+  technology; artefacts on the surfaces of solar-system objects could be detected similarly. No estimate of signal
+  size is given.
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2018arXiv181208681N
+  transcribed_by: claude-fable-5-2

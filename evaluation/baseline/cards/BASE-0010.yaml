@@ -1,0 +1,32 @@
+id: BASE-0010
+version: 1
+title: Broad-band radio pulses with artificial (for example negative) dispersion
+claim: Some sky positions emit broad-band radio pulses whose dispersion is artificial, for example negative, and
+  therefore unlike the pulses of pulsars, rotating radio transients and fast radio bursts.
+domain: technosignature
+signature_class: em_transmission
+observable: radio
+timescale: snapshot
+mechanism: The source lists wide-band artificially dispersed pulses as one of three signal types indicative of a
+  technological source and shows simulated negatively dispersed pulses. It notes that standard transient search
+  techniques are unlikely to look for such pulses and that a newly developed pipeline using machine learning will
+  be able to. No power estimate specific to this signal type is given in the passages used.
+method: Search of FAST data with a machine-learning pipeline for dispersed pulses that the standard transient technique
+  does not cover.
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2020RAA....20...78L
+  transcribed_by: claude-fable-5-2

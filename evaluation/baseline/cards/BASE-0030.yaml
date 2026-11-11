@@ -1,0 +1,30 @@
+id: BASE-0030
+version: 1
+title: Organosulfur gases revealed by an elevated ethane-to-methane ratio on planets of M dwarfs
+claim: Some terrestrial planets in the habitable zones of cool M dwarfs show an elevated C2H6/CH4 ratio caused by
+  biogenic sulfur-containing gases such as CH3SCH3 and CH3S2CH3.
+domain: biosignature
+signature_class: atmospheric_chemistry
+observable: spectroscopy
+timescale: snapshot
+mechanism: Sulfur-containing compounds such as CH3SCH3 and CH3S2CH3 have been discussed as potential atmospheric
+  biosignatures in Earth-type environments with low-UV conditions, e.g. planets in the habitable zone of cool M
+  dwarfs. The source reports a study in which these gases did not build up to levels detectable by next-generation
+  missions, but their presence could be inferred indirectly because they increase the C2H6/CH4 ratio.
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2017PhR...713....1G
+  transcribed_by: claude-fable-5-2

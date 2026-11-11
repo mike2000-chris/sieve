@@ -1,11 +1,16 @@
 """Load, validate and list hypothesis cards and register entries.
 
 Usage:
-    uv run python -m pipeline.cards validate      # all cards + register entries against the schemas
-    uv run python -m pipeline.cards list          # table of cards with status and scores
+    uv run python -m pipeline.cards validate      # all cards + register entries + baseline cards against the schemas
+    uv run python -m pipeline.cards list          # table of cards with status and scores (--baseline: baseline cards)
     uv run python -m pipeline.cards set-status SIEVE-0001 gated --reason "G1-G4 complete" --by human
 
 Status transitions are only allowed through `set_status`, which writes a gate log entry.
+
+Two card sets share one schema and are kept apart by id prefix and directory:
+  SIEVE-NNNN  catalogue/cards/            pipeline cards (Expand, human edits); gate logs in catalogue/gate_logs/
+  BASE-NNNN   evaluation/baseline/cards/  literature baseline (evaluation/baseline/README.md); gate logs in
+                                          evaluation/baseline/gate_logs/. Expand and the catalogue never read them.
 """
 from __future__ import annotations
 
@@ -23,6 +28,10 @@ CARDS = ROOT / "catalogue" / "cards"
 GATE_LOGS = ROOT / "catalogue" / "gate_logs"
 REGISTER = ROOT / "register"
 SCHEMAS = ROOT / "schema"
+BASELINE = ROOT / "evaluation" / "baseline"
+BASELINE_CARDS = BASELINE / "cards"
+BASELINE_GATE_LOGS = BASELINE / "gate_logs"
+BASELINE_SOURCES = BASELINE / "sources.yaml"
 
 ALLOWED_TRANSITIONS = {
     "raw": {"gated", "parked"},
@@ -60,6 +69,62 @@ def iter_cards():
         yield p, _load_yaml(p)
 
 
+def iter_baseline_cards():
+    for p in sorted(BASELINE_CARDS.glob("BASE-*.yaml")):
+        yield p, _load_yaml(p)
+
+
+def card_paths(card_id: str) -> tuple[Path, Path]:
+    """Card file and gate-log directory for an id; the prefix decides the card set."""
+    if card_id.startswith("BASE-"):
+        return BASELINE_CARDS / f"{card_id}.yaml", BASELINE_GATE_LOGS
+    return CARDS / f"{card_id}.yaml", GATE_LOGS
+
+
+def baseline_source_bibcodes() -> set[str] | None:
+    """Bibcodes of included baseline sources (and their full-text twins); None if sources.yaml is absent."""
+    if not BASELINE_SOURCES.exists():
+        return None
+    out = set()
+    for s in (_load_yaml(BASELINE_SOURCES).get("sources") or []):
+        if s.get("decision") == "included":
+            out.add(s["bibcode"])
+    return out
+
+
+def _validate_baseline(card_v) -> tuple[int, int]:
+    errors, n = 0, 0
+    known = baseline_source_bibcodes()
+    for p, doc in iter_baseline_cards():
+        n += 1
+        problems = [f"{'/'.join(map(str, e.path))}: {e.message}" for e in sorted(card_v.iter_errors(doc), key=lambda e: list(e.path))]
+        if doc.get("id") != p.stem:
+            problems.append(f"id {doc.get('id')} does not match filename")
+        prov = doc.get("provenance") or {}
+        if prov.get("generator_model") != "human-literature":
+            problems.append("provenance/generator_model must be 'human-literature' for baseline cards")
+        if not prov.get("transcribed_by"):
+            problems.append("provenance/transcribed_by missing")
+        bibs = prov.get("source_bibcodes") or []
+        if not bibs:
+            problems.append("provenance/source_bibcodes missing")
+        if known is not None:
+            problems += [f"source bibcode {b} is not an included source in sources.yaml" for b in bibs if b not in known]
+        if (doc.get("novelty") or {}).get("closest_prior") and doc.get("status") == "raw":
+            problems.append("novelty/closest_prior must stay empty on raw baseline cards (gate G2 fills it)")
+        for msg in problems:
+            errors += 1
+            print(f"BASELINE {p.name}: {msg}")
+    # a card in the wrong directory would leak into Expand prompts or out of the baseline
+    for stray in sorted(set(BASELINE_CARDS.glob("*.yaml")) - set(BASELINE_CARDS.glob("BASE-*.yaml"))):
+        errors += 1
+        print(f"BASELINE {stray.name}: only BASE-NNNN.yaml files belong in evaluation/baseline/cards/")
+    for stray in sorted(set(CARDS.glob("*.yaml")) - set(CARDS.glob("SIEVE-*.yaml"))):
+        errors += 1
+        print(f"CARD {stray.name}: only SIEVE-NNNN.yaml files belong in catalogue/cards/")
+    return errors, n
+
+
 def iter_register():
     for p in sorted(REGISTER.glob("REG-*.yaml")):
         yield p, _load_yaml(p)
@@ -75,6 +140,9 @@ def validate() -> int:
         if doc.get("id") != p.stem:
             errors += 1
             print(f"CARD {p.name}: id {doc.get('id')} does not match filename")
+        if (doc.get("provenance") or {}).get("generator_model") == "human-literature":
+            errors += 1
+            print(f"CARD {p.name}: literature-baseline cards belong in evaluation/baseline/cards/ with a BASE id")
     for p, doc in iter_register():
         for err in sorted(reg_v.iter_errors(doc), key=lambda e: list(e.path)):
             errors += 1
@@ -82,14 +150,16 @@ def validate() -> int:
         if doc.get("id") != p.stem:
             errors += 1
             print(f"REGISTER {p.name}: id {doc.get('id')} does not match filename")
+    base_errors, n_base = _validate_baseline(card_v)
+    errors += base_errors
     n_cards, n_reg = len(list(CARDS.glob("SIEVE-*.yaml"))), len(list(REGISTER.glob("REG-*.yaml")))
-    print(f"{n_cards} cards, {n_reg} register entries, {errors} errors")
+    print(f"{n_cards} cards, {n_reg} register entries, {n_base} baseline cards, {errors} errors")
     return 1 if errors else 0
 
 
-def list_cards() -> int:
+def list_cards(baseline: bool = False) -> int:
     rows = []
-    for _, c in iter_cards():
+    for _, c in (iter_baseline_cards() if baseline else iter_cards()):
         s = c.get("scores") or {}
         rows.append((c["id"], c["status"], c["domain"], c.get("novelty", {}).get("status", "-"), s.get("total", "-"), c["title"][:60]))
     w = [max(len(str(r[i])) for r in rows + [("id", "status", "domain", "novelty", "total", "title")]) for i in range(6)]
@@ -101,7 +171,7 @@ def list_cards() -> int:
 
 
 def set_status(card_id: str, new_status: str, reason: str, by: str) -> int:
-    path = CARDS / f"{card_id}.yaml"
+    path, gate_logs = card_paths(card_id)
     if not path.exists():
         print(f"no such card: {card_id}")
         return 1
@@ -113,8 +183,8 @@ def set_status(card_id: str, new_status: str, reason: str, by: str) -> int:
     card["status"] = new_status
     card["version"] = int(card.get("version", 1)) + 1
     path.write_text(yaml.safe_dump(card, sort_keys=False, allow_unicode=True, width=110), encoding="utf-8")
-    GATE_LOGS.mkdir(parents=True, exist_ok=True)
-    log = GATE_LOGS / f"{card_id}.jsonl"
+    gate_logs.mkdir(parents=True, exist_ok=True)
+    log = gate_logs / f"{card_id}.jsonl"
     entry = {"ts": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "event": "status", "from": old, "to": new_status, "reason": reason, "by": by}
     with log.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(entry) + "\n")
@@ -156,7 +226,8 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="sieve")
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("validate")
-    sub.add_parser("list")
+    ls = sub.add_parser("list")
+    ls.add_argument("--baseline", action="store_true", help="list evaluation/baseline/cards instead of the catalogue")
     st = sub.add_parser("set-status")
     st.add_argument("card_id")
     st.add_argument("status", choices=sorted({s for v in ALLOWED_TRANSITIONS.values() for s in v} | set(ALLOWED_TRANSITIONS)))
@@ -166,7 +237,7 @@ def main(argv: list[str] | None = None) -> int:
     if a.cmd == "validate":
         return validate()
     if a.cmd == "list":
-        return list_cards()
+        return list_cards(a.baseline)
     if a.cmd == "set-status":
         return set_status(a.card_id, a.status, a.reason, a.by)
     return 2

@@ -14,7 +14,7 @@
 | Cost | Human hours and euros per surviving / executed card | reported | | |
 
 ## Baseline
-`evaluation/baseline/`: two-hour human-only brainstorm by the owner, written as raw cards (`provenance.generator_model: human`) and gated with the same prompts.
+`evaluation/baseline/`: literature baseline (owner decision 2026-11-11, replaces the two-hour brainstorm). Published search ideas from white papers, reviews and workshop reports, found through documented ADS queries and transcribed as raw cards `BASE-NNNN` (`provenance.generator_model: human-literature`), gated with the same prompts. Selection rule, how to read the comparison (no volume lift; G2 as "tested", not "proposed") and open decisions: `evaluation/baseline/README.md`.
 
 ## Rediscovery test protocol
 Register entries with `withheld_for_rediscovery_test: true` are hidden from Expand. Matches are judged on claim + observable by an LLM judge, then confirmed by the owner. Output: recall and the list of what the pipeline could not think of (`evaluation/rediscovery/misses.md`).

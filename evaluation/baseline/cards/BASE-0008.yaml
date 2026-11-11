@@ -1,0 +1,34 @@
+id: BASE-0008
+version: 1
+title: Subcontinent-size artificial structures resolved by multi-band inversion of exoplanet reflected light curves
+claim: Some exoplanets carry subcontinent-size, highly reflective or highly absorptive artificial structures that
+  are recognisable in multi-band inversions of the planet's reflected light curve by their contrast to the natural
+  environment and their regular substructure or unnatural shape.
+domain: technosignature
+signature_class: artificial_structure_geometry
+observable: time_series
+timescale: days
+mechanism: Highly reflective structures (to reject unwanted stellar light into space) and highly absorptive, photovoltaic-like
+  structures (energy generators) in near-planetary space above the clouds. The source reports (Berdyugina and Kuhn
+  2017) that such structures can be spatially and spectrally resolved through inversions of planetary reflected
+  light curves acquired in multiple passbands, and that they can only be detected if spatially resolved in this
+  way; unresolved, their spectral and polarimetric signatures are strongly diluted by global environmental signals.
+data_requirements:
+  cadence: reflected light curves in multiple passbands (sampling not stated)
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2018arXiv181208681N
+  transcribed_by: claude-fable-5-2

@@ -1,0 +1,33 @@
+id: BASE-0011
+version: 1
+title: Broad-band radio emission carrying artificial modulation
+claim: Some sky positions emit broad-band radio emission that exhibits an underlying modulation of amplitude, frequency
+  or phase of a carrier wave.
+domain: technosignature
+signature_class: em_transmission
+observable: radio
+timescale: snapshot
+mechanism: Modulation schemes encode information onto high-frequency carrier waves; the source expects any transmission
+  containing meaningful information to exhibit some form of modulation, and names broad-band emission with such
+  modulation as a third class of radio emission indicative of an artificial origin. No power estimate specific to
+  this signal type is given in the passages used.
+method: Modulation search; the source cites a simple search with correlation statistics towards known astrophysical
+  sources (Harp et al. 2015) and proposes convolutional neural network classifiers trained on labelled modulation
+  classes.
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2020RAA....20...78L
+  transcribed_by: claude-fable-5-2

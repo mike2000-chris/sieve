@@ -1,0 +1,36 @@
+id: BASE-0032
+version: 1
+title: Micrometre-scale elemental signatures of microfossils in rocks measured by laser ablation mass spectrometry
+claim: Some rocks on Mars or other solar-system bodies contain micrometre-sized features whose abundances of biogenic
+  elements such as carbon differ from the host material in the way microfossils do.
+domain: solar_system_insitu
+signature_class: insitu_composition
+observable: mass_spectrometry
+timescale: snapshot
+mechanism: Signatures of extinct or extant life can be abundances of specific biogenic elements, isotopes fractionated
+  by metabolic processes, or biomolecules. Faint biosignatures in micrometre-sized fossils can be lost in bulk analysis.
+  Laser ablation with focal spots of several micrometres allows chemical analysis and depth profiling of micrometre-sized
+  features (microfossils, finely laminated biopatterns). The source reports that such instruments identified micrometre
+  features embedded in a host material by monitoring elements relevant to life, and the elemental signatures of
+  single microbes inoculated at low number density in a Martian mudstone analogue.
+data_requirements:
+  depth: spatial resolution of several micrometres
+  sample: solid samples analysed in situ by a lander or rover
+method: Spatially resolved chemical imaging and depth profiling with laser ablation/ionisation mass spectrometry.
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2021BAAS...53d.087L
+  transcribed_by: claude-fable-5-2

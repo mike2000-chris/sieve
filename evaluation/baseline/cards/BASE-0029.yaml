@@ -1,0 +1,35 @@
+id: BASE-0029
+version: 1
+title: Network topology of atmospheric chemistry as an indicator of an inhabited planet
+claim: The chemical reaction network of an inhabited planet's atmosphere has a topology that differs from those
+  of uninhabited planets and resembles that of biochemical metabolism.
+domain: biosignature
+signature_class: atmospheric_chemistry
+observable: spectroscopy
+timescale: snapshot
+mechanism: 'Metabolic networks of organisms from all three domains of life are scale-free (degree distribution P(k)
+  ~ k^-alpha), a candidate signature of evolutionary processes. One hypothesis is that life leaves a topological
+  imprint on atmospheric chemistry: comparative studies indicate that Earth''s atmospheric reaction network differs
+  from those of other solar-system planets and is more like biochemical metabolism in its topological structure
+  (Walker et al.). Grenfell et al. note that biochemical reaction systems differ from abiotic ones in network properties,
+  e.g. the likelihood of a species acting as reactant or product is approximately equal in biochemical networks.'
+data_requirements:
+  depth: not stated; the sources do not say how the reaction network would be derived from remote observations
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2018AsBio..18..779W
+  - 2017PhR...713....1G
+  transcribed_by: claude-fable-5-2

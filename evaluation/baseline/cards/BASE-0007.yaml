@@ -1,0 +1,43 @@
+id: BASE-0007
+version: 1
+title: Industrial compounds (CF4, CCl3F and other CFCs) in mid-infrared spectra of terrestrial exoplanet atmospheres
+claim: Some terrestrial exoplanet atmospheres contain industrial compounds such as CF4 and CCl3F at abundances that
+  produce detectable mid-infrared absorption.
+domain: technosignature
+signature_class: atmospheric_chemistry
+observable: spectroscopy
+timescale: snapshot
+mechanism: 'Atmospheric pollution is one of the most obviously artificial alterations of Earth''s observable characteristics,
+  whether as an unwanted by-product of industry or as deliberate geoengineering. Order of magnitude as reported
+  by the sources from Lin et al. 2014: CF4 and CCl3F could be detectable with less than 2 days of JWST integration
+  (NASA report); for an Earth-like planet around a white dwarf, one day of JWST at S/N 5 requires concentrations
+  10 times the present Earth level (Socas-Navarro et al.). CCl3F has a spectral feature about 0.4 um wide, needing
+  R > 30; CFC-11 and CFC-12 absorb at 8-14 um. The NASA report notes that such compounds are potent greenhouse gases,
+  so synthetic spectra must account for the associated warming.'
+data_requirements:
+  wavelength_um:
+  - 8
+  - 14
+  spectral_resolution: R > 30 for CCl3F; R > 100 for the narrowest feature discussed (Socas-Navarro et al.)
+  depth: about 1-2 days of JWST integration in the white-dwarf host case
+method: Forward modelling of technosignature spectra, with climate modelling for greenhouse-active artificial constituents
+  and a range of planetary conditions, then comparison with transmission and reflection spectra of exoplanet atmospheres
+  (existing data and upcoming missions).
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2018arXiv181208681N
+  - 2021AcAau.182..446S
+  transcribed_by: claude-fable-5-2
