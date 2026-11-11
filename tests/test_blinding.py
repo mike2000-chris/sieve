@@ -89,3 +89,13 @@ def test_g2_stops_cleanly_when_retrieval_is_down(monkeypatch, capsys):
     assert rc == 1 and attempted == ["SIEVE-0009"]
     assert [(c, e["verdict"]) for c, e in logged] == [("SIEVE-0009", "error")]
     assert "not attempted: SIEVE-0010" in capsys.readouterr().out
+
+
+def test_g2_prompt_has_no_example_from_the_catalogue_cell():
+    """v0.4: the judge must not be primed with the instruments or the signature class of the cards it judges."""
+    import re
+    from pipeline.expand import ROOT
+    text = (ROOT / "prompts" / f"{critique.G2_PROMPT_VERSION}.md").read_text(encoding="utf-8")
+    assert critique.G2_PROMPT_VERSION >= "critique-g2-novelty-v0.4"
+    for pattern in (r"spherex", r"\bwise\b", r"waste[- ]heat", r"dyson", r"infrared excess"):
+        assert not re.search(pattern, text, re.I), f"G2 prompt mentions {pattern!r}"
