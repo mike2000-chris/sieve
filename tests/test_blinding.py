@@ -73,3 +73,19 @@ def test_real_run_on_baseline_needs_explicit_flag():
         critique.check_baseline_ids([BASE_ID], dry_run=False, baseline_ok=False)
     critique.check_baseline_ids([BASE_ID], dry_run=True, baseline_ok=False)
     critique.check_baseline_ids([SIEVE_ID], dry_run=False, baseline_ok=False)
+
+
+def test_g2_stops_cleanly_when_retrieval_is_down(monkeypatch, capsys):
+    """A literature API failure is logged for the card and ends the run; later cards are not attempted."""
+    logged, attempted = [], []
+
+    def fake_g2_card(card, register, run, use_cache=True):
+        attempted.append(card["id"])
+        raise critique.G2RetrievalError("retrieval: api.openalex.org failed (429)")
+
+    monkeypatch.setattr(critique, "g2_card", fake_g2_card)
+    monkeypatch.setattr(critique.cards_mod, "append_gate_log", lambda cid, entry: logged.append((cid, entry)))
+    rc = critique.g2(["SIEVE-0009", "SIEVE-0010"], "test", dry_run=False, max_run_eur=0.0, force=True)
+    assert rc == 1 and attempted == ["SIEVE-0009"]
+    assert [(c, e["verdict"]) for c, e in logged] == [("SIEVE-0009", "error")]
+    assert "not attempted: SIEVE-0010" in capsys.readouterr().out

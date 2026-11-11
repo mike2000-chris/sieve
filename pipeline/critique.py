@@ -45,6 +45,7 @@ import re
 import sys
 from pathlib import Path
 
+import httpx
 import yaml
 
 from pipeline import cards as cards_mod
@@ -177,6 +178,11 @@ class G2Error(RuntimeError):
     """A card could not be judged (refusal, truncation, no queries); the run continues with the next card."""
 
 
+class G2RetrievalError(G2Error):
+    """ADS or OpenAlex did not answer (rate limit, outage). The card is logged as `error` and the run stops, because
+    every further card would pay for a query-writing call and then fail in the same way."""
+
+
 def card_for_prompt(card: dict) -> str:
     """The card as the query writer and the judge see it: blind to its origin (pipeline.cards.blind_card removes id,
     provenance and version) and reduced to the content fields, so no earlier novelty block, physics block, scores
@@ -304,7 +310,16 @@ def g2_card(card: dict, register: list[dict], run: dict, use_cache: bool = True)
     queries = list(dict.fromkeys(q.strip() for q in out["queries"] if q.strip()))[:G2_MAX_QUERIES]
     if not queries:
         raise G2Error("queries: model returned no query")
-    found = retrieve(queries, k=G2_MAX_PAPERS, use_cache=use_cache)
+    try:
+        found = retrieve(queries, k=G2_MAX_PAPERS, use_cache=use_cache)
+    except httpx.HTTPError as err:
+        status = getattr(getattr(err, "response", None), "status_code", None)
+        try:
+            host = err.request.url.host
+        except RuntimeError:   # httpx raises this when the error carries no request
+            host = "literature API"
+        raise G2RetrievalError(f"retrieval: {host} failed ({status or type(err).__name__}); queries written: "
+                               f"{queries}; {run['spent']:.3f} EUR spent in this run") from err
     hits = register_fast_path(card, register)
     prompt = task_b.format(card_yaml=card_yaml, today=dt.date.today().isoformat(), queries="; ".join(queries),
                            register_block=register_block(hits, register), papers_block=papers_block(found["papers"]))
@@ -342,6 +357,10 @@ def g2(card_ids: list[str], by: str, dry_run: bool, max_run_eur: float, force: b
             log_gate(cid, "G2", "error", {"error": str(err), "requested_model": MODEL}, by=by,
                      prompt_version=G2_PROMPT_VERSION)
             failed.append(cid)
+            if isinstance(err, G2RetrievalError):
+                rest = card_ids[card_ids.index(cid) + 1:]
+                print(f"stopping: retrieval is unavailable; not attempted: {', '.join(rest) or 'none'}")
+                break
             continue
         v = res["verdict"]
         payload = {
