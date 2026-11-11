@@ -6,6 +6,8 @@ Usage:
     uv run python -m pipeline.cards set-status SIEVE-0001 gated --reason "G1-G4 complete" --by human
 
 Status transitions are only allowed through `set_status`, which writes a gate log entry.
+Gate output reaches a card only through this module as well: `write_card` (validate, version bump, write) and
+`append_gate_log` are what the gate runner uses; `set_novelty` (G2) and `set_physics` (G1) write one block each.
 
 Two card sets share one schema and are kept apart by id prefix and directory:
   SIEVE-NNNN  catalogue/cards/            pipeline cards (Expand, human edits); gate logs in catalogue/gate_logs/
@@ -189,6 +191,54 @@ def set_status(card_id: str, new_status: str, reason: str, by: str) -> int:
     with log.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(entry) + "\n")
     print(f"{card_id}: {old} -> {new_status} (logged)")
+    return 0
+
+
+def write_card(card: dict) -> list[str]:
+    """Validate a changed card, bump its version and write it to its set's directory.
+
+    The only way gate output enters a card file. Returns the schema errors; if there are any, nothing is written and
+    the version is not bumped.
+    """
+    errors = [f"{'/'.join(map(str, e.path))}: {e.message}" for e in _validator("card.schema.json").iter_errors(card)]
+    if errors:
+        return errors
+    card["version"] = int(card.get("version", 1)) + 1
+    path, _ = card_paths(card["id"])
+    path.write_text(yaml.safe_dump(card, sort_keys=False, allow_unicode=True, width=110), encoding="utf-8")
+    return []
+
+
+def append_gate_log(card_id: str, entry: dict) -> None:
+    """Append one event to the card's gate log (catalogue or baseline, by id prefix)."""
+    _, gate_logs = card_paths(card_id)
+    gate_logs.mkdir(parents=True, exist_ok=True)
+    with (gate_logs / f"{card_id}.jsonl").open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+
+def set_physics(card_id: str, physics: dict, by: str, gate_log: dict) -> int:
+    """Write a G1 verdict into the card's `physics` block outside a gate run and log it.
+
+    Used to backfill the block from an existing G1 gate-log event (`python -m pipeline.gates.g1 backfill`); a live G1
+    run writes the same block through `write_card` and logs its usual `gate` event. Leaves `status` alone. The log
+    event is `physics`, not `gate`, so that G1 runs are not counted twice.
+    """
+    path, _ = card_paths(card_id)
+    if not path.exists():
+        print(f"no such card: {card_id}")
+        return 1
+    card = _load_yaml(path)
+    previous = card.get("physics")
+    card["physics"] = physics
+    errors = write_card(card)
+    if errors:
+        print(f"{card_id}: physics block refused: {errors[:3]}")
+        return 1
+    append_gate_log(card_id, {"ts": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "event": "physics",
+                              "gate": "G1", "verdict": physics["verdict"], "by": by, "card_version": card["version"],
+                              "previous_physics": previous, **gate_log})
+    print(f"{card_id}: physics {(previous or {}).get('verdict')} -> {physics['verdict']} (logged)")
     return 0
 
 

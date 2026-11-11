@@ -5,6 +5,20 @@
   "type": "object",
   "additionalProperties": false,
   "required": ["id", "version", "title", "claim", "domain", "signature_class", "observable", "timescale", "mechanism", "status", "provenance"],
+  "$defs": {
+    "judged": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "prompt_version", "date", "by"],
+      "description": "Who produced a gate or scoring output: model, prompt file, operator and date (CLAUDE.md rule 7)",
+      "properties": {
+        "model": { "type": "string" },
+        "prompt_version": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "by": { "type": "string" }
+      }
+    }
+  },
   "properties": {
     "id": { "type": "string", "pattern": "^(SIEVE|BASE)-[0-9]{4}$", "description": "SIEVE-NNNN for catalogue cards; BASE-NNNN for literature-baseline cards in evaluation/baseline/cards/ (never in catalogue/cards/)" },
     "version": { "type": "integer", "minimum": 1 },
@@ -73,18 +87,31 @@
         "rationale": { "type": "string" },
         "what_would_make_it_open": { "type": "string" },
         "queries_run": { "type": "array", "items": { "type": "string" } },
-        "judged": {
+        "judged": { "$ref": "#/$defs/judged", "description": "Provenance of the G2 verdict; written by pipeline/cards.py set_novelty" },
+        "audited_by_human": { "type": "boolean" }
+      }
+    },
+    "physics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verdict", "judged"],
+      "description": "Gate G1 output (physics plausibility); written by pipeline/gates/g1.py through pipeline/cards.py. The full result with the arithmetic stays in the gate log.",
+      "properties": {
+        "verdict": { "enum": ["pass", "revise", "fail"] },
+        "rationale": { "type": "string" },
+        "checks": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["model", "prompt_version", "date", "by"],
-          "description": "Provenance of the G2 verdict; written by pipeline/cards.py set_novelty",
+          "description": "Result per G1 check; the notes are in the gate log",
           "properties": {
-            "model": { "type": "string" },
-            "prompt_version": { "type": "string" },
-            "date": { "type": "string", "format": "date" },
-            "by": { "type": "string" }
+            "energy_budget": { "enum": ["ok", "concern", "fail", "uncertain"] },
+            "observability": { "enum": ["ok", "concern", "fail", "uncertain"] },
+            "internal_consistency": { "enum": ["ok", "concern", "fail", "uncertain"] },
+            "forbidden_physics": { "enum": ["ok", "concern", "fail", "uncertain"] }
           }
         },
+        "revision_hints": { "type": "array", "items": { "type": "string" }, "description": "What to change before the card is judged again; empty unless the verdict is revise" },
+        "judged": { "$ref": "#/$defs/judged" },
         "audited_by_human": { "type": "boolean" }
       }
     },
@@ -98,7 +125,16 @@
         "confounder_robustness": { "type": "integer", "minimum": 0, "maximum": 3 },
         "cost_inverted": { "type": "integer", "minimum": 0, "maximum": 3 },
         "total": { "type": "integer", "minimum": 0, "maximum": 15 },
-        "scored_by": { "enum": ["llm", "human", "both"] }
+        "estimated_human_hours": { "type": "number", "minimum": 0 },
+        "estimated_compute_eur": { "type": "number", "minimum": 0 },
+        "estimated_llm_eur": { "type": "number", "minimum": 0 },
+        "quick": { "type": "boolean", "description": "feasibility = 3 and estimated_human_hours < 10; pipeline/converge.py requires min_quick_cards" },
+        "ambitious": { "type": "boolean", "description": "feasibility <= 1 or estimated_human_hours > 25; pipeline/converge.py caps these at max_ambitious_cards" },
+        "dominant_confounder": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$", "description": "Normalised snake_case label; pipeline/converge.py selects no two cards with the same label" },
+        "scored_by": { "enum": ["llm", "human", "both"] },
+        "flags": { "type": "array", "items": { "type": "string" }, "description": "Missing or inconsistent gate outputs the scorer had to work around" },
+        "one_line_rationale": { "type": "string" },
+        "judged": { "$ref": "#/$defs/judged", "description": "Provenance of the scoring call (prompts/score-v*.md)" }
       }
     },
     "null_result_value": { "type": "string" },
@@ -123,7 +159,7 @@
           "type": "array",
           "minItems": 1,
           "items": { "type": "string", "pattern": "^[0-9]{4}[A-Za-z0-9&.]{5}[A-Za-z0-9.]{9}[A-Z]$" },
-          "description": "Baseline cards only: ADS-resolved bibcodes of the publication(s) the idea was transcribed from. Provenance, not novelty evidence; strip before gate prompts."
+          "description": "Baseline cards only: ADS-resolved bibcodes of the publication(s) the idea was transcribed from. Provenance, not novelty evidence; pipeline/cards.py blind_card removes the provenance block before gate prompts."
         },
         "transcribed_by": { "type": "string", "description": "Baseline cards only: model or person who transcribed the published idea into card form" }
       }
