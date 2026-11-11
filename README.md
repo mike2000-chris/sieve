@@ -14,7 +14,7 @@ The method, the rationale and the three-month plan are in the working paper: [`p
 | `register/` | Prior archival life searches, one YAML per entry — the novelty oracle for gate G2 |
 | `catalogue/cards/` | Hypothesis cards, one YAML each, all statuses (raw → gated → parked/selected → preregistered → executed → reported) |
 | `catalogue/gate_logs/`, `catalogue/scores/` | Gate verdicts with reasons; Converge scores, LLM vs human |
-| `prompts/` | Versioned prompts for Expand, the four Critique gates and scoring |
+| `prompts/` | Versioned prompts for Expand, the four Critique gates, Refine and scoring |
 | `pipeline/` | Python package: card validation, literature clients, archive helpers, stage runners |
 | `prereg/` | One pre-registration per selected card, committed before any data access; immutable after merge |
 | `analyses/` | One folder per executed card: scripts, queries as text, environment lock |

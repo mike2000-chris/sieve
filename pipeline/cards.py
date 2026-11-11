@@ -8,6 +8,8 @@ Usage:
 Status transitions are only allowed through `set_status`, which writes a gate log entry.
 Gate output reaches a card only through this module as well: `write_card` (validate, version bump, write) and
 `append_gate_log` are what the gate runner uses; `set_novelty` (G2) and `set_physics` (G1) write one block each.
+The Refine stage (pipeline/refine.py) adds its revised copy of a card with `create_card` and parks the original with
+`set_status`; `refine_lineage_problems` holds the invariants of a refined card and is part of `validate`.
 
 Two card sets share one schema and are kept apart by id prefix and directory:
   SIEVE-NNNN  catalogue/cards/            pipeline cards (Expand, human edits); gate logs in catalogue/gate_logs/
@@ -134,6 +136,7 @@ def _validate_baseline(card_v) -> tuple[int, int]:
             problems.append("provenance/generator_model must be 'human-literature' for baseline cards")
         if not prov.get("transcribed_by"):
             problems.append("provenance/transcribed_by missing")
+        problems += refine_lineage_problems(doc)
         bibs = prov.get("source_bibcodes") or []
         if not bibs:
             problems.append("provenance/source_bibcodes missing")
@@ -173,6 +176,9 @@ def validate() -> int:
         if (doc.get("provenance") or {}).get("generator_model") == "human-literature":
             errors += 1
             print(f"CARD {p.name}: literature-baseline cards belong in evaluation/baseline/cards/ with a BASE id")
+        for msg in refine_lineage_problems(doc):
+            errors += 1
+            print(f"CARD {p.name}: {msg}")
     for p, doc in iter_register():
         for err in sorted(reg_v.iter_errors(doc), key=lambda e: list(e.path)):
             errors += 1
@@ -211,11 +217,12 @@ def set_status(card_id: str, new_status: str, reason: str, by: str) -> int:
         print(f"transition {old} -> {new_status} not allowed")
         return 1
     card["status"] = new_status
+    card["parked_reason"] = reason if new_status == "parked" else None   # the reason travels with the parked card
     card["version"] = int(card.get("version", 1)) + 1
     path.write_text(yaml.safe_dump(card, sort_keys=False, allow_unicode=True, width=110), encoding="utf-8")
     gate_logs.mkdir(parents=True, exist_ok=True)
     log = gate_logs / f"{card_id}.jsonl"
-    entry = {"ts": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "event": "status", "from": old, "to": new_status, "reason": reason, "by": by}
+    entry = {"ts": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"), "event": "status", "from": old, "to": new_status, "reason": reason, "by": by}
     with log.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(entry) + "\n")
     print(f"{card_id}: {old} -> {new_status} (logged)")
@@ -235,6 +242,57 @@ def write_card(card: dict) -> list[str]:
     path, _ = card_paths(card["id"])
     path.write_text(yaml.safe_dump(card, sort_keys=False, allow_unicode=True, width=110), encoding="utf-8")
     return []
+
+
+def next_card_id() -> str:
+    """The next free catalogue id (SIEVE-NNNN)."""
+    numbers = [int(p.stem.split("-")[1]) for p in CARDS.glob("SIEVE-*.yaml")]
+    return f"SIEVE-{max(numbers, default=0) + 1:04d}"
+
+
+def create_card(card: dict) -> list[str]:
+    """Validate a new card and write it at the version it carries; never overwrites an existing card.
+
+    Used by the Refine stage (pipeline/refine.py) for the revised copy of a card. Returns the errors; if there are
+    any, nothing is written. Changes to an existing card go through `write_card`.
+    """
+    errors = [f"{'/'.join(map(str, e.path))}: {e.message}" for e in _validator("card.schema.json").iter_errors(card)]
+    errors += refine_lineage_problems(card)
+    path, _ = card_paths(card.get("id", ""))
+    if path.exists():
+        errors.append(f"{card.get('id')} already exists")
+    if errors:
+        return errors
+    path.write_text(yaml.safe_dump(card, sort_keys=False, allow_unicode=True, width=110), encoding="utf-8")
+    return []
+
+
+TAXONOMY_FIELDS = ("domain", "signature_class", "observable", "timescale")
+
+
+def refine_lineage_problems(card: dict) -> list[str]:
+    """Refine-stage invariants (paper change proposal refine-stage-v0.2): a card with `operator: refine` is a
+    catalogue card, names an existing catalogue parent that is not itself refined (one round), and sits in the
+    parent's taxonomy cell. Empty list for every other card."""
+    prov = card.get("provenance") or {}
+    if prov.get("operator") != "refine":
+        return []
+    if str(card.get("id", "")).startswith("BASE-"):
+        return ["provenance/operator: baseline cards are never refined"]
+    parent_id = prov.get("parent_card")
+    if not parent_id or not str(parent_id).startswith("SIEVE-") or parent_id == card.get("id"):
+        return ["provenance/parent_card: a refined card must name the catalogue card it revises"]
+    parent = load_card(parent_id)
+    if parent is None:
+        return [f"provenance/parent_card: {parent_id} does not exist"]
+    problems = []
+    if (parent.get("provenance") or {}).get("operator") == "refine":
+        problems.append(f"provenance/parent_card: {parent_id} is itself a refined card; one revision round only")
+    problems += [f"{f}: {card.get(f)!r} differs from parent {parent_id} ({parent.get(f)!r}); Refine may not change "
+                 "the taxonomy cell" for f in TAXONOMY_FIELDS if card.get(f) != parent.get(f)]
+    if prov.get("taxonomy_cell") != (parent.get("provenance") or {}).get("taxonomy_cell"):
+        problems.append(f"provenance/taxonomy_cell differs from parent {parent_id}")
+    return problems
 
 
 def append_gate_log(card_id: str, entry: dict) -> None:
@@ -263,7 +321,7 @@ def set_physics(card_id: str, physics: dict, by: str, gate_log: dict) -> int:
     if errors:
         print(f"{card_id}: physics block refused: {errors[:3]}")
         return 1
-    append_gate_log(card_id, {"ts": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "event": "physics",
+    append_gate_log(card_id, {"ts": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"), "event": "physics",
                               "gate": "G1", "verdict": physics["verdict"], "by": by, "card_version": card["version"],
                               "previous_physics": previous, **gate_log})
     print(f"{card_id}: physics {(previous or {}).get('verdict')} -> {physics['verdict']} (logged)")
@@ -287,7 +345,7 @@ def set_novelty(card_id: str, novelty: dict, by: str, gate_log: dict) -> int:
     if errors:
         print(f"{card_id}: novelty block refused: {errors[:3]}")
         return 1
-    append_gate_log(card_id, {"ts": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "event": "gate",
+    append_gate_log(card_id, {"ts": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"), "event": "gate",
                               "gate": "G2", "verdict": novelty["status"], "by": by, "card_version": card["version"],
                               "previous_novelty": previous, **gate_log})
     print(f"{card_id}: novelty {previous.get('status')} -> {novelty['status']} (logged)")
