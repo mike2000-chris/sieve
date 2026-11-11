@@ -1,20 +1,20 @@
 id: REG-cody-tess-dyson-transits-2024
-name: TESS search for anomalous transits as Dyson-swarm signatures
+name: TESS anomaly-detection search for transiting megastructures and non-spherical occulters (sectors 1-26)
 year: 2024
-authors: Cody (SETI Institute)
+authors: Giles, Cody, Yaptangco, Tong, Croft (2024); Yaptangco, Cody, Giles (2024) -- AAS 243 abstracts
 domain: technosignature
 signature_class: artificial_structure_geometry
 observable: time_series
-hypothesis: Megastructures in orbit produce anomalous, non-planetary transit shapes or variability.
-data_used: [TESS photometry]
-method: Optical photometry pipeline for anomalous variability; applied to the seven Hephaistos II objects.
-result: None of the seven Hephaistos II candidates shows significant anomalous variability.
-outcome: null_result
-limits: ""
-confounders_found: []
-lesson: Time-domain photometry is an independent channel for any IR-selected candidate; coincidence across channels is the bar.
-bibcodes: { status: to_resolve, values: [] }
-urls: [https://physicsworld.com/a/are-dusty-quasars-masquerading-as-dyson-sphere-candidates/]
-related: [REG-hephaistos-ii-2024]
+hypothesis: Large artificial occulters (opaque shells, swarms, non-spherical shapes) would produce fading events in stellar light curves that differ from known astrophysical variability.
+data_used: [TESS primary-mission light curves, sectors 1-26 (2018-2020)]
+method: Anomaly-detection algorithm applied to light curves of each of the first 26 TESS sectors; manual and statistical vetting to remove eclipsing binaries, systematic defects and contamination; injection of circular, square, triangular and random-shape occulter signals into quiet light curves to map detectability versus magnitude, transit duration and depth.
+result: A catalogue of anomalous fading sources from the first two years of TESS is presented (abstract level); injection tests indicate occulters with projected area above a few per cent of the stellar disk stand out in the framework.
+outcome: candidates_unconfirmed
+limits: Conference abstracts only; the catalogue contents and any follow-up are not described. Rewritten 2026-11-11 from the earlier unsourced claim (Physics World) that the seven Hephaistos II objects were tested; no ADS record supports that claim, so it is no longer made here.
+confounders_found: [eclipsing binaries, systematic defects, contamination]
+lesson: An injection-recovery map in transit depth, duration and host magnitude is what turns an anomaly search into a usable upper limit; any occultation card should state where it sits on that map.
+bibcodes: { status: resolved, values: ["2024AAS...24335603G", "2024AAS...24310902Y"] }
+urls: [https://ui.adsabs.harvard.edu/abs/2024AAS...24335603G, https://ui.adsabs.harvard.edu/abs/2024AAS...24310902Y]
+related: [REG-g-hat-iv-transiting-megastructures-2016]
 added: 2026-11-07
 withheld_for_rediscovery_test: true
