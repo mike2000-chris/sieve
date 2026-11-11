@@ -1,0 +1,20 @@
+id: REG-industrial-pollution-cfc-2014
+name: Industrial pollution (CFCs) in exoplanet transmission spectra with JWST
+year: 2014
+authors: Lin, Gonzalez Abad, Loeb
+domain: technosignature
+signature_class: atmospheric_chemistry
+observable: spectroscopy
+hypothesis: Anthropogenic chlorofluorocarbons such as CF4 and CCl3F produce absorption features detectable in transiting Earth-like exoplanet atmospheres.
+data_used: [Earth atmospheric pollutant absorption data, simulated JWST transmission spectra]
+method: Identify pollutants with strong features in the JWST band and estimate integration time to detect or constrain them.
+result: About 1.2 days (CCl3F) and 1.7 days (CF4) of total integration would detect or constrain concentrations at about ten times current terrestrial levels.
+outcome: method_demonstration
+limits: Detectability estimate only; no observations; applies at ten times present-day Earth levels.
+confounders_found: []
+lesson: Industrial gases have no known abiotic source, so their non-detection in existing JWST transmission data is a free upper limit worth computing.
+bibcodes: { status: resolved, values: ["2014ApJ...792L...7L"] }
+urls: [https://arxiv.org/abs/1406.3025]
+related: [REG-pollutant-technosignatures-no2-cfc-2021]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

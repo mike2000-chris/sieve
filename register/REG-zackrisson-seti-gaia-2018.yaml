@@ -1,0 +1,20 @@
+id: REG-zackrisson-seti-gaia-2018
+name: SETI with Gaia - parallax versus spectrophotometric distance discrepancies
+year: 2018
+authors: Zackrisson, Korn, Wehrhahn, Reiter
+domain: technosignature
+signature_class: artificial_structure_geometry
+observable: astrometry
+hypothesis: A star inside a nearly complete Dyson sphere appears optically subluminous, so its spectrophotometric distance exceeds its parallax distance.
+data_used: [Gaia DR1, RAVE DR5, high-resolution follow-up spectroscopy]
+method: Compare Gaia parallax distances with RAVE spectrophotometric distances; follow up one outlier spectroscopically.
+result: A small fraction of stars show discrepancies of the expected type; the followed-up F dwarf TYC 6111-1162-1 has a spectrophotometric distance ~2x its parallax distance and no IR excess, plausibly explained by a compromised astrometric solution from an unseen massive white-dwarf companion.
+outcome: candidates_unconfirmed
+limits: ""
+confounders_found: [unresolved binary companions corrupting the astrometric solution, errors in spectrophotometric distances]
+lesson: Distance discrepancy is a waste-heat-independent channel; candidates should be screened against astrometric-binary indicators (e.g. RUWE, proper-motion anomaly) from later Gaia releases.
+bibcodes: { status: resolved, values: ["2018ApJ...862...21Z"] }
+urls: [https://arxiv.org/abs/1804.08351]
+related: [REG-hephaistos-i-2022, REG-hipparcos-gaia-proper-motion-anomaly-2018-2021]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

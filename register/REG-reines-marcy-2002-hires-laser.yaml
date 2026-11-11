@@ -1,0 +1,20 @@
+id: REG-reines-marcy-2002-hires-laser
+name: Spectroscopic search for laser emission from 577 nearby stars in Keck/HIRES spectra
+year: 2002
+authors: Reines, Marcy
+domain: technosignature
+signature_class: em_transmission
+observable: spectroscopy
+hypothesis: Lasers beamed toward Earth from planets around nearby stars appear as emission lines too narrow to be natural in high-resolution stellar spectra.
+data_used: [Keck/HIRES radial-velocity spectra, ~20 spectra per star over 4 years, 4000-5000 A]
+method: Search each spectrum for unresolved emission lines above 3% of the continuum, plus astrophysically broadened lines (chromospheric variability, infalling comets).
+result: No lines consistent with laser emission found in 577 F, G, K and M main-sequence stars.
+outcome: upper_limit
+limits: "laser power P > 50 kW excluded for a ~0.01 arcsec beam (10 m aperture) directed at Earth, 4000-5000 A"
+confounders_found: [chromospheric emission, infalling comets]
+lesson: Radial-velocity survey archives double as optical SETI data at zero observing cost; the same search also catalogues natural emission-line anomalies.
+bibcodes: { status: resolved, values: ["2002PASP..114..416R"] }
+urls: [https://arxiv.org/abs/astro-ph/0112479]
+related: [REG-tellis-marcy-2015-2017-hires-laser]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

@@ -1,0 +1,20 @@
+id: REG-jwst-trappist1-bc-eclipse-2023
+name: JWST MIRI 15 micron secondary eclipses of TRAPPIST-1 b and c (no thick CO2 atmospheres)
+year: 2023
+authors: Greene et al. (2023); Zieba et al. (2023); Ih et al. (2023); Lincowski et al. (2023)
+domain: biosignature
+signature_class: atmospheric_chemistry
+observable: photometry
+hypothesis: Earth-sized planets around M dwarfs retain atmospheres that could host biosignature gases.
+data_used: [JWST MIRI F1500W secondary-eclipse photometry of TRAPPIST-1 b and c]
+method: Dayside brightness temperature from secondary-eclipse depth compared with radiative-convective and photochemical atmosphere models and bare-rock surfaces.
+result: TRAPPIST-1 b is consistent with no atmosphere (CO2-bearing atmospheres above 0.3 bar ruled out at 3 sigma); TRAPPIST-1 c eclipse depth 421 +/- 94 ppm is consistent with bare rock or a thin O2-dominated, low-CO2 atmosphere, and Venus-like atmospheres are unlikely.
+outcome: upper_limit
+limits: Single-band photometry; thick atmospheres without strong mid-IR absorbers remain allowed.
+confounders_found: [degeneracy between bare rock and thin atmospheres, surface albedo and composition, model-dependent temperature-pressure profiles]
+lesson: Before proposing a biosignature test for a rocky M-dwarf planet, check whether the planet has an atmosphere at all; eclipse photometry is the cheap first gate.
+bibcodes: { status: resolved, values: ["2023Natur.618...39G", "2023Natur.620..746Z", "2023ApJ...952L...4I", "2023ApJ...955L...7L"] }
+urls: [https://arxiv.org/abs/2303.14849, https://arxiv.org/abs/2306.10150, https://arxiv.org/abs/2305.10414, https://arxiv.org/abs/2308.05899]
+related: [REG-k2-18b-dms-2025]
+added: 2026-11-11
+withheld_for_rediscovery_test: true

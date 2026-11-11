@@ -1,0 +1,20 @@
+id: REG-galileo-earth-flyby-1993
+name: Galileo Earth flyby as a control experiment for remote life detection
+year: 1993
+authors: Sagan et al. (1993); Doughty & Wolf (2016); O'Malley-James & Kaltenegger (2019)
+domain: biosignature
+signature_class: atmospheric_chemistry
+observable: spectroscopy
+hypothesis: A spacecraft with no prior assumptions can infer life on Earth from first principles using remote-sensing data alone.
+data_used: [Galileo spacecraft Earth flyby remote-sensing data, Galileo reflectance spectra of the Amazon region]
+method: Treat Earth as an unknown planet; look for a widespread surface pigment with a sharp red reflectance edge and for O2 and CH4 in thermodynamic disequilibrium; later re-analysis of the same data for reflectance anisotropy.
+result: The flyby data showed a widely distributed red-edge pigment and abundant O2 with CH4 in strong disequilibrium, judged strongly suggestive of life on Earth; a 2016 re-analysis could not establish three-dimensional vegetation structure because the phase-angle coverage was too small.
+outcome: method_demonstration
+limits: Single flyby geometry with little phase-angle change; anisotropy residual attributed to minor cloud contamination.
+confounders_found: [cloud contamination, limited phase-angle coverage]
+lesson: Earth is the only positive control; run every proposed remote test on Earth data first, and re-mine old flyby data with new questions.
+bibcodes: { status: resolved, values: ["1993Natur.365..715S", "2016PLoSO..1167188D", "2019ApJ...879L..20O"] }
+urls: [https://arxiv.org/abs/1608.08125, https://arxiv.org/abs/1907.05245]
+related: [REG-earthshine-red-edge-2002, REG-epoxi-earth-as-exoplanet-2009]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

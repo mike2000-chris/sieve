@@ -1,0 +1,20 @@
+id: REG-tellis-marcy-2015-2017-hires-laser
+name: Keck HIRES laser-line searches with megawatt thresholds (5600 FGKM stars)
+year: 2017
+authors: Tellis, Marcy
+domain: technosignature
+signature_class: em_transmission
+observable: spectroscopy
+hypothesis: Extraterrestrial optical lasers produce emission lines that are both inconsistent with a natural origin and spatially unresolved within 0.5 arcsec of the host star.
+data_used: [Keck/HIRES spectra of 5600 nearby stars, 3640-7890 A]
+method: Blind search for narrow emission lines; detection thresholds calibrated by injecting synthetic laser lines and analysing them blindly, per wavelength and spectral type.
+result: No laser emission from the planetary region of any of the 5600 stars (AJ 153, 251). The 2015 PASP paper is the earlier Keck HIRES search by the same authors; its ADS record carries no abstract.
+outcome: upper_limit
+limits: "laser power thresholds 3 kW to 13 MW (10 m class launcher); < 0.1% of warm Earth-size planets beam optical lasers toward us"
+confounders_found: [stellar SED glare limiting sensitivity]
+lesson: Injection-recovery turns a null spectroscopic search into a population limit; spectral types O, B, A, early F, late M and brown dwarfs were left uncovered.
+bibcodes: { status: resolved, values: ["2017AJ....153..251T", "2015PASP..127..540T"] }
+urls: [https://arxiv.org/abs/1704.02535, https://arxiv.org/abs/1504.03369]
+related: [REG-reines-marcy-2002-hires-laser, REG-bl-apf-laser-pipeline-zuckerman-2023]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

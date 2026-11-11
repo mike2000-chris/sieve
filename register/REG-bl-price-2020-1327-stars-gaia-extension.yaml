@@ -1,0 +1,20 @@
+id: REG-bl-price-2020-1327-stars-gaia-extension
+name: Breakthrough Listen 1327 nearby stars over 1.10-3.45 GHz, extended with Gaia field stars
+year: 2020
+authors: Price, Enriquez, Brzycki, Croft, Czech, DeBoer et al.; Wlodarczyk-Sroka, Garrett, Siemion (2020)
+domain: technosignature
+signature_class: em_transmission
+observable: radio
+hypothesis: Narrowband engineered signals with drift rates within +-4 Hz/s are present toward nearby stars; every Gaia star inside the primary beam is also a target.
+data_used: [Green Bank Telescope 1.10-2.80 GHz, Parkes 2.60-3.45 GHz, Breakthrough Listen DR1 (~219 TB), Gaia DR2 distances]
+method: Doppler drift search and RFI exclusion (Price); re-analysis counting all Gaia-parallax stars within the beam FWHM, enlarging the sample from 1327 to 288315 objects (Wlodarczyk-Sroka).
+result: Zero candidates after excluding RFI-like events; the Gaia extension yields tighter transmitter-rate figures of merit, also by stellar type.
+outcome: upper_limit
+limits: "no transmitters above 2.1e12 W (GBT) and 9.1e12 W (Parkes); <~0.066% of systems within 50 pc (EIRP >~1e13 W) and <~0.039% within 200 pc (EIRP >~2.5e14 W)"
+confounders_found: [radio-frequency interference, interstellar scintillation beyond a few hundred pc]
+lesson: Cross-matching a pointed radio archive with Gaia turns one target per beam into hundreds; re-analysis of public SETI data with a new catalogue is a cheap hypothesis type.
+bibcodes: { status: resolved, values: ["2020AJ....159...86P", "2020MNRAS.498.5720W"] }
+urls: [https://arxiv.org/abs/1906.07750, https://arxiv.org/abs/2006.09756]
+related: [REG-bl-gbt-enriquez-2017-692-stars, REG-painter-2025]
+added: 2026-11-11
+withheld_for_rediscovery_test: true

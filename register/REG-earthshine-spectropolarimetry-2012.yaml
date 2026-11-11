@@ -1,0 +1,19 @@
+id: REG-earthshine-spectropolarimetry-2012
+name: Spectropolarimetry of earthshine as a biosignature benchmark
+year: 2012
+authors: Sterzik, Bagnulo, Palle
+domain: biosignature
+signature_class: surface_albedo
+observable: polarimetry
+hypothesis: Linear polarisation spectra of the integrated Earth carry the O2, O3, H2O and vegetation signatures more robustly than flux spectra.
+data_used: [ground-based linear polarisation spectra of earthshine]
+method: Compare observed earthshine polarisation spectra with radiative-transfer models to separate cloud, ocean and vegetated-surface contributions.
+result: Polarisation spectra allowed the fractional contribution of clouds and ocean surface to be discerned and revealed small vegetated areas in the hemisphere seen from the Moon; interpretation does not depend on knowing the host-star spectrum.
+outcome: method_demonstration
+limits: ""
+confounders_found: [cloud and ocean-glint contributions to polarisation]
+lesson: Polarimetry is an under-used observable that removes the stellar-spectrum dependence; consider it whenever a flux-only test is degenerate.
+bibcodes: { status: resolved, values: ["2012Natur.483...64S", "2012elbe.workE..15S"] }
+related: [REG-earthshine-red-edge-2002]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

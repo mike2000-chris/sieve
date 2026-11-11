@@ -1,0 +1,20 @@
+id: REG-weird-detector-kepler-2019
+name: The weird detector - non-parametric search for periodic signals of arbitrary shape in Kepler
+year: 2019
+authors: Wheeler & Kipping
+domain: data_mining_exemplar
+signature_class: temporal_behaviour
+observable: time_series
+hypothesis: Model-based searches such as box least squares miss periodic signals that are not box-shaped; a shape-agnostic method should recover them.
+data_used: [Kepler light curves of 161786 sources]
+method: Non-parametric detection of short duty-cycle periodic signals based on phase dispersion minimization.
+result: 18 new periodic signals consistent with heartbeat binaries or planets, four new singly and two new doubly transiting systems; recovers most known KOIs plus Boyajian's star and a comet crossing the field.
+outcome: method_demonstration
+limits: ""
+confounders_found: [heartbeat binaries, self-lensing binaries, disintegrating planets, ringed planets, solar-system comets]
+lesson: Shape-agnostic search widens the net beyond the assumed model; known oddities (Boyajian's star) serve as recovery tests for any anomaly pipeline.
+bibcodes: { status: resolved, values: ["2019MNRAS.485.5498W"] }
+urls: [https://arxiv.org/abs/1903.09213]
+related: [REG-systematic-serendipity-kepler-2019, REG-boyajian-star-kepler-dips-2016-2018]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

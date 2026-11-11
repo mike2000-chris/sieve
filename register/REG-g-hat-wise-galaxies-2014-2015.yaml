@@ -1,0 +1,20 @@
+id: REG-g-hat-wise-galaxies-2014-2015
+name: Ĝ infrared search II-III - waste heat of galaxy-spanning civilizations in WISE
+year: 2014
+authors: Wright, Griffith, Sigurdsson, Povich, Mullan (2014); Griffith, Wright, Maldonado, Povich, Sigurdsson, Mullan (2015)
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+hypothesis: Galaxy-spanning (Kardashev Type III) civilizations would reprocess much of their galaxy's starlight into mid-infrared waste heat.
+data_used: [WISE All-Sky Catalog, 2MASS, Spitzer, GALEX NUV]
+method: Formalism converting mid-IR photometry into limits on waste-heat luminosity (II); recalibrated WISE extended-source photometry for ~1e5 galaxies, colour selection and visual vetting of the reddest extended sources (III).
+result: Zeroth-order null result that Type III civilizations are very rare locally (II); none of ~1e5 galaxies hosts reprocessing of more than 85 per cent of starlight into the mid-IR, only 50 are consistent with more than 50 per cent; 563 red extended sources catalogued (III).
+outcome: upper_limit
+limits: "no galaxy with >85% of starlight reprocessed into the MIR among ~1e5 WISE galaxies (Griffith et al. 2015)"
+confounders_found: [star-forming and merging galaxies (e.g. Arp 220), barely resolved galaxy pairs, dust-producing Be star nebula, embedded young stellar clusters, WISE imaging artefacts]
+lesson: Extragalactic waste-heat searches reach large populations cheaply; the residue of unexplained red sources is itself a product worth releasing for conventional follow-up.
+bibcodes: { status: resolved, values: ["2014ApJ...792...27W", "2015ApJS..217...25G"] }
+urls: [https://arxiv.org/abs/1408.1134, https://arxiv.org/abs/1504.03418]
+related: [REG-carrigan-iras-dyson-2009, REG-hephaistos-i-2022]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

@@ -1,0 +1,20 @@
+id: REG-bl-apf-laser-pipeline-zuckerman-2023
+name: Breakthrough Listen laser search pipeline for the Automated Planet Finder (388 stars)
+year: 2023
+authors: Zuckerman, Ko, Isaacson, Croft, Price, Lebofsky, Siemion
+domain: technosignature
+signature_class: em_transmission
+observable: spectroscopy
+hypothesis: Intense, persistent, narrow-bandwidth optical lasers show up as residual emission after subtracting best-matching empirical stellar spectra.
+data_used: [Lick APF Levy spectra, 1983 spectra of 388 stars, SpecMatch-Emp library, Gaia]
+method: SpecMatch-Emp residuals against catalogue spectra; reject events that do not persist across the multiple spectra taken per target per night.
+result: No convincing candidates consistent with laser emission in the sample.
+outcome: upper_limit
+limits: "sensitive to an 84 kW laser at the median target distance of 78.5 ly"
+confounders_found: [non-persistent transient events]
+lesson: Empirical template subtraction plus a persistence requirement across same-night exposures raises sensitivity; the pipeline can be reused on any multi-epoch spectral archive.
+bibcodes: { status: resolved, values: ["2023AJ....165..114Z"] }
+urls: [https://arxiv.org/abs/2301.06971]
+related: [REG-bl-apf-laser-boyajian-lipman-2019, REG-tellis-marcy-2015-2017-hires-laser]
+added: 2026-11-11
+withheld_for_rediscovery_test: true

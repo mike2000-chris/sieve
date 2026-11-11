@@ -1,0 +1,20 @@
+id: REG-epoxi-earth-as-exoplanet-2009
+name: EPOXI / Deep Impact observations of Earth as an exoplanet
+year: 2009
+authors: Cowan et al. (2009); Livengood et al. (2008, 2011)
+domain: biosignature
+signature_class: surface_albedo
+observable: time_series
+hypothesis: Disc-integrated, time-resolved broadband photometry of an Earth-like planet reveals oceans, continents and possibly the vegetation red edge.
+data_used: [EPOXI Deep Impact seven-band visible light curves 350-950 nm, EPOXI near-IR spectra 1-4.8 micron, Earth observations at 57 and 77 deg phase in 2008]
+method: Principal component analysis of multi-band diurnal light curves; longitudinal mapping as a non-uniform Lambert sphere; IR spectroscopy of telluric species.
+result: Diurnal albedo varied by 15-30 per cent; two eigencolours explain 98 per cent of the colour changes and map onto cloud-free continents and oceans; IR spectra show H2O and CO2; data provide a test of the red edge as a signature of chlorophyll-bearing life.
+outcome: method_demonstration
+limits: Only two one-day observations at gibbous phases; clouds dominate the grey reflectance redward of 600 nm.
+confounders_found: [cloud cover, Rayleigh scattering]
+lesson: Rotational time series separate surface types that a single spectrum cannot; archival planetary-mission Earth and Mars data (PDS) are ready-made controls.
+bibcodes: { status: resolved, values: ["2009ApJ...700..915C", "2008DPS....40.0103L", "2011AsBio..11..907L"] }
+urls: [https://arxiv.org/abs/0905.3742]
+related: [REG-galileo-earth-flyby-1993, REG-earthshine-red-edge-2002]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

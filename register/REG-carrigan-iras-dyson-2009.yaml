@@ -1,0 +1,20 @@
+id: REG-carrigan-iras-dyson-2009
+name: IRAS-based whole-sky upper limit on Dyson spheres
+year: 2009
+authors: Carrigan
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectroscopy
+hypothesis: Fully or partially cloaked stars would show blackbody infrared spectra at 100-600 K.
+data_used: [IRAS Low Resolution Spectrometer (Calgary database), IRAS point sources (~250000)]
+method: Fit blackbody spectra to IRAS LRS sources over 96 per cent of the sky; eliminate sources whose stellar signatures mimic Dyson spheres.
+result: After removing mimics very few candidates remain and these are ambiguous; upper limits set for pure and partial Dyson spheres.
+outcome: upper_limit
+limits: "sensitive to solar-luminosity Dyson spheres out to 300 pc (~1e6 solar-type stars)"
+confounders_found: [dusty evolved stars and other stellar sources that mimic blackbody IR spectra]
+lesson: Low-resolution IR spectra add a shape test beyond photometric colours; the first all-sky waste-heat limit sets the baseline that WISE and Gaia searches must beat.
+bibcodes: { status: resolved, values: ["2009ApJ...698.2075C"] }
+urls: [https://arxiv.org/abs/0811.2376]
+related: [REG-g-hat-wise-galaxies-2014-2015, REG-hephaistos-i-2022, REG-hephaistos-ii-2024]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

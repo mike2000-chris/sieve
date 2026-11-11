@@ -1,0 +1,20 @@
+id: REG-earthshine-red-edge-2002
+name: Vegetation red edge in the earthshine spectrum (Earth as an unresolved planet)
+year: 2002
+authors: Woolf, Smith, Traub, Jucks (2002); Arnold, Gillet, Lardière, Riaud (2002)
+domain: biosignature
+signature_class: surface_albedo
+observable: spectroscopy
+hypothesis: The chlorophyll red edge of vegetation is visible in the disc-integrated reflection spectrum of Earth and can serve as a template for exoplanet surface biosignatures.
+data_used: [ground-based lunar earthshine spectra 480-920 nm (R~600), Observatoire de Haute-Provence earthshine spectra 400-800 nm (R~100)]
+method: Derive the integrated Earth reflection spectrum from earthshine on the Moon and fit atmospheric, Rayleigh and surface components.
+result: O3, O2 and H2O absorption and Rayleigh scattering are seen; enhanced reflectivity from about 730 nm is consistent with the red edge but not conclusive in one study, and a variable 4-10 (+/-3) per cent signal near 700 nm is attributed to vegetation in the other.
+outcome: method_demonstration
+limits: Simple model breaks down beyond 790 nm; red-edge signal is only a few per cent of the albedo and varies with the visible hemisphere.
+confounders_found: [model breakdown at long wavelengths, cloud cover variability, Rayleigh and aerosol scattering]
+lesson: Even on Earth the red edge is a few-per-cent, model-dependent signal; any exoplanet surface-pigment hypothesis needs time-resolved data and an explicit cloud model.
+bibcodes: { status: resolved, values: ["2002ApJ...574..430W", "2002A&A...392..231A"] }
+urls: [https://arxiv.org/abs/astro-ph/0203465, https://arxiv.org/abs/astro-ph/0206314]
+related: [REG-galileo-earth-flyby-1993, REG-earthshine-spectropolarimetry-2012]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

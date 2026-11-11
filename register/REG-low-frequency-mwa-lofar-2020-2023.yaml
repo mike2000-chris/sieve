@@ -1,0 +1,20 @@
+id: REG-low-frequency-mwa-lofar-2020-2023
+name: Low-frequency (100-190 MHz) technosignature surveys with the MWA (Vela) and dual-site LOFAR stations
+year: 2020
+authors: Tremblay, Tingay (2020); Johnson, Gajjar, Keane, McKenna et al. (2023)
+domain: technosignature
+signature_class: em_transmission
+observable: radio
+hypothesis: Narrowband transmissions below 1 GHz, a largely unexplored band, could come from exoplanet hosts or from any of millions of Gaia/TESS stars in a wide field.
+data_used: [Murchison Widefield Array 98-128 MHz (400 deg2 Vela field, 17 h), international LOFAR stations Ireland and Sweden 110-190 MHz, Gaia distances, TESS targets]
+method: MWA - imaging search at 10 kHz resolution at six exoplanet positions plus EIRP limits for >10 million Gaia stars; LOFAR - simultaneous non-interferometric observations at two sites to reject anthropogenic signals, Doppler drift search for 1,631,198 targets.
+result: No unknown signals above 5 sigma (MWA); Doppler-drifting narrowband transmissions rejected in the barycentric frame (LOFAR).
+outcome: upper_limit
+limits: "MWA search fraction ~2e-16 (75 exoplanets examined across three MWA surveys); LOFAR EIRP 1e17 W for 0.4 (1.3) million systems at 110 (190) MHz"
+confounders_found: [anthropogenic radio signals]
+lesson: Wide-field low-frequency arrays plus Gaia distances give millions of targets per pointing; multi-site simultaneity is an RFI filter that single-dish cadences lack.
+bibcodes: { status: resolved, values: ["2020PASA...37...35T", "2023AJ....166..193J"] }
+urls: [https://arxiv.org/abs/2009.03267, https://arxiv.org/abs/2310.15704]
+related: [REG-bl-price-2020-1327-stars-gaia-extension]
+added: 2026-11-11
+withheld_for_rediscovery_test: true

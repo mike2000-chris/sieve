@@ -1,0 +1,20 @@
+id: REG-systematic-serendipity-kepler-2019
+name: Systematic serendipity - unsupervised density-based anomaly search in Kepler light curves
+year: 2019
+authors: Giles & Walkowicz
+domain: data_mining_exemplar
+signature_class: temporal_behaviour
+observable: time_series
+hypothesis: Density-based clustering of light-curve features isolates rare and novel phenomena as outliers outside dense regions.
+data_used: [Kepler long-cadence light curves, four quarters]
+method: Unsupervised density-based clustering; Boyajian's star used as ground truth for outlier recovery.
+result: Fewer than 4 per cent of each quarter flagged as outlying; outliers include Boyajian's star, unusual phenomena, objects rare in the Kepler field and data artefacts.
+outcome: method_demonstration
+limits: ""
+confounders_found: [data artefacts]
+lesson: Signal-agnostic outlier lists need a known-anomaly injection or ground truth to calibrate recall, and an artefact-rejection step before follow-up.
+bibcodes: { status: resolved, values: ["2019MNRAS.484..834G"] }
+urls: [https://arxiv.org/abs/1812.07156]
+related: [REG-weird-detector-kepler-2019, REG-anomalous-light-curves-analogues-2021, REG-boyajian-star-kepler-dips-2016-2018]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

@@ -1,0 +1,20 @@
+id: REG-anomalous-light-curves-analogues-2021
+name: Finding anomalous light curves and their analogues with tree-based and manifold learning
+year: 2021
+authors: Martínez-Galarza, Bianco, Crake, Tirumala, Mahabal, Graham, Giles
+domain: data_mining_exemplar
+signature_class: temporal_behaviour
+observable: time_series
+hypothesis: Combining a tree-based anomaly score with manifold-learning dimensionality reduction both ranks anomalous light curves and groups them into families of analogues.
+data_used: [Kepler light curves, Gaia colours and luminosities]
+method: Tree-based anomaly scoring plus manifold-learning reduction and clustering; comparison of pre-processing and feature-engineering schemes; Gaia augmentation to interpret anomalies.
+result: Clustering in the reduced space identifies anomalies and their analogues; multiple models used in combination are a promising strategy for novel light curves and light-curve families.
+outcome: method_demonstration
+limits: ""
+confounders_found: [pre-processing and feature-engineering choices drive which objects score as anomalous]
+lesson: Finding analogues of an anomaly turns a single oddity into a testable class; anomaly rankings should be reported as model-ensemble robust, not single-model.
+bibcodes: { status: resolved, values: ["2021MNRAS.508.5734M"] }
+urls: [https://arxiv.org/abs/2009.06760]
+related: [REG-systematic-serendipity-kepler-2019, REG-weird-detector-kepler-2019]
+added: 2026-11-11
+withheld_for_rediscovery_test: true

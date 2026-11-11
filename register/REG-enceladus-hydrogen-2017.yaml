@@ -1,0 +1,19 @@
+id: REG-enceladus-hydrogen-2017
+name: Molecular hydrogen in the Enceladus plume (Cassini INMS)
+year: 2017
+authors: Waite, Glein, Perryman, Teolis et al.
+domain: solar_system_insitu
+signature_class: insitu_composition
+observable: mass_spectrometry
+hypothesis: H2 in the plume would indicate hydrothermal water-rock reactions and a chemical-energy source for methanogenesis.
+data_used: [Cassini Ion Neutral Mass Spectrometer, Enceladus plume flyby in open-source mode]
+method: Open-source-mode mass spectrometry minimising and quantifying instrumental H2 production.
+result: Statistically significant H2 native to Enceladus; most plausible source is ongoing hydrothermal reaction of reduced rock; the abundance signals thermodynamic disequilibrium favouring CH4 formation from CO2.
+outcome: confirmed_signal_no_life_claim
+limits: ""
+confounders_found: [instrumental H2 production from wall interactions]
+lesson: Chemical disequilibrium is a habitability measurement, not a life signal; instrument-background modelling decides whether the signal counts.
+bibcodes: { status: resolved, values: ["2017Sci...356..155W"] }
+related: [REG-enceladus-phosphates-2023, REG-enceladus-organics-khawaja-2025]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

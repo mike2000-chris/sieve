@@ -1,0 +1,20 @@
+id: REG-bl-apf-laser-boyajian-lipman-2019
+name: Breakthrough Listen APF laser-line search of Boyajian's Star
+year: 2019
+authors: Lipman, Isaacson, Siemion, Lebofsky, Price, MacMahon, Croft, DeBoer et al.
+domain: technosignature
+signature_class: em_transmission
+observable: spectroscopy
+hypothesis: If the irregular dimming of Boyajian's Star (KIC 8462852) were due to an artificial structure, laser signals might appear as narrow lines in its optical spectrum.
+data_used: [Lick Automated Planet Finder Levy spectra, 177 spectra, 374-970 nm]
+method: Search high-resolution spectra of one anomalous star for narrow emission lines; vet top candidates.
+result: All top candidates explained as cosmic-ray hits, stellar emission lines or atmospheric airglow lines.
+outcome: candidates_refuted
+limits: "lasers > ~24 MW at d = 1470 ly"
+confounders_found: [cosmic-ray hits, stellar emission lines, atmospheric airglow emission lines]
+lesson: A photometric anomaly can be followed up cheaply in another channel; the confounder list (cosmic rays, airglow) is the reusable vetting checklist for any laser-line search.
+bibcodes: { status: resolved, values: ["2019PASP..131c4202L"] }
+urls: [https://arxiv.org/abs/1812.10161]
+related: [REG-bl-apf-laser-pipeline-zuckerman-2023, REG-tellis-marcy-2015-2017-hires-laser]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

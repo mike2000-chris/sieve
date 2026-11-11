@@ -1,0 +1,20 @@
+id: REG-bl-tess-targets-traas-franz-2021-2022
+name: Breakthrough Listen 1-11 GHz searches of TESS planet hosts, including TOIs observed in transit
+year: 2021
+authors: Traas, Croft, Gajjar, Isaacson et al. (2021); Franz, Croft, Siemion, Traas et al. (2022)
+domain: technosignature
+signature_class: em_transmission
+observable: radio
+hypothesis: Stars hosting transiting planets, in particular when observed during transit, are favoured locations for narrowband radio transmitters.
+data_used: [Green Bank Telescope L/S/C/X bands, TESS Input Catalog, TESS Objects of Interest, Breakthrough Listen]
+method: turboSETI narrowband Doppler drift search (+-4 Hz/s, S/N >= 10) on cadences of 28 TESS targets (2021, Google Cloud) and 61 TOIs in transit (2022); RFI removed by cadence comparison.
+result: No events remain after interference removal in either survey.
+outcome: upper_limit
+limits: "< 12.72% of 28 targets with EIRP > 4.9e14 W (1-11 GHz); < 52/20/16/15% of TOIs at L/S/C/X with EIRP > a few 1e14 W"
+confounders_found: [radio-frequency interference]
+lesson: Small target lists give weak prevalence limits; transit-timed targeting is a cheap geometric prior that can be combined with exoplanet-archive ephemerides.
+bibcodes: { status: resolved, values: ["2021AJ....161..286T", "2022AJ....163..104F"] }
+urls: [https://arxiv.org/abs/2101.11137, https://arxiv.org/abs/2201.00918]
+related: [REG-ucla-seti-margot-2021-2023, REG-bl-price-2020-1327-stars-gaia-extension]
+added: 2026-11-11
+withheld_for_rediscovery_test: true

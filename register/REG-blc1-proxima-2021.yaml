@@ -1,0 +1,20 @@
+id: REG-blc1-proxima-2021
+name: BLC1 - Breakthrough Listen signal of interest toward Proxima Centauri and its RFI verdict
+year: 2021
+authors: Smith, Price, Sheikh, Czech, Croft, DeBoer, Gajjar, Isaacson et al.; Sheikh, Smith, Price et al. (2021)
+domain: technosignature
+signature_class: em_transmission
+observable: radio
+hypothesis: A narrowband signal at 982.002 MHz found in Parkes observations of Proxima Centauri (April 2019) could originate from the Proxima system.
+data_used: [Parkes Ultra-Wideband Low receiver, Breakthrough Listen, 39 h of reobservation]
+method: Narrowband search yielding signal of interest blc1; analysis with a technosignature verification framework; six months of reobservation within +-1 MHz.
+result: blc1 was not redetected, nor any other signal of interest; the reobservation null implies blc1 was transient RFI.
+outcome: candidates_refuted
+limits: ""
+confounders_found: [transient radio-frequency interference]
+lesson: A single-epoch narrowband signal of interest needs a written verification framework and reobservation before any interpretation; the case is the canonical RFI false positive.
+bibcodes: { status: resolved, values: ["2021NatAs...5.1148S", "2021NatAs...5.1153S", "2021RNAAS...5..248S"] }
+urls: [https://arxiv.org/abs/2111.08007, https://arxiv.org/abs/2111.06350]
+related: [REG-breakthrough-listen-ma-2023]
+added: 2026-11-11
+withheld_for_rediscovery_test: true

@@ -1,0 +1,19 @@
+id: REG-enceladus-phosphates-2023
+name: Sodium phosphates in Enceladus ice grains (Cassini CDA re-analysis)
+year: 2023
+authors: Postberg, Sekine, Klenner, Glein et al.
+domain: solar_system_insitu
+signature_class: insitu_composition
+observable: mass_spectrometry
+hypothesis: Phosphorus, thought to be depleted in ocean worlds, is available in the Enceladus ocean.
+data_used: [Cassini Cosmic Dust Analyzer E-ring and plume ice-grain spectra, laboratory analogue spectra]
+method: Re-analysis of CDA mass spectra, laboratory reproduction of the spectra, geochemical experiments and modelling.
+result: A small number of ocean-derived grains show Na3PO4 and Na2HPO4; inferred ocean phosphate of a few mM, at least 100 times Earth's ocean, explained by carbonate-rich fluid chemistry.
+outcome: confirmed_signal_no_life_claim
+limits: Based on a small number of grains.
+confounders_found: []
+lesson: Rare-event searches in old in-situ archives can overturn model-based expectations; look for the few outlier spectra.
+bibcodes: { status: resolved, values: ["2023Natur.618..489P", "2023EGUGA..25.5425P"] }
+related: [REG-enceladus-hydrogen-2017, REG-enceladus-organics-khawaja-2025]
+added: 2026-11-11
+withheld_for_rediscovery_test: true

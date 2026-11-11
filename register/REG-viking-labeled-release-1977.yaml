@@ -1,0 +1,19 @@
+id: REG-viking-labeled-release-1977
+name: Viking Labeled Release experiment and its non-biological explanations
+year: 1977
+authors: Levin & Straat (1977, 1981); Klein (1978); Navarro-Gonzalez et al. (2010)
+domain: solar_system_insitu
+signature_class: insitu_composition
+observable: time_series
+hypothesis: Release of radioactive gas after nutrient injection into Martian soil, suppressed by heat sterilisation, indicates metabolism.
+data_used: [Viking Lander 1 and 2 Labeled Release data, Viking GCMS organic analysis, Phoenix perchlorate finding, Atacama soil analogues]
+method: Radiolabelled nutrient incubation with heat-sterilised controls; laboratory search for chemical mimics; re-analysis of Viking GCMS with perchlorate-bearing analogue soils.
+result: LR responses were reproducible and reduced by sterilisation, reported as consistent with biology; the review of all three Viking biology experiments found most results inconsistent with biology and attributable to oxidants; perchlorate chlorination can explain the chloromethanes in the GCMS data.
+outcome: contested
+limits: Hydrogen peroxide did not reproduce the data on Mars-analogue soil; no single oxidant accounts for every observation.
+confounders_found: [surface oxidants, hydrogen peroxide, perchlorate chemistry, terrestrial contamination assumption for chlorohydrocarbons]
+lesson: A positive control-versus-sterile response is not enough; plan for unknown soil chemistry and re-run old in-situ data when new mineralogy is found.
+bibcodes: { status: resolved, values: ["1977JGR....82.4663L", "1978Icar...34..666K", "1981Icar...45..494L", "2010JGRE..11512010N"] }
+related: [REG-mars-methane-curiosity-tgo-2015]
+added: 2026-11-11
+withheld_for_rediscovery_test: false

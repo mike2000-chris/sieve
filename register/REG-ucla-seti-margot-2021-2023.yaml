@@ -1,0 +1,20 @@
+id: REG-ucla-seti-margot-2021-2023
+name: UCLA SETI Green Bank L-band searches (31 Sun-like stars; 62 TESS Objects of Interest, ~11680 stars)
+year: 2021
+authors: Margot, Pinchuk, Geil et al. (2021); Margot, Li, Pinchuk, Myhrvold et al. (2023)
+domain: technosignature
+signature_class: em_transmission
+observable: radio
+hypothesis: Continuous narrowband transmitters around stars in the GBT beam are separable from RFI by direction-of-origin filters across scans.
+data_used: [Green Bank Telescope L band 1.15-1.73 GHz, TESS Objects of Interest]
+method: Topographic-prominence signal detection, direction-of-origin RFI filters, visual inspection; end-to-end signal injection and recovery to quantify pipeline efficiency.
+result: All detections rejected automatically or confirmed anthropogenic; >99.84% of ~26 million signals (2021) classified as RFI. Pipeline recovers ~94% of injections versus ~6% for an incoherent-sum pipeline (2023).
+outcome: upper_limit
+limits: "< 6.6% of stars within 100 pc host a continuous narrowband transmitter with EIRP > 1e13 W (95%); <= 3e-4 of stars within 20000 ly with EIRP > 5e16 W"
+confounders_found: [radio-frequency interference]
+lesson: Pipeline efficiency enters every prevalence limit; a SIEVE radio card must quote injection-recovery efficiency, not just the threshold. The 2023 paper states its pipeline natively recovers the Ma et al. signals.
+bibcodes: { status: resolved, values: ["2021AJ....161...55M", "2023AJ....166..206M"] }
+urls: [https://arxiv.org/abs/2011.05265, https://arxiv.org/abs/2308.02712]
+related: [REG-breakthrough-listen-ma-2023, REG-bl-tess-targets-traas-franz-2021-2022]
+added: 2026-11-11
+withheld_for_rediscovery_test: true
