@@ -1,5 +1,5 @@
 id: SIEVE-0007
-version: 1
+version: 2
 title: Rest-frame 3-5 um waste-heat bump in SPHEREx spectra of z<0.1 galaxies, tracked through redshift to reject
   instrumental features
 claim: Among 2MASS XSC galaxies with spectroscopic z<0.1 and no AGN or star-formation signatures, none shows a rest-frame
@@ -48,7 +48,47 @@ confounders:
   exclusion: Use fixed physical apertures convolved to a common PSF. Test on galaxy pairs at the same z with different
     sizes and check for size-dependent residuals.
 novelty:
-  status: unchecked
+  status: partly_done
+  confidence: high
+  rationale: The claim is that quiescent galaxies show no galaxy-wide waste-heat excess over a stellar-population
+    model, and that claim has been tested before with other data. The Ĝ papers II–III (2014ApJ...792...27W, 2015ApJS..217...25G)
+    set mid-IR limits on starlight reprocessing for ~1e5 galaxies using WISE broadband photometry. Ĝ V (2026arXiv260812458C)
+    fitted SPS models with a Dyson-swarm component to 129 nearby galaxies and found none preferring the component,
+    with median α<0.3% in quiescent non-AGN hosts. No listed work uses SPHEREx R~35–130 spectra, a rest-frame 3.5–5
+    µm residual tracked through redshift to reject instrumental features, a 3.29 µm PAH veto, or a ~5×10^4 quiescent
+    2MASS XSC sample.
+  closest_prior:
+  - bibcode: 2026arXiv260812458C
+    relation: SPS fitting with a Dyson-swarm component and injection-recovery on 129 nearby galaxies, including
+      quiescent non-AGN hosts, with per-galaxy limits α<0.3% for T≳100 K; tests the same model-excess claim on a
+      far smaller sample with broadband SEDs rather than SPHEREx spectra.
+  - bibcode: 2015ApJS..217...25G
+    register_id: REG-g-hat-wise-galaxies-2014-2015
+    relation: Recalibrated WISE extended-source photometry for ~1e5 galaxies finds none reprocessing >85% of starlight
+      into the mid-IR; same population-level claim, but broadband colours only reach far higher reprocessing fractions
+      and cannot separate a 3.5–5 µm excess from AGN dust.
+  - bibcode: 2014ApJ...792...27W
+    register_id: REG-g-hat-wise-galaxies-2014-2015
+    relation: Framework turning WISE mid-IR photometry into waste-heat limits, with a zeroth-order null result for
+      Type III civilizations; photometric and much coarser than the card's spectral test.
+  - bibcode: 2021MNRAS.507.3761C
+    relation: Searches z<0.2 LoTSS galaxies for a mid-IR (22 µm) excess relative to the radio continuum (high q
+      values), giving 2 unconfirmed candidates; different observable and wavelength.
+  what_would_make_it_open: No listed work delivers a SPHEREx spectral measurement of rest-frame 3.5–5 µm excess
+    over SPS models for ~5×10^4 quiescent z<0.1 galaxies, stacked by redshift to separate rest-frame from observed-frame
+    features, with a PAH 3.29 µm veto and a population limit reaching f of a few per cent at 300–500 K.
+  queries_run:
+  - Kardashev civilizations galaxies waste heat infrared
+  - Dyson sphere galaxies mid-infrared excess
+  - SPHEREx galaxy spectra near-infrared
+  - early-type galaxies near-infrared excess hot dust
+  - TP-AGB stars galaxy spectral energy distribution infrared
+  judged:
+    model: claude-opus-5-5
+    prompt_version: critique-g2-novelty-v0.2
+    date: '2026-11-11'
+    by: Claude Code (claude-fable-5-2)
+  audited_by_human: false
 null_result_value: A null result limits the fraction of quiescent galaxies reprocessing more than 5 per cent of
   starlight at 400-700 K to below about 1/N_gal, N~10^4-10^5, improving the WISE broadband limit for warm reprocessors.
 status: raw

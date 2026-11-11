@@ -1,5 +1,5 @@
 id: SIEVE-0006
-version: 1
+version: 2
 title: 'Optical luminosity deficit balanced by 3-5 um excess: an energy-conservation test with Gaia XP, spectroscopic
   surveys and SPHEREx'
 claim: No main-sequence star with spectroscopic Teff/logg/[Fe/H] and Gaia parallax shows an optical bolometric deficit
@@ -51,7 +51,47 @@ confounders:
   exclusion: Edge-on disks give chromatic reddening and scattered-light polarisation. Gaia XP slope and the absence
     of a W3/W4 cold component discriminate.
 novelty:
-  status: unchecked
+  status: partly_done
+  confidence: medium
+  rationale: Zackrisson et al. 2018 searched for optically subluminous stars, flagged by parallax distances shorter
+    than their spectrophotometric distances, in RAVE DR5 × Gaia DR1, and checked infrared excess only for one follow-up
+    star. The Hephaistos papers, Contardo et al. 2024 and the earlier WISE/IRAS searches test only the infrared-excess
+    half, using WISE photometry. None of the listed abstracts reports a population-level test that requires the
+    optical deficit to equal the integrated 1-5 um excess luminosity, nor a grey-versus-chromatic dimming test with
+    Gaia XP and SPHEREx. The card is therefore a joint, energy-balance version of two halves that have each been
+    tested separately with older or different data.
+  closest_prior:
+  - bibcode: 2018ApJ...862...21Z
+    register_id: REG-zackrisson-seti-gaia-2018
+    relation: Tested optical subluminosity (spectrophotometric distance exceeding parallax distance) in RAVE DR5
+      × Gaia DR1 and found no infrared excess in its follow-up star; it did not quantify a deficit-equals-excess
+      balance and used neither XP spectra nor 1-5 um spectrophotometry.
+  - bibcode: 2024MNRAS.531..695S
+    register_id: REG-hephaistos-ii-2024
+    relation: Searched for infrared excess fitted with a photosphere-plus-blackbody model in about 5 million Gaia
+      DR3/2MASS/WISE sources; it did not compare against an optical luminosity deficit, and its candidates were
+      later attributed to background galaxies.
+  - bibcode: 2024AJ....168..157C
+    relation: Data-driven search for W1/W2 excess in about 4.9 million FGK main-sequence stars, reporting fractional
+      excess luminosities of 0.005-0.1, with no matched optical deficit test.
+  - bibcode: 2024arXiv240911447B
+    relation: Points out that such structures could make stars appear anomalously faint in optical catalogues, which
+      motivates a deficit-based search, but does not carry out one.
+  what_would_make_it_open: No listed work measures, per star, both the isochrone-relative optical bolometric deficit
+    and the integrated 1-5 um excess luminosity (Gaia XP + SPHEREx) for spectroscopic dwarfs and tests whether D
+    equals E together with grey dimming.
+  queries_run:
+  - Dyson sphere luminosity deficit infrared excess
+  - Dyson sphere candidates Gaia 2MASS WISE
+  - underluminous main-sequence stars infrared excess
+  - SPHEREx infrared excess stars
+  - Gaia parallax bolometric flux luminosity discrepancy dwarfs
+  judged:
+    model: claude-opus-5-5
+    prompt_version: critique-g2-novelty-v0.2
+    date: '2026-11-11'
+    by: Claude Code (claude-fable-5-2)
+  audited_by_human: false
 null_result_value: A null result bounds the incidence of near-spherical grey re-radiating envelopes with covering
   fraction above 5-10 per cent among well-characterised dwarfs to below about 1/N, N~10^5.
 status: raw

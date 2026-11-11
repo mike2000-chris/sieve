@@ -1,5 +1,5 @@
 id: SIEVE-0011
-version: 1
+version: 2
 title: Narrow single-temperature versus broad multi-temperature shape of 2.5-5 um excesses in SPHEREx stellar spectra
 claim: Among SPHEREx point sources with a 2.5-5 um excess above 10 per cent, the fitted log-normal width of the
   excess temperature distribution, sigma_lnT, is above 0.15 for at least 99 per cent of sources, and any excesses
@@ -53,7 +53,49 @@ confounders:
   exclusion: Restrict to Gaia luminosity class V and IV. Test the false-positive rate of sigma_lnT on 1e4 stars
     without W1-W2 excess.
 novelty:
-  status: unchecked
+  status: partly_done
+  confidence: medium
+  rationale: Carrigan (2009ApJ...698.2075C) already tested whether infrared excesses follow a single blackbody shape,
+    using IRAS LRS spectra at 100-600 K and longer wavelengths. The card itself describes its method as a transfer
+    of that test to SPHEREx. Hephaistos II (2024MNRAS.531..695S) fitted a photosphere plus a single-blackbody excess,
+    but to broadband Gaia/2MASS/WISE photometry. Chen et al. (2006ApJS..166..351C) compared a single-temperature
+    model with a continuous-disk model for natural debris disks at 5.5-35 um. None of the listed works fits a log-normal
+    temperature width or Bayes factor to 2.5-5 um SPHEREx spectra, or makes a population-level claim about the fraction
+    of narrow excesses.
+  closest_prior:
+  - bibcode: 2009ApJ...698.2075C
+    register_id: REG-carrigan-iras-dyson-2009
+    relation: Fitted blackbodies to IRAS LRS spectra of about 250,000 sources to find single-temperature 100-600
+      K excesses; this is the same spectral-shape test at lower resolution, longer wavelengths and cooler temperatures,
+      without a fitted temperature-width parameter.
+  - bibcode: 2024MNRAS.531..695S
+    register_id: REG-hephaistos-ii-2024
+    relation: Fitted photosphere-plus-blackbody models to Gaia/2MASS/WISE photometry of 5 million sources and kept
+      seven M-dwarf candidates; it used broadband SEDs and did not test single versus distributed temperature.
+  - bibcode: 2006ApJS..166..351C
+    relation: Compared single-temperature blackbody fits with continuous-disk fits for 59 debris disks in Spitzer
+      IRS 5.5-35 um spectra, finding many are better fit by a single temperature; this bears on the natural-confounder
+      side of the card at longer wavelengths.
+  - bibcode: 2022MNRAS.512.2988S
+    register_id: REG-hephaistos-i-2022
+    relation: Set upper limits on partial Dyson spheres from Gaia DR2/AllWISE colour cuts; photometric colours only,
+      with no spectral-shape or temperature-width analysis.
+  what_would_make_it_open: No listed work measures sigma_lnT and single-versus-distributed-temperature Bayes factors
+    on 2.5-5 um SPHEREx spectra of a parallax-selected stellar excess sample, calibrates them on known debris disks,
+    YSOs and brown dwarfs, or tests whether at least 99 per cent of excesses are broad and whether the narrow ones
+    lack molecular bands.
+  queries_run:
+  - Dyson sphere infrared excess blackbody
+  - waste heat technosignature search infrared
+  - warm debris disk 3-5 micron excess temperature
+  - SPHEREx stellar spectra infrared excess
+  - Dyson sphere IRAS spectra search
+  judged:
+    model: claude-opus-5-5
+    prompt_version: critique-g2-novelty-v0.2
+    date: '2026-11-11'
+    by: Claude Code (claude-fable-5-2)
+  audited_by_human: false
 null_result_value: A non-detection limits the number of stars hosting single-temperature (plus or minus 5 per cent)
   radiators that reprocess more than 1 per cent of stellar luminosity to below about 1 in 1e5 among SPHEREx stars
   brighter than W2 = 12.

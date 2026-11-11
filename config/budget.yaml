@@ -6,6 +6,7 @@ llm:
   max_gate_calls_per_run: 600
   measured_cost_per_card_eur: null    # all stages; fill in week 3 once G1-G4 run (paper Section 9.3)
   measured_cost_per_card_eur_expand: 0.050   # 2026-11-11, claude-opus-5-5 effort high, 10 cards, 0.498 EUR, 8,843 in / 26,895 out tokens (evaluation/costs/llm_runs.jsonl)
+  measured_cost_per_card_eur_g2: 0.066       # 2026-11-11, claude-opus-5-5 (queries effort low, judge effort high), prompt critique-g2-novelty-v0.2, 11 cards, 22 calls, 0.724 EUR, 141,707 in / 13,293 out tokens; ADS and OpenAlex requests cost nothing (evaluation/costs/llm_runs.jsonl)
   pricing:                            # list prices (Anthropic API, cached 2026-11-03); eur_per_usd is an assumption, update when billing shows the real rate
     claude-opus-5-5:   { input_usd_per_mtok: 4.0, output_usd_per_mtok: 20.0, eur_per_usd: 0.87 }
     claude-opus-4-8:   { input_usd_per_mtok: 5.0, output_usd_per_mtok: 25.0, eur_per_usd: 0.87 }   # possible server-side fallback

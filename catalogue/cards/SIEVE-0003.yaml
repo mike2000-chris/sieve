@@ -1,5 +1,5 @@
 id: SIEVE-0003
-version: 1
+version: 2
 title: 'Featureless 1-5 um excess around Gaia white dwarfs: separating structures from debris disks and brown dwarfs
   in SPHEREx'
 claim: Among Gaia white dwarfs within 100 pc, the 2-5 um excess sources split into (a) metal-polluted 800-1500 K
@@ -47,7 +47,45 @@ confounders:
   exclusion: Use Legacy Survey DR10 imaging for extended sources within 6 arcsec and the WISE W1-W2 AGN colour cut.
     Gaia proper motion fixes the white-dwarf position at the SPHEREx epoch.
 novelty:
-  status: unchecked
+  status: partly_done
+  confidence: medium
+  rationale: Zuckerman (2022MNRAS.514..227Z) already used Spitzer and WISE infrared data to constrain the frequency
+    of Dyson-sphere-like structures at white dwarfs, which is a closely related claim tested with broadband photometry.
+    Murillo-Ojeda et al. (2026A&A...707A.268M) built the 100 pc Gaia white dwarf infrared-excess catalogue (456
+    sources) that defines the card's parent sample, but interprets the excesses only as disks or companions. Owens
+    et al. (2023AJ....166....5O) and Lai et al. (2021ApJ...920..156L) show disk/companion separation by near-IR
+    spectroscopy or photometry for small samples, and Owens leaves one excess unexplained. No listed work classifies
+    the 100 pc excess population with 1-5 um spectral band depths plus metal-pollution checks to look for a featureless
+    250-500 K group, which is what SPHEREx would add.
+  closest_prior:
+  - bibcode: 2022MNRAS.514..227Z
+    relation: Constrains the frequency of Dyson-sphere structures at white dwarfs with Spitzer/WISE/TESS/Kepler
+      photometry; same hypothesis, but no SPHEREx 1-5 um spectral classification of the 100 pc sample.
+  - bibcode: 2026A&A...707A.268M
+    relation: Complete 100 pc Gaia white dwarf infrared-excess catalogue from VOSA SED fits with WISE/2MASS photometry;
+      same sample but attributes excesses to disks or companions without band-depth classification or a search for
+      featureless cool non-polluted excesses.
+  - bibcode: 2023AJ....166....5O
+    relation: Near-IR spectroscopy separates disks from brown dwarf companions in seven white dwarfs and leaves
+      one excess (Gaia J0723+6301) unexplained; the same spectral-feature logic, applied to a tiny sample.
+  - bibcode: 2021ApJ...920..156L
+    relation: Spitzer/Gemini follow-up of Gaia+unWISE excess candidates with a photometric method to separate companions
+      from dust disks; broadband only, no technosignature-motivated third class.
+  what_would_make_it_open: No listed work uses SPHEREx R~35-130 spectra of the 100 pc white dwarf excess sample,
+    combined with spectroscopic metal-pollution checks, to test whether a featureless 250-500 K excess population
+    exists beyond disks and companions.
+  queries_run:
+  - white dwarf Dyson sphere infrared excess
+  - white dwarf habitable zone megastructure waste heat
+  - white dwarf infrared excess debris disk brown dwarf
+  - SPHEREx white dwarfs infrared excess
+  - Gaia white dwarfs WISE infrared excess
+  judged:
+    model: claude-opus-5-5
+    prompt_version: critique-g2-novelty-v0.2
+    date: '2026-11-11'
+    by: Claude Code (claude-fable-5-2)
+  audited_by_human: false
 null_result_value: A null result limits the fraction of nearby white dwarfs with 250-500 K re-radiating structures
   covering more than about 5 per cent of the sky to below 1/N_WD, about 1e-3 to 1e-4.
 status: raw

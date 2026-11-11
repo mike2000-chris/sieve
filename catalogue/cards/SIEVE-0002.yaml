@@ -1,5 +1,5 @@
 id: SIEVE-0002
-version: 1
+version: 2
 title: Smooth 300-600 K blackbody excess at 3-5 um around Gaia 100-pc FGKM dwarfs in SPHEREx QR spectral images
 claim: Fewer than 1 in 10^4 Gaia DR3 main-sequence stars within 100 pc show a 3.5-5.0 um flux excess above 5 per
   cent whose spectral slope fits a single 300-600 K blackbody to chi2_nu<1.5 with no feature deeper than 2 per cent.
@@ -49,7 +49,49 @@ confounders:
   exclusion: Compare against constant-star control samples matched in magnitude and focal-plane position. Require
     the excess in both semiannual passes.
 novelty:
-  status: unchecked
+  status: partly_done
+  confidence: high
+  rationale: The claim that partial Dyson-sphere waste heat (100-1000 K) appears as a photospheric infrared excess
+    in very few stars has been tested on Gaia+2MASS+WISE photometry, yielding occurrence upper limits near 1 in
+    10^5 (2022MNRAS.512.2988S) and a handful of M-dwarf candidates (2024MNRAS.531..695S). Those candidates are now
+    largely attributed to background contamination (2024RNAAS...8..145R, 2026arXiv260703619R). A data-driven W1/W2
+    excess search over five million FGK stars (2024AJ....168..157C) covers the same 3-5 um band but only with two
+    broadband points. None of the listed works uses SPHEREx channel-resolved 3-5 um spectra to test whether the
+    residual is a smooth, featureless single-temperature 300-600 K blackbody, so the card is a new-archive, sharper-observable
+    version of an already tested claim.
+  closest_prior:
+  - bibcode: 2024MNRAS.531..695S
+    register_id: REG-hephaistos-ii-2024
+    relation: Fit photosphere-plus-blackbody SEDs to Gaia DR3/2MASS/AllWISE photometry for ~5 million stars and
+      found 7 M-dwarf excess candidates; it used broadband WISE points rather than SPHEREx spectra and placed no
+      limit on spectral smoothness.
+  - bibcode: 2022MNRAS.512.2988S
+    register_id: REG-hephaistos-i-2022
+    relation: Set upper limits of order 1 in 10^5 on the fraction of stars hosting 100-1000 K partial Dyson spheres,
+      using Gaia DR2+AllWISE colour cuts; same occurrence-rate claim, but with colours and no spectral-shape test.
+  - bibcode: 2024AJ....168..157C
+    relation: Searched 4.9 million main-sequence FGK stars for W1/W2 (3.4/4.6 um) excess with machine-learning photospheric
+      predictions and found 53 objects; same wavelength range, but only two broadband points and no blackbody-temperature
+      or feature-depth test.
+  - bibcode: 2009ApJ...698.2075C
+    register_id: REG-carrigan-iras-dyson-2009
+    relation: Fit 100-600 K blackbodies to IRAS LRS spectra of ~250,000 sources and set Dyson-sphere upper limits;
+      spectral-shape test of the same claim, but at longer wavelengths and much shallower depth.
+  what_would_make_it_open: No listed work uses SPHEREx 3.0-5.0 um channel-resolved residuals over a Gaia XP+2MASS
+    photosphere to bound the fraction of 100-pc dwarfs with a >5 per cent excess that is a featureless single 300-600
+    K blackbody, so delivering that per-channel spectral-shape constraint and ranked residue table is the new contribution.
+  queries_run:
+  - Dyson sphere candidates Gaia WISE
+  - Dyson sphere infrared excess search
+  - warm infrared excess main-sequence stars
+  - SPHEREx stellar infrared excess
+  - hot dust excess nearby dwarfs WISE
+  judged:
+    model: claude-opus-5-5
+    prompt_version: critique-g2-novelty-v0.2
+    date: '2026-11-11'
+    by: Claude Code (claude-fable-5-2)
+  audited_by_human: false
 null_result_value: A null result bounds the fraction of nearby FGKM stars hosting re-radiating structures with covering
   fraction above about 0.5 per cent at 300-600 K to below about 1e-4.
 status: raw
