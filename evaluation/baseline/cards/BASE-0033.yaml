@@ -1,5 +1,5 @@
 id: BASE-0033
-version: 2
+version: 3
 title: Compositional heterogeneity at millimetre to 100 um scale on planetary surfaces as evidence of life's processes
 claim: Some planetary surface materials show elemental compositional heterogeneity at the millimetre to 100 um scale
   that was produced by life's processes.
@@ -7,9 +7,9 @@ domain: solar_system_insitu
 signature_class: insitu_composition
 observable: imaging
 timescale: snapshot
-mechanism: The source states that compositional heterogeneity at the mm-to-100 um scale can reveal geological processes
-  indicative of past or present habitability and can provide evidence of life's processes, and that an arm-mounted
-  in-situ X-ray fluorescence mapping spectrometer is designed to identify these features.
+mechanism: Compositional heterogeneity at the mm-to-100 um scale can reveal geological processes indicative of past
+  or present habitability and can provide evidence of life's processes, and an arm-mounted in-situ X-ray fluorescence
+  mapping spectrometer is designed to identify these features.
 data_requirements:
   depth: mm to 100 um spatial scale
 method: In-situ X-ray fluorescence element mapping of surface targets.

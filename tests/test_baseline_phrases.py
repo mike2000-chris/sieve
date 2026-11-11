@@ -2,7 +2,8 @@
 
 Rule and variant list: evaluation/baseline/README.md, "Blinding: normalisation of transcription phrases". A field
 the source does not address is absent (or an empty string where the schema requires the field); it is never filled
-with a sentence saying that the source is silent.
+with a sentence saying that the source is silent. What the source says is written as a direct statement, not as
+"The source states that ..."; the attribution is in provenance.source_bibcodes.
 """
 import re
 
@@ -22,7 +23,28 @@ FILLER = [
     r"\bpassages? used\b",
     r"\btranscri(?:ber|bed|ption)\b",
 ]
+_VERBS = (r"(?:states?|lists?|notes?|suggests?|argues?|reports?|adds?|cautions?|expects?|names?|mentions?|cites?|calls?|"
+          r"presents?|frames?|sets?|anticipates?|refers?|quotes?|says?|stress(?:es)?|shows?|gives?|proposes?|describes?|"
+          r"discuss(?:es)?|recommends?|claims?|points?|considers?|includes?|finds?|concludes?)")
+ATTRIBUTION = [
+    # "The source states that ...", "the source lists ...", "the sources report ..."
+    rf"\b(?:the|this|these|each|one|a) sources? (?:also |further |then )?{_VERBS}\b",
+    # "the source's example", "named by the source", "as reported by the sources", "in the source"
+    r"\bsource's\b",
+    r"\b(?:by|in|from) the sources?\b",
+    # the publication under another name: "The abstract states", "The NASA report notes", "(NASA report)"
+    r"\bthe abstract\b",
+    r"\b(?:NASA|workshop|roadmap) report\b",
+    rf"\b(?:the|this) (?:white paper|review|report|paper|study|authors?) (?:also )?{_VERBS}\b",
+    # the publication's authors as the subject: "Fujii et al. state that ...", "Westall et al. do not consider ..."
+    rf"\bet al\. (?:also )?(?:{_VERBS}|do not|did not)\b",
+    # follow-on sentences: "It states that", "It also notes that", "its table of ..."
+    r"\bIt (?:also )?(?:states|notes|lists|adds|cautions|argues|reports) that\b",
+    r"\bits (?:table|figure|abstract|section)\b",
+    r"\bciting\b",
+]
 _FILLER = [re.compile(p, re.I) for p in FILLER]
+_ATTRIBUTION = [re.compile(p) if p.startswith(r"\bIt") else re.compile(p, re.I) for p in ATTRIBUTION]
 
 
 def _strings(obj, path=""):
@@ -44,6 +66,36 @@ def test_baseline_cards_have_no_transcription_filler():
         for path, text in _strings(card):
             hits += [f"{p.stem} {path}: {m.group(0)!r}" for rx in _FILLER if (m := rx.search(text))]
     assert not hits, "transcription filler in baseline cards:\n" + "\n".join(hits)
+
+
+def test_baseline_cards_have_no_attribution_to_the_source():
+    """Content is stated directly; who said it is in provenance.source_bibcodes, which no gate prompt contains."""
+    hits = []
+    for p, card in cards.iter_baseline_cards():
+        for path, text in _strings(card):
+            hits += [f"{p.stem} {path}: {m.group(0)!r}" for rx in _ATTRIBUTION if (m := rx.search(text))]
+    assert not hits, "attribution wording in baseline cards:\n" + "\n".join(hits)
+
+
+@pytest.mark.parametrize("phrase", [
+    "The source states that artificial materials appear different.", "Besides the red edge, the source lists the purple edge",
+    "the source expects any transmission to be modulated", "It also notes that spectropolarimetry suggests disequilibrium",
+    "The source's example is an old elliptical", "Three tasks named by the source: (1)", "The abstract states that oxygen",
+    "The NASA report notes that such compounds", "Fujii et al. state that direct imaging will", "(citing Kissell 1974)",
+    "The sources suggest a survey", "its table of technosignatures names starshades",
+])
+def test_attribution_patterns_catch_the_known_variants(phrase):
+    assert any(rx.search(phrase) for rx in _ATTRIBUTION)
+
+
+@pytest.mark.parametrize("phrase", [
+    "Some sources emit narrowband X-ray emission centred at 0.5-2 keV",
+    "readily distinguished from natural sources", "for the same source flux", "Non-technological sources of NO2",
+    "It has been proposed (Hippke and Forgan 2017) that narrowband X-ray emission is optimal",
+    "ten classes of transit anomaly (Wright et al. 2016) express these properties",
+])
+def test_attribution_patterns_leave_content_alone(phrase):
+    assert not any(rx.search(phrase) for rx in _ATTRIBUTION)
 
 
 @pytest.mark.parametrize("phrase", [

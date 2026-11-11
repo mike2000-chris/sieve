@@ -141,12 +141,20 @@ Stripping `id` and `provenance` does not help if the card text itself says that 
 | "(not named individually)", "(not named individually in the passage used)" | `candidate_archives[].name` | 2 | parenthesis deleted |
 | "(converted to wavelength by the transcriber)" | `data_requirements.depth` | 1 | parenthesis deleted (same field as one "not stated; …") |
 
-`tests/test_baseline_phrases.py` fails if one of these phrases, or a close variant ("the source does not specify …", "transcribed"), appears in a baseline card outside `provenance`.
+**Attribution wording (owner decision of 2026-11-11, second step).** Sentences that reported content as what the source says were rewritten as direct statements of the same content: 59 passages in 36 cards.
+
+5. The attribution is deleted and the content stands as a statement: "The source states that X" becomes "X". This covers "the source" with any reporting verb (states, lists, notes, reports, adds, mentions, cites, names, refers to), "the source's example / Figure", "named by the source", "as reported by the source(s)", follow-on sentences ("It states that", "It also notes that", "its table of …"), and the same forms with the publication named another way ("The abstract states", "The NASA report notes", "(NASA report)", "Fujii et al. state that", "Li et al. give").
+6. No claim is added, removed or strengthened. Hedges stay as written ("may", "could", "might", "potentially", "in principle"). Where the verb itself carried the hedge, an impersonal form keeps it: "the source argues that X is" becomes "X is argued to be", "expects" becomes "is expected", "proposes" becomes "is proposed", "presents X as the best potential" becomes "X is put forward as the best potential", "cautions that" becomes "However,", "anticipates" becomes "is anticipated".
+7. Citations of other works inside such a sentence are kept as plain citations: "(citing Kissell 1974)" becomes "(Kissell 1974)".
+8. Who said what remains recoverable from `provenance.source_bibcodes`, the locators in `sources.yaml` and the git history of the card.
+
+`tests/test_baseline_phrases.py` fails if a filler phrase or an attribution of these kinds, or a close variant ("the source does not specify …", "transcribed", "the sources suggest …"), appears in a baseline card outside `provenance`.
 
 **What remains visible (limitation for the paper).**
 
 - Absent fields. 34 of 40 baseline cards have no `candidate_archives`, 28 no `confounders`, 22 no `data_requirements` and 19 no `method`; six cards have archives with an empty access path and three have a confounder with an empty exclusion. Every pipeline card so far fills all of these. A judge can still tell the two sets apart by how complete a card is, and a difference in gate outcomes between the sets is confounded with completeness.
-- Attribution wording. 39 sentences in 30 cards report content as "The source states …", "The source lists …", "the source's example is …". These carry what the source says, so they were left as they are under the rule "do not change stated content". They are a tell of the same kind as the filler and need a separate decision: rewording them into direct statements would remove it, at the price of presenting attributed claims as the card's own.
+- Citations. Baseline cards cite works by author, e.g. "(Wright et al. 2016)"; in seven cards with more than one source, 19 parentheses of the form "(Li et al.)" say which source a statement comes from. Pipeline cards cite nothing, because Expand may not write references from memory. Citations were kept: they are content, and removing them would detach numbers from their origin.
+- Direct statements read more assertive than the attributed originals, although no claim was changed. A G1 judge may weigh "X is" differently from "the source states that X is".
 - Missing order-of-magnitude estimates in `mechanism` are no longer announced, but they are still missing (decision point 3).
 
 ## Limitations

@@ -1,15 +1,15 @@
 id: BASE-0024
-version: 1
+version: 2
 title: Ozone ultraviolet absorption in photometry of directly imaged temperate rocky exoplanets
 claim: Some temperate rocky exoplanets in the solar neighbourhood show the ultraviolet absorption feature of ozone.
 domain: biosignature
 signature_class: atmospheric_chemistry
 observable: photometry
 timescale: snapshot
-mechanism: 'The source presents ozone as the best potential biosignature gas for an early exoplanet imaging mission:
-  it is a proxy for oxygen with a pronounced ultraviolet feature. The abstract states that oxygen is not detectable
-  at Earth until about 0.5 Ga whereas its proxy ozone is detectable ''for about half of that history'', and that
-  the feature allows a small starshade and telescope with a simple photometer.'
+mechanism: 'Ozone is put forward as the best potential biosignature gas for an early exoplanet imaging mission:
+  it is a proxy for oxygen with a pronounced ultraviolet feature. Oxygen is not detectable at Earth until about
+  0.5 Ga, whereas its proxy ozone is detectable ''for about half of that history'', and the feature allows a small
+  starshade and telescope with a simple photometer.'
 data_requirements:
   sample: temperate rocky exoplanets in the solar neighbourhood
 method: Survey with a starshade, a small telescope and an ultraviolet photometer.

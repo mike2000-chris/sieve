@@ -1,5 +1,5 @@
 id: BASE-0002
-version: 2
+version: 3
 title: Anomalous, non-planetary transit signatures of orbiting megastructures in Kepler, K2 and TESS light curves
 claim: Some stars in the Kepler, K2 and TESS photometric data sets show transit events that are consistent with
   large artificial orbiting structures and not with intrinsic stellar variability, disks or exoplanets.
@@ -10,9 +10,8 @@ timescale: days
 mechanism: Energy use requires large collecting and radiating surfaces, proportional in area to the power consumed;
   over millions of years this may produce swarms of objects or planet-sized structures around a star, which intercept
   starlight as they transit. Unlike planets, such structures might be non-spherical and non-circular, low-mass and
-  subject to radiation pressure, opaque, in orbits uncharacteristic of planets, or much larger than planets; the
-  source refers to ten classes of transit anomaly (Wright et al. 2016) that express these properties as light-curve
-  properties.
+  subject to radiation pressure, opaque, in orbits uncharacteristic of planets, or much larger than planets; ten
+  classes of transit anomaly (Wright et al. 2016) express these properties as light-curve properties.
 data_requirements:
   cadence: as taken for exoplanet transit searches
   sample: stars monitored by Kepler, K2 and TESS
@@ -23,11 +22,11 @@ candidate_archives:
   access: ''
 - name: TESS
   access: ''
-method: 'Three tasks named by the source: (1) compute the sensitivity of the surveys as a function of megastructure
-  properties; (2) identify light-curve signals consistent with megastructures but not with common natural phenomena,
-  with automated approaches (the source mentions unsupervised machine learning for anomalous events) instead of
-  human inspection; (3) follow up anomalous stars to determine their nature. The output is single-target and population
-  upper limits on classes of megastructure.'
+method: 'Three tasks: (1) compute the sensitivity of the surveys as a function of megastructure properties; (2)
+  identify light-curve signals consistent with megastructures but not with common natural phenomena, with automated
+  approaches (for example unsupervised machine learning for anomalous events) instead of human inspection; (3) follow
+  up anomalous stars to determine their nature. The output is single-target and population upper limits on classes
+  of megastructure.'
 confounders:
 - name: Circumstellar dust (the Boyajian's Star case)
   exclusion: Reddening during a dip showed occulting material consistent with dust, not opaque objects.

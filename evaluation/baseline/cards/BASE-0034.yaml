@@ -1,5 +1,5 @@
 id: BASE-0034
-version: 2
+version: 3
 title: Microbially induced sedimentary structures and fossil biofilms in rover images of Martian sedimentary rocks
 claim: Some ancient Martian sedimentary rocks contain microbially induced sedimentary structures, stromatolite-like
   laminations or mineral-replaced microbial colonies and biofilms recognisable in rover camera and close-up images.
@@ -11,8 +11,8 @@ mechanism: On Earth benthic microorganisms form biofilms that bind, baffle and t
   microbially induced sedimentary structures and, with repeated precipitation, stromatolites. Individual early Martian
   cells would be about a micron to a few microns and too small to distinguish, but permineralised or compressed
   colonies and biofilms would be much larger and may be preserved as mineral-replaced structures or carbonaceous
-  remains in cemented sediments. The source adds that in more than 20 years of Mars surface exploration no claim
-  of biomediated structures has gathered widespread support.
+  remains in cemented sediments. In more than 20 years of Mars surface exploration no claim of biomediated structures
+  has gathered widespread support.
 method: Investigation of candidate microbialites with rover cameras and high-resolution close-up imagers.
 confounders:
 - name: Abiotic laminated sedimentary structures

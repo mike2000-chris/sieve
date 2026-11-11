@@ -1,5 +1,5 @@
 id: BASE-0028
-version: 2
+version: 3
 title: Purple edge and other biological pigment reflectance features of exoplanet surfaces
 claim: Some terrestrial exoplanets show a 'purple edge' or other reflectance features peculiar to biological pigments
   in their reflected-light spectrum.
@@ -7,9 +7,9 @@ domain: biosignature
 signature_class: surface_albedo
 observable: spectroscopy
 timescale: snapshot
-mechanism: Besides the vegetation red edge, the source lists the 'purple edge' (citing Sanroma et al. 2014) and
-  the peculiar reflectance spectra of a variety of biological pigments of diverse functions as surface reflectance
-  biosignatures that high-contrast direct imaging will make accessible for the first time.
+mechanism: Besides the vegetation red edge, the 'purple edge' (Sanroma et al. 2014) and the peculiar reflectance
+  spectra of a variety of biological pigments of diverse functions are surface reflectance biosignatures that high-contrast
+  direct imaging will make accessible for the first time.
 method: Reflectance spectroscopy of directly imaged planets.
 novelty:
   status: unchecked

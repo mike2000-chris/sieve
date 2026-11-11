@@ -1,5 +1,5 @@
 id: BASE-0021
-version: 2
+version: 3
 title: Molecular oxygen bands together with methane in transmission or reflected-light spectra of nearby rocky planets
 claim: Some rocky planets in the habitable zones of nearby stars show O2 absorption at 0.688, 0.762 or 1.269 um
   together with CH4, a disequilibrium combination.
@@ -10,8 +10,8 @@ timescale: snapshot
 mechanism: On Earth atmospheric O2 is linked to oxygenic photosynthesis by cyanobacteria-like organisms and CH4
   to methanogenic organisms; O2 is considered a key biosignature gas, particularly in the disequilibrium combination
   of O2 and CH4. O2 has well isolated, sharp bands at 0.688, 0.762 and 1.269 um; CH4 has bands near 2.3 and 3.3
-  um that overlap with H2O. The source expects a sample of 10-20 planets suitable for biosignature searches with
-  extremely large telescopes in the next decade.
+  um that overlap with H2O. A sample of 10-20 planets suitable for biosignature searches with extremely large telescopes
+  is expected in the next decade.
 data_requirements:
   wavelength_um:
   - 0.68
@@ -21,8 +21,7 @@ method: Transmission spectra of transiting planets or reflectance spectra of dir
   extremely large telescopes.
 confounders:
 - name: Abiotic pathways for O2, O3 and CH4
-  exclusion: Detect the companion molecules that reveal abiotic O2 mechanisms (source's Figure 1, after Meadows
-    et al. 2018).
+  exclusion: Detect the companion molecules that reveal abiotic O2 mechanisms (Meadows et al. 2018).
 - name: Refraction, clouds and hazes in transmission
   exclusion: ''
 novelty:
