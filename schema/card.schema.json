@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "required": ["id", "version", "title", "claim", "domain", "signature_class", "observable", "timescale", "mechanism", "status", "provenance"],
   "properties": {
-    "id": { "type": "string", "pattern": "^SIEVE-[0-9]{4}$" },
+    "id": { "type": "string", "pattern": "^(SIEVE|BASE)-[0-9]{4}$", "description": "SIEVE-NNNN for catalogue cards; BASE-NNNN for literature-baseline cards in evaluation/baseline/cards/ (never in catalogue/cards/)" },
     "version": { "type": "integer", "minimum": 1 },
     "title": { "type": "string", "minLength": 10, "maxLength": 160 },
     "claim": { "type": "string", "minLength": 20, "description": "One falsifiable sentence" },
@@ -63,7 +63,7 @@
             "required": ["bibcode", "relation"],
             "additionalProperties": false,
             "properties": {
-              "bibcode": { "type": "string", "pattern": "^[0-9]{4}[A-Za-z&.]{5}[0-9.]{4}[A-Za-z.][0-9.]{4}[A-Z]$" },
+              "bibcode": { "type": "string", "pattern": "^[0-9]{4}[A-Za-z&.]{5}[0-9.]{4}[A-Za-z0-9.][0-9.]{4}[A-Z]$" },
               "register_id": { "type": "string" },
               "relation": { "type": "string" }
             }
@@ -103,7 +103,14 @@
         "taxonomy_cell": { "type": "string" },
         "parent_card": { "type": ["string", "null"] },
         "created": { "type": "string", "format": "date" },
-        "edited_by_human": { "type": "boolean" }
+        "edited_by_human": { "type": "boolean" },
+        "source_bibcodes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "pattern": "^[0-9]{4}[A-Za-z&.]{5}[0-9.]{4}[A-Za-z0-9.][0-9.]{4}[A-Z]$" },
+          "description": "Baseline cards only: ADS-resolved bibcodes of the publication(s) the idea was transcribed from. Provenance, not novelty evidence; strip before gate prompts."
+        },
+        "transcribed_by": { "type": "string", "description": "Baseline cards only: model or person who transcribed the published idea into card form" }
       }
     }
   }
