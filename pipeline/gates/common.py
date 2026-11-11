@@ -1,8 +1,9 @@
 """Shared machinery for the LLM gates: budget check, structured call, cost record, gate log, card write-back.
 
 Follows the expand-v0.2 pattern (pipeline/expand.py): budget check before every call (CLAUDE.md rule 6), one record per
-call in evaluation/costs/llm_runs.jsonl, schema-enforced JSON output. Status transitions are never made here; the
-optional `park` flag goes through pipeline.cards.set_status.
+call in evaluation/costs/llm_runs.jsonl, schema-enforced JSON output. Card files and gate logs are written only through
+pipeline.cards (`write_card`, `append_gate_log`). Status transitions are never made here; the optional `park` flag goes
+through pipeline.cards.set_status.
 """
 from __future__ import annotations
 
@@ -17,7 +18,6 @@ from dotenv import load_dotenv
 from pipeline import cards as cards_mod
 from pipeline.expand import COST_LOG, MODEL, ROOT, _eur, load_prompt, load_yaml, spent_this_month
 
-GATE_LOGS = ROOT / "catalogue" / "gate_logs"
 EFFORT = "high"
 MAX_TOKENS = 16000
 EST_OUT_TOKENS = 8000   # upper-bound planning figure for the pre-call budget check (thinking + JSON)
@@ -27,21 +27,22 @@ _DETECTION_WORDS = re.compile(r"\b(detect(?:ion|ions|ed|s)?|discover(?:y|ies|ed)
 
 
 def load_card(card_id: str) -> dict:
-    path = cards_mod.CARDS / f"{card_id}.yaml"
-    if not path.exists():
+    """Catalogue (SIEVE-NNNN) or baseline (BASE-NNNN) card; the id prefix decides the directory."""
+    card = cards_mod.load_card(card_id)
+    if card is None:
         raise SystemExit(f"no such card: {card_id}")
-    return cards_mod._load_yaml(path)
+    return card
 
 
-def save_card(card: dict) -> None:
-    card["version"] = int(card.get("version", 1)) + 1
-    (cards_mod.CARDS / f"{card['id']}.yaml").write_text(
-        yaml.safe_dump(card, sort_keys=False, allow_unicode=True, width=110), encoding="utf-8")
+def judged_block(model: str, prompt_version: str, by: str) -> dict:
+    """Provenance of one gate output as stored in the card (CLAUDE.md rule 7)."""
+    return {"model": model, "prompt_version": prompt_version, "date": dt.date.today().isoformat(), "by": by}
 
 
-def card_yaml(card: dict) -> str:
-    """The card as the critic sees it: no provenance block, no earlier gate output in `scores`."""
-    view = {k: v for k, v in card.items() if k not in {"provenance", "scores", "version"}}
+def card_yaml(card: dict, drop: tuple = ()) -> str:
+    """The card as the critic sees it: blind to its origin (pipeline.cards.blind_card removes id, provenance and
+    version), without earlier gate output in `scores` and without the fields in `drop` (a gate's own earlier output)."""
+    view = {k: v for k, v in cards_mod.blind_card(card).items() if k != "scores" and k not in drop}
     return yaml.safe_dump(view, sort_keys=False, allow_unicode=True, width=110).rstrip()
 
 
@@ -99,14 +100,12 @@ def validate_output(result: dict, schema: dict) -> list[str]:
 
 def log_gate(card: dict, gate: str, verdict: str, result: dict, *, by: str, prompt_version: str, model: str,
              cost_eur: float, usage: dict, extra: dict | None = None) -> None:
-    GATE_LOGS.mkdir(parents=True, exist_ok=True)
     now = dt.datetime.now(dt.timezone.utc)
     entry = {"ts": now.isoformat(timespec="seconds"), "date": now.date().isoformat(), "event": "gate", "gate": gate,
              "verdict": verdict, "by": by, "model": model, "prompt_version": prompt_version,
              "card_version": card.get("version", 1), "cost_eur": round(cost_eur, 4), "usage": usage,
              "language_flags": language_flags(result), "result": result, **(extra or {})}
-    with (GATE_LOGS / f"{card['id']}.jsonl").open("a", encoding="utf-8") as fh:
-        fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    cards_mod.append_gate_log(card["id"], entry)
 
 
 def append_cost_record(gate: str, card: dict, prompt_version: str, model: str, requested: str, msg, usage: dict,
@@ -127,14 +126,16 @@ class Gate:
     prompt_version: str       # "critique-g1-physics-v0.2"
     schema: dict
     build_vars: object        # (card) -> dict of prompt placeholders besides card_yaml
-    apply: object             # (card, result) -> list of card fields written (empty: card unchanged)
+    apply: object             # (card, result, judged) -> list of card fields written (empty: card unchanged)
     verdict_of: object        # (result) -> str
     fail_verdicts: tuple = ()
     precheck: object = None   # optional (card) -> dict | None; a non-None return short-circuits the LLM call
+    own_fields: tuple = ()    # card fields holding this gate's earlier output; hidden from its own prompt
 
 
 def build_prompt(gate: Gate, card: dict) -> str:
-    return load_prompt(f"{gate.prompt_version}.md").format(card_yaml=card_yaml(card), **gate.build_vars(card))
+    return load_prompt(f"{gate.prompt_version}.md").format(card_yaml=card_yaml(card, gate.own_fields),
+                                                           **gate.build_vars(card))
 
 
 def run_gate(gate: Gate, card_id: str, *, by: str, model: str = MODEL, dry_run: bool = False,
@@ -170,11 +171,16 @@ def run_gate(gate: Gate, card_id: str, *, by: str, model: str = MODEL, dry_run: 
                  model=msg.model, cost_eur=cost, usage=usage)
         return {"verdict": "invalid_output", "cost_eur": cost, "fields": []}
     verdict = gate.verdict_of(result)
-    fields = gate.apply(card, result)
+    fields = gate.apply(card, result, judged_block(msg.model, gate.prompt_version, by))
+    extra = {"card_fields_written": fields}
     if fields:
-        save_card(card)
+        write_errors = cards_mod.write_card(card)   # validates, bumps the version, writes
+        if write_errors:
+            print(f"{card_id} {gate.name}: card write refused, verdict is in the gate log only: {write_errors[:3]}")
+            extra = {"card_fields_written": [], "card_write_refused": write_errors[:5]}
+            fields = []
     log_gate(card, gate.name, verdict, result, by=by, prompt_version=gate.prompt_version, model=msg.model,
-             cost_eur=cost, usage=usage, extra={"card_fields_written": fields})
+             cost_eur=cost, usage=usage, extra=extra)
     flags = language_flags(result)
     print(f"{card_id} {gate.name}: {verdict}  ({usage['input_tokens']} in / {usage['output_tokens']} out, "
           f"{cost:.3f} EUR, {msg.model}){'  language flags: ' + ', '.join(flags) if flags else ''}")

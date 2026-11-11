@@ -1,5 +1,5 @@
 id: BASE-0003
-version: 1
+version: 4
 title: Narrowband or artificially pulsed radio emission from Galactic sources in targeted and broad surveys
 claim: Some stars in the Galaxy emit repeatable narrowband or artificially pulsed radio emission, either intended
   for detection (a beacon) or not (a radar, inter-planet telecommunication or other leakage).
@@ -9,22 +9,22 @@ observable: radio
 timescale: snapshot
 mechanism: 'Radio transmitters of a technological species. Narrowband (~Hz) signals are ubiquitous in early terrestrial
   communication, need relatively little energy, cross the interstellar medium easily and are readily distinguished
-  from natural sources (Li et al.). Order of magnitude (Margot et al., Figure 1): at S/N 10, 3 Hz bandwidth and
-  5 min integration most large facilities detect Arecibo''s EIRP from about 500 light years and 1000 times that
-  from about 16,000 light years; the Arecibo-class EIRP is given as 2e13 W. Li et al. give an EIRP limit of 1.9e11
-  W for a 1 Hz signal at 200 light years with the FAST 19-beam receiver. The NASA workshop report states that the
-  full SKA will be the first telescope able to detect Earth-2020 levels of radio leakage at interstellar distances.'
+  from natural sources. Order of magnitude: at S/N 10, 3 Hz bandwidth and 5 min integration most large facilities
+  detect Arecibo''s EIRP from about 500 light years and 1000 times that from about 16,000 light years; the Arecibo-class
+  EIRP is given as 2e13 W. The EIRP limit for a 1 Hz signal at 200 light years with the FAST 19-beam receiver is
+  1.9e11 W. The full SKA will be the first telescope able to detect Earth-2020 levels of radio leakage at interstellar
+  distances.'
 data_requirements:
   spectral_resolution: Hz-scale channels
   sample: hundreds to thousands of stars surveyed so far; planned MeerKAT commensal survey of ~750,000 stars per
-    year (Margot et al.); TESS planet hosts (Li et al.)
+    year; TESS planet hosts
   cadence: re-observation to confirm candidates
 method: Targeted surveys for sensitivity and broad surveys for sky coverage, maximising frequency coverage and time
-  span; commensal observing with beamforming arrays (Margot et al.); Doppler-drift search with turboSETI and candidate
-  selection as in Enriquez et al. 2017 (Li et al.).
+  span; commensal observing with beamforming arrays; Doppler-drift search with turboSETI and candidate selection
+  as in Enriquez et al. 2017.
 confounders:
 - name: Radio-frequency interference
-  exclusion: Observing cadence chosen to mitigate RFI and re-observation of candidate signals (Margot et al.).
+  exclusion: Observing cadence chosen to mitigate RFI and re-observation of candidate signals.
 novelty:
   status: unchecked
 status: raw

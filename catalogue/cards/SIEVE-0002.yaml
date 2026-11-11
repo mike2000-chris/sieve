@@ -1,5 +1,5 @@
 id: SIEVE-0002
-version: 4
+version: 6
 title: Smooth 300-600 K blackbody excess at 3-5 um around Gaia 100-pc FGKM dwarfs in SPHEREx QR spectral images
 claim: Fewer than 1 in 10^4 Gaia DR3 main-sequence stars within 100 pc show a 3.5-5.0 um flux excess above 5 per
   cent whose spectral slope fits a single 300-600 K blackbody to chi2_nu<1.5 with no feature deeper than 2 per cent.
@@ -116,46 +116,42 @@ confounders:
     Data: SPHEREx short-wavelength channels; NEOWISE W1/W2 time series; TESS light curves; Gaia DR3 variability
     tables [G4 excludable: yes]'
 novelty:
-  status: partly_done
+  status: open
   confidence: high
-  rationale: The claim that partial Dyson-sphere waste heat (100-1000 K) appears as a photospheric infrared excess
-    in very few stars has been tested on Gaia+2MASS+WISE photometry, yielding occurrence upper limits near 1 in
-    10^5 (2022MNRAS.512.2988S) and a handful of M-dwarf candidates (2024MNRAS.531..695S). Those candidates are now
-    largely attributed to background contamination (2024RNAAS...8..145R, 2026arXiv260703619R). A data-driven W1/W2
-    excess search over five million FGK stars (2024AJ....168..157C) covers the same 3-5 um band but only with two
-    broadband points. None of the listed works uses SPHEREx channel-resolved 3-5 um spectra to test whether the
-    residual is a smooth, featureless single-temperature 300-600 K blackbody, so the card is a new-archive, sharper-observable
-    version of an already tested claim.
+  rationale: The card measures the per-channel spectral shape of a 3.0-5.0 um excess across roughly 100 SPHEREx
+    channels. It fits a single 300-600 K blackbody and limits features to under 2 per cent. Earlier listed searches
+    (Hephaistos I/II, Contardo et al.) had only WISE/2MASS broadband photometry, which shows that an excess exists
+    but not its Wien-side curvature or whether it is featureless. Carrigan's IRAS LRS blackbody fits covered roughly
+    8-23 um for IRAS-bright sources, not 3-5 um percent-level excesses around 100-pc dwarfs, and no listed work
+    applies SPHEREx spectra to this question.
   closest_prior:
   - bibcode: 2024MNRAS.531..695S
     register_id: REG-hephaistos-ii-2024
-    relation: Fit photosphere-plus-blackbody SEDs to Gaia DR3/2MASS/AllWISE photometry for ~5 million stars and
-      found 7 M-dwarf excess candidates; it used broadband WISE points rather than SPHEREx spectra and placed no
-      limit on spectral smoothness.
+    relation: Hephaistos II searched about 5 million Gaia/2MASS/AllWISE sources for partial-Dyson-sphere excesses
+      by fitting broadband SEDs; it measured band fluxes in a few WISE filters, not a 3-5 um spectral shape, and
+      found seven M-dwarf candidates.
   - bibcode: 2022MNRAS.512.2988S
     register_id: REG-hephaistos-i-2022
-    relation: Set upper limits of order 1 in 10^5 on the fraction of stars hosting 100-1000 K partial Dyson spheres,
-      using Gaia DR2+AllWISE colour cuts; same occurrence-rate claim, but with colours and no spectral-shape test.
-  - bibcode: 2024AJ....168..157C
-    relation: Searched 4.9 million main-sequence FGK stars for W1/W2 (3.4/4.6 um) excess with machine-learning photospheric
-      predictions and found 53 objects; same wavelength range, but only two broadband points and no blackbody-temperature
-      or feature-depth test.
+    relation: Hephaistos I used Gaia DR2 and AllWISE colour cuts to set upper limits (as low as about 1 in 10^5)
+      on the fraction of stars hosting partial Dyson spheres; it is photometric only and cannot test blackbody shape
+      or absence of features.
   - bibcode: 2009ApJ...698.2075C
     register_id: REG-carrigan-iras-dyson-2009
-    relation: Fit 100-600 K blackbodies to IRAS LRS spectra of ~250,000 sources and set Dyson-sphere upper limits;
-      spectral-shape test of the same claim, but at longer wavelengths and much shallower depth.
-  what_would_make_it_open: No listed work uses SPHEREx 3.0-5.0 um channel-resolved residuals over a Gaia XP+2MASS
-    photosphere to bound the fraction of 100-pc dwarfs with a >5 per cent excess that is a featureless single 300-600
-    K blackbody, so delivering that per-channel spectral-shape constraint and ranked residue table is the new contribution.
+    relation: Fitted 100-600 K blackbodies to IRAS LRS spectra of about 250,000 sources; this tests spectral shape,
+      but at about 8-23 um, for IRAS-bright sources, and at much coarser sensitivity, not the 3-5 um Wien side of
+      nearby dwarfs.
+  - bibcode: 2024AJ....168..157C
+    relation: Data-driven search for W1/W2 excesses among 4.9 million FGK main-sequence stars with Gaia/2MASS/unWISE;
+      it measured two-band excess amplitude, not spectral shape or a single-temperature fit.
   queries_run:
   - Dyson sphere candidates Gaia WISE
-  - Dyson sphere infrared excess search
+  - Dyson sphere mid-infrared excess search
   - warm infrared excess main-sequence stars
+  - hot dust excess nearby stars WISE
   - SPHEREx stellar infrared excess
-  - hot dust excess nearby dwarfs WISE
   judged:
     model: claude-opus-5-5
-    prompt_version: critique-g2-novelty-v0.2
+    prompt_version: critique-g2-novelty-v0.3
     date: '2026-11-11'
     by: Claude Code (claude-fable-5-2)
   audited_by_human: false
@@ -177,3 +173,26 @@ provenance:
 scores:
   confounder_robustness: 2
   scored_by: llm
+physics:
+  verdict: revise
+  rationale: 'The core arithmetic is correct: for a 5800 K star and a 400 K radiator I get about 11f at 4.5 um and
+    1.6f at 3.5 um, and with f = 1 per cent the pattern sits roughly 2-5x above a plausible 2-3 per cent systematic
+    floor. The stated null-result bound (covering fraction 0.5 per cent across 300-600 K for all FGKM) is wrong
+    by up to an order of magnitude at the cool-radiator and M-dwarf end. At 300 K, or around a 3200 K host, f =
+    0.5 per cent gives only about 1.2 per cent excess, below the 5 per cent threshold.'
+  checks:
+    energy_budget: ok
+    observability: concern
+    internal_consistency: concern
+    forbidden_physics: ok
+  revision_hints:
+  - 'Restate the threshold as a 4.5 um (or band-integrated 4-5 um) excess. Replace the single null-result bound
+    with a covering-fraction limit that depends on host Teff and T_d: f_min = 0.05 / [(T*/T_d)^4 B(4.5um,T_d)/B(4.5um,T*)],
+    about 0.5 per cent for G/400 K but about 2 per cent for G/300 K or M/400 K. Also state the SPHEREx bright-star
+    saturation cut alongside Ks < 12.'
+  judged:
+    model: claude-opus-5-5
+    prompt_version: critique-g1-physics-v0.2
+    date: '2026-11-11'
+    by: Claude Code (claude-opus-5-5)
+  audited_by_human: false

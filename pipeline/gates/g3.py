@@ -118,7 +118,7 @@ SCHEMA = {
 }
 
 
-def _apply(card: dict, result: dict) -> list[str]:
+def _apply(card: dict, result: dict, judged: dict | None = None) -> list[str]:
     """Fill `licence` and `volume_estimate` on candidate_archives entries the judge also names (same map key or name)."""
     written = []
     for ca in card.get("candidate_archives") or []:

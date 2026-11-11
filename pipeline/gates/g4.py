@@ -56,7 +56,7 @@ SCHEMA = {
 }
 
 
-def _apply(card: dict, result: dict) -> list[str]:
+def _apply(card: dict, result: dict, judged: dict | None = None) -> list[str]:
     written = []
     existing = {c["name"].strip().lower() for c in card.get("confounders") or []}
     for c in result["confounders"]:

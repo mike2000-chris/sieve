@@ -1,5 +1,5 @@
 id: BASE-0040
-version: 1
+version: 2
 title: Motile organisms or cells in plume-deposit samples from the surface of Enceladus
 claim: Plume deposits on the surface of Enceladus contain cells or motile organisms at concentrations of the order
   of one cell per millilitre or more.
@@ -8,9 +8,9 @@ signature_class: insitu_composition
 observable: imaging
 timescale: snapshot
 mechanism: Plume deposits likely reflect and preserve the composition of the internal ocean. Among the independent
-  tests for life the source lists the observation of motile organisms. It states that, depending on instrument sensitivity
-  and the biomass the ocean might support, sample volumes of the order of 1-10 cm3 or more may be needed to reach
-  limits of detection better than 1 cell per ml.
+  tests for life is the observation of motile organisms. Depending on instrument sensitivity and the biomass the
+  ocean might support, sample volumes of the order of 1-10 cm3 or more may be needed to reach limits of detection
+  better than 1 cell per ml.
 data_requirements:
   sample: 1-10 cm3 or more of fresh surface plume deposit
   depth: limit of detection better than 1 cell per ml

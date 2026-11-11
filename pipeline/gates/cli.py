@@ -8,6 +8,11 @@
 `--dry-run` prints the prompt and a cost estimate without calling the API. `--park` moves a card to `parked` through
 pipeline.cards.set_status when G1 says fail or G3 says needs_observations/proprietary (default: verdicts are only logged).
 `all` stops a card after a G1 `fail` unless `--continue-on-fail`. The ADS-backed G2 judge is not part of `all` yet.
+
+Card ids may be `SIEVE-NNNN` (catalogue/cards, logs in catalogue/gate_logs) or `BASE-NNNN` (evaluation/baseline/cards,
+logs in evaluation/baseline/gate_logs). Both are judged blind: the prompt never contains the id or the provenance
+block (pipeline.cards.blind_card). `--all-raw` covers the catalogue only. A real run on a baseline card needs
+`--baseline-ok`; `--dry-run` does not (pipeline.critique.check_baseline_ids).
 """
 from __future__ import annotations
 
@@ -32,6 +37,8 @@ def add_subparsers(sub) -> None:
         p.add_argument("--max-eur", type=float, default=None, help="hard cap for this invocation, on top of config/budget.yaml")
         p.add_argument("--park", action="store_true")
         p.add_argument("--dry-run", action="store_true")
+        p.add_argument("--baseline-ok", action="store_true",
+                       help="allow a real run on BASE-NNNN cards (only after the owner's audit of the baseline sample)")
         if name == "all":
             p.add_argument("--continue-on-fail", action="store_true")
 

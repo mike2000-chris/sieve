@@ -1,5 +1,5 @@
 id: BASE-0019
-version: 1
+version: 2
 title: Optical or infrared laser beacons in direct-imaging observations of exoplanetary systems
 claim: Some exoplanetary systems contain intentionally built optical or infrared laser beacons bright enough to
   be seen by high-contrast imaging instruments.
@@ -8,9 +8,9 @@ signature_class: em_transmission
 observable: imaging
 timescale: snapshot
 mechanism: 'Optical beacons could be a cost-effective means of directed communication between exoplanetary systems,
-  possibly encoded in nanosecond pulses. Order of magnitude as reported by the source from Vides (2019): the Gemini
-  Planet Imager could detect a 24 kW laser from outside the habitable zone of tau Ceti, and the Roman Space Telescope
-  a 7.3 W laser within tau Ceti''s habitable zone.'
+  possibly encoded in nanosecond pulses. Order of magnitude (Vides 2019): the Gemini Planet Imager could detect
+  a 24 kW laser from outside the habitable zone of tau Ceti, and the Roman Space Telescope a 7.3 W laser within
+  tau Ceti''s habitable zone.'
 data_requirements:
   sample: targets where rocky planets in the habitable zone can be characterised by direct imaging
 novelty:

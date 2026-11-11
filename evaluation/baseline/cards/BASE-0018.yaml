@@ -1,5 +1,5 @@
 id: BASE-0018
-version: 1
+version: 5
 title: Nitrogen dioxide from industry in ultraviolet-visible spectra of terrestrial exoplanets
 claim: Some terrestrial exoplanets show NO2 absorption at 0.2-0.7 um at levels elevated by industrial processes.
 domain: technosignature
@@ -7,11 +7,10 @@ signature_class: atmospheric_chemistry
 observable: spectroscopy
 timescale: snapshot
 mechanism: 'Elevated NO2 in an exoplanet atmosphere could be consistent with ongoing industrial processes on the
-  surface. NO2 absorbs broadly at 0.25-0.6 um with little overlap with other terrestrial atmospheric constituents
-  (Socas-Navarro et al.). Order of magnitude as reported from Kopparapu et al.: a 15 m LUVOIR-like telescope could
-  detect Earth-like NO2 levels for a planet around a Sun-like star at 10 pc in about 400 hours (Haqq-Misra et al.);
-  Socas-Navarro et al. quote about 1000 hours at S/N 5. Planets of K dwarfs need less time because less NO2 is lost
-  to photolysis.'
+  surface. NO2 absorbs broadly at 0.25-0.6 um with little overlap with other terrestrial atmospheric constituents.
+  Order of magnitude (Kopparapu et al.): a 15 m LUVOIR-like telescope could detect Earth-like NO2 levels for a planet
+  around a Sun-like star at 10 pc in about 400 hours; Another estimate is about 1000 hours at S/N 5. Planets of
+  K dwarfs need less time because less NO2 is lost to photolysis.'
 data_requirements:
   wavelength_um:
   - 0.2
@@ -20,7 +19,7 @@ data_requirements:
   depth: about 400-1000 hours with a 15 m telescope at 10 pc
 confounders:
 - name: Non-technological sources of NO2
-  exclusion: Not specified; the source says any detection must be evaluated against non-technological explanations.
+  exclusion: Any detection must be evaluated against non-technological explanations.
 novelty:
   status: unchecked
 status: raw

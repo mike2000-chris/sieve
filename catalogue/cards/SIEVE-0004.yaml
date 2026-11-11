@@ -1,5 +1,5 @@
 id: SIEVE-0004
-version: 2
+version: 3
 title: Absence of ice, PAH and aliphatic bands in the residue of WISE waste-heat candidate lists, tested with SPHEREx
   spectra
 claim: 'Every star flagged as an unexplained WISE 3-22 um excess in published waste-heat searches shows, in SPHEREx
@@ -46,43 +46,39 @@ confounders:
   exclusion: Compare SPHEREx 4.5 um flux to WISE W2. A mismatch above 20 per cent flags confusion from the 6 arcsec
     WISE beam.
 novelty:
-  status: partly_done
+  status: open
   confidence: medium
-  rationale: No listed work measures 3.05/3.29/3.4/4.27/4.67 um band equivalent widths with SPHEREx across the union
-    of WISE waste-heat candidate lists. However, Hephaistos IV (2026arXiv260709460Z) already used JWST/MIRI spectroscopy
-    on two Hephaistos candidates and attributed their excesses to background galaxies with Hot DOG and dusty-starburst
-    spectra. That is a spectral test of whether the excess is natural, but on only two sources, with a different
-    instrument and wavelength range. Other follow-ups (Ren 2026, Korn 2026, Ren 2024, Blain 2024) addressed contamination
-    through astrometry, radio data, imaging or stellar parameters rather than solid-state or molecular band strengths,
-    so the card's population-wide SPHEREx band census remains largely untested.
+  rationale: The card measures equivalent widths, or upper limits, of the 3.05, 3.29, 3.40, 4.27 and 4.67 um ice,
+    PAH, aliphatic and CO bands relative to the excess continuum for the residue of WISE waste-heat candidate lists.
+    Earlier searches (2024MNRAS.531..695S, 2014ApJ...792...27W) used WISE broadbands, which can show that an excess
+    exists but cannot resolve these bands. No listed work measures this quantity on these sources. The closest test,
+    Hephaistos IV (2026arXiv260709460Z), took JWST/MIRI spectra of only two candidates at mid-infrared wavelengths
+    and attributed their excess to background galaxies; it did not measure 3-5 um band strengths across the candidate
+    union, which SPHEREx makes possible for the first time.
   closest_prior:
   - bibcode: 2026arXiv260709460Z
-    relation: JWST/MIRI imaging and spectroscopy of Hephaistos candidates D and E found background Hot DOG and dusty-starburst
-      spectra; it is a spectral natural-origin test on 2 sources in the mid-IR, not SPHEREx 2-5 um band EWs for
+    relation: JWST/MIRI imaging and spectroscopy of two Hephaistos candidates attributing the excess to a background
+      Hot DOG and a dusty starburst; covers two objects at MIRI wavelengths, not 3-5 um band equivalent widths across
       the full candidate union.
-  - bibcode: 2026arXiv260703619R
-    relation: Archival astrometric, imaging and radio diagnostics of nine Hephaistos candidates for background contamination;
-      no spectral band measurements, and candidates D and I remain without obvious contamination.
-  - bibcode: 2026arXiv260725701K
-    relation: Photometric and some spectroscopic characterisation of ten candidates (youth indicators, H-alpha,
-      stellar parameters), leaving the excess unexplained; it does not test dust-band features.
   - bibcode: 2024MNRAS.531..695S
     register_id: REG-hephaistos-ii-2024
-    relation: Source of the WISE excess candidate list, which the card would test spectroscopically; the excess
-      was assessed only through broadband SED fits.
-  what_would_make_it_open: No listed work delivers SPHEREx forced-photometry spectra with injection-calibrated equivalent
-    widths or upper limits on the H2O, PAH, aliphatic, CO2 and CO bands for the full union of published WISE waste-heat
-    candidate lists (Hephaistos, the G-hat red galaxies and others), together with a sorting into feature-bearing
-    and featureless sources.
+    relation: Produced seven M-dwarf excess candidates from blackbody-plus-photosphere fits to Gaia/2MASS/WISE broadband
+      photometry; supplies part of the input list but measured no spectral features.
+  - bibcode: 2026ApJ..1001..165H
+    relation: Maps SPHEREx H2O, CO2 and CO ice and 3.28 um PAH features in Cygnus X; same bands and archive, but
+      applied to the interstellar medium, not to waste-heat candidate stars.
+  - bibcode: 2014ApJ...792...27W
+    register_id: REG-g-hat-wise-galaxies-2014-2015
+    relation: WISE broadband waste-heat limits for galaxies; measured mid-infrared excess luminosity, not band strengths.
   queries_run:
-  - Dyson sphere candidates infrared excess
-  - waste heat Gaia WISE technosignature
-  - SPHEREx ice PAH spectra
-  - mid-infrared excess debris disk spectral features
-  - Dyson sphere spectral features dust
+  - Dyson sphere candidates WISE infrared excess
+  - waste heat technosignature mid-infrared spectra
+  - SPHEREx ice PAH absorption features
+  - infrared excess stars ice PAH bands
+  - Gaia WISE Dyson sphere search
   judged:
     model: claude-opus-5-5
-    prompt_version: critique-g2-novelty-v0.2
+    prompt_version: critique-g2-novelty-v0.3
     date: '2026-11-11'
     by: Claude Code (claude-fable-5-2)
   audited_by_human: false

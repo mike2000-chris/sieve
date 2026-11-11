@@ -1,5 +1,5 @@
 id: BASE-0022
-version: 1
+version: 3
 title: Ozone at 9.6 um with methane or nitrous oxide in mid-infrared spectra of rocky planets
 claim: Some rocky habitable-zone planets show the 9.6 um O3 band together with out-of-equilibrium species such as
   CH4 (7.7 um) or N2O in their mid-infrared spectra.
@@ -9,17 +9,15 @@ observable: spectroscopy
 timescale: snapshot
 mechanism: O3 is a photochemical derivative of O2; its strong band near 9.6-9.7 um allows the presence of molecular
   oxygen to be inferred, which is a powerful biosignature when combined with other out-of-equilibrium species such
-  as CH4 and/or N2O (Staguhn et al.). The O3 band lies in the middle of the N-band window and CH4 has a feature
-  at 7.7 um; these features are broad and suitable for spectroscopy and photometry (Lopez-Morales et al.). Staguhn
-  et al. propose transmission, emission and phase-curve spectroscopy at 4-25 um with flux stability better than
-  5 ppm for planets of the nearest M dwarfs.
+  as CH4 and/or N2O. The O3 band lies in the middle of the N-band window and CH4 has a feature at 7.7 um; these
+  features are broad and suitable for spectroscopy and photometry. Transmission, emission and phase-curve spectroscopy
+  at 4-25 um with flux stability better than 5 ppm is proposed for planets of the nearest M dwarfs.
 data_requirements:
   wavelength_um:
   - 4
   - 25
-  depth: better than 5 ppm flux measurement stability (Staguhn et al.)
-  sample: directly imaged nearby planets (Lopez-Morales et al.); rocky planets of the nearest M dwarfs (Staguhn
-    et al.)
+  depth: better than 5 ppm flux measurement stability
+  sample: directly imaged nearby planets; rocky planets of the nearest M dwarfs
 novelty:
   status: unchecked
 status: raw

@@ -1,5 +1,5 @@
 id: BASE-0017
-version: 1
+version: 3
 title: Interstellar artefacts as outliers in Kuiper Belt Object survey demographics
 claim: The catalogues of Kuiper Belt Object surveys contain outliers or anomalies that are interstellar artefacts.
 domain: technosignature
@@ -7,12 +7,12 @@ signature_class: population_statistics
 observable: population_statistic
 timescale: years
 mechanism: Objects from another planetary system passing through the solar system could be functional spacecraft
-  or technological debris. The source states that dozens of Kuiper Belt Object surveys over the last decades have
-  built an increasingly large catalogue and that improved KBO demographics help to identify potential outliers and
-  anomalies that could be interstellar artefacts. No expected number is given.
+  or technological debris. Dozens of Kuiper Belt Object surveys over the last decades have built an increasingly
+  large catalogue, and improved KBO demographics help to identify potential outliers and anomalies that could be
+  interstellar artefacts.
 candidate_archives:
-- name: ground-based Kuiper Belt Object survey catalogues (not named individually)
-  access: not stated in source
+- name: ground-based Kuiper Belt Object survey catalogues
+  access: ''
 method: Demographic analysis of KBO catalogues to flag outliers and anomalies.
 novelty:
   status: unchecked

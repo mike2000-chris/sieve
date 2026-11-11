@@ -1,5 +1,5 @@
 id: BASE-0009
-version: 1
+version: 2
 title: Continuous isotropic radio transmitters of Kardashev Type II or III civilisations in the Andromeda Galaxy
 claim: At least one continuous, isotropic radio transmitter at the power level of a Kardashev Type II or more advanced
   civilisation exists among the roughly one trillion stars of the Andromeda Galaxy.
@@ -9,16 +9,16 @@ observable: radio
 timescale: snapshot
 mechanism: A Type II civilisation harnesses the entire energy output of its star and a Type III that of all stars
   in a galaxy, around 1e36 W for a Milky Way-like galaxy. Such civilisations may be sparse, so a search should cover
-  a large number of stars. The source states that a dedicated FAST survey of M31 would identify any continuous and
-  isotropic transmitter from Type II and Type III civilisations among one trillion stars.
+  a large number of stars. A dedicated FAST survey of M31 would identify any continuous and isotropic transmitter
+  from Type II and Type III civilisations among one trillion stars.
 data_requirements:
   sample: M31 covered with 21 hexagonal tiles of four pointings of the FAST 19-beam receiver
   depth: 10 minutes per pointing
   spectral_resolution: narrow-band (Hz-scale) channels
-method: Deep blind search with the multibeam receiver; the tiling is presented by the source as RFI-resistant.
+method: Deep blind search with the multibeam receiver; the tiling is described as RFI-resistant.
 confounders:
 - name: Radio-frequency interference
-  exclusion: Multibeam tiling (details in the source's Figure 3).
+  exclusion: Multibeam tiling.
 novelty:
   status: unchecked
 status: raw

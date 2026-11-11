@@ -13,6 +13,21 @@
 | Expert review | External researchers rate top 20 cards | 2-3 reviewers | | |
 | Cost | Human hours and euros per surviving / executed card | reported | | |
 
+## Survival at G2
+Owner decisions 2026-11-11, prompts `critique-g2-novelty-v0.3` and `v0.4` (same rules; v0.4 replaced the examples):
+
+| G2 verdict | Meaning | Survival metric |
+| --- | --- | --- |
+| `open` | No listed work tests the claim, including the case where the card's archive or method measures a quantity earlier searches could not measure | passes |
+| `partly_done` | The same measurement exists and the card repeats it on newer or larger data, or a closely related claim was tested | passes |
+| `done` | The same claim was tested with equivalent data and method | fails |
+
+- A paper that only proposes the idea is not a test and supports neither `done` nor `partly_done`. This covers white papers, reviews, roadmaps, the card's own source, and forecast or concept papers (owner decision 2026-11-11): a test is an analysis of observational data that could have shown the pattern.
+- `done` never parks a card automatically. The verdict is written to the card's `novelty` block and to the gate log; moving a card to `parked` remains a separate `pipeline.cards set-status` step taken by a person. The G2 survival fraction is therefore computed from `novelty.status`, not from `status`.
+- Cards without a verdict (`unchecked`, or a run logged as `error` or `unsupported`) are not in the denominator.
+- Verdicts from different prompt versions are not pooled. v0.2 sent every new-archive card to `partly_done`. v0.3 illustrated the new-quantity rule with an example from the taxonomy cell of all cards judged with it (SIEVE-0001..0008), so those verdicts are superseded by a v0.4 run. The prompt version is in `novelty.judged.prompt_version`.
+- Novelty precision (table above) is unchanged: it is the share of `open` verdicts a human audit confirms.
+
 ## Baseline
 `evaluation/baseline/`: literature baseline (owner decision 2026-11-11, replaces the two-hour brainstorm). Published search ideas from white papers, reviews and workshop reports, found through documented ADS queries and transcribed as raw cards `BASE-NNNN` (`provenance.generator_model: human-literature`), gated with the same prompts. Selection rule, how to read the comparison (no volume lift; G2 as "tested", not "proposed") and open decisions: `evaluation/baseline/README.md`.
 

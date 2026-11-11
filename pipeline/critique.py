@@ -10,14 +10,27 @@ G2-fast, G1, G3, G4 (full G2 is run separately with `g2`).
     uv run python -m pipeline.critique g2 SIEVE-0002 [--dry-run] [--max-run-eur 3]
     uv run python -m pipeline.critique g2 --all-unchecked --by "name (model)"
 
-Full G2 (prompt critique-g2-novelty-v0.2): the model writes 3-5 queries; pipeline/literature/retrieve.py runs them
+Full G2 (prompt critique-g2-novelty-v0.4): the model writes 3-5 queries; pipeline/literature/retrieve.py runs them
 against NASA ADS and OpenAlex and keeps the 10 best papers, all with ADS-resolved bibcodes; the model judges
 done | partly_done | open over those papers and the closest register entries. Rule 2 is enforced in code: a bibcode in
 the judge's output that is neither in the retrieved list nor a resolved register bibcode is dropped and logged, and a
 done/partly_done verdict left without any resolved bibcode is logged as `unsupported` and does not reach the card.
 The verdict is written through pipeline/cards.py `set_novelty` (card + `G2` gate-log event); `status` is untouched.
+No G2 verdict parks a card: `done` is written to the `novelty` block and the gate log and nothing else happens
+(owner decision 2026-11-11; G2 has no `--park`). For the survival metric `open` and `partly_done` pass G2 and only
+`done` fails (evaluation/metrics.md). Verdict rules since v0.3 (v0.4 changed only the examples, which no longer come
+from the catalogue's own taxonomy cell): `open` when the card's archive or method measures a
+quantity earlier searches could not measure; `partly_done` when the same measurement is repeated on newer or larger
+data or a closely related claim was tested; a paper that only proposes the idea (white paper, review, forecast or
+concept paper, the card's own source) is not a test.
 Every model call is preceded by the budget checks (monthly cap, calls per run, --max-run-eur against the call's
 worst case) and followed by a record in evaluation/costs/llm_runs.jsonl.
+
+Card sets and blinding: every subcommand takes `SIEVE-NNNN` ids (catalogue/cards, logs in catalogue/gate_logs) and
+`BASE-NNNN` ids (evaluation/baseline/cards, logs in evaluation/baseline/gate_logs; evaluation/baseline/README.md).
+Cards are read and written through pipeline/cards.py. No prompt contains the card id or its provenance block:
+all gates build the card text from `pipeline.cards.blind_card`. `--all-raw` and `--all-unchecked` cover the catalogue
+only, and a real (non-dry) run on a baseline card is refused without `--baseline-ok`.
 
 The fast path ranks register entries by taxonomy match (domain, signature class, observable) and term overlap between
 the card (title, claim, mechanism, method, archives) and the entry (name, hypothesis, method, data used). It writes a
@@ -34,13 +47,14 @@ import re
 import sys
 from pathlib import Path
 
+import httpx
 import yaml
 
+from pipeline import cards as cards_mod
 from pipeline.gates import cli as gate_cli
 
 ROOT = Path(__file__).resolve().parents[1]
-GATE_LOGS = ROOT / "catalogue" / "gate_logs"
-CARDS = ROOT / "catalogue" / "cards"
+CARDS = cards_mod.CARDS   # catalogue only: what --all-raw and --all-unchecked iterate over
 FAST_PATH_VERSION = "g2-register-v0.1"
 TOP_K = 5
 HIT_THRESHOLD = 4.0   # taxonomy alone gives at most 4; a hit needs term overlap on top of a same-cell match
@@ -96,17 +110,30 @@ def register_fast_path(card: dict, register: list[dict] | None = None, k: int = 
 
 
 def log_gate(card_id: str, gate: str, verdict: str, payload: dict, by: str = "agent", prompt_version: str = "v0.1") -> None:
-    GATE_LOGS.mkdir(parents=True, exist_ok=True)
     entry = {"ts": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "event": "gate", "gate": gate,
              "verdict": verdict, "by": by, "prompt_version": prompt_version, **payload}
-    with (GATE_LOGS / f"{card_id}.jsonl").open("a", encoding="utf-8") as fh:
-        fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    cards_mod.append_gate_log(card_id, entry)
+
+
+def load_card(card_id: str) -> dict:
+    card = cards_mod.load_card(card_id)
+    if card is None:
+        raise SystemExit(f"no such card: {card_id}")
+    return card
+
+
+def check_baseline_ids(card_ids: list[str], dry_run: bool, baseline_ok: bool) -> None:
+    """Refuse a real gate run on literature-baseline cards unless it was asked for explicitly."""
+    base = [c for c in card_ids if c.startswith("BASE-")]
+    if base and not dry_run and not baseline_ok:
+        raise SystemExit(f"{', '.join(base[:3])}{' ...' if len(base) > 3 else ''}: baseline cards are gated only after "
+                         "the owner's audit of the sample; use --dry-run, or pass --baseline-ok once that is done")
 
 
 def g2_fast(card_ids: list[str], by: str, dry_run: bool) -> int:
     register = load_register()
     for cid in card_ids:
-        card = yaml.safe_load((CARDS / f"{cid}.yaml").read_text(encoding="utf-8"))
+        card = load_card(cid)
         hits = register_fast_path(card, register)
         strong = [h for h in hits if h["score"] >= HIT_THRESHOLD and h["evidence"]]
         verdict = "register_hit" if strong else "no_register_hit"
@@ -122,12 +149,13 @@ def g2_fast(card_ids: list[str], by: str, dry_run: bool) -> int:
 
 # --- G2: ADS/OpenAlex retrieval + LLM judge ---------------------------------------------------------------------
 
-G2_PROMPT_VERSION = "critique-g2-novelty-v0.2"
+G2_PROMPT_VERSION = "critique-g2-novelty-v0.4"
+G2_PASS = ("open", "partly_done")   # survival metric: only `done` fails G2; no verdict changes a card's status
 G2_EFFORT = {"queries": "low", "judge": "high"}       # query writing is routine; the verdict is the judgement
 G2_MAX_TOKENS = {"queries": 4000, "judge": 12000}     # hard per-call output ceilings; they bound the cost check
 G2_MAX_PAPERS = 10
 G2_MAX_QUERIES = 5
-G2_CARD_FIELDS = ("id", "title", "claim", "domain", "signature_class", "observable", "timescale", "mechanism",
+G2_CARD_FIELDS = ("title", "claim", "domain", "signature_class", "observable", "timescale", "mechanism",
                   "data_requirements", "candidate_archives", "method", "confounders")
 
 _S = {"type": "string"}
@@ -152,9 +180,17 @@ class G2Error(RuntimeError):
     """A card could not be judged (refusal, truncation, no queries); the run continues with the next card."""
 
 
+class G2RetrievalError(G2Error):
+    """ADS or OpenAlex did not answer (rate limit, outage). The card is logged as `error` and the run stops, because
+    every further card would pay for a query-writing call and then fail in the same way."""
+
+
 def card_for_prompt(card: dict) -> str:
-    """The card as the model sees it: content only, without an earlier novelty block, status or provenance."""
-    return yaml.safe_dump({k: card[k] for k in G2_CARD_FIELDS if k in card}, sort_keys=False, allow_unicode=True,
+    """The card as the query writer and the judge see it: blind to its origin (pipeline.cards.blind_card removes id,
+    provenance and version) and reduced to the content fields, so no earlier novelty block, physics block, scores
+    or status reaches the judge."""
+    view = cards_mod.blind_card(card)
+    return yaml.safe_dump({k: view[k] for k in G2_CARD_FIELDS if k in view}, sort_keys=False, allow_unicode=True,
                           width=110)
 
 
@@ -276,7 +312,16 @@ def g2_card(card: dict, register: list[dict], run: dict, use_cache: bool = True)
     queries = list(dict.fromkeys(q.strip() for q in out["queries"] if q.strip()))[:G2_MAX_QUERIES]
     if not queries:
         raise G2Error("queries: model returned no query")
-    found = retrieve(queries, k=G2_MAX_PAPERS, use_cache=use_cache)
+    try:
+        found = retrieve(queries, k=G2_MAX_PAPERS, use_cache=use_cache)
+    except httpx.HTTPError as err:
+        status = getattr(getattr(err, "response", None), "status_code", None)
+        try:
+            host = err.request.url.host
+        except RuntimeError:   # httpx raises this when the error carries no request
+            host = "literature API"
+        raise G2RetrievalError(f"retrieval: {host} failed ({status or type(err).__name__}); queries written: "
+                               f"{queries}; {run['spent']:.3f} EUR spent in this run") from err
     hits = register_fast_path(card, register)
     prompt = task_b.format(card_yaml=card_yaml, today=dt.date.today().isoformat(), queries="; ".join(queries),
                            register_block=register_block(hits, register), papers_block=papers_block(found["papers"]))
@@ -288,7 +333,6 @@ def g2_card(card: dict, register: list[dict], run: dict, use_cache: bool = True)
 
 
 def g2(card_ids: list[str], by: str, dry_run: bool, max_run_eur: float, force: bool, use_cache: bool = True) -> int:
-    from pipeline import cards as cards_mod
     from pipeline.expand import MODEL, _eur, load_yaml
 
     register = load_register()
@@ -296,7 +340,7 @@ def g2(card_ids: list[str], by: str, dry_run: bool, max_run_eur: float, force: b
     run = {"spent": 0.0, "calls": 0, "cap": max_run_eur, "budget": budget, "by": by}
     done, failed = [], []
     for cid in card_ids:
-        card = yaml.safe_load((CARDS / f"{cid}.yaml").read_text(encoding="utf-8"))
+        card = load_card(cid)
         previous = (card.get("novelty") or {}).get("status", "unchecked")
         if previous != "unchecked" and not force:
             print(f"{cid}: novelty already {previous}; skipped (use --force to judge again)")
@@ -305,7 +349,8 @@ def g2(card_ids: list[str], by: str, dry_run: bool, max_run_eur: float, force: b
             prompt = g2_prompts()[0].format(card_yaml=card_for_prompt(card))
             dearest = max(budget["llm"]["pricing"].values(), key=lambda p: p["output_usd_per_mtok"])
             worst = _eur({"input_tokens": len(prompt) // 3 + 12000, "output_tokens": sum(G2_MAX_TOKENS.values())}, dearest)
-            print(f"--- {cid}: Task A prompt ---\n{prompt}\n--- worst case for both calls <= {worst:.2f} EUR ---")
+            print(f"--- {cid}: Task A prompt (the judge prompt, Task B, embeds the same card block) ---\n{prompt}\n"
+                  f"--- worst case for both calls <= {worst:.2f} EUR ---")
             continue
         try:
             res = g2_card(card, register, run, use_cache)
@@ -314,6 +359,10 @@ def g2(card_ids: list[str], by: str, dry_run: bool, max_run_eur: float, force: b
             log_gate(cid, "G2", "error", {"error": str(err), "requested_model": MODEL}, by=by,
                      prompt_version=G2_PROMPT_VERSION)
             failed.append(cid)
+            if isinstance(err, G2RetrievalError):
+                rest = card_ids[card_ids.index(cid) + 1:]
+                print(f"stopping: retrieval is unavailable; not attempted: {', '.join(rest) or 'none'}")
+                break
             continue
         v = res["verdict"]
         payload = {
@@ -366,6 +415,7 @@ def main(argv: list[str] | None = None) -> int:
     g.add_argument("--all-raw", action="store_true")
     g.add_argument("--by", default="agent")
     g.add_argument("--dry-run", action="store_true")
+    g.add_argument("--baseline-ok", action="store_true", help="allow a real run on BASE-NNNN cards")
     g2p = sub.add_parser("g2", help="G2 novelty: LLM queries, ADS/OpenAlex retrieval, LLM judge")
     g2p.add_argument("card_ids", nargs="*")
     g2p.add_argument("--all-unchecked", action="store_true", help="every card with novelty.status unchecked")
@@ -374,8 +424,11 @@ def main(argv: list[str] | None = None) -> int:
     g2p.add_argument("--no-cache", action="store_true", help="ignore cached ADS/OpenAlex responses")
     g2p.add_argument("--by", default="agent")
     g2p.add_argument("--dry-run", action="store_true")
+    g2p.add_argument("--baseline-ok", action="store_true",
+                     help="allow a real run on BASE-NNNN cards (only after the owner's audit of the baseline sample)")
     gate_cli.add_subparsers(sub)
     a = ap.parse_args(argv)
+    check_baseline_ids(list(a.card_ids), a.dry_run, a.baseline_ok)
     if a.cmd == "g2":
         ids = list(a.card_ids)
         if a.all_unchecked:

@@ -1,21 +1,21 @@
 id: BASE-0020
-version: 1
+version: 3
 title: Narrowband X-ray emission at 0.5-2 keV as an interstellar communication signal
 claim: Some sources emit narrowband X-ray emission centred at 0.5-2 keV that is an artificial communication signal.
 domain: technosignature
 signature_class: em_transmission
 observable: spectroscopy
 timescale: snapshot
-mechanism: The source reports a proposal (Hippke and Forgan 2017) that narrowband X-ray emission centred at 0.5-2
-  keV is optimal for communication when the transmitted data rate is maximised, because photons at these energies
-  can be focused most tightly and allow timing to be used in the transmission. If so, X-ray probes with high spectral
-  resolution could search for it. No flux estimate is given.
+mechanism: It has been proposed (Hippke and Forgan 2017) that narrowband X-ray emission centred at 0.5-2 keV is
+  optimal for communication when the transmitted data rate is maximised, because photons at these energies can be
+  focused most tightly and allow timing to be used in the transmission. If so, X-ray probes with high spectral resolution
+  could search for it.
 data_requirements:
   wavelength_um:
   - 0.00062
   - 0.00248
-  spectral_resolution: R ~ 7500 is the capability the source quotes for the recommended X-ray probe
-  depth: not stated; energy range 0.5-2 keV (converted to wavelength by the transcriber)
+  spectral_resolution: R ~ 7500 (capability of the recommended X-ray probe)
+  depth: energy range 0.5-2 keV
 novelty:
   status: unchecked
 status: raw

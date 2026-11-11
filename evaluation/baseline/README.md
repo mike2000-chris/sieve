@@ -15,7 +15,7 @@ Status: 23 sources, 40 raw cards, no gate has been run. Proposed text for the pa
 | `cards/BASE-NNNN.yaml` | The baseline cards, `status: raw`. |
 | `paper-change-v0.2.md` | Proposed changes to paper Sections 7 and 9.1. |
 
-Gate logs for baseline cards go to `evaluation/baseline/gate_logs/` (written by `pipeline.cards set-status BASE-NNNN ...`).
+Gate logs for baseline cards go to `evaluation/baseline/gate_logs/` (written by `pipeline.cards set-status BASE-NNNN ...` and by the gate runner, see "Gating the baseline").
 
 ## Selection rule
 
@@ -37,8 +37,8 @@ Accessible text means, in this order: the open full text behind an e-source link
 
 **Transcription.** The card states what the source states.
 
-- Claim and mechanism are restated from the source. Numbers appear only if the source gives them; where it gives none, the mechanism says so. No estimate was added.
-- `data_requirements`, `candidate_archives`, `method`, `confounders` and `null_result_value` are filled only where the source addresses them, otherwise left out. Archive access paths are "not stated in source".
+- Claim and mechanism are restated from the source. Numbers appear only if the source gives them. No estimate was added, and a missing estimate is not commented on in the card (see "Blinding: normalisation of transcription phrases").
+- `data_requirements`, `candidate_archives`, `method`, `confounders` and `null_result_value` are filled only where the source addresses them, otherwise left out. Archive access paths are empty strings, because no source states one and the schema requires the field.
 - `domain`, `signature_class`, `observable` and `timescale` are assigned by the transcriber from `config/taxonomy.yaml`. They are a classification, not part of the source.
 - `novelty.status` is `unchecked` and `closest_prior` stays empty. The source bibcodes are provenance, not novelty evidence.
 
@@ -103,6 +103,60 @@ The bibcode pattern in the schema rejected arXiv bibcodes such as `2018arXiv1812
 - Suggested reading: report G2 under the "tested" definition for both sets, and add for pipeline cards a second label, proposed before or not, judged against ADS and against the baseline cards. The share of baseline cards that Expand regenerates is then a second rediscovery measure beside the register-based one.
 
 **Blinding.** The gate prompts take the card as YAML. `provenance` (and the id prefix) should be removed before the card reaches a judge, for both sets, so that the judge does not know whether a card is from the literature or from the pipeline and does not see the source bibcodes.
+
+## Gating the baseline
+
+Owner decisions of 2026-11-11 on decision points 2 and 4 below, as implemented:
+
+- **Blind prompts.** `pipeline.cards.blind_card` removes `id`, `version` and the whole `provenance` block (with `source_bibcodes` and `transcribed_by`) before a card enters any gate prompt: G1, G3 and G4 through `pipeline/gates/common.py`, the G2 query writer and judge through `pipeline/critique.py`. This holds for both card sets. `tests/test_blinding.py` checks it on one card of each set.
+- **Runner.** `python -m pipeline.critique g1|g2|g2-fast|g3|g4|all` accepts `BASE-NNNN` ids, reads and writes `evaluation/baseline/cards/` and logs to `evaluation/baseline/gate_logs/`. `--all-raw` and `--all-unchecked` stay catalogue-only. A real run on a baseline card is refused unless `--baseline-ok` is given; `--dry-run` works without it.
+- **G2.** From `critique-g2-novelty-v0.3` on, a paper that only proposes the idea, the card's own source included, is not a test and cannot support `done`. The judge is not told which listed paper is the source.
+- **Not done yet.** No gate has been run on a baseline card. The owner audits a sample of the screening and the cards first.
+
+G3 short-circuits without a model call on a card that lists no archive (`no_archives_listed`), which applies to 34 baseline cards.
+
+## Blinding: normalisation of transcription phrases
+
+Stripping `id` and `provenance` does not help if the card text itself says that it was transcribed. The first version of the cards filled gaps with sentences such as "The source gives no abundance or signal-size estimate". Owner decision of 2026-11-11: such filler is replaced by the schema's empty or absent value, so that a field the source does not address looks the same as on a pipeline card that leaves it out. 42 fields in 27 cards were changed and one emptied `data_requirements` block removed (cards at version 2); nothing a source states was removed.
+
+**Rule.**
+
+1. A sentence that only says something is absent is deleted. The rest of the field is unchanged.
+2. A field that consists only of filler becomes absent if the schema allows it (`data_requirements.depth`; an emptied `data_requirements` block is removed) and an empty string if the schema requires it (`candidate_archives[].access`, `confounders[].exclusion`).
+3. Where filler stands in front of stated content, the filler clause and an attribution lead-in directly after it ("the source says", "the source stresses", "the source names") are deleted and the stated content is kept word for word.
+4. A parenthesis that only reports a gap or the act of transcription is deleted.
+
+**Variants found.**
+
+| Variant | Where | Fields | Replacement |
+| --- | --- | --- | --- |
+| "The source gives no … estimate / threshold." | `mechanism` | 2 | sentence deleted |
+| "The abstract gives no … estimate." | `mechanism` | 2 | sentence deleted |
+| "No … estimate / number / signal size is given." with or without "in the source", "in the passage used", "in the passages used" | `mechanism` | 13 | sentence deleted |
+| "not stated in source" | `candidate_archives[].access` | 11 | empty string |
+| "Not specified." | `confounders[].exclusion` | 3 | empty string |
+| "Not specified; …", "Not specified in the passage used; …", "Not specified beyond …" | `confounders[].exclusion` | 5 | clause deleted, content kept |
+| "not stated; …" | `data_requirements.depth` | 3 | clause deleted, content kept; field removed where the rest was "the sources do not say …" (BASE-0029) |
+| "(sampling not stated)" | `data_requirements.cadence` | 1 | parenthesis deleted |
+| "(not named individually)", "(not named individually in the passage used)" | `candidate_archives[].name` | 2 | parenthesis deleted |
+| "(converted to wavelength by the transcriber)" | `data_requirements.depth` | 1 | parenthesis deleted (same field as one "not stated; …") |
+
+**Attribution wording (owner decision of 2026-11-11, second step).** Sentences that reported content as what the source says were rewritten as direct statements of the same content: 59 passages in 36 cards.
+
+5. The attribution is deleted and the content stands as a statement: "The source states that X" becomes "X". This covers "the source" with any reporting verb (states, lists, notes, reports, adds, mentions, cites, names, refers to), "the source's example / Figure", "named by the source", "as reported by the source(s)", follow-on sentences ("It states that", "It also notes that", "its table of …"), and the same forms with the publication named another way ("The abstract states", "The NASA report notes", "(NASA report)", "Fujii et al. state that", "Li et al. give").
+6. No claim is added, removed or strengthened. Hedges stay as written ("may", "could", "might", "potentially", "in principle"). Where the verb itself carried the hedge, an impersonal form keeps it: "the source argues that X is" becomes "X is argued to be", "expects" becomes "is expected", "proposes" becomes "is proposed", "presents X as the best potential" becomes "X is put forward as the best potential", "cautions that" becomes "However,", "anticipates" becomes "is anticipated".
+7. Citations of other works inside such a sentence are kept as plain citations: "(citing Kissell 1974)" becomes "(Kissell 1974)".
+8. Yearless author pointers to a card's own source are deleted (owner decision of 2026-11-11, third step): "(Li et al.)", "(Margot et al., Figure 1)", where the author is the first author of a bibcode in the card's `source_bibcodes`. 21 pointers in 7 cards (the cards with more than one source, where they said which source a statement came from). Citations of other works are content and stay, with their year: "(Wright et al. 2016)", "as in Enriquez et al. 2017".
+9. Who said what remains recoverable from `provenance.source_bibcodes`, the locators in `sources.yaml` and the git history of the card.
+
+`tests/test_baseline_phrases.py` fails if a filler phrase or an attribution of these kinds, or a close variant ("the source does not specify …", "transcribed", "the sources suggest …"), appears in a baseline card outside `provenance`, and if a card names the first author of one of its own sources with "et al." and no year.
+
+**What remains visible (limitation for the paper).**
+
+- Absent fields. 34 of 40 baseline cards have no `candidate_archives`, 28 no `confounders`, 22 no `data_requirements` and 19 no `method`; six cards have archives with an empty access path and three have a confounder with an empty exclusion. Every pipeline card so far fills all of these. A judge can still tell the two sets apart by how complete a card is, and a difference in gate outcomes between the sets is confounded with completeness.
+- Citations of other works. Baseline cards still cite works other than their source by author and year, e.g. "(Wright et al. 2016)"; one such citation has no year ("Kopparapu et al." in BASE-0018, not a source of that card). Pipeline cards cite nothing, because Expand may not write references from memory. These citations were kept as content. The pointers to a card's own sources are gone (rule 8), so in a card with several sources the text no longer says which statement comes from which source; `sources.yaml` and the git history do.
+- Direct statements read more assertive than the attributed originals, although no claim was changed. A G1 judge may weigh "X is" differently from "the source states that X is".
+- Missing order-of-magnitude estimates in `mechanism` are no longer announced, but they are still missing (decision point 3).
 
 ## Limitations
 
