@@ -5,6 +5,11 @@
     uv run python -m pipeline.archives.adql_run FILE --chunked 1 --count-stmt 0 --out results/x.ecsv
     uv run python -m pipeline.archives.adql_run FILE --run 2 --out results/y.ecsv   # unchunked, checked against cap
 
+Optional login: if GAIA_USER and GAIA_PASSWORD are set (environment or .env) the runner logs in via astroquery
+before the first query; otherwise it stays anonymous. The password is never printed. The authenticated row limit is
+read from config/archives.yaml (gaia.authenticated_row_limit; null = not yet measured, chunking then stays at the
+anonymous size). The COUNT check (rows must equal COUNT) applies in both modes.
+
 Statements in a file are separated by ';'. Lines starting with '--' are comments. A chunked statement must contain
 `random_index BETWEEN :lo AND :hi`; the runner picks chunk bounds so that each chunk's expected size stays under
 CHUNK_TARGET, then checks that the rows add up to the COUNT. Anonymous Gaia results are silently cut at 50,000 rows
@@ -15,18 +20,66 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 import sys
 import time
 from pathlib import Path
 
+import yaml
+
+ROOT = Path(__file__).resolve().parents[2]
 ROW_CAP = 50_000
 CHUNK_TARGET = 40_000
+CHUNK_HEADROOM = 0.8  # authenticated chunks are sized at 80 % of the measured limit
 RANDOM_INDEX_MAX = {"gaiadr3": 1_811_709_770, "gaiadr4": None}  # DR4: read MAX(random_index) on release day
 
 
 def statements(path: Path) -> list[str]:
     body = "\n".join(l for l in path.read_text(encoding="utf-8").splitlines() if not l.strip().startswith("--"))
     return [s.strip() for s in body.split(";") if s.strip()]
+
+
+def authenticated_row_limit(config_path: Path | None = None) -> int | None:
+    """Row limit for authenticated Gaia jobs from config/archives.yaml, or None while it is unmeasured."""
+    cfg = yaml.safe_load((config_path or ROOT / "config" / "archives.yaml").read_text(encoding="utf-8"))
+    for a in cfg.get("archives", []):
+        if a.get("key") == "gaia":
+            v = a.get("authenticated_row_limit")
+            return int(v) if v else None
+    return None
+
+
+def gaia_login(env=None) -> str | None:
+    """Log in if GAIA_USER and GAIA_PASSWORD are set; return the user name, or None (anonymous).
+
+    Never prints or returns the password. A failed login falls back to anonymous with a warning.
+    """
+    from dotenv import load_dotenv
+
+    if env is None:
+        load_dotenv(ROOT / ".env")
+        env = os.environ
+    user, pw = env.get("GAIA_USER"), env.get("GAIA_PASSWORD")
+    if not (user and pw):
+        print("Gaia archive: anonymous")
+        return None
+    from astroquery.gaia import Gaia
+
+    try:
+        Gaia.login(user=user, password=pw)
+    except Exception as e:  # do not echo the message: it may contain request details
+        print(f"Gaia archive: login failed ({type(e).__name__}); continuing anonymous")
+        return None
+    print(f"Gaia archive: authenticated as {user}")
+    return user
+
+
+def limits(authenticated: bool, config_path: Path | None = None) -> tuple[int, int]:
+    """(row_cap, chunk_target). Authenticated with a measured limit: cap = limit, chunks = 80 % of it."""
+    lim = authenticated_row_limit(config_path) if authenticated else None
+    if lim is None:
+        return ROW_CAP, CHUNK_TARGET
+    return lim, int(lim * CHUNK_HEADROOM)
 
 
 def _launch(adql: str):
@@ -53,19 +106,19 @@ def random_index_max(adql: str) -> int:
     return n
 
 
-def run_chunked(adql: str, total: int):
+def run_chunked(adql: str, total: int, row_cap: int = ROW_CAP, chunk_target: int = CHUNK_TARGET):
     from astropy.table import vstack
 
     if ":lo" not in adql or ":hi" not in adql:
         raise SystemExit("chunked statement needs 'random_index BETWEEN :lo AND :hi'")
     rmax = random_index_max(adql)
-    n_chunks = max(1, math.ceil(total / CHUNK_TARGET))
+    n_chunks = max(1, math.ceil(total / chunk_target))
     edges = [round(i * (rmax + 1) / n_chunks) for i in range(n_chunks + 1)]
     parts, log = [], []
     for lo, hi in zip(edges[:-1], edges[1:]):
         t, dt = _launch(adql.replace(":lo", str(lo)).replace(":hi", str(hi - 1)))
-        if len(t) >= ROW_CAP:
-            raise SystemExit(f"chunk {lo}-{hi - 1} hit the {ROW_CAP:,}-row cap; use more chunks")
+        if len(t) >= row_cap:
+            raise SystemExit(f"chunk {lo}-{hi - 1} hit the {row_cap:,}-row cap; use more chunks")
         print(f"  chunk {lo:>13,}-{hi - 1:<13,} {len(t):>7,} rows  {dt:.1f} s")
         log.append({"lo": lo, "hi": hi - 1, "rows": len(t), "seconds": round(dt, 1)})
         parts.append(t)
@@ -95,7 +148,12 @@ def main() -> int:
             print(f"[{i}] {s[:160].replace(chr(10), ' ')}{'...' if len(s) > 160 else ''}")
         return 0
 
-    record = {"file": str(a.file), "started": time.strftime("%Y-%m-%dT%H:%M:%S%z")}
+    user = gaia_login()
+    row_cap, chunk_target = limits(user is not None)
+    if user and row_cap == ROW_CAP:
+        print("authenticated_row_limit is null in config/archives.yaml: keeping anonymous chunk size; measure the limit")
+    record = {"file": str(a.file), "started": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+              "gaia_user": user or "anonymous", "row_cap": row_cap, "chunk_target": chunk_target}
     table = None
     if a.count is not None:
         record["count"] = run_count(stmts[a.count])
@@ -103,12 +161,12 @@ def main() -> int:
         if a.count_stmt is None:
             raise SystemExit("--chunked needs --count-stmt")
         total = run_count(stmts[a.count_stmt])
-        table, record["chunks"] = run_chunked(stmts[a.chunked], total)
+        table, record["chunks"] = run_chunked(stmts[a.chunked], total, row_cap, chunk_target)
         record["count"] = total
     if a.run is not None:
         table, dt = _launch(stmts[a.run])
-        if len(table) >= ROW_CAP:
-            raise SystemExit(f"result hit the {ROW_CAP:,}-row cap; chunk this statement")
+        if len(table) >= row_cap:
+            raise SystemExit(f"result hit the {row_cap:,}-row cap; chunk this statement")
         record.update(rows=len(table), seconds=round(dt, 1))
         print(f"{len(table):,} rows ({dt:.1f} s)")
     if a.out and table is not None:

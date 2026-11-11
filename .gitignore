@@ -19,6 +19,9 @@ analyses/**/*.hdf5
 *.onnx
 *.bin
 
+# raw literature API responses (ADS, OpenAlex) cached by gate G2
+.cache/
+
 # notebooks checkpoints
 .ipynb_checkpoints/
 

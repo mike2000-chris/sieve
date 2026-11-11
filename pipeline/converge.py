@@ -1,6 +1,6 @@
 """Converge stage: portfolio selection under the constraints in config/budget.yaml.
 
-Implemented: constraint-aware greedy selection over scored cards. Scoring itself (prompts/score-v0.1.md) is a Phase 0 task.
+Implemented: constraint-aware greedy selection over scored cards. Scoring itself (prompts/score-v0.2.md) is a Phase 0 task.
 """
 from __future__ import annotations
 

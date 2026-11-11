@@ -11,7 +11,7 @@ method: Proposal to scrutinise LRO images for SETI purposes, piggy-backing on ro
 result: No search results reported; the papers argue that existing planetary image archives are a low-cost SETI target and that current searches leave the presence of probes poorly constrained.
 outcome: method_demonstration
 limits: No systematic search executed; very low prior probability acknowledged.
-confounders_found: []
+confounders_found: []  # source names none (checked 2026-11-11); not filled from memory, CLAUDE.md rule 2
 lesson: PDS imagery is a large, under-searched archive for artefact hypotheses; a quantified completeness measure is the missing piece.
 bibcodes: { status: resolved, values: ["2013AcAau..89..261D", "2012AcAau..72...15H"] }
 urls: [https://arxiv.org/abs/1111.1212]

@@ -1,5 +1,5 @@
 id: SIEVE-0009
-version: 1
+version: 2
 title: Integrated 3-5 um excess beyond stellar-population models in SPHEREx spectra of Milky Way and M31 globular
   clusters
 claim: Among about 150 Milky Way and about 400 M31 globular clusters, the 3.5-5 um integrated flux in SPHEREx spectra
@@ -55,7 +55,47 @@ confounders:
   exclusion: Fit the excess-versus-[Fe/H] trend across all clusters and test outliers against that trend, not against
     the absolute model.
 novelty:
-  status: unchecked
+  status: partly_done
+  confidence: medium
+  rationale: Barmby et al. 2012 (2012AJ....143...87B) already compared integrated 3.6 and 4.5 um (IRAC) colours
+    of massive old M31 globular clusters with simple-stellar-population predictions. They found the models reproduce
+    the colours reasonably well, apart from a small, not statistically significant red offset in [4.5]-[5.8] attributed
+    to missing circumstellar dust. That is a closely related test of an integrated 3-5 um excess over SSP models,
+    run on broadband photometry with a smaller, M31-only sample. The card's SPHEREx spectral version adds the Milky
+    Way clusters, a per-cluster outlier fraction above 5 per cent, CO-band modelling and a radial-profile test.
+    The Ĝ survey (2014ApJ...792...27W, 2015ApJS..217...25G) sets waste-heat limits on whole galaxies, not on globular
+    clusters.
+  closest_prior:
+  - bibcode: 2012AJ....143...87B
+    relation: Tested integrated IRAC 3.6/4.5/5.8 um colours of massive M31 globular clusters against SSP models
+      and found agreement except a small, insignificant [4.5]-[5.8] red offset; it used Spitzer photometry of a
+      smaller M31-only sample, with no per-cluster outlier census or waste-heat framing.
+  - bibcode: 2014ApJ...792...27W
+    register_id: REG-g-hat-wise-galaxies-2014-2015
+    relation: Formalism converting mid-IR excess into waste-heat luminosity limits, applied to galaxies rather than
+      globular clusters.
+  - bibcode: 2015ApJS..217...25G
+    register_id: REG-g-hat-wise-galaxies-2014-2015
+    relation: WISE search of ~1e5 galaxies for mid-IR reprocessing of starlight, giving upper limits at galaxy scale
+      with no cluster-level SSP-residual analysis.
+  - bibcode: 2000AJ....119..727B
+    relation: Found up to 0.2 mag V-K offsets between M31 globular cluster colours and SSP models, attributed to
+      model systematics; this covers only the optical-near-IR, not 3-5 um.
+  what_would_make_it_open: No listed work delivers a per-cluster SPHEREx spectral census of the 3.5-5 um excess
+    over SSP fits to 0.75-2.5 um for both Milky Way and M31 globular clusters, with an outlier fraction above 5
+    per cent, tests against metallicity and AGB counts, and radial-profile checks.
+  queries_run:
+  - globular clusters waste heat Dyson
+  - infrared excess globular clusters integrated light
+  - globular clusters mid-infrared dust AGB
+  - SPHEREx globular clusters spectra
+  - M31 globular clusters infrared stellar population
+  judged:
+    model: claude-opus-5-5
+    prompt_version: critique-g2-novelty-v0.2
+    date: '2026-11-11'
+    by: Claude Code (claude-fable-5-2)
+  audited_by_human: false
 null_result_value: A non-detection limits the fraction of globular-cluster starlight reprocessed into 300-700 K
   emission to below about 1 per cent per cluster across about 550 clusters, a sample with near-zero natural dust
   foreground.

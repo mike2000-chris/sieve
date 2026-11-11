@@ -1,5 +1,5 @@
 id: SIEVE-0010
-version: 1
+version: 2
 title: Kiloparsec-scale 4-5 um excess patches uncorrelated with star formation in SPHEREx maps of the LMC, SMC,
   M31 and M33
 claim: In pixel-resolved SPHEREx maps of the LMC, SMC, M31 and M33, the 4-5 um continuum excess over a stellar continuum
@@ -56,7 +56,48 @@ confounders:
   exclusion: Cross-match with Legacy Survey and 2MASS extended source catalogues. Background-galaxy excess appears
     as point-like knots with redshifted PAH features.
 novelty:
-  status: unchecked
+  status: partly_done
+  confidence: medium
+  rationale: 'The waste-heat hypothesis behind the card has been tested only at the level of whole galaxies: the
+    Ĝ papers use WISE mid-IR colours of about 1e5 galaxies (2014ApJ...792...27W, 2015ApJS..217...25G), and Curtis
+    et al. 2026 fit SPS models with a Dyson-sphere component to 129 galaxies. Garrett 2015 proposed comparing resolved
+    kpc-scale mid-IR and radio images to find partly occupied galaxies but did not run that test, and Curtis et
+    al. 2026 list resolved fitting as a future step. No listed work maps a spatially resolved 4-5 um excess in the
+    LMC, SMC, M31 or M33 with SPHEREx spectra and star-formation tracers removed. The card is therefore a resolved,
+    spectrally decomposed extension of a tested integrated-galaxy claim, and also runs a test that has only been
+    proposed.'
+  closest_prior:
+  - bibcode: 2015ApJS..217...25G
+    register_id: REG-g-hat-wise-galaxies-2014-2015
+    relation: Searched WISE extended-source photometry of about 1e5 galaxies for integrated mid-IR waste-heat excess;
+      it used whole-galaxy colours, not resolved sub-kpc maps of Local Group galaxies with PAH, Br-alpha and 24
+      um dust removed.
+  - bibcode: 2015A&A...581L...5G
+    relation: Proposed comparing resolved kpc-scale mid-IR and radio images to identify partial Type II/III civilisations
+      but did not perform a resolved analysis; the card would run a spatially resolved version with SPHEREx.
+  - bibcode: 2026arXiv260812458C
+    relation: Set per-galaxy integrated limits on Dyson-swarm covering fraction in 129 galaxies using SPS fits,
+      and proposes resolved fitting as a future step; it does not include resolved patch searches in Local Group
+      galaxies.
+  - bibcode: 2014ApJ...792...27W
+    register_id: REG-g-hat-wise-galaxies-2014-2015
+    relation: Set up the waste-heat formalism and gave a zeroth-order null result for Type III civilisations from
+      integrated WISE photometry; the test is not spatially resolved.
+  what_would_make_it_open: A friends-of-friends search for contiguous regions larger than 100 pc with more than
+    20 per cent 4-5 um excess in resolved SPHEREx spectral maps of the LMC, SMC, M31 and M33, after removing PAH,
+    Br-alpha and 24 um-traced dust, has not been done by any listed work and would be the new contribution.
+  queries_run:
+  - waste heat Kardashev galaxies infrared
+  - resolved waste heat Andromeda civilization
+  - near-infrared excess emission Magellanic Clouds
+  - SPHEREx Local Group galaxies
+  - hot dust excess M31 M33
+  judged:
+    model: claude-opus-5-5
+    prompt_version: critique-g2-novelty-v0.2
+    date: '2026-11-11'
+    by: Claude Code (claude-fable-5-2)
+  audited_by_human: false
 null_result_value: A non-detection limits the fraction of the stellar disks of four Local Group galaxies that host
   reprocessing of more than 5 per cent of starlight at 300-600 K to below the smallest resolved patch area, about
   1e-4 of each disk.

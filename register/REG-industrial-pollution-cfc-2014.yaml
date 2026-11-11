@@ -11,7 +11,7 @@ method: Identify pollutants with strong features in the JWST band and estimate i
 result: About 1.2 days (CCl3F) and 1.7 days (CF4) of total integration would detect or constrain concentrations at about ten times current terrestrial levels.
 outcome: method_demonstration
 limits: Detectability estimate only; no observations; applies at ten times present-day Earth levels.
-confounders_found: []
+confounders_found: []  # source names none (checked 2026-11-11); not filled from memory, CLAUDE.md rule 2
 lesson: Industrial gases have no known abiotic source, so their non-detection in existing JWST transmission data is a free upper limit worth computing.
 bibcodes: { status: resolved, values: ["2014ApJ...792L...7L"] }
 urls: [https://arxiv.org/abs/1406.3025]
