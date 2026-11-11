@@ -9,7 +9,7 @@ hypothesis: PAHs, carbonate globules and single-domain magnetite in ALH84001 are
 data_used: [Antarctic meteorite ALH84001, scanning and transmission electron microscopy, nanoscale colocated analyses]
 method: Electron microscopy of fracture surfaces and carbonate globules; contamination studies; later petrology and nanoscale mineral-organic analyses.
 result: PAHs and magnetite-bearing carbonate globules resembling bacterially induced precipitates were reported, with inorganic formation acknowledged as possible; later work describes shock and thermal metamorphism producing the magnetite and abiotic organic synthesis during serpentinisation and carbonation.
-outcome: confirmed_natural
+outcome: contested  # owner judgement 2026-11-11: abiotic pathways are documented for all four lines of evidence, but the case is not regarded as fully closed
 limits: Morphology alone is ambiguous at sub-micron scale.
 confounders_found: [shock melting of carbonates, thermal decomposition producing magnetite, abiotic organic synthesis by water-rock reaction, terrestrial contamination]
 lesson: Morphology and co-location are not biogenicity; generate the abiotic formation pathway alongside every biological hypothesis.

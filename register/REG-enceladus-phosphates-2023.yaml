@@ -11,7 +11,7 @@ method: Re-analysis of CDA mass spectra, laboratory reproduction of the spectra,
 result: A small number of ocean-derived grains show Na3PO4 and Na2HPO4; inferred ocean phosphate of a few mM, at least 100 times Earth's ocean, explained by carbonate-rich fluid chemistry.
 outcome: confirmed_signal_no_life_claim
 limits: Based on a small number of grains.
-confounders_found: []
+confounders_found: []  # source names none (checked 2026-11-11); not filled from memory, CLAUDE.md rule 2
 lesson: Rare-event searches in old in-situ archives can overturn model-based expectations; look for the few outlier spectra.
 bibcodes: { status: resolved, values: ["2023Natur.618..489P", "2023EGUGA..25.5425P"] }
 related: [REG-enceladus-hydrogen-2017, REG-enceladus-organics-khawaja-2025]
