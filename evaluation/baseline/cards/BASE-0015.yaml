@@ -1,5 +1,5 @@
 id: BASE-0015
-version: 1
+version: 2
 title: Non-terrestrial artefacts on the lunar surface in Lunar Reconnaissance Orbiter images
 claim: At least one non-terrestrial artefact is present on the lunar surface and identifiable in Lunar Reconnaissance
   Orbiter images.
@@ -16,7 +16,7 @@ data_requirements:
   sample: more than 2 million LRO images
 candidate_archives:
 - name: Lunar Reconnaissance Orbiter images
-  access: not stated in source
+  access: ''
 method: Automatic processing of the image set; the source calls development of such AI a low-cost initial activity
   and cites an unsupervised machine-learning approach (Lesnikowski et al. 2020) and an earlier discussion of examining
   lunar images (Davies and Wagner 2013).

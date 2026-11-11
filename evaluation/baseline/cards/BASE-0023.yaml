@@ -1,5 +1,5 @@
 id: BASE-0023
-version: 1
+version: 2
 title: Methane together with carbon dioxide in anoxic terrestrial exoplanet atmospheres
 claim: Some terrestrial exoplanets with oxygen-free atmospheres show CH4 and CO2 together, a chemical disequilibrium.
 domain: biosignature
@@ -9,7 +9,7 @@ timescale: snapshot
 mechanism: The source argues that atmospheric chemical disequilibrium is an exoplanet biosignature and that a CH4
   + CO2 combination could be a common sign of life on planets with oxygen-free atmospheres such as the ancient Earth.
   It states that the combination is potentially detectable with JWST and readily detectable with some next-generation
-  space telescopes. The abstract gives no abundance or flux estimate.
+  space telescopes.
 novelty:
   status: unchecked
 status: raw

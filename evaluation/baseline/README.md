@@ -37,8 +37,8 @@ Accessible text means, in this order: the open full text behind an e-source link
 
 **Transcription.** The card states what the source states.
 
-- Claim and mechanism are restated from the source. Numbers appear only if the source gives them; where it gives none, the mechanism says so. No estimate was added.
-- `data_requirements`, `candidate_archives`, `method`, `confounders` and `null_result_value` are filled only where the source addresses them, otherwise left out. Archive access paths are "not stated in source".
+- Claim and mechanism are restated from the source. Numbers appear only if the source gives them. No estimate was added, and a missing estimate is not commented on in the card (see "Blinding: normalisation of transcription phrases").
+- `data_requirements`, `candidate_archives`, `method`, `confounders` and `null_result_value` are filled only where the source addresses them, otherwise left out. Archive access paths are empty strings, because no source states one and the schema requires the field.
 - `domain`, `signature_class`, `observable` and `timescale` are assigned by the transcriber from `config/taxonomy.yaml`. They are a classification, not part of the source.
 - `novelty.status` is `unchecked` and `closest_prior` stays empty. The source bibcodes are provenance, not novelty evidence.
 
@@ -113,7 +113,41 @@ Owner decisions of 2026-11-11 on decision points 2 and 4 below, as implemented:
 - **G2.** From `critique-g2-novelty-v0.3` on, a paper that only proposes the idea, the card's own source included, is not a test and cannot support `done`. The judge is not told which listed paper is the source.
 - **Not done yet.** No gate has been run on a baseline card. The owner audits a sample of the screening and the cards first.
 
-What blinding does not remove is wording. 33 of the 40 cards contain transcription phrases such as "the source gives no estimate" or "not stated in source", and most have no `candidate_archives`, `method` or `confounders`. A judge can infer from that text that a card was transcribed. G3 also short-circuits without a model call on a card that lists no archive (`no_archives_listed`), which applies to 34 baseline cards.
+G3 short-circuits without a model call on a card that lists no archive (`no_archives_listed`), which applies to 34 baseline cards.
+
+## Blinding: normalisation of transcription phrases
+
+Stripping `id` and `provenance` does not help if the card text itself says that it was transcribed. The first version of the cards filled gaps with sentences such as "The source gives no abundance or signal-size estimate". Owner decision of 2026-11-11: such filler is replaced by the schema's empty or absent value, so that a field the source does not address looks the same as on a pipeline card that leaves it out. 42 fields in 27 cards were changed and one emptied `data_requirements` block removed (cards at version 2); nothing a source states was removed.
+
+**Rule.**
+
+1. A sentence that only says something is absent is deleted. The rest of the field is unchanged.
+2. A field that consists only of filler becomes absent if the schema allows it (`data_requirements.depth`; an emptied `data_requirements` block is removed) and an empty string if the schema requires it (`candidate_archives[].access`, `confounders[].exclusion`).
+3. Where filler stands in front of stated content, the filler clause and an attribution lead-in directly after it ("the source says", "the source stresses", "the source names") are deleted and the stated content is kept word for word.
+4. A parenthesis that only reports a gap or the act of transcription is deleted.
+
+**Variants found.**
+
+| Variant | Where | Fields | Replacement |
+| --- | --- | --- | --- |
+| "The source gives no … estimate / threshold." | `mechanism` | 2 | sentence deleted |
+| "The abstract gives no … estimate." | `mechanism` | 2 | sentence deleted |
+| "No … estimate / number / signal size is given." with or without "in the source", "in the passage used", "in the passages used" | `mechanism` | 13 | sentence deleted |
+| "not stated in source" | `candidate_archives[].access` | 11 | empty string |
+| "Not specified." | `confounders[].exclusion` | 3 | empty string |
+| "Not specified; …", "Not specified in the passage used; …", "Not specified beyond …" | `confounders[].exclusion` | 5 | clause deleted, content kept |
+| "not stated; …" | `data_requirements.depth` | 3 | clause deleted, content kept; field removed where the rest was "the sources do not say …" (BASE-0029) |
+| "(sampling not stated)" | `data_requirements.cadence` | 1 | parenthesis deleted |
+| "(not named individually)", "(not named individually in the passage used)" | `candidate_archives[].name` | 2 | parenthesis deleted |
+| "(converted to wavelength by the transcriber)" | `data_requirements.depth` | 1 | parenthesis deleted (same field as one "not stated; …") |
+
+`tests/test_baseline_phrases.py` fails if one of these phrases, or a close variant ("the source does not specify …", "transcribed"), appears in a baseline card outside `provenance`.
+
+**What remains visible (limitation for the paper).**
+
+- Absent fields. 34 of 40 baseline cards have no `candidate_archives`, 28 no `confounders`, 22 no `data_requirements` and 19 no `method`; six cards have archives with an empty access path and three have a confounder with an empty exclusion. Every pipeline card so far fills all of these. A judge can still tell the two sets apart by how complete a card is, and a difference in gate outcomes between the sets is confounded with completeness.
+- Attribution wording. 39 sentences in 30 cards report content as "The source states …", "The source lists …", "the source's example is …". These carry what the source says, so they were left as they are under the rule "do not change stated content". They are a tell of the same kind as the filler and need a separate decision: rewording them into direct statements would remove it, at the price of presenting attributed claims as the card's own.
+- Missing order-of-magnitude estimates in `mechanism` are no longer announced, but they are still missing (decision point 3).
 
 ## Limitations
 

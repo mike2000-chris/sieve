@@ -1,5 +1,5 @@
 id: BASE-0005
-version: 1
+version: 2
 title: 'Galaxy-wide waste heat: smooth mid-infrared emission not associated with dust or star formation in galaxies'
 claim: Some galaxies show mid-infrared emission from a smoothly distributed component with large mid- to far-infrared
   colours and without the PAH features or the association with star formation expected from dust.
@@ -15,9 +15,9 @@ mechanism: 'A spacefaring civilisation that has settled a galaxy reprocesses par
   and hence waste heat, are well mixed: waste heat should be conspicuous between spiral arms and throughout ellipticals.'
 candidate_archives:
 - name: WISE
-  access: not stated in source
+  access: ''
 - name: JWST (mid-infrared spectroscopy)
-  access: not stated in source
+  access: ''
 method: Catalogue the mid-infrared luminosities of galaxies; break the degeneracy with dust using infrared spectra
   (PAH features) or far-infrared measurements; for resolved galaxies fit stellar population synthesis models with
   an added smoothly varying waste-heat component to the SEDs of individual pixels.

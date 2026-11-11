@@ -1,5 +1,5 @@
 id: BASE-0012
-version: 1
+version: 2
 title: Artificial objects in orbit around exoplanets in existing transit light curves
 claim: Some transiting exoplanets show light-curve features produced by artificial objects in orbit around the planet.
 domain: technosignature
@@ -8,10 +8,10 @@ observable: time_series
 timescale: days
 mechanism: The source lists 'complex light curve analysis, including objects in orbit around exoplanets' as a new
   search on existing data; its table of technosignatures names starshades in transit and a Clarke exobelt in transit
-  among the technosignatures discussed. No signal-size estimate is given in the passage used.
+  among the technosignatures discussed.
 candidate_archives:
-- name: existing exoplanet transit photometry (not named individually in the passage used)
-  access: not stated in source
+- name: existing exoplanet transit photometry
+  access: ''
 method: Forward modelling of technosignature observations to produce a catalogue of possible light curves, then
   a check against existing and upcoming transit photometry. Exomoon and exoring discovery are named as ancillary
   benefits.

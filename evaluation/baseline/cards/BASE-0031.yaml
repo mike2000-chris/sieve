@@ -1,5 +1,5 @@
 id: BASE-0031
-version: 1
+version: 2
 title: Circular polarisation from chiral biological pigments in spectropolarimetry of planets
 claim: Some planets show a circular-polarisation signal in reflected light caused by chiral molecules such as chlorophyll.
 domain: biosignature
@@ -9,7 +9,7 @@ timescale: snapshot
 mechanism: The source states that circular spectropolarimetry can in principle detect chiral signals, e.g. due to
   chlorophyll, and that its application as a biosignature beyond the Earth is very challenging. It also notes that
   spectropolarimetry of Earthshine suggests the redox disequilibrium of Earth's atmosphere (simultaneous CH4 and
-  O2). No signal-size estimate is given.
+  O2).
 novelty:
   status: unchecked
 status: raw

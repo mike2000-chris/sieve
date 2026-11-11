@@ -1,5 +1,5 @@
 id: BASE-0035
-version: 1
+version: 2
 title: Enantiomeric excess and isomer selectivity of organic molecules in Martian samples
 claim: Some organic molecules preserved in Martian samples show an enantiomeric excess, a diastereoisomeric preference
   or a restricted subset of structural isomers.
@@ -16,7 +16,7 @@ confounders:
   exclusion: l-excesses of some amino acids in the Tagish Lake meteorite show non-biological processes can produce
     them; the source calls for a holistic interpretation over several compounds and their relationships.
 - name: Racemisation over time
-  exclusion: Not specified.
+  exclusion: ''
 novelty:
   status: unchecked
 status: raw

@@ -1,5 +1,5 @@
 id: BASE-0018
-version: 1
+version: 2
 title: Nitrogen dioxide from industry in ultraviolet-visible spectra of terrestrial exoplanets
 claim: Some terrestrial exoplanets show NO2 absorption at 0.2-0.7 um at levels elevated by industrial processes.
 domain: technosignature
@@ -20,7 +20,7 @@ data_requirements:
   depth: about 400-1000 hours with a 15 m telescope at 10 pc
 confounders:
 - name: Non-technological sources of NO2
-  exclusion: Not specified; the source says any detection must be evaluated against non-technological explanations.
+  exclusion: Any detection must be evaluated against non-technological explanations.
 novelty:
   status: unchecked
 status: raw

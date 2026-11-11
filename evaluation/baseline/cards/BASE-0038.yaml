@@ -1,5 +1,5 @@
 id: BASE-0038
-version: 1
+version: 2
 title: Isotopic fractionation of carbon, sulfur and other light elements as a metabolic signature in planetary samples
 claim: Some planetary samples show isotope ratios of carbon, sulfur or other CHONS elements shifted in the way biological
   metabolism shifts them.
@@ -15,9 +15,9 @@ mechanism: Metabolic activity fractionates isotopes; carbon and sulfur are the e
   it only together with less indirect biosignatures.
 confounders:
 - name: Atmospheric fractionation of carbon and sulfur
-  exclusion: Not specified.
+  exclusion: ''
 - name: Abiotic synthesis (Fischer-Tropsch reactions in hydrothermal settings) and chondritic organic matter
-  exclusion: Not specified; isotopic ranges overlap with biogenic ones (Westall et al.).
+  exclusion: Isotopic ranges overlap with biogenic ones (Westall et al.).
 novelty:
   status: unchecked
 status: raw

@@ -1,5 +1,5 @@
 id: BASE-0021
-version: 1
+version: 2
 title: Molecular oxygen bands together with methane in transmission or reflected-light spectra of nearby rocky planets
 claim: Some rocky planets in the habitable zones of nearby stars show O2 absorption at 0.688, 0.762 or 1.269 um
   together with CH4, a disequilibrium combination.
@@ -24,7 +24,7 @@ confounders:
   exclusion: Detect the companion molecules that reveal abiotic O2 mechanisms (source's Figure 1, after Meadows
     et al. 2018).
 - name: Refraction, clouds and hazes in transmission
-  exclusion: Not specified.
+  exclusion: ''
 novelty:
   status: unchecked
 status: raw

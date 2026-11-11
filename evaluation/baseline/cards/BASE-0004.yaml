@@ -1,5 +1,5 @@
 id: BASE-0004
-version: 1
+version: 2
 title: Infrared excess from waste heat of circumstellar technology in WISE and Gaia catalogues of nearby stars
 claim: Some nearby stars, in particular old stars, show a mid-infrared excess that is not explained by circumstellar
   dust, as expected if technology around the star re-radiates intercepted starlight as waste heat.
@@ -10,14 +10,14 @@ timescale: snapshot
 mechanism: Waste heat is an inevitable consequence of energy use. In the AGENT parameterisation (Wright et al. 2014)
   technology blocks a fraction of the starlight and re-radiates a fraction as heat at a characteristic temperature;
   the infrared brightening is a significantly stronger signal than the optical decrement and is more omnidirectional
-  and persistent. The source gives no numerical threshold for stars.
+  and persistent.
 candidate_archives:
 - name: WISE
-  access: not stated in source
+  access: ''
 - name: Gaia
-  access: not stated in source
+  access: ''
 - name: JWST (mid-infrared spectroscopy)
-  access: not stated in source
+  access: ''
 method: Build a nearly complete catalogue of nearby stars with infrared excesses from WISE and Gaia; identify the
   origin of the excesses with JWST mid-infrared spectroscopy; compute upper limits on circumstellar energy use.
   Searches for debris disks can be modified slightly to become searches for waste heat.

@@ -1,5 +1,5 @@
 id: BASE-0001
-version: 1
+version: 2
 title: Artificial greenhouse gases (perfluorocarbons) in 8-12 um spectra of planets outside the habitable zone
 claim: Some planets outside the formal habitable zone show 8-12 um spectral features of artificial greenhouse gases
   such as perfluorocarbons, which are not known to occur otherwise in high abundances.
@@ -10,14 +10,13 @@ timescale: snapshot
 mechanism: 'Terraforming of otherwise uninhabitable planets within a planetary system: powerful artificial greenhouse
   gases may be deployed to warm a planet outside the formal habitable zone. Greenhouse gases such as perfluorocarbons
   (PFCs) are not known to occur otherwise in high abundances and have their most observable features in the thermal
-  infrared window at 8-12 um. The source gives no abundance or signal-size estimate.'
+  infrared window at 8-12 um.'
 data_requirements:
   wavelength_um:
   - 8
   - 12
   sample: planets outside the formal habitable zone
-  depth: not stated; the source names mid-infrared concepts able to image terrestrial planets (TPF-I, Darwin, Origins
-    Space Telescope)
+  depth: mid-infrared concepts able to image terrestrial planets (TPF-I, Darwin, Origins Space Telescope)
 novelty:
   status: unchecked
 status: raw
