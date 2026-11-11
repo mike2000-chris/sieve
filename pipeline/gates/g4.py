@@ -3,7 +3,8 @@
     uv run python -m pipeline.critique g4 SIEVE-0002 [--dry-run]
 
 The prompt carries the `confounders_found` lists of the register entries nearest to the card (same taxonomy score as the
-Expand excerpt; entries withheld for the rediscovery test are left out). The judge returns an adversarial confounder
+Expand excerpt). Entries withheld for the rediscovery test are included: like G2, G4 is a critique oracle, not the
+generator, and the withholding only applies to what Expand sees (owner decision 2026-11-11). The judge returns an adversarial confounder
 list with exclusion tests and a 0-3 robustness. Writes: new confounders appended to `card.confounders` (existing ones
 kept), `scores.confounder_robustness`, and `scores.scored_by` (llm, or both if a human scored before). `scores.total` is
 not touched; the Converge stage owns it.
@@ -24,7 +25,7 @@ def register_confounders(card: dict, limit: int = MAX_ENTRIES) -> str:
     rows = []
     for p in sorted((ROOT / "register").glob("REG-*.yaml")):
         e = yaml.safe_load(p.read_text(encoding="utf-8"))
-        if e.get("withheld_for_rediscovery_test") or not e.get("confounders_found"):
+        if not e.get("confounders_found"):
             continue
         score = 2 * (e.get("signature_class") == card["signature_class"]) + (e.get("domain") == card["domain"]) \
             + (e.get("observable") == card["observable"])
