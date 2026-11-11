@@ -1,5 +1,5 @@
 id: SIEVE-0008
-version: 1
+version: 2
 title: 3-5 um excess in SPHEREx spectra of Kepler, K2, TESS and ZTF aperiodic dippers versus matched non-dipping
   control stars
 claim: Stars with aperiodic dips deeper than 1 per cent in Kepler, K2, TESS or ZTF light curves show a median SPHEREx
@@ -55,7 +55,43 @@ confounders:
   exclusion: Apply the identical model pipeline to the matched controls, so systematic model offsets cancel in the
     difference statistic.
 novelty:
-  status: unchecked
+  status: partly_done
+  confidence: medium
+  rationale: 'No listed work compares SPHEREx 3.5-5 um excess between a large multi-survey dipper sample and Gaia-matched
+    controls. Closely related checks exist with WISE-band data for individual dippers or small samples: Tzanidakis
+    et al. (2025) report no IR excess among 81 ZTF main-sequence dipper candidates, Boyajian et al. (2016) find
+    no significant IR excess for KIC 8462852, and Marshall et al. (2023) find a NEOWISE 3.4/4.6 um excess for ASASSN-21qj.
+    Ansdell et al. (2016) tested a dip-depth versus W2-excess relation, but only in young disk-hosting dippers,
+    which the card excludes.'
+  closest_prior:
+  - bibcode: 2025ApJ...991..118T
+    relation: Examined archival IR data for 81 ZTF main-sequence dipper candidates and reported no IR excess or
+      variability, using WISE-era photometry, without a matched-control population statistic or SPHEREx spectra.
+  - bibcode: 2016ApJ...816...69A
+    relation: Found a positive correlation between dip depth and WISE-2 excess in ten young K2 dippers in Upper
+      Sco/Oph, a YSO population the card explicitly excludes.
+  - bibcode: 2023ApJ...954..140M
+    relation: 'Single-star case: NEOWISE 3.4/4.6 um excess in the Boyajian-like dipper ASASSN-21qj, attributed to
+      dust; no control comparison.'
+  - bibcode: 2016MNRAS.457.3988B
+    register_id: REG-boyajian-star-kepler-dips-2016-2018
+    relation: SED fitting of KIC 8462852 showed no significant IR excess; this is one object, the F3V star used
+      in the card's own mechanism estimate.
+  what_would_make_it_open: An analysis would need to deliver a population-level median 3.5-5 um excess difference,
+    measured with SPHEREx spectrophotometry, between about 500 Kepler/K2/TESS/ZTF field dippers and Gaia-matched
+    controls, which no listed work provides.
+  queries_run:
+  - Dyson swarm infrared excess dipping stars
+  - aperiodic dippers infrared excess circumstellar dust
+  - SPHEREx spectra infrared excess stars
+  - Boyajian star infrared excess WISE
+  - waste heat transiting megastructures
+  judged:
+    model: claude-opus-5-5
+    prompt_version: critique-g2-novelty-v0.2
+    date: '2026-11-11'
+    by: Claude Code (claude-fable-5-2)
+  audited_by_human: false
 null_result_value: A non-detection limits the time-averaged covering factor of warm (300-600 K) opaque occulters
   around aperiodic dippers to below about 0.5 per cent per star and below about 0.1 per cent for the population
   mean.
