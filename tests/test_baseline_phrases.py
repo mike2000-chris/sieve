@@ -117,3 +117,33 @@ def test_filler_patterns_catch_the_known_variants(phrase):
 ])
 def test_filler_patterns_leave_stated_content_alone(phrase):
     assert not any(rx.search(phrase) for rx in _FILLER)
+
+
+def _own_source_surnames() -> dict[str, str]:
+    sources = cards._load_yaml(cards.BASELINE_SOURCES)["sources"]
+    return {s["bibcode"]: s["first_author"].split(",")[0].strip() for s in sources if s.get("decision") == "included"}
+
+
+def _own_source_pointer(surnames: list[str]) -> re.Pattern:
+    """A card's own source named by author without a year: "(Li et al.)", "Li et al. give", "(Margot et al., Figure 1)".
+    With a year ("Li et al. 2019", "Li et al. (2019)") it is a citation of a publication and is left alone."""
+    return re.compile(r"\b(?:" + "|".join(map(re.escape, surnames)) + r") et al\.(?!,? ?\(?\d{4})")
+
+
+def test_baseline_cards_do_not_point_at_their_own_sources_by_author():
+    surname = _own_source_surnames()
+    hits = []
+    for p, card in cards.iter_baseline_cards():
+        rx = _own_source_pointer([surname[b] for b in card["provenance"]["source_bibcodes"]])
+        for path, text in _strings(card):
+            hits += [f"{p.stem} {path}: {m.group(0)!r}" for m in rx.finditer(text)]
+    assert not hits, "yearless author pointers to a card's own source:\n" + "\n".join(hits)
+
+
+def test_own_source_pointer_pattern():
+    rx = _own_source_pointer(["Li", "Socas-Navarro"])
+    for phrase in ("natural sources (Li et al.).", "(Socas-Navarro et al.)", "Order of magnitude (Li et al., Figure 1): at"):
+        assert rx.search(phrase)
+    for phrase in ("candidate selection as in Enriquez et al. 2017", "(Kopparapu et al.)", "(Li et al. 2019)",
+                   "Li et al. (2019) searched", "Socas-Navarro et al., 2021"):
+        assert not rx.search(phrase)

@@ -1,5 +1,5 @@
 id: BASE-0038
-version: 5
+version: 6
 title: Isotopic fractionation of carbon, sulfur and other light elements as a metabolic signature in planetary samples
 claim: Some planetary samples show isotope ratios of carbon, sulfur or other CHONS elements shifted in the way biological
   metabolism shifts them.
@@ -7,16 +7,16 @@ domain: solar_system_insitu
 signature_class: insitu_composition
 observable: mass_spectrometry
 timescale: snapshot
-mechanism: Metabolic activity fractionates isotopes; carbon and sulfur are the elements most used on Earth (Westall
-  et al.). Organic biosynthesis favours the lighter carbon isotope and largely sets the 13C/12C ratios of terrestrial
-  reservoirs (Vago et al.). CHONS isotope ratios of major compounds are a route to biosignature detection; isotopes
-  fractionated by metabolic processes are among the signatures of life. Bulk fractionation is not considered robust
-  where sources and sinks are poorly known, as on Mars, and is included only together with less indirect biosignatures.
+mechanism: Metabolic activity fractionates isotopes; carbon and sulfur are the elements most used on Earth. Organic
+  biosynthesis favours the lighter carbon isotope and largely sets the 13C/12C ratios of terrestrial reservoirs.
+  CHONS isotope ratios of major compounds are a route to biosignature detection; isotopes fractionated by metabolic
+  processes are among the signatures of life. Bulk fractionation is not considered robust where sources and sinks
+  are poorly known, as on Mars, and is included only together with less indirect biosignatures.
 confounders:
 - name: Atmospheric fractionation of carbon and sulfur
   exclusion: ''
 - name: Abiotic synthesis (Fischer-Tropsch reactions in hydrothermal settings) and chondritic organic matter
-  exclusion: Isotopic ranges overlap with biogenic ones (Westall et al.).
+  exclusion: Isotopic ranges overlap with biogenic ones.
 novelty:
   status: unchecked
 status: raw
