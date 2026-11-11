@@ -1,0 +1,37 @@
+id: BASE-0039
+version: 1
+title: Fatty-acid and amino-acid abundance patterns preserved in plume deposits on the surface of Enceladus
+claim: Plume deposits on the surface of Enceladus contain fatty acids or amino acids whose molecular abundance pattern
+  is evidence of biological activity.
+domain: solar_system_insitu
+signature_class: insitu_composition
+observable: mass_spectrometry
+timescale: snapshot
+mechanism: 'Ice particles of the Enceladus plume come from the subsurface ocean and may hold traces of life; up
+  to 93 per cent of the plume particles fall back onto the surface. The low radiation environment and continuing
+  deposition favour preservation: organic molecules inside micron-sized ice particles are almost entirely shielded
+  from vacuum-ultraviolet radiation. The source sets a limit of 10 per cent degradation for the faithful reconstruction
+  of molecular abundance patterns (fatty acids, amino acids) that could provide evidence of biological activity.'
+data_requirements:
+  sample: surface plume deposits collected by a landed mission
+confounders:
+- name: Photolytic degradation of organics by longer-wavelength ultraviolet light
+  exclusion: The source anticipates processing between deposition and collection to be minimal and cites laboratory
+    photolysis rates for amino acids in ice.
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2021PSJ.....2..100C
+  transcribed_by: claude-fable-5-2

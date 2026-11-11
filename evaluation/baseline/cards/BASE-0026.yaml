@@ -1,0 +1,34 @@
+id: BASE-0026
+version: 1
+title: Vegetation red edge in reflected-light spectra of terrestrial exoplanets
+claim: Some terrestrial exoplanets show a red-edge-like step in their reflectance spectrum caused by photosynthetic
+  pigments of surface organisms.
+domain: biosignature
+signature_class: surface_albedo
+observable: spectroscopy
+timescale: snapshot
+mechanism: 'The vegetation red edge is a well-known spectral reflectance signature of plant leaves. It has been
+  shown to be detectable in observations of Earth from the Galileo spacecraft and in the Earthshine spectrum. The
+  source frames open questions: whether a red edge from vegetation or cyanobacteria can be expected on another planet
+  and at what wavelengths, and how atmospheric opacity and surface conditions affect it. Fujii et al. state that
+  direct imaging will give first access to surface reflectance biosignatures such as the red edge. No disk-averaged
+  signal size is given in the passages used.'
+method: Reflectance spectroscopy of directly imaged planets (Fujii et al.).
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2018AsBio..18..663S
+  - 2018AsBio..18..739F
+  transcribed_by: claude-fable-5-2

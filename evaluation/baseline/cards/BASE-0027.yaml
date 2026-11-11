@@ -1,0 +1,33 @@
+id: BASE-0027
+version: 1
+title: Seasonal oscillations of CO2, O2, O3 and CH4 in exoplanet atmospheres
+claim: Some terrestrial exoplanets show seasonal oscillations in the abundance of spectrally active gases such as
+  CO2, with O2 anticorrelated, driven by a biosphere.
+domain: biosignature
+signature_class: temporal_behaviour
+observable: time_series
+timescale: years
+mechanism: 'Earth''s biosphere modulates CO2, O2, O3 and CH4. The best known is the seasonal CO2 oscillation from
+  growth and decay of land vegetation: CO2 falls in spring and rises in autumn and winter. The amplitude is about
+  3 ppm near the equator and about 10-20 ppm at high northern latitudes, and is far greater in the northern hemisphere.
+  O2 oscillates in anticorrelation. The source cautions that absorption bands such as the 15 um CO2 band do not
+  vary linearly with abundance if saturated, so the measurable spectral variability may be smaller.'
+data_requirements:
+  cadence: repeated spectra over the planet's orbital period
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2018AsBio..18..663S
+  transcribed_by: claude-fable-5-2

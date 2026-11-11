@@ -1,0 +1,33 @@
+id: BASE-0013
+version: 1
+title: Night-time artificial illumination on exoplanets in photometry and spectroscopy
+claim: Some exoplanets show light from artificial sources on their night side.
+domain: technosignature
+signature_class: em_transmission
+observable: photometry
+timescale: snapshot
+mechanism: By analogy with human night-time city illumination, artificial light sources might be detectable on the
+  night sides of exoplanets with near-future technology (NASA report, citing Schneider et al. 2010 and Loeb and
+  Turner 2012). Socas-Navarro et al. list photometric and spectroscopic searches for night-time illumination among
+  new searches on existing data and data from upcoming direct-imaging missions. No flux estimate is given in the
+  passages used.
+method: Forward modelling of the expected observables and comparison with exoplanet photometry and spectroscopy;
+  synergy with exoplanet characterisation and surface mapping.
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2021AcAau.182..446S
+  - 2018arXiv181208681N
+  transcribed_by: claude-fable-5-2

@@ -1,0 +1,39 @@
+id: BASE-0015
+version: 1
+title: Non-terrestrial artefacts on the lunar surface in Lunar Reconnaissance Orbiter images
+claim: At least one non-terrestrial artefact is present on the lunar surface and identifiable in Lunar Reconnaissance
+  Orbiter images.
+domain: technosignature
+signature_class: artificial_structure_geometry
+observable: imaging
+timescale: snapshot
+mechanism: Artefacts on a planetary surface, functional or defunct, could be identified by analysis of surface images;
+  the lifetime of inactive artefacts is limited by the resurfacing timescale of the body. LRO has been in low lunar
+  orbit since 2009 and has taken more than 2 million images at sub-metre resolution (a few sites at 0.5 m), enough
+  to show boot prints, and the vast majority have not been inspected by eye.
+data_requirements:
+  depth: sub-metre image resolution
+  sample: more than 2 million LRO images
+candidate_archives:
+- name: Lunar Reconnaissance Orbiter images
+  access: not stated in source
+method: Automatic processing of the image set; the source calls development of such AI a low-cost initial activity
+  and cites an unsupervised machine-learning approach (Lesnikowski et al. 2020) and an earlier discussion of examining
+  lunar images (Davies and Wagner 2013).
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2022arXiv220911685H
+  transcribed_by: claude-fable-5-2

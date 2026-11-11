@@ -1,0 +1,35 @@
+id: BASE-0037
+version: 1
+title: Degraded biomarker molecules bound to phyllosilicates or trapped in halite on Mars
+claim: Some Martian phyllosilicate-bearing rocks or halite fluid inclusions contain degraded organic molecules that
+  can be traced back to biological precursors.
+domain: solar_system_insitu
+signature_class: insitu_composition
+observable: mass_spectrometry
+timescale: snapshot
+mechanism: Organic components of cells can be preserved as degraded molecules trapped in mineralised cells or chemically
+  bonded to mineral particles such as phyllosilicates, whose layered structure, high surface area and charged surfaces
+  fix organic molecules; organics may also be trapped in fluid inclusions in halite. Degraded molecules can up to
+  a point be traced to their origin, e.g. bacterial hopanoids degrade to hopanes. The source cautions that at the
+  oxidising, irradiated surface of Mars at least the labile organic compounds are likely to be destroyed, and that
+  rapid mineral entombment or burial is needed for preservation.
+confounders:
+- name: Abiotic, prebiotic or detrital organic matter
+  exclusion: Not specified in the passage used; the same preservation pathways apply to abiotic organics.
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2015AsBio..15..998W
+  transcribed_by: claude-fable-5-2

@@ -19,7 +19,7 @@ The method, the rationale and the three-month plan are in the working paper: [`p
 | `prereg/` | One pre-registration per selected card, committed before any data access; immutable after merge |
 | `analyses/` | One folder per executed card: scripts, queries as text, environment lock |
 | `reports/` | Two-page reports per executed card (null result, limit or anomaly) |
-| `evaluation/` | Baseline brainstorm, rediscovery test, metrics (paper Section 7) |
+| `evaluation/` | Literature baseline (`BASE-NNNN` cards), rediscovery test, metrics (paper Section 7) |
 | `tasks/` | Phase checklists for Claude Code / Cowork sessions |
 
 ## Credibility ladder (public language is tied to the level)

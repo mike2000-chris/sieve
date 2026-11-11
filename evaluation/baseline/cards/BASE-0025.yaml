@@ -1,0 +1,30 @@
+id: BASE-0025
+version: 1
+title: Nitrous oxide in spectra of terrestrial exoplanet atmospheres
+claim: Some terrestrial exoplanets show spectral features of N2O at abundances that require a biological source.
+domain: biosignature
+signature_class: atmospheric_chemistry
+observable: spectroscopy
+timescale: snapshot
+mechanism: N2O is produced by Earth's biosphere through incomplete denitrification of nitrate to N2. It has been
+  proposed as a strong biosignature because its abiotic sources are small on modern Earth and it has potentially
+  detectable spectral features. The pre-industrial concentration was about 270 ppb. Euxinic Proterozoic oceans may
+  have allowed biogenic N2O to build up to higher concentrations, and photochemical models show N2O building up
+  to higher concentrations around M dwarfs than on an Earth-Sun analogue for the same source flux.
+novelty:
+  status: unchecked
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: human-literature
+  prompt_version: baseline-literature-v0.1
+  operator: manual
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
+  source_bibcodes:
+  - 2018AsBio..18..663S
+  transcribed_by: claude-fable-5-2
