@@ -13,8 +13,10 @@ Milestone **M0**: repository public, 50 register entries, baseline cards scored.
 ## Register (novelty oracle)
 - [ ] Resolve bibcodes for the 11 seed entries (`bibcodes.status: to_resolve` → `resolved`)
   - 10/11 resolved via `pipeline/literature/resolve_register.py`; `REG-cody-tess-dyson-transits-2024` open (no ADS record found, see STATUS 2026-11-07)
-- [ ] Add the "entries to add in week 1–2" from paper Section 6 (laser searches, Boyajian's star, Clarke exobelt, lunar/Martian artefact searches, Galileo Earth-as-exoplanet, Gaia astrometric anomaly searches, Kepler artificial-transit searches, pollutant biosignatures) — target 50 entries
+- [x] Add the "entries to add in week 1–2" from paper Section 6 (laser searches, Boyajian's star, Clarke exobelt, lunar/Martian artefact searches, Galileo Earth-as-exoplanet, Gaia astrometric anomaly searches, Kepler artificial-transit searches, pollutant biosignatures) — target 50 entries
+  - 39 entries added, register at 50; all 91 bibcodes re-resolved via ADS (PR #4, 2026-11-11)
 - [ ] For each entry fill `lesson` and `confounders_found`; these feed the negative-space operator
+  - all 50 have `lesson`; `confounders_found` empty for 4 whose sources name none (cody, enceladus-phosphates, industrial-pollution-cfc, lunar-artefacts-lro) — owner to decide
 
 ## Archive access smoke tests (gate G3 map)
 - [x] Gaia DR3 ADQL query via `astroquery.gaia` (count sources with G < 12 within 100 pc) — record runtime
@@ -24,8 +26,9 @@ Milestone **M0**: repository public, 50 register entries, baseline cards scored.
 - [x] NASA Exoplanet Archive TAP query (planets with equilibrium temperature 200–350 K)
 - [x] SPHEREx QR S3 range read (`aws s3 ls --no-sign-request s3://nasa-irsa-spherex/`)
 - [x] Record each archive's actual access path, latency and licence in `config/archives.yaml`
-- [ ] Prepare 3 Gaia DR4 queries (astrometric anomalies, periodic photometry, anomalous accelerations) as text files in `analyses/dr4-day-one/` for 2 Dec 2026
+- [x] Prepare 3 Gaia DR4 queries (astrometric anomalies, periodic photometry, anomalous accelerations) as text files in `analyses/dr4-day-one/` for 2 Dec 2026
   - mind the Gaia anonymous 50,000-row cap found in the smoke tests: chunk each query and check it against `COUNT(*)` (see `config/archives.yaml`)
+  - done against the draft DR4 data model, DR3 dry runs pass, runner `pipeline/archives/adql_run.py`; release-day checklist in `analyses/dr4-day-one/README.md` (PR #5, 2026-11-11)
 
 ## Baseline
 - [ ] Owner: two-hour human-only brainstorm, write results as raw cards with `provenance.generator_model: human`
@@ -33,9 +36,12 @@ Milestone **M0**: repository public, 50 register entries, baseline cards scored.
 
 ## Prompts and pipeline
 - [ ] Review `prompts/*-v0.1.md`; adjust tone and constraints; bump versions on change
-- [ ] Implement `pipeline/expand.py` end to end for one taxonomy cell (10 cards) and inspect output by hand
+- [x] Implement `pipeline/expand.py` end to end for one taxonomy cell (10 cards) and inspect output by hand
+  - prompt `expand-v0.2` (JSON schema output); SIEVE-0002..0011 in cell technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex; agent spot-checked, **owner inspection pending**
 - [ ] Implement gate G2 against the register first (fast path), then ADS/OpenAlex queries
+  - fast path done (`uv run python -m pipeline.critique g2-fast`), gate logs for SIEVE-0001..0011; ADS/OpenAlex query + LLM judge open
 - [ ] Measure cost per card (tokens, €) and write it into `config/budget.yaml` as `measured_cost_per_card`
+  - Expand only: 0.050 EUR/card (`measured_cost_per_card_eur_expand`); gates still to measure
 
 ## Exit criteria
 - [ ] M0 reached; owner signs off in `tasks/STATUS.md`; Phase 1 checklist (`tasks/PHASE1.md`) created from paper Section 9.1

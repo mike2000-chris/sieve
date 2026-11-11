@@ -1,0 +1,65 @@
+id: SIEVE-0003
+version: 1
+title: 'Featureless 1-5 um excess around Gaia white dwarfs: separating structures from debris disks and brown dwarfs
+  in SPHEREx'
+claim: Among Gaia white dwarfs within 100 pc, the 2-5 um excess sources split into (a) metal-polluted 800-1500 K
+  debris disks and (b) companions with CH4/H2O/CO bands, with no third group of featureless 250-500 K excesses in
+  a non-polluted white dwarf.
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+timescale: snapshot
+mechanism: The habitable radiation zone of a 10^4 K white dwarf lies at ~0.01 AU, so a structure covering a large
+  solid angle needs little material. For a 10^4 K white dwarf and a 300 K radiator, the 4.5 um excess is about 11f
+  of the photosphere. A 10 per cent covering fraction would double the 4.5 um flux. This assumes that post-main-sequence
+  civilizations harvest compact, long-lived stellar remnants and run radiators near 300 K.
+data_requirements:
+  measured_quantity: flux excess over white-dwarf atmosphere model at 1-5 um (per cent), fitted excess temperature,
+    and band depths at 1.4, 1.9, 3.3 and 4.6 um
+  wavelength_um:
+  - 0.75
+  - 5
+  spectral_resolution: R~35-130
+  cadence: single all-sky pass
+  depth: AB~19 per channel all-sky; white dwarfs with G<18 in deep ecliptic pole fields
+  sample: ~2x10^4 Gaia white dwarfs within 100 pc, a few thousand bright enough for SPHEREx S/N>10 at 4.5 um
+candidate_archives:
+- name: IRSA SPHEREx Quick Release
+  access: boto3 unsigned S3, bucket nasa-irsa-spherex, prefixes qr2/ qr3/
+- name: Gaia EDR3 white dwarf catalogue
+  access: VizieR TAP via CDS, Gaia EDR3 white dwarf candidate table with P_WD column
+- name: DESI DR1 / SDSS DR17 spectra
+  access: DESI data.desi.lbl.gov public releases; SDSS SkyServer SpecObj table
+- name: Pan-STARRS DR2
+  access: MAST CasJobs PanSTARRS_DR2 ObjectThin/MeanObject
+method: Cross-match the Gaia EDR3/DR3 white dwarf catalogue (P_WD>0.75, d<100 pc) to SPHEREx forced photometry.
+  Fit DA/DB atmosphere models to Gaia XP + Pan-STARRS + 2MASS. Classify each excess by temperature and by spectral
+  features in the 1.3-1.5, 1.8-2.0, 3.2-3.4 and 4.5-4.8 um windows. Check metal pollution with SDSS/DESI spectra
+  (Ca II H&K, Mg II 4481). Flag featureless cool excesses with no metal lines.
+confounders:
+- name: Circumstellar debris disk from tidally disrupted planetesimals
+  exclusion: Debris disks are hotter (800-1500 K) and nearly always accompany atmospheric metal lines in DESI/SDSS
+    spectra. Require no Ca II/Mg II absorption.
+- name: Unresolved L/T brown dwarf companion
+  exclusion: SPHEREx resolves H2O at 1.4/1.9 um, CH4 at 3.3 um and CO at 4.6 um. A featureless spectrum to 3 per
+    cent excludes a companion atmosphere.
+- name: Background galaxy or AGN in the beam
+  exclusion: Use Legacy Survey DR10 imaging for extended sources within 6 arcsec and the WISE W1-W2 AGN colour cut.
+    Gaia proper motion fixes the white-dwarf position at the SPHEREx epoch.
+novelty:
+  status: unchecked
+null_result_value: A null result limits the fraction of nearby white dwarfs with 250-500 K re-radiating structures
+  covering more than about 5 per cent of the sky to below 1/N_WD, about 1e-3 to 1e-4.
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: claude-opus-5-5
+  prompt_version: expand-v0.2
+  operator: cross_archive_transfer
+  taxonomy_cell: technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false

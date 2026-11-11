@@ -2,6 +2,20 @@
 
 Newest first. One entry per agent session or weekly review. Questions for the owner go under **Open questions**, not into chat.
 
+## 2026-11-11 — register at 50, DR4 day-one queries, Expand + G2 fast path
+Operator: Claude Code (claude-opus-5-5). Three PRs, to be merged in this order: #4 → #5 → #6 (#6 is built on #4).
+- **PR #4 `register/phase0-expansion`**: 39 new entries, register at 50 (M0 target). Written by three parallel sub-agents from ADS abstracts; all 91 register bibcodes re-resolved via ADS in one batch afterwards (0 missing). No detection language found.
+- **PR #5 `analyses/dr4-day-one-queries`**: three DR4 queries against the draft DR4 data model (CU9, 2026-05-20), DR3 dry runs (35,142 / 4,460 / 17,285 rows), new runner `pipeline/archives/adql_run.py` (COUNT → random_index chunks < 40k → rows == COUNT). Key fact: DR4 epoch astrometry/photometry are DataLink products, not TAP tables. Release-day checklist in `analyses/dr4-day-one/README.md`. Gaia archive maintenance 12 Nov 16:00 CET (1 h); sync queue was saturated today (503), async worked.
+- **PR #6 `pipeline/expand-one-cell`**: `pipeline/expand.py` end to end with prompt `expand-v0.2` (structured JSON output; v0.1 kept). Budget check before every call, run log `evaluation/costs/llm_runs.jsonl`. 10 cards SIEVE-0002..0011 in technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex: **0.498 EUR total, 0.050 EUR/card** (Expand only). First call returned 7 of 10 cards, one with empty claim/mechanism (rejected by the schema check) → top-up logic added; the prompt now lists cards already in the cell to avoid repeats.
+- G2 register fast path (`uv run python -m pipeline.critique g2-fast --all-raw`): all 11 cards hit Hephaistos II / Ĝ / Carrigan, as expected for this cell. Logged as `G2-register`; `novelty.status` untouched (ADS judge still to build).
+- Withheld register entries (2020+) are never shown to Expand (`evaluation/metrics.md`); hence Hephaistos I/II do not appear in the prompt for this cell.
+
+### Open questions
+- Please inspect SIEVE-0002..0011 by hand (checklist item); tone/constraints of `expand-v0.2` ok?
+- Register judgement calls: Boyajian dips `confirmed_natural` vs `contested`; ALH84001 `confirmed_natural`; Zackrisson 2018 as `artificial_structure_geometry`/`astrometry`; Viking LR observable `time_series`; 4 entries without `confounders_found`.
+- EUR/USD rate in `config/budget.yaml` (`eur_per_usd: 0.87`) is an assumption; replace with the billed rate.
+- Still open from 2026-11-07: Gaia archive account for DR4 day one; `REG-cody-tess-dyson-transits-2024`.
+
 ## 2026-11-07 (later) — archive smoke tests
 Operator: Claude Code (claude-opus-5-5). Branch `archives/smoke-tests`.
 - All five Phase 0 smoke tests pass: `pipeline/archives/smoke.py`, records in `analyses/smoke-tests-phase0/results/smoke.json`, access paths/latency/licence in `config/archives.yaml` (`smoke_test` blocks).

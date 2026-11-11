@@ -1,0 +1,72 @@
+id: SIEVE-0011
+version: 1
+title: Narrow single-temperature versus broad multi-temperature shape of 2.5-5 um excesses in SPHEREx stellar spectra
+claim: Among SPHEREx point sources with a 2.5-5 um excess above 10 per cent, the fitted log-normal width of the
+  excess temperature distribution, sigma_lnT, is above 0.15 for at least 99 per cent of sources, and any excesses
+  consistent with a single blackbody (sigma_lnT < 0.05) lack molecular bands.
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+timescale: snapshot
+mechanism: Engineered heat rejection is likely to run at a fixed design temperature to maximize Carnot efficiency.
+  That produces an excess close to a single Planck curve. Natural dust spans a range of radii (T roughly proportional
+  to r^-1/2) and grain sizes, which broadens the excess. With about 35 SPHEREx channels between 2.5 and 5 um at
+  S/N 20 per channel, a pure 400 K blackbody can be told apart from a distribution with sigma_lnT = 0.2 at more
+  than 5 sigma. This assumes radiators operate at one temperature within plus or minus 5 per cent. The operator
+  transfers the low-resolution IRAS spectral shape test to SPHEREx's 102-band spectra, which have about 10 times
+  the spectral sampling.
+data_requirements:
+  measured_quantity: log-normal temperature width sigma_lnT and Bayes factor (single blackbody versus distributed
+    temperature) of the 2.5-5 um excess over a photospheric model
+  wavelength_um:
+  - 0.75
+  - 5
+  spectral_resolution: R 35-130 (SPHEREx native, about 35 independent channels at 2.5-5 um)
+  cadence: snapshot; QR visits co-added
+  depth: S/N >= 20 per channel at 2.5-5 um, roughly W2 < 12 mag
+  sample: all SPHEREx stellar point sources with Gaia DR3 parallax > 1 mas and a measured 3-5 um excess above 10
+    per cent, expected 1e3-1e4 sources
+candidate_archives:
+- name: IRSA SPHEREx Quick Release
+  access: boto3 with signature_version=UNSIGNED, bucket nasa-irsa-spherex (us-east-1), prefixes qr2/ and qr3/
+- name: AllWISE and CatWISE2020
+  access: IRSA TAP tables allwise_p3as_psd and catwise_2020 for preselection
+- name: Gaia DR3
+  access: ESA Gaia TAP gaiadr3.gaia_source and gaiadr3.astrophysical_parameters for photospheric priors
+method: 'Select SPHEREx sources cross-matched to Gaia DR3 stars, with AllWISE W1-W2 > 0.15 mag above the photospheric
+  expectation or a SPHEREx-derived excess above 10 per cent. Fit photosphere plus excess models of two types: a
+  single blackbody, and a log-normal temperature distribution with free mean and sigma_lnT. Use nested sampling
+  and record the Bayes factor and sigma_lnT. Calibrate sigma_lnT on known debris disks, YSOs and brown-dwarf binaries.
+  Release the list of sources with sigma_lnT < 0.05 and their molecular-band check.'
+confounders:
+- name: Narrow warm debris rings (single-radius belts)
+  exclusion: Thin rings still contain a grain-size range, which produces non-Planckian emissivity and spectral slopes
+    beyond 5 um. Check AllWISE W3/W4 for a rising mid-IR continuum or 10 um silicate shape, which single-temperature
+    radiators lack.
+- name: Unresolved brown dwarf or late-M companion
+  exclusion: Brown dwarfs show CH4 at 3.3 um, CO at 4.6 um and H2O at 2.7 um in SPHEREx spectra. Fit companion templates
+    and reject sources where they improve chi-squared by more than 25.
+- name: Free-free or synchrotron excess from active or accreting stars
+  exclusion: Power-law excesses have the wrong curvature compared with a Wien tail. Cross-check with ROSAT/eROSITA
+    X-ray and VLASS radio detections.
+- name: Photospheric model mismatch in the 2.5-5 um region for cool giants
+  exclusion: Restrict to Gaia luminosity class V and IV. Test the false-positive rate of sigma_lnT on 1e4 stars
+    without W1-W2 excess.
+novelty:
+  status: unchecked
+null_result_value: A non-detection limits the number of stars hosting single-temperature (plus or minus 5 per cent)
+  radiators that reprocess more than 1 per cent of stellar luminosity to below about 1 in 1e5 among SPHEREx stars
+  brighter than W2 = 12.
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: claude-opus-5-5
+  prompt_version: expand-v0.2
+  operator: cross_archive_transfer
+  taxonomy_cell: technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false

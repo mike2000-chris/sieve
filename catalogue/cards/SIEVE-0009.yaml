@@ -1,0 +1,74 @@
+id: SIEVE-0009
+version: 1
+title: Integrated 3-5 um excess beyond stellar-population models in SPHEREx spectra of Milky Way and M31 globular
+  clusters
+claim: Among about 150 Milky Way and about 400 M31 globular clusters, the 3.5-5 um integrated flux in SPHEREx spectra
+  exceeds simple-stellar-population model predictions by more than 5 per cent in fewer than 1 per cent of clusters,
+  and any such outliers do not correlate with metallicity or AGB-star counts.
+domain: technosignature
+signature_class: thermal_waste_heat
+observable: spectral_excess
+timescale: snapshot
+mechanism: Globular clusters are old, dense (stellar separations of 0.01-0.1 pc in cores) and nearly dust-free (intracluster
+  dust below about 1e-3 Msun). A civilization spread across a cluster would face the shortest interstellar travel
+  distances in the Galaxy. Reprocessing 1 per cent of a 1e5 Lsun cluster's light at 500 K gives a 4.6 um excess
+  of about 0.01 x (4000/500)^4 x [B_nu(500 K)/B_nu(4000 K)], roughly 9 per cent of the red-giant-dominated integrated
+  light. This assumes reprocessing is spread across many stars rather than concentrated in one. The operator transfers
+  the galaxy-scale waste-heat search to a cleaner, dust-poor stellar system in a spectral archive.
+data_requirements:
+  measured_quantity: integrated 3.5-5 um flux excess over a simple-stellar-population model fitted to 0.75-2.5 um,
+    in per cent, within the half-light radius
+  wavelength_um:
+  - 0.75
+  - 5
+  spectral_resolution: R 35-130 (SPHEREx native)
+  cadence: single epoch (snapshot), all QR visits stacked
+  depth: integrated S/N >= 50 per band for clusters with K < 10 mag; M31 clusters at K about 13-15 need stacking
+  sample: about 150 Milky Way globular clusters (Harris catalogue) and about 400 confirmed M31 globular clusters
+    (RBC)
+candidate_archives:
+- name: IRSA SPHEREx Quick Release
+  access: boto3 with signature_version=UNSIGNED, bucket nasa-irsa-spherex (us-east-1), prefixes qr2/ and qr3/
+- name: Harris Milky Way globular cluster catalogue
+  access: VizieR VII/202 via astroquery.vizier
+- name: Revised Bologna Catalogue of M31 globular clusters
+  access: VizieR V/143 via astroquery.vizier
+- name: Gaia DR3 for foreground masking
+  access: ESA Gaia TAP gaiadr3.gaia_source cone search per cluster
+method: Take cluster positions and structural parameters from the Harris Milky Way and RBC M31 catalogues. Extract
+  SPHEREx aperture spectra within the half-light radius, masking Gaia DR3 foreground stars by proper motion and
+  parallax. Fit 0.75-2.5 um bands with simple-stellar-population models at the catalogued [Fe/H] and age. Predict
+  the 3-5 um continuum, including the CO 4.6 um absorption of giants, and compute the residual excess. Compare the
+  radial profile of any excess with the cluster light profile, since a distributed excess should follow it. Flag
+  clusters above 5 per cent.
+confounders:
+- name: Mass-losing AGB stars and post-AGB dust shells inside the cluster
+  exclusion: An AGB excess comes from one or a few point sources. Require the excess to follow the cluster's King-profile
+    light distribution in the SPHEREx images, and remove known long-period variables from Gaia DR3 vari_long_period_variable.
+- name: Foreground interstellar dust and zodiacal light gradients
+  exclusion: Use a local annulus background at 3-5 half-light radii. Reject clusters with E(B-V) > 0.5, or check
+    that the residual lacks the 3.3 um PAH band typical of the ISM.
+- name: Background galaxies and AGN projected onto M31 clusters
+  exclusion: Cross-match with Legacy Survey DR10 morphology and spectroscopic redshifts. Reject sources whose SPHEREx
+    spectra show redshifted PAH or Br-alpha features.
+- name: Stellar-population model systematics at low metallicity
+  exclusion: Fit the excess-versus-[Fe/H] trend across all clusters and test outliers against that trend, not against
+    the absolute model.
+novelty:
+  status: unchecked
+null_result_value: A non-detection limits the fraction of globular-cluster starlight reprocessed into 300-700 K
+  emission to below about 1 per cent per cluster across about 550 clusters, a sample with near-zero natural dust
+  foreground.
+status: raw
+anomaly_level: null
+parked_reason: null
+preregistration: null
+report: null
+provenance:
+  generator_model: claude-opus-5-5
+  prompt_version: expand-v0.2
+  operator: cross_archive_transfer
+  taxonomy_cell: technosignature/thermal_waste_heat/spectral_excess/snapshot/spherex
+  parent_card: null
+  created: '2026-11-11'
+  edited_by_human: false
