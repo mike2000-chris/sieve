@@ -1,0 +1,47 @@
+-- SIEVE Gaia DR4 day-one query 3: anomalous accelerations against DR3 and Hipparcos baselines
+-- serves card:      none yet (day-one data pull; a card must be pre-registered before any hypothesis test on this table)
+-- schema basis:     draft DR4 data model, 2026-05-20 (pre-release 2026-06-26); schema name assumed `gaiadr4` (NOT confirmed)
+-- question:         which nearby stars have (a) a DPAC acceleration solution, or (b) a long-baseline Hipparcos-to-DR4
+--                   proper motion that differs from the DR4 proper motion (proper-motion anomaly), and how does each
+--                   compare with DR3?
+-- expected rows:    (a) O(10^4) within 100 pc; (b) ~2 x 10^4 Hipparcos stars within 100 pc (DR3 dry run, see README)
+-- row cap:          50,000 anonymous; part (b) fits in one call, part (a) must be counted first
+-- columns verified: nss_acceleration_astro.{acceleration_ra, acceleration_dec, *_error, derivative_acceleration_*,
+--                   significance, solution_type}; hipparcos2_best_neighbour.{source_id, original_ext_source_id,
+--                   angular_distance}; dr3_neighbourhood.{source_id, dr3_source_id, angular_distance};
+--                   public.hipparcos_newreduction.{hip, ra_rad, de_rad, plx, pm_ra, pm_de, e_pm_ra, e_pm_de} (live archive)
+-- epochs:           Hipparcos 1991.25; DR3 2016.0; DR4 ref_epoch 2017.5 (DR4 pre-release page) -> baseline 26.25 yr.
+--                   Read ref_epoch from the table on release day and replace 26.25 if it differs.
+-- known confounders (analysis, not query): stellar and substellar companions (the expected main population),
+--                   Hipparcos frame rotation and pm systematics, perspective acceleration for high-RV nearby stars,
+--                   DR3/DR4 frame differences
+
+-- Part (a): DPAC acceleration solutions within 100 pc. Count first, then rows.
+SELECT COUNT(*) AS n
+FROM gaiadr4.nss_acceleration_astro AS a
+WHERE a.parallax > 10;
+
+SELECT a.source_id, a.solution_type, a.significance, a.ra, a.dec, a.parallax, a.pmra, a.pmdec,
+       a.acceleration_ra, a.acceleration_ra_error, a.acceleration_dec, a.acceleration_dec_error,
+       a.derivative_acceleration_ra, a.derivative_acceleration_dec, a.ruwe, a.flags,
+       g.phot_g_mean_mag, g.bp_rp, g.radial_velocity, f.non_single_star,
+       n.dr3_source_id, n.angular_distance AS dr3_sep_mas
+FROM gaiadr4.nss_acceleration_astro AS a
+JOIN gaiadr4.gaia_source AS g USING (source_id)
+JOIN gaiadr4.all_source_flags AS f USING (source_id)
+LEFT JOIN gaiadr4.dr3_neighbourhood AS n USING (source_id)
+WHERE a.parallax > 10;
+
+-- Part (b): Hipparcos-DR4 proper-motion anomaly, computed archive-side.
+-- pm_hg = position difference / 26.25 yr; dpm = DR4 pm - pm_hg (mas/yr). Positions in deg; 3.6e6 mas per deg.
+SELECT g.source_id, h.hip, g.parallax, g.ruwe, g.phot_g_mean_mag,
+       g.pmra, g.pmdec,
+       (g.ra - DEGREES(h.ra_rad)) * COS(RADIANS(g.dec)) * 3.6e6 / 26.25 AS pmra_hg,
+       (g.dec - DEGREES(h.de_rad)) * 3.6e6 / 26.25 AS pmdec_hg,
+       g.pmra - (g.ra - DEGREES(h.ra_rad)) * COS(RADIANS(g.dec)) * 3.6e6 / 26.25 AS dpmra,
+       g.pmdec - (g.dec - DEGREES(h.de_rad)) * 3.6e6 / 26.25 AS dpmdec,
+       h.pm_ra AS pmra_hip, h.pm_de AS pmdec_hip, h.e_pm_ra, h.e_pm_de, x.angular_distance AS hip_sep_arcsec
+FROM gaiadr4.hipparcos2_best_neighbour AS x
+JOIN gaiadr4.gaia_source AS g USING (source_id)
+JOIN public.hipparcos_newreduction AS h ON h.hip = x.original_ext_source_id
+WHERE g.parallax > 10;

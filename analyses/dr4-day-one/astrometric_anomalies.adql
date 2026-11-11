@@ -1,0 +1,42 @@
+-- SIEVE Gaia DR4 day-one query 1: astrometric anomalies without a non-single-star explanation
+-- serves card:      none yet (day-one data pull; a card must be pre-registered before any hypothesis test on this table)
+-- schema basis:     draft DR4 data model, 2026-05-20 (pre-release 2026-06-26); schema name assumed `gaiadr4` (NOT confirmed)
+-- question:         which nearby sources have a poor single-star astrometric fit (high RUWE) although DPAC
+--                   found no astrometric, spectroscopic or eclipsing binary solution (non_single_star = 0)?
+-- expected rows:    O(10^3-10^4); DR3 dry run gives the order of magnitude (see dr3-dryrun/README.md)
+-- row cap:          anonymous Gaia results are silently cut at 50,000 rows -> run COUNT first, then chunk by random_index
+-- columns verified: gaia_source.{ruwe, astrometric_excess_noise, ipd_frac_multi_peak, ipd_frac_odd_win, blended,
+--                   unreliable_astrometry, visibility_periods_used, random_index}; all_source_flags.non_single_star
+-- known confounders (to be handled in the analysis, not in this query): unresolved binaries below NSS thresholds,
+--                   close visual pairs, extended sources, bright-star saturation, scan-law effects
+
+-- Step A: count (run first)
+SELECT COUNT(*) AS n
+FROM gaiadr4.gaia_source AS g
+JOIN gaiadr4.all_source_flags AS f USING (source_id)
+WHERE g.parallax > 10
+  AND g.parallax_over_error > 10
+  AND g.ruwe > 1.4
+  AND f.non_single_star = 0
+  AND g.ipd_frac_multi_peak <= 2
+  AND g.unreliable_astrometry = 0;
+
+-- Step B: rows, one chunk per random_index range; replace :lo / :hi, chunk so that each COUNT(*) < 50,000
+SELECT g.source_id, g.ra, g.dec, g.parallax, g.parallax_error, g.pmra, g.pmdec,
+       g.ruwe, g.astrometric_excess_noise, g.astrometric_chi2_al, g.astrometric_matched_transits,
+       g.visibility_periods_used, g.ipd_frac_multi_peak, g.ipd_frac_odd_win, g.blended,
+       g.phot_g_mean_mag, g.bp_rp, g.radial_velocity, g.radial_velocity_error, g.rv_renormalised_gof,
+       g.phot_variable_flag, g.teff, g.logg, f.has_epoch_astrometry, f.has_epoch_photometry, g.random_index
+FROM gaiadr4.gaia_source AS g
+JOIN gaiadr4.all_source_flags AS f USING (source_id)
+WHERE g.parallax > 10
+  AND g.parallax_over_error > 10
+  AND g.ruwe > 1.4
+  AND f.non_single_star = 0
+  AND g.ipd_frac_multi_peak <= 2
+  AND g.unreliable_astrometry = 0
+  AND g.random_index BETWEEN :lo AND :hi;
+
+-- Step C (after B): epoch astrometry for the selected source_ids comes through DataLink (epoch_astrometry is NOT a TAP
+-- table in DR4: 62 TB, 1.3e11 records). Use astroquery.gaia.Gaia.load_data(ids=..., data_release='Gaia DR4',
+-- retrieval_type='EPOCH_ASTROMETRY') in batches; keep only result tables in the repository.

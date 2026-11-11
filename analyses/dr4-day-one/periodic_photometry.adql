@@ -1,0 +1,55 @@
+-- SIEVE Gaia DR4 day-one query 2: strictly periodic, low-amplitude photometry outside known variable classes
+-- serves card:      none yet (day-one data pull; a card must be pre-registered before any hypothesis test on this table)
+-- schema basis:     draft DR4 data model, 2026-05-20 (pre-release 2026-06-26); schema name assumed `gaiadr4` (NOT confirmed)
+-- question:         which nearby sources show a significant periodogram peak with a small Fourier amplitude but were
+--                   not placed in any class-specific variability table by DPAC?
+-- expected rows:    unknown; DR3 has no equivalent of vari_classifier_feature.ls_frequency (no dry run possible).
+--                   The coverage of vari_classifier_feature (all sources vs. variability candidates only) is not stated
+--                   in the draft data model: check on release day.
+-- row cap:          anonymous Gaia results are silently cut at 50,000 rows -> run COUNT first, then chunk by random_index
+-- columns verified: vari_classifier_feature.{ls_frequency, ls_frequency_fap_log10_g_fov, ls_frequency_sde_g_fov,
+--                   model_frequency, model_a1_g_fov, model_a1_error_g_fov}; vari_summary.{time_duration_g_fov,
+--                   std_dev_over_rms_err_mag_g_fov, in_vari_*}
+-- known confounders (analysis, not query): Gaia scanning-law aliases (spin period 6 h -> 4 d^-1 and harmonics; precession
+--                   ~63 d), rotational modulation and ellipsoidal binaries below DPAC class thresholds, blends,
+--                   aliasing of long periods with the 5.5-yr baseline
+
+-- Step A: count (run first)
+SELECT COUNT(*) AS n
+FROM gaiadr4.vari_classifier_feature AS v
+JOIN gaiadr4.vari_summary AS s USING (source_id)
+JOIN gaiadr4.gaia_source AS g USING (source_id)
+WHERE g.parallax > 5
+  AND g.parallax_over_error > 10
+  AND v.ls_frequency_fap_log10_g_fov < -6
+  AND v.model_a1_g_fov < 0.01
+  AND v.model_a1_g_fov > 3 * v.model_a1_error_g_fov
+  AND s.in_vari_rrlyrae = 'false' AND s.in_vari_cepheid = 'false' AND s.in_vari_eclipsing_binary = 'false'
+  AND s.in_vari_rotation_modulation = 'false' AND s.in_vari_long_period_variable = 'false'
+  AND s.in_vari_short_timescale = 'false' AND s.in_vari_planetary_transit = 'false'
+  AND s.in_vari_yso = 'false' AND s.in_vari_agn = 'false' AND s.in_vari_pms_oscillator = 'false'
+  AND s.in_vari_compact_companion = 'false';
+
+-- Step B: rows, chunked by random_index (replace :lo / :hi)
+SELECT g.source_id, g.ra, g.dec, g.parallax, g.phot_g_mean_mag, g.bp_rp, g.teff, g.logg, g.ruwe,
+       v.ls_frequency, v.ls_frequency_fap_log10_g_fov, v.ls_frequency_sde_g_fov, v.hybrid_frequency,
+       v.model_frequency, v.model_a1_g_fov, v.model_a1_error_g_fov, v.model_r21_g_fov, v.model_phi21_g_fov,
+       s.time_duration_g_fov, s.std_dev_over_rms_err_mag_g_fov, s.abbe_mag_g_fov, s.stetson_mag_g_fov,
+       s.pearson_mag_bp_rp, g.random_index
+FROM gaiadr4.vari_classifier_feature AS v
+JOIN gaiadr4.vari_summary AS s USING (source_id)
+JOIN gaiadr4.gaia_source AS g USING (source_id)
+WHERE g.parallax > 5
+  AND g.parallax_over_error > 10
+  AND v.ls_frequency_fap_log10_g_fov < -6
+  AND v.model_a1_g_fov < 0.01
+  AND v.model_a1_g_fov > 3 * v.model_a1_error_g_fov
+  AND s.in_vari_rrlyrae = 'false' AND s.in_vari_cepheid = 'false' AND s.in_vari_eclipsing_binary = 'false'
+  AND s.in_vari_rotation_modulation = 'false' AND s.in_vari_long_period_variable = 'false'
+  AND s.in_vari_short_timescale = 'false' AND s.in_vari_planetary_transit = 'false'
+  AND s.in_vari_yso = 'false' AND s.in_vari_agn = 'false' AND s.in_vari_pms_oscillator = 'false'
+  AND s.in_vari_compact_companion = 'false'
+  AND g.random_index BETWEEN :lo AND :hi;
+
+-- Step C (after B): flag frequencies within 0.01 d^-1 of 4 d^-1 harmonics and of 1/63 d^-1 harmonics as scan-law
+-- suspects (done in Python, not here); epoch photometry via DataLink (retrieval_type='EPOCH_PHOTOMETRY').

@@ -1,0 +1,23 @@
+-- DR3 dry run of ../astrometric_anomalies.adql: same selection on gaiadr3 to check syntax, runtime and row counts.
+-- Differences to DR4: no all_source_flags (non_single_star is in gaia_source), no unreliable_astrometry column.
+
+SELECT COUNT(*) AS n
+FROM gaiadr3.gaia_source AS g
+WHERE g.parallax > 10
+  AND g.parallax_over_error > 10
+  AND g.ruwe > 1.4
+  AND g.non_single_star = 0
+  AND g.ipd_frac_multi_peak <= 2;
+
+SELECT g.source_id, g.ra, g.dec, g.parallax, g.parallax_error, g.pmra, g.pmdec,
+       g.ruwe, g.astrometric_excess_noise, g.astrometric_chi2_al, g.astrometric_matched_transits,
+       g.visibility_periods_used, g.ipd_frac_multi_peak, g.ipd_frac_odd_win,
+       g.phot_g_mean_mag, g.bp_rp, g.radial_velocity, g.radial_velocity_error, g.rv_renormalised_gof,
+       g.phot_variable_flag, g.random_index
+FROM gaiadr3.gaia_source AS g
+WHERE g.parallax > 10
+  AND g.parallax_over_error > 10
+  AND g.ruwe > 1.4
+  AND g.non_single_star = 0
+  AND g.ipd_frac_multi_peak <= 2
+  AND g.random_index BETWEEN :lo AND :hi;
