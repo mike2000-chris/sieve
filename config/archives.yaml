@@ -35,6 +35,10 @@ archives:
     licence: public
     suitability: very_high
     notes: run archive-side ADQL; DR4 day-one queries prepared in analyses/dr4-day-one/
+    # Row limit for async jobs when logged in (GAIA_USER / GAIA_PASSWORD in .env). null = unknown: it must be
+    # measured on the first login (a query whose COUNT is known to exceed 50,000) before it is set here.
+    # While null, authenticated runs keep the anonymous 50,000-row cap and 40,000-row chunks.
+    authenticated_row_limit: null
     url: https://gea.esac.esa.int/archive/
     smoke_test:   # 2026-11-07, pipeline/archives/smoke.py, results in analyses/smoke-tests-phase0/results/smoke.json
       status: ok

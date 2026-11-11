@@ -2,6 +2,27 @@
 
 Newest first. One entry per agent session or weekly review. Questions for the owner go under **Open questions**, not into chat.
 
+## 2026-11-11 (later) — owner review: decisions, merges, four agent work packages
+Operator: Claude Code (claude-opus-5-5), dialogue with the owner. PRs #4, #5, #6 merged by the agent at the owner's request.
+**Owner decisions**
+- Register: `REG-boyajian-star-kepler-dips-2016-2018` and `REG-alh84001-1996` → `outcome: contested`; Zackrisson 2018 stays `artificial_structure_geometry`/`astrometry`; Viking LR stays `time_series`.
+- `REG-cody-tess-dyson-transits-2024` rewritten against the AAS 243 abstracts 2024AAS...24335603G (Giles, Cody et al.) and 2024AAS...24310902Y (Yaptangco, Cody, Giles); the unsourced Hephaistos II claim is dropped; outcome `candidates_unconfirmed`, confounders taken from the abstract. Register now 50/50 resolved.
+- Empty `confounders_found` stay empty with a `source names none` comment (3 entries); not filled from memory.
+- `expand-v0.2` accepted as is; owner inspection ticked.
+- Gaia archive account: owner creates it (ESA Cosmos) and adds `GAIA_USER`/`GAIA_PASSWORD` to `.env`; login support being built.
+- `eur_per_usd` stays at the 0.87 assumption until a bill arrives.
+- **Baseline**: the two-hour brainstorm is replaced by a literature baseline (published human-proposed hypotheses, resolved bibcodes only). Paper Section 7 / 9.1 change proposed for v0.2, not edited. Note: Expand already ran before any baseline, so a brainstorm baseline would have been contaminated for the SPHEREx waste-heat cell.
+- Sub-agent models: Fable 5.2 for judgement-heavy work, Sonnet 5.5 for scaffolding.
+
+**Agent work packages started (one branch + PR each)**
+- `critique/g2-ads-judge` (Fable 5.2): G2 with ADS/OpenAlex retrieval and LLM judge, G2 prompt review, cost per card; cap 3 EUR.
+- `critique/g1-g3-g4-scaffold` (Sonnet 5.5): G1/G3/G4 in `pipeline/gates/`, prompt review v0.2, smoke run on 2 cards; cap 2 EUR.
+- `archives/gaia-login` + `prompts/score-v0.2` (Sonnet 5.5): optional authenticated Gaia login in `adql_run.py`; score prompt review.
+- `evaluation/literature-baseline` (Fable 5.2): selection rule, baseline cards in `evaluation/baseline/cards/`, paper change note; no API spend.
+
+### Open questions
+- Literature baseline vs G2: published ideas may be judged "not novel" if G2 asks "proposed?" rather than "tested?". The baseline agent documents how to read the comparison; owner to confirm the definition.
+
 ## 2026-11-11 — register at 50, DR4 day-one queries, Expand + G2 fast path
 Operator: Claude Code (claude-opus-5-5). Three PRs, to be merged in this order: #4 → #5 → #6 (#6 is built on #4).
 - **PR #4 `register/phase0-expansion`**: 39 new entries, register at 50 (M0 target). Written by three parallel sub-agents from ADS abstracts; all 91 register bibcodes re-resolved via ADS in one batch afterwards (0 missing). No detection language found.

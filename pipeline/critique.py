@@ -2,7 +2,8 @@
 
 Order: G2 fast path against the register first (cheap), then G1, G3, G4, then G2 against ADS/OpenAlex.
 
-Implemented here: the G2 register fast path and the full G2 gate.
+Implemented: the G2 register fast path, the full G2 gate (`g2`), and G1, G3, G4 (pipeline/gates/); `all` runs
+G2-fast, G1, G3, G4 (full G2 is run separately with `g2`).
 
     uv run python -m pipeline.critique g2-fast SIEVE-0002 SIEVE-0003
     uv run python -m pipeline.critique g2-fast --all-raw [--dry-run]
@@ -34,6 +35,8 @@ import sys
 from pathlib import Path
 
 import yaml
+
+from pipeline.gates import cli as gate_cli
 
 ROOT = Path(__file__).resolve().parents[1]
 GATE_LOGS = ROOT / "catalogue" / "gate_logs"
@@ -371,6 +374,7 @@ def main(argv: list[str] | None = None) -> int:
     g2p.add_argument("--no-cache", action="store_true", help="ignore cached ADS/OpenAlex responses")
     g2p.add_argument("--by", default="agent")
     g2p.add_argument("--dry-run", action="store_true")
+    gate_cli.add_subparsers(sub)
     a = ap.parse_args(argv)
     if a.cmd == "g2":
         ids = list(a.card_ids)
@@ -389,6 +393,8 @@ def main(argv: list[str] | None = None) -> int:
         if not ids:
             ap.error("give card ids or --all-raw")
         return g2_fast(ids, a.by, a.dry_run)
+    if a.cmd in gate_cli.COMMANDS:
+        return gate_cli.run(a, g2_fast=g2_fast)
     return 2
 
 

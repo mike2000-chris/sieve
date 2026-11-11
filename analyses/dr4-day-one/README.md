@@ -29,8 +29,14 @@ uv run python -m pipeline.archives.adql_run analyses/dr4-day-one/astrometric_ano
 The runner runs the COUNT, splits the chunked statement over `random_index` so that every chunk stays under 40,000 rows
 (anonymous Gaia results are silently cut at 50,000), and fails unless the rows add up to the COUNT.
 
+Optional login: with `GAIA_USER` and `GAIA_PASSWORD` in `.env` the runner logs in through `astroquery.gaia` and prints
+`authenticated as <user>` (never the password); without them it prints `anonymous`. Once
+`gaia.authenticated_row_limit` in `config/archives.yaml` is set, chunks are sized at 80 % of that limit. The COUNT check
+stays in force either way. The run record (`.json`) notes `gaia_user`, `row_cap` and `chunk_target`.
+
 ## Checklist for 2 December (before the first run)
 
+0. Log in: put `GAIA_USER` / `GAIA_PASSWORD` (ESA Cosmos account, created by the owner beforehand) into `.env`, run any `--count` and confirm the output says `authenticated as ...`. Then **measure the authenticated row limit** (run a query whose COUNT is known to exceed 50,000 and compare rows returned with the COUNT; repeat at larger sizes) and write the value into `gaia.authenticated_row_limit` in `config/archives.yaml`. Until then the runner stays at anonymous chunk sizes.
 1. Confirm the schema name (`gaiadr4` is assumed) and that the tables above exist: `SELECT table_name FROM tap_schema.tables WHERE table_name LIKE 'gaiadr4.%'`.
 2. Check the columns used against the final data model (draft dated 2026-05-20 may change without notice).
 3. Read `ref_epoch` from `gaiadr4.gaia_source` and replace the 26.25-yr Hipparcos baseline in query 3 if it is not J2017.5.

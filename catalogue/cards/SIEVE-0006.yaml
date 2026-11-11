@@ -1,5 +1,5 @@
 id: SIEVE-0006
-version: 2
+version: 4
 title: 'Optical luminosity deficit balanced by 3-5 um excess: an energy-conservation test with Gaia XP, spectroscopic
   surveys and SPHEREx'
 claim: No main-sequence star with spectroscopic Teff/logg/[Fe/H] and Gaia parallax shows an optical bolometric deficit
@@ -27,12 +27,22 @@ data_requirements:
 candidate_archives:
 - name: IRSA SPHEREx Quick Release
   access: boto3 unsigned S3, bucket nasa-irsa-spherex, prefixes qr2/ qr3/
+  licence: public (IPAC/IRSA, NASA)
+  volume_estimate: Order 10^7 image cutouts (2x10^5 stars x ~100 band-exposures). At ~50-150 kB per row-range read
+    this is roughly 0.5-2 TB of S3 range reads (to verify); best run in AWS us-east-1.
 - name: Gaia DR3
   access: ESA Gaia TAP gaiadr3.gaia_source and gaiadr3.xp_sampled_mean_spectrum
+  licence: ESA Gaia data, CC BY-SA 3.0 IGO (acknowledge ESA/Gaia/DPAC)
+  volume_estimate: gaia_source selection ~2x10^5 rows, tens of MB. XP sampled spectra ~2x10^5 x 343 samples x flux/error,
+    about 1 GB.
 - name: APOGEE DR17
   access: SDSS SAS file allStar-dr17-synspec_rev1.fits
+  licence: public (SDSS; specific terms to verify)
+  volume_estimate: single allStar file, several GB (to verify)
 - name: GALAH DR4 / LAMOST DR10
   access: GALAH DR4 allstar FITS via datacentral.org.au; LAMOST DR10 catalog via dr10.lamost.org
+  licence: public (SDSS; specific terms to verify)
+  volume_estimate: single allStar file, several GB (to verify)
 - name: Bayestar19 3D dust
   access: python dustmaps package, bayestar query
 method: For dwarfs with APOGEE/GALAH/LAMOST parameters and parallax_over_error>100, predict L from isochrones (MIST)
@@ -50,6 +60,66 @@ confounders:
 - name: Edge-on circumstellar disk producing both dimming and excess
   exclusion: Edge-on disks give chromatic reddening and scattered-light polarisation. Gaia XP slope and the absence
     of a W3/W4 cold component discriminate.
+- name: Isochrone luminosity systematics (age, Teff zero-point, [Fe/H], alpha)
+  exclusion: 'Not addressed by the card. Replace the isochrone prediction with an empirical estimate: L from Gaia
+    parallax plus an IRFM or angular-diameter Teff. Require the deficit to persist when the age is marginalised
+    and when APOGEE, GALAH and LAMOST parameters are swapped. Calibrate the D distribution on a control sample of
+    interferometrically characterised dwarfs (threshold to calibrate on a control sample). Discard stars whose D
+    is consistent with the ZAMS-to-turnoff width. Data: APOGEE DR17 / GALAH DR4 / LAMOST DR10 overlaps; JMMC stellar
+    diameter catalogue and interferometric benchmarks; Gaia FLAME parameters; MIST plus a second isochrone grid
+    (PARSEC) [G4 excludable: partly]'
+- name: Starspots and two-temperature photospheres in active dwarfs
+  exclusion: 'Not in the card. Flag activity using four indicators: X-ray luminosity, Gaia RVS Ca II IRT activity
+    index, TESS/ZTF rotation amplitude, and APOGEE/LAMOST emission cores. Exclude or separately calibrate active
+    and fast-rotating stars. Test whether a two-component spot model fits Gaia XP plus SPHEREx as well as a grey
+    screen. A residue remains for low-amplitude, pole-on spotted stars. Data: eROSITA eRASS1 and ROSAT 2RXS; Gaia
+    DR3 activityindex_espcs and vbroad; TESS and ZTF light curves; GALEX NUV [G4 excludable: partly]'
+- name: SPHEREx and WISE blending with background or companion sources
+  exclusion: 'Not in the card. Check the neighbourhood with Gaia DR3 sources within about 15 arcsec and with deeper
+    optical and near-infrared imaging. Require a consistent excess in unWISE/CatWISE W1-W2 with clean cc_flags (all
+    zeros) and ext_flg=0. Inspect the SPHEREx PSF residual for extended or offset emission. Require consistency
+    across independent SPHEREx exposures. Data: Gaia DR3; Legacy Surveys DR10 / Pan-STARRS1 images; unWISE and CatWISE2020;
+    AllWISE cc_flags and ext_flg; Spitzer IRAC archival images where available; 2MASS cc_flg [G4 excludable: partly]'
+- name: Photospheric model mismatch at 3-5 um
+  exclusion: 'Not in the card. Build empirical photospheric templates by binning SPHEREx spectra of control stars
+    in Teff, logg and [Fe/H]. Require the excess to be smooth and continuum-like rather than tied to molecular band
+    positions. Compare results across PHOENIX, MARCS and Kurucz grids. Thresholds to calibrate on a control sample.
+    Data: SPHEREx Quick Release spectra of matched control dwarfs; WISE W1-W2 colour-Teff loci; IRTF spectral library
+    [G4 excludable: partly]'
+- name: 'Large-grain (grey) circumstellar dust: extreme debris disks, dippers, collisional clouds'
+  exclusion: 'The card''s grey-versus-chromatic test does not exclude this. Look for variability, since dust clouds
+    produce dips and infrared variability: Gaia epoch photometry, TESS, ZTF, ASAS-SN, and NEOWISE multi-epoch W1/W2.
+    Look for a silicate or cold component at 12-22 um, and for youth indicators such as Li and kinematic association
+    membership. A residue remains for static, optically thin, quasi-spherical large-grain envelopes. Data: Gaia
+    DR3 epoch photometry and phot_variable_flag; NEOWISE-R single-exposure database; TESS/ZTF/ASAS-SN; AllWISE W3/W4;
+    GALAH/APOGEE Li abundances; moving-group catalogues [G4 excludable: partly]'
+- name: Unresolved companion distorting spectroscopic parameters
+  exclusion: 'The card''s RUWE<1.2 plus RV check is partly adequate. Add Gaia ipd_frac_multi_peak and ipd_gof_harmonic_amplitude,
+    non_single_star, Hipparcos-Gaia proper-motion anomaly, APOGEE VSCATTER from multiple visits, and Gaia rv_amplitude_robust.
+    Low-mass, wide-separation or long-period companions can still escape these checks. Data: Gaia DR3 gaia_source
+    and nss tables; Hipparcos-Gaia catalogue of accelerations; APOGEE DR17 allVisit; archival AO/speckle imaging
+    [G4 excludable: partly]'
+- name: Calibration and instrumental artefacts (Gaia XP, SPHEREx Quick Release)
+  exclusion: 'Not in the card. Require consistency across multiple SPHEREx exposures and spacecraft orientations.
+    Require agreement with WISE W1/W2 and 2MASS photometry. Use Gaia G/BP/RP photometry as a cross-check on XP integrals.
+    Apply magnitude-dependent corrections derived from control stars (threshold to calibrate on a control sample).
+    Data: Multi-epoch SPHEREx QR2/QR3 cutouts; AllWISE/unWISE; 2MASS ph_qual; Gaia DR3 phot_bp_rp_excess_factor
+    [G4 excludable: yes]'
+- name: Underestimated interstellar extinction
+  exclusion: 'The card''s restriction to d<200 pc plus the chromatic XP slope test is adequate. Interstellar dust
+    cannot also supply the 3-5 um excess. Cross-check against a second 3D map and against diffuse interstellar band
+    or Na D absorption in survey spectra. Data: Bayestar19; Lallement/STILISM 3D maps; Gaia XP slopes; APOGEE DIB
+    measurements [G4 excludable: yes]'
+- name: Edge-on protoplanetary or transitional disk / YSO
+  exclusion: 'The card''s chromatic-slope test plus W3/W4 check is mostly adequate. Add the following: accretion
+    and emission-line indicators (H-alpha, Br-gamma in APOGEE), Li and youth flags, membership in star-forming regions,
+    and variability. Restricting the sample to main-sequence dwarfs within 200 pc further limits this. Data: AllWISE
+    W3/W4; APOGEE spectra; SIMBAD YSO classes; Gaia variability; star-forming region membership catalogues [G4 excludable:
+    yes]'
+- name: Look-elsewhere coincidence in the D-E plane
+  exclusion: 'Not in the card. Preregister the cuts. Estimate the false-coincidence rate by scrambling D and E across
+    stars and by injection-recovery tests on control samples. Require the D~E significance to exceed this empirical
+    null. Data: The survey sample itself (scrambled pairings); matched control samples [G4 excludable: yes]'
 novelty:
   status: partly_done
   confidence: medium
@@ -107,3 +177,6 @@ provenance:
   parent_card: null
   created: '2026-11-11'
   edited_by_human: false
+scores:
+  confounder_robustness: 2
+  scored_by: llm
